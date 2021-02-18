@@ -45,3 +45,19 @@ Dungeon crawler group project for CS 2340, Georgia Institute of Technology
 10. Now try to run the app. You should see a new window open.
 
     ![](docs/run.png)
+
+11. Lastly, we need to setup SceneBuilder. First, download the appropriate installer for SceneBuilder (15.0.1) 
+    https://gluonhq.com/products/scene-builder/#download
+    
+    Run the installer
+
+12. Go to File -> Settings -> Languages & Frameworks -> JavaFX. Use the following path for SceneBuilder (which is the
+    default install location) on Windows: `C:\Program Files\SceneBuilder\SceneBuilder.exe`.
+    
+    Hit apply and leave the settings window.
+
+13. Right click on any fxml file and select "Open in SceneBuilder".
+
+    ![](docs/scenebuilder.png)
+
+    You should see the SceneBuilder application pop up.
