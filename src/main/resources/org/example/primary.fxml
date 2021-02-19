@@ -31,41 +31,36 @@
                <children>
                   <VBox alignment="BOTTOM_CENTER" prefHeight="1030.0" prefWidth="250.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/fontstyle.css" textFill="WHITE">
+                        <Button mnemonicParsing="false" style="-fx-background-color: 00;" text="Start" textFill="WHITE">
                            <font>
-                              <Font name="Pixeboy" size="30.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="primaryButton" layoutX="53.0" layoutY="981.0" mnemonicParsing="false" onAction="#switchToSecondary" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/fontstyle.css" text="Start" textFill="WHITE">
-                           <font>
-                              <Font name="Pixeboy" size="30.0" />
+                              <Font name="Pixeboy" size="45.0" />
                            </font>
                         </Button>
                      </children>
                   </VBox>
                   <VBox alignment="BOTTOM_CENTER" layoutX="845.0" layoutY="10.0" prefHeight="1030.0" prefWidth="250.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/fontstyle.css" text="Load Game" textFill="WHITE">
+                        <Button mnemonicParsing="false" style="-fx-background-color: 00;" text="Load Game" textFill="WHITE">
                            <font>
-                              <Font name="Pixeboy" size="30.0" />
+                              <Font name="Pixeboy" size="45.0" />
                            </font>
                         </Button>
                      </children>
                   </VBox>
                   <VBox alignment="BOTTOM_CENTER" layoutX="970.0" layoutY="10.0" prefHeight="1030.0" prefWidth="250.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/fontstyle.css" text="Settings" textFill="WHITE">
+                        <Button mnemonicParsing="false" style="-fx-background-color: 00;" text="Settings" textFill="WHITE">
                            <font>
-                              <Font name="Pixeboy" size="30.0" />
+                              <Font name="Pixeboy" size="45.0" />
                            </font>
                         </Button>
                      </children>
                   </VBox>
                   <VBox alignment="BOTTOM_CENTER" layoutX="1095.0" layoutY="10.0" prefHeight="1030.0" prefWidth="250.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/fontstyle.css" text="Exit" textFill="WHITE">
+                        <Button mnemonicParsing="false" style="-fx-background-color: 00;" text="Exit" textFill="WHITE">
                            <font>
-                              <Font name="Pixeboy" size="30.0" />
+                              <Font name="Pixeboy" size="45.0" />
                            </font>
                         </Button>
                      </children>
