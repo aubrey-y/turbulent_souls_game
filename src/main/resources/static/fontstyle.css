@@ -6,3 +6,7 @@
 .label {
     -fx-font-family: 'Pixeboy';
 }
+
+.label:hover {
+    -fx-background-color: linear-gradient(#2d2121, #1d1414), linear-gradient(#180d0d 0%, #000000 20%, #000000 100%), linear-gradient(#000000 0%, #000000 50%);
+}

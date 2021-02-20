@@ -36,7 +36,7 @@
                               <Font name="Pixeboy" size="30.0" />
                            </font>
                            <graphic>
-                              <Label stylesheets="@../../static/fontstyle.css" text="Start" textFill="WHITE">
+                              <Label fx:id="startLabel" stylesheets="@../../static/fontstyle.css" text="Start" textFill="WHITE">
                                  <font>
                                     <Font size="36.0" />
                                  </font>
