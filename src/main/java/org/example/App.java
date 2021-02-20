@@ -4,8 +4,11 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.nio.file.Paths;
 
 /**
  * JavaFX App
@@ -13,10 +16,18 @@ import java.io.IOException;
 public class App extends Application {
 
     private static Scene scene;
+
+    private MediaPlayer mediaPlayer;
+
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("primary"), 1920, 1080);
 //        scene.getStylesheets().add(getClass().getResource("/static/fontstyle.css").toExternalForm());
+
+        Media media = new Media(Paths.get("src/main/resources/static/music/bardsadventure.mp3").toUri().toString());
+        this.mediaPlayer = new MediaPlayer(media);
+        this.mediaPlayer.play();
+
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.setFullScreen(true);
