@@ -19,7 +19,9 @@ public class App extends Application {
 
     private static Scene scene;
 
-    private MediaPlayer mediaPlayer;
+    private static MediaPlayer mediaPlayer;
+
+    private static boolean soundPlaying = true;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -27,14 +29,26 @@ public class App extends Application {
 //        scene.getStylesheets().add(getClass().getResource("/static/fontstyle.css").toExternalForm());
 
         Media media = new Media(Paths.get("src/main/resources/static/music/bardsadventure.mp3").toUri().toString());
-        this.mediaPlayer = new MediaPlayer(media);
-        this.mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
-        this.mediaPlayer.play();
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
+        mediaPlayer.play();
 
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.setFullScreen(true);
         stage.show();
+    }
+
+    public static void toggleSound() {
+        if(soundPlaying) {
+            mediaPlayer.setOnEndOfMedia(() -> {});
+            mediaPlayer.stop();
+        }
+        else {
+            mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
+            mediaPlayer.play();
+        }
+        soundPlaying = !soundPlaying;
     }
 
     public static void setRoot(String fxml) throws IOException {

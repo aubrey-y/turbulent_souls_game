@@ -16,7 +16,10 @@ public class PrimaryController {
     private Label startLabel;
 
     @FXML
-    private javafx.scene.control.Button closeButton;
+    private Button closeButton;
+
+    @FXML
+    private Button soundToggle;
 
     @FXML
     private void closeButtonAction(){
@@ -27,6 +30,11 @@ public class PrimaryController {
     @FXML
     private void switchToSecondary() throws IOException, InterruptedException {
         App.setRoot("secondary");
+    }
+
+    @FXML
+    private void toggleSound() {
+        App.toggleSound();
     }
 
 }

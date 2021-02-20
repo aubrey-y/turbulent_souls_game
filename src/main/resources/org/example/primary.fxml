@@ -6,6 +6,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -93,6 +94,23 @@
                         </Button>
                      </children>
                   </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="soundToggle" layoutX="114.0" mnemonicParsing="false" onAction="#toggleSound" prefHeight="67.0" prefWidth="70.0" style="-fx-background-color: 00;">
+                           <graphic>
+                              <ImageView fitHeight="67.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true" style="-fx-padding: 0 0 0 100000;">
+                                 <image>
+                                    <Image url="@../../static/images/mute.PNG" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </Pane>
                </children>
             </HBox>
          </children>
