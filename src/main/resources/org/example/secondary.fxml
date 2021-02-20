@@ -23,12 +23,12 @@
          <children>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Label prefHeight="118.0" prefWidth="755.0" stylesheets="@../../static/css/fontstyleNonButton.css" text="Your story begins..." textFill="WHITE">
+                  <Label prefHeight="118.0" prefWidth="755.0" stylesheets="@../../static/css/fontstyle.css" text="Your story begins..." textFill="WHITE">
                      <font>
                         <Font size="96.0" />
                      </font>
                   </Label>
-                  <Label stylesheets="@../../static/css/fontstyleNonButton.css" text="What is your name adventurer?" textFill="WHITE">
+                  <Label stylesheets="@../../static/css/fontstyle.css" text="What is your name adventurer?" textFill="WHITE">
                      <font>
                         <Font size="40.0" />
                      </font>
@@ -44,7 +44,7 @@
                         <Font size="60.0" />
                      </font>
                   </TextField>
-                  <Label stylesheets="@../../static/css/fontstyleNonButton.css" text="Select A difficulty" textFill="WHITE">
+                  <Label stylesheets="@../../static/css/fontstyle.css" text="Select A difficulty" textFill="WHITE">
                      <font>
                         <Font size="40.0" />
                      </font>
@@ -59,7 +59,7 @@
                               <Font name="Pixeboy" size="30.0" />
                            </font>
                            <graphic>
-                              <Label stylesheets="@../../static/css/fontstyle.css" text="Easy" textFill="WHITE">
+                              <Label id="clickable" stylesheets="@../../static/css/fontstyle.css" text="Easy" textFill="WHITE">
                                  <font>
                                     <Font size="36.0" />
                                  </font>
@@ -71,7 +71,7 @@
                               <Font name="Pixeboy" size="30.0" />
                            </font>
                            <graphic>
-                              <Label stylesheets="@../../static/css/fontstyle.css" text="Medium" textFill="WHITE">
+                              <Label id="clickable" stylesheets="@../../static/css/fontstyle.css" text="Medium" textFill="WHITE">
                                  <font>
                                     <Font size="36.0" />
                                  </font>
@@ -83,7 +83,7 @@
                               <Font name="Pixeboy" size="30.0" />
                            </font>
                            <graphic>
-                              <Label stylesheets="@../../static/css/fontstyle.css" text="Hard" textFill="WHITE">
+                              <Label id="clickable" stylesheets="@../../static/css/fontstyle.css" text="Hard" textFill="WHITE">
                                  <font>
                                     <Font size="36.0" />
                                  </font>
@@ -92,7 +92,7 @@
                         </Button>
                      </children>
                   </HBox>
-                  <Label layoutX="804.0" layoutY="598.0" stylesheets="@../../static/css/fontstyleNonButton.css" text="Choose your weapon" textFill="WHITE">
+                  <Label layoutX="804.0" layoutY="598.0" stylesheets="@../../static/css/fontstyle.css" text="Choose your weapon" textFill="WHITE">
                      <font>
                         <Font size="40.0" />
                      </font>
@@ -147,7 +147,7 @@
                               <Font name="Pixeboy" size="30.0" />
                            </font>
                            <graphic>
-                              <Label stylesheets="@../../static/css/fontstyle.css" text="Back" textFill="WHITE">
+                              <Label id="clickable" stylesheets="@../../static/css/fontstyle.css" text="Back" textFill="WHITE">
                                  <font>
                                     <Font size="36.0" />
                                  </font>
@@ -159,7 +159,7 @@
                               <Font name="Pixeboy" size="30.0" />
                            </font>
                            <graphic>
-                              <Label stylesheets="@../../static/css/fontstyle.css" text="Start" textFill="WHITE">
+                              <Label id="clickable" stylesheets="@../../static/css/fontstyle.css" text="Start" textFill="WHITE">
                                  <font>
                                     <Font size="36.0" />
                                  </font>

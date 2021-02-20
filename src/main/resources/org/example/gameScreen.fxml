@@ -17,12 +17,12 @@
       </ImageView>
       <StackPane alignment="BOTTOM_LEFT" layoutX="46.0" prefHeight="1032.0" prefWidth="1874.0" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button fx:id="closeButton" alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE">
+            <Button id="clickable" fx:id="closeButton" alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE">
                <font>
                   <Font name="Pixeboy" size="30.0" />
                </font>
                <graphic>
-                  <Label stylesheets="@../../static/css/fontstyle.css" text="Exit" textFill="WHITE">
+                  <Label id="clickable" stylesheets="@../../static/css/fontstyle.css" text="Exit" textFill="WHITE">
                      <font>
                         <Font size="36.0" />
                      </font>
@@ -31,7 +31,7 @@
             </Button>
          </children>
       </StackPane>
-      <Label prefHeight="65.0" prefWidth="211.0" stylesheets="@../../static/css/fontstyleNonButton.css" text="GOLD : 0" textFill="WHITE" AnchorPane.bottomAnchor="1015.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="1709.0" AnchorPane.topAnchor="0.0">
+      <Label prefHeight="65.0" prefWidth="211.0" stylesheets="@../../static/css/fontstyle.css" text="GOLD : 0" textFill="WHITE" AnchorPane.bottomAnchor="1015.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="1709.0" AnchorPane.topAnchor="0.0">
          <font>
             <Font size="59.0" />
          </font>

@@ -37,7 +37,7 @@
                               <Font name="Pixeboy" size="30.0" />
                            </font>
                            <graphic>
-                              <Label fx:id="startLabel" stylesheets="@../../static/css/fontstyle.css" text="Start" textFill="WHITE">
+                              <Label id="clickable" fx:id="startLabel" stylesheets="@../../static/css/fontstyle.css" text="Start" textFill="WHITE">
                                  <font>
                                     <Font size="36.0" />
                                  </font>
@@ -53,7 +53,7 @@
                               <Font name="Pixeboy" size="30.0" />
                            </font>
                            <graphic>
-                              <Label stylesheets="@../../static/css/fontstyle.css" text="Load Game" textFill="WHITE">
+                              <Label id="clickable" stylesheets="@../../static/css/fontstyle.css" text="Load Game" textFill="WHITE">
                                  <font>
                                     <Font size="36.0" />
                                  </font>
@@ -69,7 +69,7 @@
                               <Font name="Pixeboy" size="30.0" />
                            </font>
                            <graphic>
-                              <Label stylesheets="@../../static/css/fontstyle.css" text="Settings" textFill="WHITE">
+                              <Label id="clickable" stylesheets="@../../static/css/fontstyle.css" text="Settings" textFill="WHITE">
                                  <font>
                                     <Font size="36.0" />
                                  </font>
@@ -85,7 +85,7 @@
                               <Font name="Pixeboy" size="30.0" />
                            </font>
                            <graphic>
-                              <Label stylesheets="@../../static/css/fontstyle.css" text="Exit" textFill="WHITE">
+                              <Label id="clickable" stylesheets="@../../static/css/fontstyle.css" text="Exit" textFill="WHITE">
                                  <font>
                                     <Font size="36.0" />
                                  </font>
