@@ -10,17 +10,17 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.PrimaryController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.PrimaryController">
    <children>
       <ImageView pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
-            <Image url="@../../static/exampleBackground2.png" />
+            <Image url="@../../static/images/exampleBackground2.png" />
          </image></ImageView>
       <StackPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Label styleClass="Pixeboy" stylesheets="@../../static/fontstyle.css" text="World of Warcruft" textFill="WHITE">
+                  <Label styleClass="Pixeboy" stylesheets="@../../static/css/fontstyle.css" text="World of Warcruft" textFill="WHITE">
                      <font>
                         <Font name="Pixeboy" size="200.0" />
                      </font>
@@ -31,12 +31,12 @@
                <children>
                   <VBox alignment="BOTTOM_CENTER" prefHeight="1030.0" prefWidth="250.0">
                      <children>
-                        <Button fx:id="primaryButton" alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#switchToSecondary" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/fontstyle.css" textFill="WHITE">
+                        <Button fx:id="primaryButton" alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#switchToSecondary" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE">
                            <font>
                               <Font name="Pixeboy" size="30.0" />
                            </font>
                            <graphic>
-                              <Label fx:id="startLabel" stylesheets="@../../static/fontstyle.css" text="Start" textFill="WHITE">
+                              <Label fx:id="startLabel" stylesheets="@../../static/css/fontstyle.css" text="Start" textFill="WHITE">
                                  <font>
                                     <Font size="36.0" />
                                  </font>
@@ -47,12 +47,12 @@
                   </VBox>
                   <VBox alignment="BOTTOM_CENTER" layoutX="845.0" layoutY="10.0" prefHeight="1030.0" prefWidth="250.0">
                      <children>
-                        <Button alignment="BASELINE_CENTER" mnemonicParsing="false" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/fontstyle.css" textFill="WHITE">
+                        <Button alignment="BASELINE_CENTER" mnemonicParsing="false" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE">
                            <font>
                               <Font name="Pixeboy" size="30.0" />
                            </font>
                            <graphic>
-                              <Label stylesheets="@../../static/fontstyle.css" text="Load Game" textFill="WHITE">
+                              <Label stylesheets="@../../static/css/fontstyle.css" text="Load Game" textFill="WHITE">
                                  <font>
                                     <Font size="36.0" />
                                  </font>
@@ -63,12 +63,12 @@
                   </VBox>
                   <VBox alignment="BOTTOM_CENTER" layoutX="970.0" layoutY="10.0" prefHeight="1030.0" prefWidth="250.0">
                      <children>
-                        <Button alignment="BASELINE_CENTER" mnemonicParsing="false" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/fontstyle.css" textFill="WHITE">
+                        <Button alignment="BASELINE_CENTER" mnemonicParsing="false" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE">
                            <font>
                               <Font name="Pixeboy" size="30.0" />
                            </font>
                            <graphic>
-                              <Label stylesheets="@../../static/fontstyle.css" text="Settings" textFill="WHITE">
+                              <Label stylesheets="@../../static/css/fontstyle.css" text="Settings" textFill="WHITE">
                                  <font>
                                     <Font size="36.0" />
                                  </font>
@@ -79,12 +79,12 @@
                   </VBox>
                   <VBox alignment="BOTTOM_CENTER" layoutX="1095.0" layoutY="10.0" prefHeight="1030.0" prefWidth="250.0">
                      <children>
-                        <Button fx:id="closeButton" alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/fontstyle.css" textFill="WHITE">
+                        <Button fx:id="closeButton" alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE">
                            <font>
                               <Font name="Pixeboy" size="30.0" />
                            </font>
                            <graphic>
-                              <Label stylesheets="@../../static/fontstyle.css" text="Exit" textFill="WHITE">
+                              <Label stylesheets="@../../static/css/fontstyle.css" text="Exit" textFill="WHITE">
                                  <font>
                                     <Font size="36.0" />
                                  </font>

@@ -1,10 +1,11 @@
-package org.example;
+package org.example.controllers;
 
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import org.example.App;
 
 public class PrimaryController {
 
