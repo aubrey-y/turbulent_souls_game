@@ -18,8 +18,8 @@ public class App extends Application {
         scene = new Scene(loadFXML("primary"), 1920, 1080);
 //        scene.getStylesheets().add(getClass().getResource("/static/fontstyle.css").toExternalForm());
         stage.setScene(scene);
-//        stage.setMaximized(true);
-//        stage.setFullScreen(true);
+        stage.setMaximized(true);
+        stage.setFullScreen(true);
         stage.show();
     }
 

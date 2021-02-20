@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.SecondaryController">
    <children>
       <ImageView pickOnBounds="true" preserveRatio="true">
@@ -55,20 +54,41 @@
                   </Label>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button alignment="BASELINE_CENTER" mnemonicParsing="false" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/fontstyle.css" text="easy" textFill="WHITE">
+                        <Button alignment="BASELINE_CENTER" mnemonicParsing="false" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/fontstyle.css" textFill="WHITE">
                            <font>
                               <Font name="Pixeboy" size="30.0" />
                            </font>
+                           <graphic>
+                              <Label stylesheets="@../../static/fontstyle.css" text="Easy" textFill="WHITE">
+                                 <font>
+                                    <Font size="36.0" />
+                                 </font>
+                              </Label>
+                           </graphic>
                         </Button>
-                        <Button alignment="BASELINE_CENTER" layoutX="888.0" layoutY="31.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/fontstyle.css" text="Medium" textFill="WHITE">
+                        <Button alignment="BASELINE_CENTER" layoutX="888.0" layoutY="31.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/fontstyle.css" textFill="WHITE">
                            <font>
                               <Font name="Pixeboy" size="30.0" />
                            </font>
+                           <graphic>
+                              <Label stylesheets="@../../static/fontstyle.css" text="Medium" textFill="WHITE">
+                                 <font>
+                                    <Font size="36.0" />
+                                 </font>
+                              </Label>
+                           </graphic>
                         </Button>
-                        <Button alignment="BASELINE_CENTER" layoutX="970.0" layoutY="31.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/fontstyle.css" text="hard" textFill="WHITE">
+                        <Button alignment="BASELINE_CENTER" layoutX="970.0" layoutY="31.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/fontstyle.css" textFill="WHITE">
                            <font>
                               <Font name="Pixeboy" size="30.0" />
                            </font>
+                           <graphic>
+                              <Label stylesheets="@../../static/fontstyle.css" text="Hard" textFill="WHITE">
+                                 <font>
+                                    <Font size="36.0" />
+                                 </font>
+                              </Label>
+                           </graphic>
                         </Button>
                      </children>
                   </HBox>
@@ -122,15 +142,29 @@
                   </HBox>
                   <HBox alignment="BASELINE_CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="secondaryButton" alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#switchToPrimary" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/fontstyle.css" text="Back" textFill="WHITE">
+                        <Button alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#switchToPrimary" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/fontstyle.css" textFill="WHITE">
                            <font>
                               <Font name="Pixeboy" size="30.0" />
                            </font>
+                           <graphic>
+                              <Label stylesheets="@../../static/fontstyle.css" text="Back" textFill="WHITE">
+                                 <font>
+                                    <Font size="36.0" />
+                                 </font>
+                              </Label>
+                           </graphic>
                         </Button>
-                        <Button alignment="BASELINE_CENTER" layoutX="888.0" layoutY="10.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/fontstyle.css" text="Start" textFill="WHITE">
+                        <Button alignment="BASELINE_CENTER" layoutX="806.0" layoutY="10.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/fontstyle.css" textFill="WHITE">
                            <font>
                               <Font name="Pixeboy" size="30.0" />
                            </font>
+                           <graphic>
+                              <Label stylesheets="@../../static/fontstyle.css" text="Start" textFill="WHITE">
+                                 <font>
+                                    <Font size="36.0" />
+                                 </font>
+                              </Label>
+                           </graphic>
                         </Button>
                      </children>
                      <VBox.margin>
