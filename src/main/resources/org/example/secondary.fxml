@@ -23,12 +23,12 @@
          <children>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Label prefHeight="118.0" prefWidth="755.0" styleClass="Pixeboy" stylesheets="@../../static/fontstyle.css" text="Your story begins..." textFill="WHITE">
+                  <Label prefHeight="118.0" prefWidth="755.0" stylesheets="@../../static/fontstyleNonButton.css" text="Your story begins..." textFill="WHITE">
                      <font>
                         <Font size="96.0" />
                      </font>
                   </Label>
-                  <Label styleClass="Pixeboy" stylesheets="@../../static/fontstyle.css" text="What is your name adventurer?" textFill="WHITE">
+                  <Label stylesheets="@../../static/fontstyleNonButton.css" text="What is your name adventurer?" textFill="WHITE">
                      <font>
                         <Font size="40.0" />
                      </font>
@@ -44,7 +44,7 @@
                         <Font size="60.0" />
                      </font>
                   </TextField>
-                  <Label styleClass="Pixeboy" stylesheets="@../../static/fontstyle.css" text="Select A difficulty" textFill="WHITE">
+                  <Label stylesheets="@../../static/fontstyleNonButton.css" text="Select A difficulty" textFill="WHITE">
                      <font>
                         <Font size="40.0" />
                      </font>
@@ -92,7 +92,7 @@
                         </Button>
                      </children>
                   </HBox>
-                  <Label layoutX="804.0" layoutY="598.0" styleClass="Pixeboy" stylesheets="@../../static/fontstyle.css" text="Choose your weapon" textFill="WHITE">
+                  <Label layoutX="804.0" layoutY="598.0" stylesheets="@../../static/fontstyleNonButton.css" text="Choose your weapon" textFill="WHITE">
                      <font>
                         <Font size="40.0" />
                      </font>

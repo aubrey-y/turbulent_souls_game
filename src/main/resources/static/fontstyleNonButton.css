@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'Pixeboy';
+    src: url('Pixeboy-z8XGD.ttf');
+}
+
+.label {
+    -fx-font-family: 'Pixeboy';
+}
