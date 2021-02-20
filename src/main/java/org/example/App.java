@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+
 import java.io.IOException;
 import java.nio.file.Paths;
 
@@ -26,6 +28,7 @@ public class App extends Application {
 
         Media media = new Media(Paths.get("src/main/resources/static/music/bardsadventure.mp3").toUri().toString());
         this.mediaPlayer = new MediaPlayer(media);
+        this.mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
         this.mediaPlayer.play();
 
         stage.setScene(scene);
