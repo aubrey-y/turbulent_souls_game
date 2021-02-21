@@ -47,8 +47,6 @@ public class App extends Application {
         stage.show();
     }
 
-
-
     public static void toggleSound() {
         if(soundPlaying) {
             mediaPlayer.setOnEndOfMedia(() -> {});
