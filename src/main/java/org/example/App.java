@@ -32,7 +32,9 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary"), 1920, 1080);
+        //scene = new Scene(loadFXML("primary"), 1920, 1080);
+        Parent root = FXMLLoader.load(getClass().getResource("primary.fxml"));
+        scene = new Scene(root, 1920, 1080);
 //        scene.getStylesheets().add(getClass().getResource("/static/fontstyle.css").toExternalForm());
 
         Media media = new Media(Paths.get("src/main/resources/static/music/bardsadventure.mp3").toUri().toString());

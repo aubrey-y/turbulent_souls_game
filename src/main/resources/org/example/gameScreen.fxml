@@ -8,14 +8,14 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.SecondaryController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.GameScreenController">
    <children>
       <ImageView fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../static/images/example.jpg" />
          </image>
       </ImageView>
-      <StackPane alignment="BOTTOM_LEFT" layoutX="46.0" prefHeight="1032.0" prefWidth="1874.0" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <StackPane alignment="BOTTOM_LEFT" layoutX="46.0" layoutY="-13.0" prefHeight="1032.0" prefWidth="1874.0" AnchorPane.bottomAnchor="61.0" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-13.0">
          <children>
             <Button id="clickable" fx:id="closeButton" alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE">
                <font>
@@ -31,7 +31,7 @@
             </Button>
          </children>
       </StackPane>
-      <Label fx:id="gold" prefHeight="65.0" prefWidth="211.0" stylesheets="@../../static/css/fontstyle.css" text="GOLD : 0" textFill="WHITE" AnchorPane.bottomAnchor="1015.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="1709.0" AnchorPane.topAnchor="0.0">
+      <Label fx:id="gold" prefHeight="92.0" prefWidth="192.0" stylesheets="@../../static/css/fontstyle.css" text="GOLD : 0" textFill="WHITE" AnchorPane.bottomAnchor="988.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="1718.0" AnchorPane.topAnchor="0.0">
          <font>
             <Font size="59.0" />
          </font>

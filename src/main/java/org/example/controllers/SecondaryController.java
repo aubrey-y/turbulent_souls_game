@@ -1,10 +1,10 @@
 package org.example.controllers;
 
 import java.io.IOException;
-
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -31,9 +31,6 @@ public class SecondaryController {
 
     @FXML
     private Label gameConditions3;
-
-    @FXML
-    private Label gold;
 
     @FXML
     private void switchToPrimary() throws IOException {
@@ -70,7 +67,6 @@ public class SecondaryController {
     void weapon3(ActionEvent event) {
         weaponChoice = "weaponC";
     }
-
 
     @FXML
     void switchToGameScreen(ActionEvent event) throws IOException {
@@ -112,8 +108,10 @@ public class SecondaryController {
             gameConditions3.setText("Your selected weapon " + weaponChoice);
             weaponCheck = true;
         }
-        if (nameCheck && difficultyCheck && nameCheck) {
-            //gold.setText("Gold: " + goldAmount);  Error here
+        if (nameCheck && difficultyCheck && weaponCheck) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("gameScreen.fxml"));
+            GameScreenController gameScreenController = loader.getController();
+            gameScreenController.displayGold(goldAmount);
             App.setRoot("gameScreen");
         }
     }
@@ -126,7 +124,4 @@ public class SecondaryController {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
     }
-
-
-
 }
