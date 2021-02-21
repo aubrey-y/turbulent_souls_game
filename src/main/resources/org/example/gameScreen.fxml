@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.GameScreenController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.SecondaryController">
    <children>
       <ImageView fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -31,7 +31,7 @@
             </Button>
          </children>
       </StackPane>
-      <Label prefHeight="65.0" prefWidth="211.0" stylesheets="@../../static/css/fontstyle.css" text="GOLD : 0" textFill="WHITE" AnchorPane.bottomAnchor="1015.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="1709.0" AnchorPane.topAnchor="0.0">
+      <Label fx:id="gold" prefHeight="65.0" prefWidth="211.0" stylesheets="@../../static/css/fontstyle.css" text="GOLD : 0" textFill="WHITE" AnchorPane.bottomAnchor="1015.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="1709.0" AnchorPane.topAnchor="0.0">
          <font>
             <Font size="59.0" />
          </font>
