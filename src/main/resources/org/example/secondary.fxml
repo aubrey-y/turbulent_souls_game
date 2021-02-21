@@ -16,7 +16,7 @@
    <children>
       <ImageView pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../static/images/exampleBackground2.png" />
+            <Image url="@../../static/images/backgroundOrange.png" />
          </image>
       </ImageView>
       <StackPane prefHeight="1080.0" prefWidth="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -36,7 +36,7 @@
                         <Insets bottom="15.0" />
                      </padding>
                   </Label>
-                  <TextField alignment="CENTER" maxWidth="100.0" minHeight="-Infinity" minWidth="-Infinity" styleClass="Pixeboy" stylesheets="@../../static/css/fontstyle.css">
+                  <TextField fx:id="nameID" alignment="CENTER" maxWidth="100.0" minHeight="-Infinity" minWidth="-Infinity" styleClass="Pixeboy" stylesheets="@../../static/css/fontstyle.css">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
@@ -102,7 +102,7 @@
                   </Label>
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="625.0" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button alignment="BASELINE_CENTER" mnemonicParsing="false" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE">
+                        <Button alignment="BASELINE_CENTER" mnemonicParsing="false" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE">
                            <font>
                               <Font name="Pixeboy" size="30.0" />
                            </font>
@@ -154,7 +154,7 @@
                               </Label>
                            </graphic>
                         </Button>
-                        <Button alignment="BASELINE_CENTER" layoutX="806.0" layoutY="10.0" mnemonicParsing="false" onAction="#switchToGameScreen" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE">
+                        <Button fx:id="startButton" alignment="BASELINE_CENTER" layoutX="806.0" layoutY="10.0" mnemonicParsing="false" onAction="#switchToGameScreen" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE">
                            <font>
                               <Font name="Pixeboy" size="30.0" />
                            </font>
