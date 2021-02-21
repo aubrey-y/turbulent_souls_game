@@ -1,9 +1,13 @@
 package org.example;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
@@ -23,6 +27,8 @@ public class App extends Application {
 
     private static boolean soundPlaying = true;
 
+    private static AudioClip clickSound;
+
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("primary"), 1920, 1080);
@@ -32,12 +38,16 @@ public class App extends Application {
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
         mediaPlayer.play();
-
+        clickSound = new AudioClip(Paths.get("src/main/resources/static/music/buttonPress.wav").toUri().toString());
+        scene.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent -> clickSound.play());
+        scene.addEventFilter(KeyEvent.KEY_PRESSED, mouseEvent -> clickSound.play());
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.setFullScreen(true);
         stage.show();
     }
+
+
 
     public static void toggleSound() {
         if(soundPlaying) {
