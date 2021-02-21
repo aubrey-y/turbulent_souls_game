@@ -78,7 +78,7 @@ public class SecondaryController {
         boolean nameCheck = false;
         boolean difficultyCheck = false;
         boolean weaponCheck = false;
-        if (nameID.getText().isEmpty() || nameID.getText() == null || nameID.getText().contains(" ")) {
+        if (nameID.getText().isEmpty() || nameID.getText() == null || nameID.getText().trim().equals("")) {
             gameConditions.setText("Please enter a valid username!");
         } else {
             String userName = nameID.getText();
