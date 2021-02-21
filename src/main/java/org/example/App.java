@@ -4,11 +4,13 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 
@@ -39,7 +41,13 @@ public class App extends Application {
         stage.show();
     }
 
+    public static void buttonSound() {
+        AudioClip buttonPress = new AudioClip(new File("src/main/resources/static/soundeffects/buttonPress.wav").toURI().toString());
+        buttonPress.play();
+    }
+
     public static void toggleSound() {
+        buttonSound();
         if(soundPlaying) {
             mediaPlayer.setOnEndOfMedia(() -> {});
             mediaPlayer.stop();
@@ -52,6 +60,7 @@ public class App extends Application {
     }
 
     public static void setRoot(String fxml) throws IOException {
+        buttonSound();
         scene.setRoot(loadFXML(fxml));
     }
 
