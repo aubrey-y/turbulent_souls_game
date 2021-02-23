@@ -38,6 +38,10 @@ Dungeon crawler group project for CS 2340, Georgia Institute of Technology
    
    ![](docs/libraries.png)
 
+    If you are on macos, follow the instructions here https://www.jetbrains.com/help/idea/javafx.html#add-javafx-lib
+
+    The macos version of the javafx sdk has also been packaged with this project (`jfx/macos.javafx-sdk-15.0.1`).
+
 9. Navigate to the following folder and select the following zip files. Click OK, and OK, to close out of the windows.
 
     ![](docs/select_libraries.PNG)
