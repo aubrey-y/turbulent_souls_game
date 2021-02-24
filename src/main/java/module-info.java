@@ -8,4 +8,5 @@ module org.example {
     opens org.example.controllers to javafx.fxml;
     exports org.example;
     exports org.example.controllers;
+    exports org.example.dto;
 }
