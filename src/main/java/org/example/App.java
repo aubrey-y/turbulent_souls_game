@@ -12,6 +12,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.example.dto.PlayerState;
 
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -29,14 +30,14 @@ public class App extends Application {
 
     private static AudioClip clickSound;
 
+    private static PlayerState playerState;
+
 
     @Override
     public void start(Stage stage) throws IOException {
         //scene = new Scene(loadFXML("primary"), 1920, 1080);
         Parent root = FXMLLoader.load(getClass().getResource("primary.fxml"));
         scene = new Scene(root, 1920, 1080);
-//        scene.getStylesheets().add(getClass().getResource("/static/fontstyle.css").toExternalForm());
-
         Media media = new Media(Paths.get("src/main/resources/static/music/bardsadventure.mp3").toUri().toString());
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
@@ -73,6 +74,14 @@ public class App extends Application {
 
     public static void main(String[] args) {
         launch();
+    }
+
+    public static PlayerState getPlayerState() {
+        return playerState;
+    }
+
+    public static void setPlayerState(PlayerState playerState) {
+        playerState = playerState;
     }
 
 }
