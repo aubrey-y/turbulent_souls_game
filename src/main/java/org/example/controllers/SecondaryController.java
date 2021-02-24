@@ -3,8 +3,6 @@ package org.example.controllers;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -12,6 +10,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import org.example.App;
 import org.example.dto.PlayerState;
+import org.example.exceptions.InvalidArchetypeException;
+import org.example.exceptions.InvalidDifficultyException;
 import org.example.exceptions.InvalidNameException;
 
 public class SecondaryController {
@@ -48,8 +48,14 @@ public class SecondaryController {
         this.hideErrorMessage();
         try {
             validatePlayerName();
+            validateDifficulty();
+            validateArchetype();
         } catch (InvalidNameException e) {
             this.setErrorMessage("Make sure your username is not empty.");
+        } catch (InvalidDifficultyException a) {
+            this.setErrorMessage("Make sure you select a difficulty.");
+        } catch (InvalidArchetypeException b) {
+            this.setErrorMessage("Make sure you select a character");
         }
 //        boolean nameCheck = false;
 //        boolean difficultyCheck = false;
@@ -100,10 +106,34 @@ public class SecondaryController {
         String username = nameID.getText();
         if (username.isEmpty() || username.trim().equals("")) {
             throw new InvalidNameException("");
-        }
-        else {
+        } else {
             PlayerState playerState = App.getPlayerState();
             playerState.setUsername(username);
+            App.setPlayerState(playerState);
+        }
+    }
+
+    //Not complete skeleton code
+    private void validateDifficulty() throws InvalidDifficultyException {
+        String difficulty = difficultySet();
+        if (difficulty == null) {
+            throw new InvalidDifficultyException("");
+        } else {
+            PlayerState playerState = App.getPlayerState();
+            playerState.setDifficulty(difficulty);
+            App.setPlayerState(playerState);
+        }
+    }
+
+    //Not complete skeleton code
+    private void validateArchetype() throws InvalidArchetypeException {
+        String archetype = null;
+        if (archetype == null) {
+            throw new InvalidArchetypeException("");
+        } else {
+            PlayerState playerState = App.getPlayerState();
+            playerState.setArchetype(archetype);
+            App.setPlayerState(playerState);
         }
     }
 
@@ -124,7 +154,7 @@ public class SecondaryController {
     private javafx.scene.control.Button closeButton;
 
     @FXML
-    private void closeButtonAction(){
+    private void closeButtonAction() {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
     }

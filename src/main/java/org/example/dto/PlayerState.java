@@ -14,14 +14,26 @@ public class PlayerState {
 
     private List<Weapon> weaponInventory;
 
+    private String difficulty;
+
     private int goldAmount;
 
     public PlayerState(String username,
                        Archetype archetype,
-                       Weapon activeWeapon) {
+                       Weapon activeWeapon, String difficulty) {
         this.username = username;
         this.archetype = archetype;
         this.activeWeapon = activeWeapon;
+        this.difficulty = difficulty;
+    }
+
+    public PlayerState setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
+        return this;
+    }
+
+    public String getDifficulty() {
+        return difficulty;
     }
 
     public String getUsername() {
