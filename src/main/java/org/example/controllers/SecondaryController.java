@@ -38,38 +38,38 @@ public class SecondaryController {
     }
 
     @FXML
-    void setEasyMode(ActionEvent event) {
+    public void setEasyMode(ActionEvent event) {
         gameDifficulty = "Easy";
     }
 
     @FXML
-    void setMediumMode(ActionEvent event) {
+    public void setMediumMode(ActionEvent event) {
         gameDifficulty = "Medium";
     }
 
     @FXML
-    void setHardMode(ActionEvent event) {
+    public void setHardMode(ActionEvent event) {
         gameDifficulty = "Hard";
     }
 
     //Placeholder names currently change them as needed
     @FXML
-    void weapon1(ActionEvent event) {
+    public void weapon1(ActionEvent event) {
         weaponChoice = "weaponA";
     }
 
     @FXML
-    void weapon2(ActionEvent event) {
+    public void weapon2(ActionEvent event) {
         weaponChoice = "weaponB";
     }
 
     @FXML
-    void weapon3(ActionEvent event) {
+    public void weapon3(ActionEvent event) {
         weaponChoice = "weaponC";
     }
 
     @FXML
-    void switchToGameScreen(ActionEvent event) throws IOException {
+    public void switchToGameScreen(ActionEvent event) throws IOException {
         //This is the logic for the text field inputs
         boolean nameCheck = false;
         boolean difficultyCheck = false;
