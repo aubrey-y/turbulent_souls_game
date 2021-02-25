@@ -57,53 +57,6 @@ public class SecondaryController {
         } catch (InvalidArchetypeException b) {
             this.setErrorMessage("Make sure you select a character");
         }
-//        boolean nameCheck = false;
-//        boolean difficultyCheck = false;
-//        boolean weaponCheck = false;
-//        if (nameID.getText().isEmpty()
-//        || nameID.getText() == null
-//        || nameID.getText().trim().equals("")) {
-//            gameConditions.setText("Please enter a valid username!");
-//        } else {
-//            String userName = nameID.getText();
-//            gameConditions.setText("Your name is " + nameID.getText());
-//            nameCheck = true;
-//        }
-//        //This is the logic for the game difficulty
-//        if (gameDifficulty == null) {
-//            gameConditions2.setText("Please select a difficulty!");
-//        } else {
-//            if (gameDifficulty.equals("Easy")) {
-//                gameConditions2.setText
-//                ("Your chosen difficulty is " + gameDifficulty + ", you're a baby");
-//                difficultyCheck = true;
-//                goldAmount = 1000;
-//            }
-//            if (gameDifficulty.equals("Medium")) {
-//                gameConditions2.setText("Your chosen difficulty is " + gameDifficulty);
-//                difficultyCheck = true;
-//                goldAmount = 500;
-//            }
-//            if (gameDifficulty.equals("Hard")) {
-//                gameConditions2.setText
-//                ("Your chosen difficulty is " + gameDifficulty + ", I'm proud of you");
-//                difficultyCheck = true;
-//                goldAmount = 100;
-//            }
-//        }
-//        //This is the logic for the chosen weapons, currently are placeholders
-//        if (weaponChoice == null) {
-//            gameConditions3.setText("Please choose a weapon!");
-//        } else {
-//            gameConditions3.setText("Your selected weapon " + weaponChoice);
-//            weaponCheck = true;
-//        }
-//        if (nameCheck && difficultyCheck && weaponCheck) {
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("gameScreen.fxml"));
-//            GameScreenController gameScreenController = loader.getController();
-//            gameScreenController.displayGold(goldAmount);
-//            App.setRoot("gameScreen");
-    }
     }
 
     private void validatePlayerName() throws InvalidNameException {
@@ -119,26 +72,26 @@ public class SecondaryController {
 
     //Not complete skeleton code
     private void validateDifficulty() throws InvalidDifficultyException {
-        String difficulty = difficultySet();
-        if (difficulty == null) {
-            throw new InvalidDifficultyException("");
-        } else {
-            PlayerState playerState = App.getPlayerState();
-            playerState.setDifficulty(difficulty);
-            App.setPlayerState(playerState);
-        }
+//        String difficulty = difficultySet();
+//        if (difficulty == null) {
+//            throw new InvalidDifficultyException("");
+//        } else {
+//            PlayerState playerState = App.getPlayerState();
+//            playerState.setDifficulty(difficulty);
+//            App.setPlayerState(playerState);
+//        }
     }
 
     //Not complete skeleton code
     private void validateArchetype() throws InvalidArchetypeException {
-        String archetype = null;
-        if (archetype == null) {
-            throw new InvalidArchetypeException("");
-        } else {
-            PlayerState playerState = App.getPlayerState();
-            playerState.setArchetype(archetype);
-            App.setPlayerState(playerState);
-        }
+//        String archetype = null;
+//        if (archetype == null) {
+//            throw new InvalidArchetypeException("");
+//        } else {
+//            PlayerState playerState = App.getPlayerState();
+//            playerState.setArchetype(archetype);
+//            App.setPlayerState(playerState);
+//        }
     }
 
     @FXML
