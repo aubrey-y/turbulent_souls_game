@@ -22,7 +22,7 @@ public class PrimaryController {
     private Button soundToggle;
 
     @FXML
-    private void closeButtonAction(){
+    private void closeButtonAction() {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
     }

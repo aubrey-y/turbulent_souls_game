@@ -60,7 +60,9 @@ public class SecondaryController {
 //        boolean nameCheck = false;
 //        boolean difficultyCheck = false;
 //        boolean weaponCheck = false;
-//        if (nameID.getText().isEmpty() || nameID.getText() == null || nameID.getText().trim().equals("")) {
+//        if (nameID.getText().isEmpty()
+//        || nameID.getText() == null
+//        || nameID.getText().trim().equals("")) {
 //            gameConditions.setText("Please enter a valid username!");
 //        } else {
 //            String userName = nameID.getText();
@@ -72,7 +74,8 @@ public class SecondaryController {
 //            gameConditions2.setText("Please select a difficulty!");
 //        } else {
 //            if (gameDifficulty.equals("Easy")) {
-//                gameConditions2.setText("Your chosen difficulty is " + gameDifficulty + ", you're a baby");
+//                gameConditions2.setText
+//                ("Your chosen difficulty is " + gameDifficulty + ", you're a baby");
 //                difficultyCheck = true;
 //                goldAmount = 1000;
 //            }
@@ -82,7 +85,8 @@ public class SecondaryController {
 //                goldAmount = 500;
 //            }
 //            if (gameDifficulty.equals("Hard")) {
-//                gameConditions2.setText("Your chosen difficulty is " + gameDifficulty + ", I'm proud of you");
+//                gameConditions2.setText
+//                ("Your chosen difficulty is " + gameDifficulty + ", I'm proud of you");
 //                difficultyCheck = true;
 //                goldAmount = 100;
 //            }
@@ -99,7 +103,7 @@ public class SecondaryController {
 //            GameScreenController gameScreenController = loader.getController();
 //            gameScreenController.displayGold(goldAmount);
 //            App.setRoot("gameScreen");
-//        }
+    }
     }
 
     private void validatePlayerName() throws InvalidNameException {

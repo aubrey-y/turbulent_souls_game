@@ -20,7 +20,7 @@ public class GameScreenController {
     }
     
     @FXML
-    private void closeButtonAction(){
+    private void closeButtonAction() {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
     }

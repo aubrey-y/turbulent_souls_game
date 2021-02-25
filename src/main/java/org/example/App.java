@@ -1,7 +1,7 @@
 package org.example;
 
 import javafx.application.Application;
-import javafx.event.EventHandler;
+//import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -38,11 +38,13 @@ public class App extends Application {
         //scene = new Scene(loadFXML("primary"), 1920, 1080);
         Parent root = FXMLLoader.load(getClass().getResource("primary.fxml"));
         scene = new Scene(root, 1920, 1080);
-        Media media = new Media(Paths.get("src/main/resources/static/music/bardsadventure.mp3").toUri().toString());
+        Media media = new Media(Paths.get("src/main/resources/static/music/bardsadventure.mp3")
+                .toUri().toString());
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
         mediaPlayer.play();
-        clickSound = new AudioClip(Paths.get("src/main/resources/static/music/buttonPress.wav").toUri().toString());
+        clickSound = new AudioClip(Paths.get("src/main/resources/static/music/buttonPress.wav")
+                .toUri().toString());
         scene.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent -> clickSound.play());
         scene.addEventFilter(KeyEvent.KEY_PRESSED, mouseEvent -> clickSound.play());
         stage.setScene(scene);
@@ -52,11 +54,10 @@ public class App extends Application {
     }
 
     public static void toggleSound() {
-        if(soundPlaying) {
-            mediaPlayer.setOnEndOfMedia(() -> {});
+        if (soundPlaying) {
+            mediaPlayer.setOnEndOfMedia(() -> { });
             mediaPlayer.stop();
-        }
-        else {
+        } else {
             mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
             mediaPlayer.play();
         }
