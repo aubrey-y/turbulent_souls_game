@@ -119,9 +119,9 @@
                               <Font name="Pixeboy" size="30.0" />
                            </font>
                            <graphic>
-                              <ImageView fitHeight="200.0" fitWidth="107.0">
+                              <ImageView fitHeight="200.0" fitWidth="182.0">
                                  <image>
-                                    <Image url="@../../static/images/sword.png" />
+                                    <Image url="@../../static/images/bow.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -131,9 +131,9 @@
                               <Font name="Pixeboy" size="30.0" />
                            </font>
                            <graphic>
-                              <ImageView fitHeight="200.0" fitWidth="200.0">
+                              <ImageView fitHeight="184.0" fitWidth="178.0">
                                  <image>
-                                    <Image url="@../../static/images/GreatAxe.png" />
+                                    <Image url="@../../static/images/staff.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -143,9 +143,9 @@
                               <Font name="Pixeboy" size="30.0" />
                            </font>
                            <graphic>
-                              <ImageView>
+                              <ImageView fitHeight="185.0" fitWidth="172.0">
                                  <image>
-                                    <Image url="@../../static/images/HalberdMithrilLongRetexturedEnlarged.png" />
+                                    <Image url="@../../static/images/swordR.png" />
                                  </image>
                               </ImageView>
                            </graphic>
