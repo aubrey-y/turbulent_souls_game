@@ -32,33 +32,35 @@ public class PlayerState {
 
     private void assignDefaultWeaponForClass() throws PlayerCreationException {
         switch (this.archetype) {
-            case ARCHER:
-                this.activeWeapon = new BasicBow();
-                break;
-            case MAGE:
-                this.activeWeapon = new BasicStaff();
-                break;
-            case WARRIOR:
-                this.activeWeapon = new BasicSword();
-                break;
-            default:
-                throw new PlayerCreationException("Invalid archetype passed for player weapon assignment");
+        case ARCHER:
+            this.activeWeapon = new BasicBow();
+            break;
+        case MAGE:
+            this.activeWeapon = new BasicStaff();
+            break;
+        case WARRIOR:
+            this.activeWeapon = new BasicSword();
+            break;
+        default:
+            throw new PlayerCreationException("Invalid archetype passed "
+            + "for player weapon assignment");
         }
     }
 
     private void assignDefaultGoldForDifficulty() throws PlayerCreationException {
         switch (this.difficulty) {
-            case EASY:
-                this.goldAmount = 1000;
-                break;
-            case MEDIUM:
-                this.goldAmount = 800;
-                break;
-            case HARD:
-                this.goldAmount = 500;
-                break;
-            default:
-                throw new PlayerCreationException("Invalid difficulty passed for player gold assignment");
+        case EASY:
+            this.goldAmount = 1000;
+            break;
+        case MEDIUM:
+            this.goldAmount = 800;
+            break;
+        case HARD:
+            this.goldAmount = 500;
+            break;
+        default:
+            throw new PlayerCreationException("Invalid difficulty "
+          + "passed for player gold assignment");
         }
     }
 
