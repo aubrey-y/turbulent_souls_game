@@ -107,6 +107,8 @@ public class SecondaryController {
         this.errorText.setOpacity(0.0);
     }
 
+
+
     @FXML
     private javafx.scene.control.Button closeButton;
 

@@ -12,7 +12,7 @@
    <children>
       <ImageView fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../static/images/example.jpg" />
+            <Image url="@../../static/images/temp%20room%201.png" />
          </image>
       </ImageView>
       <StackPane alignment="BOTTOM_LEFT" layoutX="46.0" layoutY="-13.0" prefHeight="1032.0" prefWidth="1874.0" AnchorPane.bottomAnchor="61.0" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-13.0">
@@ -31,7 +31,7 @@
             </Button>
          </children>
       </StackPane>
-      <Label fx:id="gold" prefHeight="92.0" prefWidth="192.0" stylesheets="@../../static/css/fontstyle.css" text="GOLD : 0" textFill="WHITE" AnchorPane.bottomAnchor="988.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="1718.0" AnchorPane.topAnchor="0.0">
+      <Label fx:id="gold" layoutX="32.0" layoutY="6.0" prefHeight="92.0" prefWidth="192.0" stylesheets="@../../static/css/fontstyle.css" text="GOLD : 0" textFill="WHITE" AnchorPane.bottomAnchor="982.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="1696.0" AnchorPane.topAnchor="6.0">
          <font>
             <Font size="59.0" />
          </font>
