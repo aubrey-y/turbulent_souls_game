@@ -68,7 +68,7 @@
                   </Label>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <ToggleButton mnemonicParsing="false" prefHeight="66.0" prefWidth="193.0" stylesheets="@../../static/css/button.css" text="Easy" textFill="WHITE">
+                        <ToggleButton mnemonicParsing="false" onAction="#selectEasyDifficulty" prefHeight="66.0" prefWidth="193.0" stylesheets="@../../static/css/button.css" text="Easy" textFill="WHITE">
                            <font>
                               <Font name="Pixeboy" size="39.0" />
                            </font>
@@ -76,12 +76,12 @@
                               <ToggleGroup fx:id="toggleGroup1" />
                            </toggleGroup>
                         </ToggleButton>
-                        <ToggleButton mnemonicParsing="false" prefHeight="66.0" prefWidth="194.0" stylesheets="@../../static/css/button.css" text="MEDIUM" textFill="WHITE" toggleGroup="$toggleGroup1">
+                        <ToggleButton mnemonicParsing="false" onAction="#selectMediumDifficulty" prefHeight="66.0" prefWidth="194.0" stylesheets="@../../static/css/button.css" text="Medium" textFill="WHITE" toggleGroup="$toggleGroup1">
                            <font>
                               <Font name="Pixeboy" size="39.0" />
                            </font>
                         </ToggleButton>
-                        <ToggleButton mnemonicParsing="false" prefHeight="66.0" prefWidth="194.0" stylesheets="@../../static/css/button.css" text="HARD" textFill="WHITE" toggleGroup="$toggleGroup1">
+                        <ToggleButton mnemonicParsing="false" onAction="#selectHardDifficulty" prefHeight="66.0" prefWidth="194.0" stylesheets="@../../static/css/button.css" text="Hard" textFill="WHITE" toggleGroup="$toggleGroup1">
                            <font>
                               <Font name="Pixeboy" size="39.0" />
                            </font>
@@ -98,7 +98,7 @@
                   </Label>
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="625.0" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <ToggleButton mnemonicParsing="false" prefHeight="66.0" prefWidth="193.0" stylesheets="@../../static/css/button.css" textFill="WHITE">
+                        <ToggleButton mnemonicParsing="false" onAction="#selectArcherArchetype" prefHeight="66.0" prefWidth="193.0" stylesheets="@../../static/css/button.css" textFill="WHITE">
                            <font>
                               <Font name="Pixeboy" size="39.0" />
                            </font>
@@ -113,7 +113,7 @@
                               <ToggleGroup fx:id="toggleGroup2" />
                            </toggleGroup>
                         </ToggleButton>
-                        <ToggleButton mnemonicParsing="false" prefHeight="66.0" prefWidth="193.0" stylesheets="@../../static/css/button.css" textFill="WHITE" toggleGroup="$toggleGroup2">
+                        <ToggleButton mnemonicParsing="false" onAction="#selectMageArchetype" prefHeight="66.0" prefWidth="193.0" stylesheets="@../../static/css/button.css" textFill="WHITE" toggleGroup="$toggleGroup2">
                            <font>
                               <Font name="Pixeboy" size="39.0" />
                            </font>
@@ -125,7 +125,7 @@
                               </ImageView>
                            </graphic>
                         </ToggleButton>
-                        <ToggleButton mnemonicParsing="false" prefHeight="66.0" prefWidth="193.0" stylesheets="@../../static/css/button.css" textFill="WHITE" toggleGroup="$toggleGroup2">
+                        <ToggleButton mnemonicParsing="false" onAction="#selectWarriorArchetype" prefHeight="66.0" prefWidth="193.0" stylesheets="@../../static/css/button.css" textFill="WHITE" toggleGroup="$toggleGroup2">
                            <font>
                               <Font name="Pixeboy" size="39.0" />
                            </font>

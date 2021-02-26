@@ -4,9 +4,9 @@ import org.example.enums.WeaponType;
 
 public abstract class Weapon {
 
-    private String name;
+    protected String name;
 
-    private WeaponType type;
+    protected WeaponType type;
 
-    private int attack;
+    protected int attack;
 }

@@ -81,8 +81,8 @@ public class App extends Application {
         return playerState;
     }
 
-    public static void setPlayerState(PlayerState playerState) {
-        playerState = playerState;
+    public static void setPlayerState(PlayerState state) {
+        playerState = state;
     }
 
 }

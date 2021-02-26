@@ -3,16 +3,17 @@ package org.example.controllers;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
 import org.example.App;
 import org.example.dto.PlayerState;
+import org.example.enums.Archetype;
+import org.example.enums.Difficulty;
 import org.example.exceptions.InvalidArchetypeException;
 import org.example.exceptions.InvalidDifficultyException;
 import org.example.exceptions.InvalidNameException;
+import org.example.exceptions.PlayerCreationException;
 
 public class SecondaryController {
 
@@ -20,22 +21,16 @@ public class SecondaryController {
     private TextField nameID;
 
     @FXML
-    private Button startButton;
-
-    @FXML
-    private Label gameConditions;
-
-    @FXML
-    private Label gameConditions2;
-
-    @FXML
-    private Label gameConditions3;
-
-    @FXML
     private Rectangle errorBox;
 
     @FXML
     private Label errorText;
+
+    private String username;
+
+    private Difficulty difficulty;
+
+    private Archetype archetype;
 
     @FXML
     private void switchToPrimary() throws IOException {
@@ -44,18 +39,21 @@ public class SecondaryController {
 
     @FXML
     public void switchToGameScreen(ActionEvent event) throws IOException {
-        //This is the logic for the text field inputs
         this.hideErrorMessage();
         try {
             validatePlayerName();
             validateDifficulty();
             validateArchetype();
+            App.setPlayerState(new PlayerState(this.username, this.archetype, this.difficulty));
+            App.setRoot("gameScreen");
         } catch (InvalidNameException e) {
             this.setErrorMessage("Make sure your username is not empty.");
-        } catch (InvalidDifficultyException a) {
+        } catch (InvalidDifficultyException e) {
             this.setErrorMessage("Make sure you select a difficulty.");
-        } catch (InvalidArchetypeException b) {
-            this.setErrorMessage("Make sure you select a character");
+        } catch (InvalidArchetypeException e) {
+            this.setErrorMessage("Make sure you select a class.");
+        } catch (PlayerCreationException e) {
+            this.setErrorMessage("Unknown error: Contact cruft@gmail.com.");
         }
     }
 
@@ -64,34 +62,21 @@ public class SecondaryController {
         if (username.isEmpty() || username.trim().equals("")) {
             throw new InvalidNameException("");
         } else {
-            PlayerState playerState = App.getPlayerState();
-            playerState.setUsername(username);
-            App.setPlayerState(playerState);
+            this.username = username;
         }
     }
 
-    //Not complete skeleton code
+    //No else statement because selection is already tracked
     private void validateDifficulty() throws InvalidDifficultyException {
-//        String difficulty = difficultySet();
-//        if (difficulty == null) {
-//            throw new InvalidDifficultyException("");
-//        } else {
-//            PlayerState playerState = App.getPlayerState();
-//            playerState.setDifficulty(difficulty);
-//            App.setPlayerState(playerState);
-//        }
+        if (this.difficulty == null) {
+            throw new InvalidDifficultyException("");
+        }
     }
 
-    //Not complete skeleton code
     private void validateArchetype() throws InvalidArchetypeException {
-//        String archetype = null;
-//        if (archetype == null) {
-//            throw new InvalidArchetypeException("");
-//        } else {
-//            PlayerState playerState = App.getPlayerState();
-//            playerState.setArchetype(archetype);
-//            App.setPlayerState(playerState);
-//        }
+        if (this.archetype == null) {
+            throw new InvalidArchetypeException("");
+        }
     }
 
     @FXML
@@ -107,14 +92,58 @@ public class SecondaryController {
         this.errorText.setOpacity(0.0);
     }
 
-
-
     @FXML
-    private javafx.scene.control.Button closeButton;
-
-    @FXML
-    private void closeButtonAction() {
-        Stage stage = (Stage) closeButton.getScene().getWindow();
-        stage.close();
+    private void selectEasyDifficulty() {
+        if (this.difficulty != Difficulty.EASY) {
+            this.difficulty = Difficulty.EASY;
+        } else {
+            this.difficulty = null;
+        }
     }
+
+    @FXML
+    private void selectMediumDifficulty() {
+        if (this.difficulty != Difficulty.MEDIUM) {
+            this.difficulty = Difficulty.MEDIUM;
+        } else {
+            this.difficulty = null;
+        }
+    }
+
+    @FXML
+    private void selectHardDifficulty() {
+        if (this.difficulty != Difficulty.HARD) {
+            this.difficulty = Difficulty.HARD;
+        } else {
+            this.difficulty = null;
+        }
+    }
+
+    @FXML
+    private void selectArcherArchetype() {
+        if (this.archetype != Archetype.ARCHER) {
+            this.archetype = Archetype.ARCHER;
+        } else {
+            this.archetype = null;
+        }
+    }
+
+    @FXML
+    private void selectMageArchetype() {
+        if (this.archetype != Archetype.MAGE) {
+            this.archetype = Archetype.MAGE;
+        } else {
+            this.archetype = null;
+        }
+    }
+
+    @FXML
+    private void selectWarriorArchetype() {
+        if (this.archetype != Archetype.WARRIOR) {
+            this.archetype = Archetype.WARRIOR;
+        } else {
+            this.archetype = null;
+        }
+    }
+
 }

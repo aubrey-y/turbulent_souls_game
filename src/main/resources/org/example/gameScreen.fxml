@@ -31,7 +31,12 @@
             </Button>
          </children>
       </StackPane>
-      <Label fx:id="gold" layoutX="32.0" layoutY="6.0" prefHeight="92.0" prefWidth="192.0" stylesheets="@../../static/css/fontstyle.css" text="GOLD : 0" textFill="WHITE" AnchorPane.bottomAnchor="982.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="1696.0" AnchorPane.topAnchor="6.0">
+      <Label fx:id="goldAmountLabel" layoutX="32.0" layoutY="6.0" prefHeight="92.0" prefWidth="145.0" stylesheets="@../../static/css/fontstyle.css" text="GOLD : " textFill="WHITE" AnchorPane.bottomAnchor="982.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="1743.0" AnchorPane.topAnchor="6.0">
+         <font>
+            <Font size="59.0" />
+         </font>
+      </Label>
+      <Label fx:id="goldAmount" layoutX="175.0" layoutY="6.0" prefHeight="92.0" prefWidth="385.0" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE">
          <font>
             <Font size="59.0" />
          </font>

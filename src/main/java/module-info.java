@@ -9,4 +9,6 @@ module org.example {
     exports org.example;
     exports org.example.controllers;
     exports org.example.dto;
+    exports org.example.enums;
+    exports org.example.exceptions;
 }
