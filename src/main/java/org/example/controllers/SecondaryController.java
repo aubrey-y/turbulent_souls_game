@@ -57,6 +57,15 @@ public class SecondaryController {
         }
     }
 
+    public void setNameID(String a) {
+        this.nameID = new TextField();
+        nameID.setText(a);
+    }
+
+    public void validatePlayerTest() throws InvalidNameException {
+        validatePlayerName();
+    }
+
     private void validatePlayerName() throws InvalidNameException {
         String username = nameID.getText();
         if (username.isEmpty() || username.trim().equals("")) {
@@ -66,11 +75,20 @@ public class SecondaryController {
         }
     }
 
+
+    public void validateDifficultyTest() throws InvalidDifficultyException {
+        validateDifficulty();
+    }
+
     //No else statement because selection is already tracked
     private void validateDifficulty() throws InvalidDifficultyException {
         if (this.difficulty == null) {
             throw new InvalidDifficultyException("");
         }
+    }
+
+    public void validateArchetypeTest() throws InvalidArchetypeException {
+        validateArchetype();
     }
 
     private void validateArchetype() throws InvalidArchetypeException {

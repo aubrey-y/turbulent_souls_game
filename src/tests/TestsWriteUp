@@ -1,0 +1,18 @@
+Our testing process for this milestone was to focus on the initial game configuration page where you can enter a
+username, select a difficulty, and select a weapon. We wanted to ensure that the correct exceptions would be thrown
+for each item which wouldn't allow the user to progress towards the starting point of the game unless all items were
+properly selected. We also wanted to test that the correct gold amount would be displayed based on the difficulty chosen.
+We decided to test on these three components heavily because they serve as the backbone of the game currently and without
+any of those three items the game wouldn't be able to progress. For example, if a user was able to progress past the
+initial configuration screen without selecting a difficulty, but selected a name and a weapon, the user would run into
+the problem of an incorrect gold amount. This could ruin the entire game for them and the same level of importance of
+difficulty goes for the name and weapon as well.
+
+Explanation of Tests by File
+SecondaryControllerTest
+
+testDifficulty() test verifies that the code functions as expected since it throws an InvalidDifficultyException if the
+difficulty is null which means no difficulty was chosen.
+
+testArcheType() test  verifies that the code functions as expected since it throws an InvalidArchetypeException if the
+archetype is null which means no archetype(weapon) was chosen.
