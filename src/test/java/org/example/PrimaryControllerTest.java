@@ -2,7 +2,6 @@ package org.example;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Disabled;
@@ -16,8 +15,6 @@ import org.testfx.framework.junit5.Start;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
-import static org.testfx.api.FxAssert.verifyThat;
-import static org.testfx.matcher.control.LabeledMatchers.hasText;
 
 @Disabled
 @ExtendWith(ApplicationExtension.class)

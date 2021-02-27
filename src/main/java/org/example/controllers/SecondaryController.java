@@ -60,7 +60,8 @@ public class SecondaryController implements Initializable {
             validatePlayerName();
             validateDifficulty();
             validateArchetype();
-            this.appService.setPlayerState(new PlayerState(this.username, this.archetype, this.difficulty));
+            this.appService.setPlayerState(
+                    new PlayerState(this.username, this.archetype, this.difficulty));
             this.appService.setRoot("gameScreen");
         } catch (InvalidNameException e) {
             this.setErrorMessage(invalidNameExceptionMessage);
