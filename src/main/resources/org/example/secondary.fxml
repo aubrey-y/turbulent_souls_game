@@ -68,7 +68,7 @@
                   </Label>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <ToggleButton mnemonicParsing="false" onAction="#selectEasyDifficulty" prefHeight="66.0" prefWidth="193.0" stylesheets="@../../static/css/button.css" text="Easy" textFill="WHITE">
+                        <ToggleButton id="levelButton" mnemonicParsing="false" onAction="#selectEasyDifficulty" prefHeight="66.0" prefWidth="193.0" stylesheets="@../../static/css/button.css" text="Easy" textFill="WHITE">
                            <font>
                               <Font name="Pixeboy" size="39.0" />
                            </font>
@@ -76,12 +76,12 @@
                               <ToggleGroup fx:id="toggleGroup1" />
                            </toggleGroup>
                         </ToggleButton>
-                        <ToggleButton mnemonicParsing="false" onAction="#selectMediumDifficulty" prefHeight="66.0" prefWidth="194.0" stylesheets="@../../static/css/button.css" text="Medium" textFill="WHITE" toggleGroup="$toggleGroup1">
+                        <ToggleButton id="levelButton" mnemonicParsing="false" onAction="#selectMediumDifficulty" prefHeight="66.0" prefWidth="194.0" stylesheets="@../../static/css/button.css" text="Medium" textFill="WHITE" toggleGroup="$toggleGroup1">
                            <font>
                               <Font name="Pixeboy" size="39.0" />
                            </font>
                         </ToggleButton>
-                        <ToggleButton mnemonicParsing="false" onAction="#selectHardDifficulty" prefHeight="66.0" prefWidth="194.0" stylesheets="@../../static/css/button.css" text="Hard" textFill="WHITE" toggleGroup="$toggleGroup1">
+                        <ToggleButton id="levelButton" mnemonicParsing="false" onAction="#selectHardDifficulty" prefHeight="66.0" prefWidth="194.0" stylesheets="@../../static/css/button.css" text="Hard" textFill="WHITE" toggleGroup="$toggleGroup1">
                            <font>
                               <Font name="Pixeboy" size="39.0" />
                            </font>
@@ -103,7 +103,7 @@
                               <Font name="Pixeboy" size="39.0" />
                            </font>
                            <graphic>
-                              <ImageView fitHeight="200.0" fitWidth="182.0" preserveRatio="true">
+                              <ImageView id="archetypeButton" fitHeight="200.0" fitWidth="182.0" preserveRatio="true">
                                  <image>
                                     <Image url="@../../static/images/bow.png" />
                                  </image>
@@ -118,7 +118,7 @@
                               <Font name="Pixeboy" size="39.0" />
                            </font>
                            <graphic>
-                              <ImageView fitHeight="184.0" fitWidth="178.0" preserveRatio="true">
+                              <ImageView id="archetypeButton" fitHeight="184.0" fitWidth="178.0" preserveRatio="true">
                                  <image>
                                     <Image url="@../../static/images/staff.png" />
                                  </image>
@@ -130,7 +130,7 @@
                               <Font name="Pixeboy" size="39.0" />
                            </font>
                            <graphic>
-                              <ImageView fitHeight="185.0" fitWidth="172.0" preserveRatio="true">
+                              <ImageView id="archetypeButton" fitHeight="185.0" fitWidth="172.0" preserveRatio="true">
                                  <image>
                                     <Image url="@../../static/images/swordR.png" />
                                  </image>

@@ -18,6 +18,7 @@ import java.util.concurrent.TimeoutException;
 
 import static org.example.exceptions.ExceptionMessages.invalidDifficultyExceptionMessage;
 import static org.example.exceptions.ExceptionMessages.invalidNameExceptionMessage;
+import static org.example.exceptions.ExceptionMessages.invalidArchetypeExceptionMessage;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.control.LabeledMatchers.hasText;
 
@@ -56,5 +57,30 @@ public class SecondaryControllerTest {
 
         //Then
         verifyThat("#errorText", hasText(invalidDifficultyExceptionMessage));
+    }
+
+    @Test
+    public void testSwitchToGameScreen_givenUnselectedArchetype_throwsInvalidArchetypeException(FxRobot robot) {
+        //When
+        robot.clickOn("#usernameField");
+        robot.press(KeyCode.A);
+        robot.clickOn("#levelButton");
+        robot.clickOn("#startButton");
+
+        //Then
+        verifyThat("#errorText", hasText(invalidArchetypeExceptionMessage));
+    }
+
+    @Test
+    public void testSwitchToGameScreen_givenValidInputs(FxRobot robot) {
+        //When
+        robot.clickOn("#usernameField");
+        robot.press(KeyCode.A);
+        robot.clickOn("#levelButton");
+        robot.clickOn("#archetypeButton");
+        robot.clickOn("#startButton");
+
+        //Then - FIX!
+        verifyThat("#errorText", hasText(""));
     }
 }
