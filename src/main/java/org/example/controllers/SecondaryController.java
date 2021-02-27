@@ -15,10 +15,15 @@ import org.example.exceptions.InvalidDifficultyException;
 import org.example.exceptions.InvalidNameException;
 import org.example.exceptions.PlayerCreationException;
 
+import static org.example.exceptions.ExceptionMessages.invalidArchetypeExceptionMessage;
+import static org.example.exceptions.ExceptionMessages.invalidDifficultyExceptionMessage;
+import static org.example.exceptions.ExceptionMessages.invalidNameExceptionMessage;
+import static org.example.exceptions.ExceptionMessages.unknownExceptionMessage;
+
 public class SecondaryController {
 
     @FXML
-    private TextField nameID;
+    private TextField usernameField;
 
     @FXML
     private Rectangle errorBox;
@@ -47,27 +52,18 @@ public class SecondaryController {
             App.setPlayerState(new PlayerState(this.username, this.archetype, this.difficulty));
             App.setRoot("gameScreen");
         } catch (InvalidNameException e) {
-            this.setErrorMessage("Make sure your username is not empty.");
+            this.setErrorMessage(invalidNameExceptionMessage);
         } catch (InvalidDifficultyException e) {
-            this.setErrorMessage("Make sure you select a difficulty.");
+            this.setErrorMessage(invalidDifficultyExceptionMessage);
         } catch (InvalidArchetypeException e) {
-            this.setErrorMessage("Make sure you select a class.");
+            this.setErrorMessage(invalidArchetypeExceptionMessage);
         } catch (PlayerCreationException e) {
-            this.setErrorMessage("Unknown error: Contact cruft@gmail.com.");
+            this.setErrorMessage(unknownExceptionMessage);
         }
     }
 
-    public void setNameID(String a) {
-        this.nameID = new TextField();
-        nameID.setText(a);
-    }
-
-    public void validatePlayerTest() throws InvalidNameException {
-        validatePlayerName();
-    }
-
     private void validatePlayerName() throws InvalidNameException {
-        String username = nameID.getText();
+        String username = usernameField.getText();
         if (username.isEmpty() || username.trim().equals("")) {
             throw new InvalidNameException("");
         } else {
@@ -75,20 +71,11 @@ public class SecondaryController {
         }
     }
 
-
-    public void validateDifficultyTest() throws InvalidDifficultyException {
-        validateDifficulty();
-    }
-
     //No else statement because selection is already tracked
     private void validateDifficulty() throws InvalidDifficultyException {
         if (this.difficulty == null) {
             throw new InvalidDifficultyException("");
         }
-    }
-
-    public void validateArchetypeTest() throws InvalidArchetypeException {
-        validateArchetype();
     }
 
     private void validateArchetype() throws InvalidArchetypeException {
@@ -164,4 +151,58 @@ public class SecondaryController {
         }
     }
 
+    //Class builders
+    public SecondaryController setUsernameField(TextField usernameField) {
+        this.usernameField = usernameField;
+        return this;
+    }
+
+    public SecondaryController setErrorBox(Rectangle errorBox) {
+        this.errorBox = errorBox;
+        return this;
+    }
+
+    public SecondaryController setErrorText(Label errorText) {
+        this.errorText = errorText;
+        return this;
+    }
+
+    public SecondaryController setUsername(String username) {
+        this.username = username;
+        return this;
+    }
+
+    public SecondaryController setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
+        return this;
+    }
+
+    public SecondaryController setArchetype(Archetype archetype) {
+        this.archetype = archetype;
+        return this;
+    }
+
+    public TextField getUsernameField() {
+        return usernameField;
+    }
+
+    public Rectangle getErrorBox() {
+        return errorBox;
+    }
+
+    public Label getErrorText() {
+        return errorText;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public Archetype getArchetype() {
+        return archetype;
+    }
 }

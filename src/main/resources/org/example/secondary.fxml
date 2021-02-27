@@ -50,7 +50,7 @@
                         <Insets bottom="15.0" />
                      </padding>
                   </Label>
-                  <TextField fx:id="nameID" alignment="CENTER" maxWidth="100.0" minHeight="-Infinity" minWidth="-Infinity" styleClass="Pixeboy" stylesheets="@../../static/css/fontstyle.css">
+                  <TextField fx:id="usernameField" alignment="CENTER" maxWidth="100.0" minHeight="-Infinity" minWidth="-Infinity" styleClass="Pixeboy" stylesheets="@../../static/css/fontstyle.css">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
