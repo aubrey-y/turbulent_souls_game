@@ -1,12 +1,15 @@
 package org.example.controllers;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.shape.Rectangle;
-import org.example.App;
 import org.example.dto.PlayerState;
 import org.example.enums.Archetype;
 import org.example.enums.Difficulty;
@@ -14,13 +17,16 @@ import org.example.exceptions.InvalidArchetypeException;
 import org.example.exceptions.InvalidDifficultyException;
 import org.example.exceptions.InvalidNameException;
 import org.example.exceptions.PlayerCreationException;
+import org.example.services.AppService;
 
 import static org.example.exceptions.ExceptionMessages.invalidArchetypeExceptionMessage;
 import static org.example.exceptions.ExceptionMessages.invalidDifficultyExceptionMessage;
 import static org.example.exceptions.ExceptionMessages.invalidNameExceptionMessage;
 import static org.example.exceptions.ExceptionMessages.unknownExceptionMessage;
 
-public class SecondaryController {
+public class SecondaryController implements Initializable {
+
+    private AppService appService;
 
     @FXML
     private TextField usernameField;
@@ -37,9 +43,14 @@ public class SecondaryController {
 
     private Archetype archetype;
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.appService = new AppService();
+    }
+
     @FXML
     private void switchToPrimary() throws IOException {
-        App.setRoot("primary");
+        this.appService.setRoot("primary");
     }
 
     @FXML
@@ -49,8 +60,8 @@ public class SecondaryController {
             validatePlayerName();
             validateDifficulty();
             validateArchetype();
-            App.setPlayerState(new PlayerState(this.username, this.archetype, this.difficulty));
-            App.setRoot("gameScreen");
+            this.appService.setPlayerState(new PlayerState(this.username, this.archetype, this.difficulty));
+            this.appService.setRoot("gameScreen");
         } catch (InvalidNameException e) {
             this.setErrorMessage(invalidNameExceptionMessage);
         } catch (InvalidDifficultyException e) {
@@ -149,6 +160,15 @@ public class SecondaryController {
         } else {
             this.archetype = null;
         }
+    }
+
+    public AppService getAppService() {
+        return appService;
+    }
+
+    public SecondaryController setAppService(AppService appService) {
+        this.appService = appService;
+        return this;
     }
 
     //Class builders

@@ -1,13 +1,17 @@
 package org.example.controllers;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import org.example.App;
+import org.example.services.AppService;
 
-public class PrimaryController {
+public class PrimaryController implements Initializable {
 
     @FXML
     private Button primaryButton;
@@ -21,6 +25,13 @@ public class PrimaryController {
     @FXML
     private Button soundToggle;
 
+    private AppService appService;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.appService = new AppService();
+    }
+
     @FXML
     private void closeButtonAction() {
         Stage stage = (Stage) closeButton.getScene().getWindow();
@@ -29,12 +40,11 @@ public class PrimaryController {
 
     @FXML
     private void switchToSecondary() throws IOException, InterruptedException {
-        App.setRoot("secondary");
+        this.appService.setRoot("secondary");
     }
 
     @FXML
     private void toggleSound() {
-        App.toggleSound();
+        this.appService.toggleSound();
     }
-
 }

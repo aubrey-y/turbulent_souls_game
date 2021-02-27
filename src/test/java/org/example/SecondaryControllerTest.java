@@ -1,9 +1,12 @@
 package org.example;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
+import org.example.controllers.SecondaryController;
+import org.example.services.AppService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -16,9 +19,12 @@ import org.testfx.framework.junit5.Start;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
+import static org.example.exceptions.ExceptionMessages.invalidArchetypeExceptionMessage;
 import static org.example.exceptions.ExceptionMessages.invalidDifficultyExceptionMessage;
 import static org.example.exceptions.ExceptionMessages.invalidNameExceptionMessage;
-import static org.example.exceptions.ExceptionMessages.invalidArchetypeExceptionMessage;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.mock;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.control.LabeledMatchers.hasText;
 
@@ -26,11 +32,18 @@ import static org.testfx.matcher.control.LabeledMatchers.hasText;
 @ExtendWith(ApplicationExtension.class)
 public class SecondaryControllerTest {
 
+    private SecondaryController controller;
+
+    private AppService appService;
 
     @Start
     public void setUp(Stage stage) throws IOException {
+        withMockedAppService();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("secondary.fxml"));
-        stage.setScene(new Scene(loader.load(), 0, 0));
+        Parent root = loader.load();
+        this.controller = loader.getController();
+        this.controller.setAppService(this.appService);
+        stage.setScene(new Scene(root, 0, 0));
         stage.show();
     }
 
@@ -72,7 +85,7 @@ public class SecondaryControllerTest {
     }
 
     @Test
-    public void testSwitchToGameScreen_givenValidInputs(FxRobot robot) {
+    public void testSwitchToGameScreen_givenValidInputs_doesNotReportExceptions(FxRobot robot) {
         //When
         robot.clickOn("#usernameField");
         robot.press(KeyCode.A);
@@ -81,6 +94,11 @@ public class SecondaryControllerTest {
         robot.clickOn("#startButton");
 
         //Then - FIX!
-        verifyThat("#errorText", hasText(""));
+        verifyThat("#errorText", hasText("No errors reported."));
+    }
+
+    private void withMockedAppService() throws IOException {
+        this.appService = mock(AppService.class);
+        doNothing().when(this.appService).setRoot(anyString());
     }
 }

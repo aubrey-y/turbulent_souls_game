@@ -8,8 +8,10 @@ module org.example {
 
     opens org.example to javafx.fxml;
     opens org.example.controllers to javafx.fxml;
+    opens org.example.services to javafx.fxml;
     exports org.example;
     exports org.example.controllers;
+    exports org.example.services;
     exports org.example.dto;
     exports org.example.enums;
     exports org.example.exceptions;
