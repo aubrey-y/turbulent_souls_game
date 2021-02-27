@@ -26,4 +26,5 @@ public class SecondaryControllerTest {
         app.validateArchetypeTest();
     }
 
+
 }
