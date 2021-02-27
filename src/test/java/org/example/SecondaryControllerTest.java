@@ -1,56 +1,60 @@
 package org.example;
 
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.shape.Rectangle;
-import org.example.controllers.SecondaryController;
-import org.example.exceptions.InvalidArchetypeException;
-import org.example.exceptions.InvalidDifficultyException;
-import org.junit.jupiter.api.BeforeEach;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.stage.Stage;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.testfx.api.FxRobot;
+import org.testfx.api.FxToolkit;
+import org.testfx.framework.junit5.ApplicationExtension;
+import org.testfx.framework.junit5.Start;
 
 import java.io.IOException;
+import java.util.concurrent.TimeoutException;
 
+import static org.example.exceptions.ExceptionMessages.invalidDifficultyExceptionMessage;
 import static org.example.exceptions.ExceptionMessages.invalidNameExceptionMessage;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.testfx.api.FxAssert.verifyThat;
+import static org.testfx.matcher.control.LabeledMatchers.hasText;
 
+@Disabled
+@ExtendWith(ApplicationExtension.class)
 public class SecondaryControllerTest {
 
-    private SecondaryController controller;
 
-//    @BeforeEach
-//    public void setUp() {
-//        this.controller = new SecondaryController()
-//                .setErrorBox(new Rectangle());
-//    }
-//
-//    @Test
-//    public void testSwitchToGameScreen_givenEmptyUsername_setsExpectedErrorText() throws IOException {
-//        //Given
-//        Label label = new Label();
-//        label.setText("");
-//        this.controller.setErrorText(label);
-//
-//        String expected = invalidNameExceptionMessage;
-//        //When
-//        this.controller.switchToGameScreen(null);
-//
-//        //Then
-//        String actual = this.controller.getErrorText().getText();
-//
-//        assertThat(actual, is(equalTo(expected)));
-//    }
+    @Start
+    public void setUp(Stage stage) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("secondary.fxml"));
+        stage.setScene(new Scene(loader.load(), 0, 0));
+        stage.show();
+    }
 
-//    @Test
-//    public void testSwitchToGameScreen_givenUnselectedDifficulty_throwsInvalidDifficultyException() {
-//        assertThrows(InvalidDifficultyException.class, () -> this.controller.switchToGameScreen(null));
-//    }
-//
-//    @Test
-//    public void testSwitchToGameScreen_givenUnselectedArchetype_throwsInvalidArchetypeException() {
-//        assertThrows(InvalidArchetypeException.class, () -> this.controller.switchToGameScreen(null));
-//    }
+    @AfterEach
+    public void tearDown() throws TimeoutException {
+        FxToolkit.hideStage();
+    }
+
+    @Test
+    public void testSwitchToGameScreen_givenEmptyUsername_setsExpectedErrorText(FxRobot robot) {
+        //When
+        robot.clickOn("#startButton");
+
+        //Then
+        verifyThat("#errorText", hasText(invalidNameExceptionMessage));
+    }
+
+    @Test
+    public void testSwitchToGameScreen_givenUnselectedDifficulty_throwsInvalidDifficultyException(FxRobot robot) {
+        //When
+        robot.clickOn("#usernameField");
+        robot.press(KeyCode.A);
+        robot.clickOn("#startButton");
+
+        //Then
+        verifyThat("#errorText", hasText(invalidDifficultyExceptionMessage));
+    }
 }

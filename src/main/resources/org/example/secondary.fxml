@@ -28,7 +28,7 @@
             <Pane prefHeight="200.0" prefWidth="200.0">
                <children>
                   <Rectangle fx:id="errorBox" arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="50.0" opacity="0.0" stroke="TRANSPARENT" strokeType="INSIDE" width="520.0" x="1400.0" y="1030.0" />
-                  <Label fx:id="errorText" layoutX="1420.0" layoutY="1050.0" opacity="0.0" textFill="WHITE">
+                  <Label id="errorText" fx:id="errorText" layoutX="1420.0" layoutY="1050.0" opacity="0.0" textFill="WHITE">
                      <font>
                         <Font name="Pixeboy" size="28.0" />
                      </font>
@@ -50,7 +50,7 @@
                         <Insets bottom="15.0" />
                      </padding>
                   </Label>
-                  <TextField fx:id="usernameField" alignment="CENTER" maxWidth="100.0" minHeight="-Infinity" minWidth="-Infinity" styleClass="Pixeboy" stylesheets="@../../static/css/fontstyle.css">
+                  <TextField id="usernameField" fx:id="usernameField" alignment="CENTER" maxWidth="100.0" minHeight="-Infinity" minWidth="-Infinity" styleClass="Pixeboy" stylesheets="@../../static/css/fontstyle.css">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
@@ -153,7 +153,7 @@
                               </Label>
                            </graphic>
                         </Button>
-                        <Button fx:id="startButton" alignment="BASELINE_CENTER" layoutX="806.0" layoutY="10.0" mnemonicParsing="false" onAction="#switchToGameScreen" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE">
+                        <Button id="startButton" fx:id="startButton" alignment="BASELINE_CENTER" layoutX="806.0" layoutY="10.0" mnemonicParsing="false" onAction="#switchToGameScreen" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE">
                            <font>
                               <Font name="Pixeboy" size="30.0" />
                            </font>
