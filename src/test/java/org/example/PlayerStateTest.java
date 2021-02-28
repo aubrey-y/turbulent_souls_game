@@ -54,7 +54,7 @@ public class PlayerStateTest {
     }
 
     @Test
-    public void testGivenEasyWarrior2ProducesValidInit() throws PlayerCreationException {
+    public void testGivenEasyWarriorProducesValidInit() throws PlayerCreationException {
         Archetype warrior = Archetype.WARRIOR;
         Difficulty easy = Difficulty.EASY;
         PlayerState player = new PlayerState("Jeff", warrior, easy);
