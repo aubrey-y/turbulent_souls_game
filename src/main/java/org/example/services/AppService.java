@@ -27,4 +27,6 @@ public class AppService {
     public void setPlayerState(PlayerState playerState) {
         App.setPlayerState(playerState);
     }
+
+    public static boolean getSoundPlaying() { return App.getSoundPlaying(); }
 }

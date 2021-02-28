@@ -84,4 +84,6 @@ public class App extends Application {
         playerState = state;
     }
 
+    public static boolean getSoundPlaying() { return soundPlaying; }
+
 }

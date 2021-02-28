@@ -1,6 +1,7 @@
 package org.example;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -23,8 +24,7 @@ import static org.example.exceptions.ExceptionMessages.invalidArchetypeException
 import static org.example.exceptions.ExceptionMessages.invalidDifficultyExceptionMessage;
 import static org.example.exceptions.ExceptionMessages.invalidNameExceptionMessage;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.control.LabeledMatchers.hasText;
 
@@ -97,8 +97,20 @@ public class SecondaryControllerTest {
         verifyThat("#errorText", hasText("No errors reported."));
     }
 
+    @Test
+    public void testSwitchToGameScreen_givenWhiteSpaceUsername_throwsInvalidArchetypeException(FxRobot robot) {
+        //When
+        robot.clickOn("#usernameField").type(KeyCode.valueOf(" "));
+        robot.clickOn("#levelButton");
+        robot.clickOn("#archetypeButton");
+        robot.clickOn("#startButton");
+
+        //Then
+        verifyThat("#errorText", hasText(invalidNameExceptionMessage));
+    }
+
     private void withMockedAppService() throws IOException {
-        this.appService = mock(AppService.class);
+        this.appService = spy(AppService.class);
         doNothing().when(this.appService).setRoot(anyString());
     }
 }
