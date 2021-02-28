@@ -86,4 +86,7 @@ public class App extends Application {
 
     public static boolean getSoundPlaying() { return soundPlaying; }
 
+    public static void setSoundPlaying(boolean soundPlaying) {
+        App.soundPlaying = soundPlaying;
+    }
 }

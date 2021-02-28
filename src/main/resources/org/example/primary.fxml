@@ -98,7 +98,7 @@
                      <children>
                         <Button fx:id="soundToggle" mnemonicParsing="false" onAction="#toggleSound" prefHeight="67.0" prefWidth="70.0" style="-fx-background-color: 00;">
                            <graphic>
-                              <ImageView fitHeight="67.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true" style="-fx-padding: 0 0 0 100000;">
+                              <ImageView id="soundToggle" fitHeight="67.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true" style="-fx-padding: 0 0 0 100000;">
                                  <image>
                                     <Image url="@../../static/images/mute.PNG" />
                                  </image>

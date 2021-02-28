@@ -1,6 +1,7 @@
 package org.example;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.example.controllers.PrimaryController;
@@ -19,6 +20,8 @@ import java.util.concurrent.TimeoutException;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.mock;
 
 @Disabled
 @ExtendWith(ApplicationExtension.class)
@@ -30,8 +33,12 @@ public class PrimaryControllerTest {
 
     @Start
     public void setUp(Stage stage) throws IOException {
+        withMockedAppService();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("primary.fxml"));
-        stage.setScene(new Scene(loader.load(), 0, 0));
+        Parent root = loader.load();
+        this.controller = loader.getController();
+        this.controller.setAppService(this.appService);
+        stage.setScene(new Scene(root, 0, 0));
         stage.show();
     }
 
@@ -46,7 +53,14 @@ public class PrimaryControllerTest {
         robot.clickOn("#soundToggle");
 
         //Then
-        assertThat(AppService.getSoundPlaying(), is(false));
+        assertThat(this.appService.getSoundPlaying(), is(false));
     }
 
+    private void withMockedAppService() {
+        this.appService = mock(AppService.class);
+        doAnswer(invocationOnMock -> {
+            App.setSoundPlaying(false);
+            return null;
+        }).when(this.appService).toggleSound();
+    }
 }

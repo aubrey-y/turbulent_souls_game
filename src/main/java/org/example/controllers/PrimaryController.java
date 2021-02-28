@@ -47,4 +47,13 @@ public class PrimaryController implements Initializable {
     private void toggleSound() {
         this.appService.toggleSound();
     }
+
+    public AppService getAppService() {
+        return appService;
+    }
+
+    public PrimaryController setAppService(AppService appService) {
+        this.appService = appService;
+        return this;
+    }
 }

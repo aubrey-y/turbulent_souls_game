@@ -1,7 +1,6 @@
 package org.example;
 
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -24,7 +23,8 @@ import static org.example.exceptions.ExceptionMessages.invalidArchetypeException
 import static org.example.exceptions.ExceptionMessages.invalidDifficultyExceptionMessage;
 import static org.example.exceptions.ExceptionMessages.invalidNameExceptionMessage;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.spy;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.control.LabeledMatchers.hasText;
 

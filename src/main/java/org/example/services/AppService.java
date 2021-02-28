@@ -28,5 +28,5 @@ public class AppService {
         App.setPlayerState(playerState);
     }
 
-    public static boolean getSoundPlaying() { return App.getSoundPlaying(); }
+    public boolean getSoundPlaying() { return App.getSoundPlaying(); }
 }
