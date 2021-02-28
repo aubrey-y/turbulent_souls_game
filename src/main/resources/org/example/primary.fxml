@@ -1,16 +1,120 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Button?>
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.PrimaryController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.PrimaryController">
    <children>
-      <Label text="Primary View" />
-      <Button fx:id="primaryButton" text="Switch to Secondary View" onAction="#switchToSecondary"/>
+      <ImageView pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../../static/images/backgroundOrange.png" />
+         </image></ImageView>
+      <ImageView id="muteEnabled" fx:id="muteEnabled" fitHeight="67.0" fitWidth="72.0" layoutX="1843.0" layoutY="4.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" style="-fx-padding: 0 0 0 100000;">
+         <image>
+            <Image url="@../../static/images/muteOn.PNG" />
+         </image>
+      </ImageView>
+      <StackPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label styleClass="Pixeboy" stylesheets="@../../static/css/fontstyle.css" text="World of Warcruft" textFill="WHITE">
+                     <font>
+                        <Font name="Pixeboy" size="200.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <HBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0">
+               <children>
+                  <VBox id="vBoxLeft" prefHeight="1030.0" prefWidth="500.0" />
+                  <VBox alignment="BOTTOM_CENTER" prefHeight="1030.0" prefWidth="250.0">
+                     <children>
+                        <Button fx:id="primaryButton" alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#switchToSecondary" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE">
+                           <font>
+                              <Font name="Pixeboy" size="30.0" />
+                           </font>
+                           <graphic>
+                              <Label id="clickable" fx:id="startLabel" stylesheets="@../../static/css/fontstyle.css" text="Start" textFill="WHITE">
+                                 <font>
+                                    <Font size="36.0" />
+                                 </font>
+                              </Label>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <VBox alignment="BOTTOM_CENTER" layoutX="845.0" layoutY="10.0" prefHeight="1030.0" prefWidth="250.0">
+                     <children>
+                        <Button alignment="BASELINE_CENTER" mnemonicParsing="false" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE">
+                           <font>
+                              <Font name="Pixeboy" size="30.0" />
+                           </font>
+                           <graphic>
+                              <Label id="clickable" stylesheets="@../../static/css/fontstyle.css" text="Load Game" textFill="WHITE">
+                                 <font>
+                                    <Font size="36.0" />
+                                 </font>
+                              </Label>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <VBox alignment="BOTTOM_CENTER" layoutX="970.0" layoutY="10.0" prefHeight="1030.0" prefWidth="250.0">
+                     <children>
+                        <Button alignment="BASELINE_CENTER" mnemonicParsing="false" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE">
+                           <font>
+                              <Font name="Pixeboy" size="30.0" />
+                           </font>
+                           <graphic>
+                              <Label id="clickable" stylesheets="@../../static/css/fontstyle.css" text="Settings" textFill="WHITE">
+                                 <font>
+                                    <Font size="36.0" />
+                                 </font>
+                              </Label>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <VBox alignment="BOTTOM_CENTER" layoutX="1095.0" layoutY="10.0" prefHeight="1030.0" prefWidth="250.0">
+                     <children>
+                        <Button fx:id="closeButton" alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE">
+                           <font>
+                              <Font name="Pixeboy" size="30.0" />
+                           </font>
+                           <graphic>
+                              <Label id="clickable" stylesheets="@../../static/css/fontstyle.css" text="Exit" textFill="WHITE">
+                                 <font>
+                                    <Font size="36.0" />
+                                 </font>
+                              </Label>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="500.0">
+                     <children>
+                        <Button fx:id="soundToggle" mnemonicParsing="false" onAction="#toggleSound" prefHeight="67.0" prefWidth="70.0" style="-fx-background-color: 00;">
+                           <graphic>
+                              <ImageView id="muteDisabled" fx:id="muteDisabled" fitHeight="67.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true" style="-fx-padding: 0 0 0 100000;">
+                                 <image>
+                                    <Image url="@../../static/images/mute.PNG" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </StackPane>
    </children>
-   <padding>
-      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-   </padding>
-</VBox>
+</AnchorPane>

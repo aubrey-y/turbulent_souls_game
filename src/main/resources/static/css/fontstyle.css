@@ -1,0 +1,18 @@
+@font-face {
+    font-family: 'Pixeboy';
+    src: url('../fonts/Pixeboy-z8XGD.ttf');
+}
+
+.label {
+    -fx-font-family: 'Pixeboy';
+}
+
+#clickable:hover {
+    -fx-background-color: linear-gradient(#2d2121, #1d1414), linear-gradient(#180d0d 0%, #000000 20%, #000000 100%), linear-gradient(#000000 0%, #000000 50%);
+}
+
+#clickable:pressed {
+    -fx-rotate: 10;
+}
+
+
