@@ -24,9 +24,7 @@ import static org.example.exceptions.ExceptionMessages.INVALID_DIFFICULTY_EXCEPT
 import static org.example.exceptions.ExceptionMessages.INVALID_NAME_EXCEPTION_MESSAGE;
 import static org.example.exceptions.ExceptionMessages.UNKNOWN_EXCEPTION_MESSAGE;
 
-public class SecondaryController implements Initializable {
-
-    private AppService appService;
+public class SecondaryController extends BaseController implements Initializable {
 
     @FXML
     private TextField usernameField;
@@ -45,7 +43,7 @@ public class SecondaryController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.appService = new AppService();
+        initController();
     }
 
     @FXML

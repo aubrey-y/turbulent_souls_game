@@ -20,8 +20,10 @@ import java.util.concurrent.TimeoutException;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
+import static org.testfx.api.FxAssert.verifyThat;
 
 @Disabled
 @ExtendWith(ApplicationExtension.class)
@@ -48,7 +50,7 @@ public class PrimaryControllerTest {
     }
 
     @Test
-    public void switchAudioToggle_givenAudioIsPlaying(FxRobot robot) {
+    public void switchAudioToggle_givenAudioIsPlaying_turnsSoundPlayingOff(FxRobot robot) {
         //When
         robot.clickOn("#soundToggle");
 
@@ -61,6 +63,6 @@ public class PrimaryControllerTest {
         doAnswer(invocationOnMock -> {
             App.setSoundPlaying(false);
             return null;
-        }).when(this.appService).toggleSound();
+        }).when(this.appService).toggleSound(any(), any());
     }
 }

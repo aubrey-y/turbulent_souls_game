@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.media.AudioClip;
@@ -52,13 +53,15 @@ public class App extends Application {
         stage.show();
     }
 
-    public static void toggleSound() {
+    public static void toggleSound(ImageView muteDisabled, ImageView muteEnabled) {
         if (soundPlaying) {
-            mediaPlayer.setOnEndOfMedia(() -> { });
-            mediaPlayer.stop();
+            mediaPlayer.setVolume(0.0);
+            muteDisabled.setOpacity(0.0);
+            muteEnabled.setOpacity(1.0);
         } else {
-            mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
-            mediaPlayer.play();
+            mediaPlayer.setVolume(1.0);
+            muteDisabled.setOpacity(1.0);
+            muteEnabled.setOpacity(0.0);
         }
         soundPlaying = !soundPlaying;
     }

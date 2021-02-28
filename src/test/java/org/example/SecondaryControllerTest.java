@@ -100,7 +100,7 @@ public class SecondaryControllerTest {
     @Test
     public void testSwitchToGameScreen_givenWhiteSpaceUsername_throwsIAException(FxRobot robot) {
         //When
-        robot.clickOn("#usernameField").type(KeyCode.valueOf(" "));
+        robot.clickOn("#usernameField").type(KeyCode.SPACE);
         robot.clickOn("#levelButton");
         robot.clickOn("#archetypeButton");
         robot.clickOn("#startButton");

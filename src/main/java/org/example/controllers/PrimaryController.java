@@ -11,7 +11,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import org.example.services.AppService;
 
-public class PrimaryController implements Initializable {
+public class PrimaryController extends BaseController implements Initializable {
 
     @FXML
     private Button primaryButton;
@@ -25,11 +25,9 @@ public class PrimaryController implements Initializable {
     @FXML
     private Button soundToggle;
 
-    private AppService appService;
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.appService = new AppService();
+        this.initController();
     }
 
     @FXML
@@ -39,13 +37,8 @@ public class PrimaryController implements Initializable {
     }
 
     @FXML
-    private void switchToSecondary() throws IOException, InterruptedException {
+    private void switchToSecondary() throws IOException {
         this.appService.setRoot("secondary");
-    }
-
-    @FXML
-    private void toggleSound() {
-        this.appService.toggleSound();
     }
 
     public AppService getAppService() {

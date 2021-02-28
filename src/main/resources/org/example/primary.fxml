@@ -16,6 +16,11 @@
          <image>
             <Image url="@../../static/images/backgroundOrange.png" />
          </image></ImageView>
+      <ImageView id="muteEnabled" fx:id="muteEnabled" fitHeight="67.0" fitWidth="72.0" layoutX="1843.0" layoutY="4.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" style="-fx-padding: 0 0 0 100000;">
+         <image>
+            <Image url="@../../static/images/muteOn.PNG" />
+         </image>
+      </ImageView>
       <StackPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
@@ -98,7 +103,7 @@
                      <children>
                         <Button fx:id="soundToggle" mnemonicParsing="false" onAction="#toggleSound" prefHeight="67.0" prefWidth="70.0" style="-fx-background-color: 00;">
                            <graphic>
-                              <ImageView id="soundToggle" fitHeight="67.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true" style="-fx-padding: 0 0 0 100000;">
+                              <ImageView id="muteDisabled" fx:id="muteDisabled" fitHeight="67.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true" style="-fx-padding: 0 0 0 100000;">
                                  <image>
                                     <Image url="@../../static/images/mute.PNG" />
                                  </image>

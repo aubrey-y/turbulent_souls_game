@@ -1,5 +1,6 @@
 package org.example.services;
 
+import javafx.scene.image.ImageView;
 import org.example.App;
 import org.example.dto.PlayerState;
 
@@ -12,8 +13,8 @@ import java.io.IOException;
  */
 public class AppService {
 
-    public void toggleSound() {
-        App.toggleSound();
+    public void toggleSound(ImageView muteDisabled, ImageView muteEnabled) {
+        App.toggleSound(muteDisabled, muteEnabled);
     }
 
     public void setRoot(String root) throws IOException {
