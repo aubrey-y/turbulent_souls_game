@@ -18,7 +18,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class PlayerStateTest {
 
     @Test
-    public void testPlayerState_givenEasyMage_producesValidInit() throws PlayerCreationException {
+    public void testGivenEasyMageProducesValidInit() throws PlayerCreationException {
         Archetype mage = Archetype.MAGE;
         Difficulty easy = Difficulty.EASY;
         PlayerState player = new PlayerState("Jeff", mage, easy);
@@ -30,7 +30,7 @@ public class PlayerStateTest {
     }
 
     @Test
-    public void testPlayerState_givenMedArcher_producesValidInit() throws PlayerCreationException {
+    public void testGivenMedArcherProducesValidInit() throws PlayerCreationException {
         Archetype archer = Archetype.ARCHER;
         Difficulty medium = Difficulty.MEDIUM;
         PlayerState player = new PlayerState("Jeff", archer, medium);
@@ -42,7 +42,7 @@ public class PlayerStateTest {
     }
 
     @Test
-    public void testPlayerState_givenHrdWarrior_producesValidInit() throws PlayerCreationException {
+    public void testGivenHrdWarriorProducesValidInit() throws PlayerCreationException {
         Archetype warrior = Archetype.WARRIOR;
         Difficulty hard = Difficulty.HARD;
         PlayerState player = new PlayerState("Jeff", warrior, hard);
@@ -50,6 +50,18 @@ public class PlayerStateTest {
         Weapon weapon = player.getActiveWeapon();
 
         assertThat(goldAmount, is(equalTo(500)));
+        assertThat(weapon, is(instanceOf(BasicSword.class)));
+    }
+
+    @Test
+    public void testGivenHrdWarrior2ProducesValidInit() throws PlayerCreationException {
+        Archetype warrior = Archetype.WARRIOR;
+        Difficulty easy = Difficulty.EASY;
+        PlayerState player = new PlayerState("Jeff", warrior, easy);
+        int goldAmount = player.getGoldAmount();
+        Weapon weapon = player.getActiveWeapon();
+
+        assertThat(goldAmount, is(equalTo(1000)));
         assertThat(weapon, is(instanceOf(BasicSword.class)));
     }
 }

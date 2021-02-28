@@ -22,7 +22,7 @@ public abstract class BaseController implements Initializable {
 
     protected void initController() {
         this.appService = new AppService();
-        if(!this.appService.getSoundPlaying()) {
+        if (!this.appService.getSoundPlaying()) {
             this.muteEnabled.setOpacity(1.0);
             this.muteDisabled.setOpacity(0.0);
         }

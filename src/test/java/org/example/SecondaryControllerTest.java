@@ -53,7 +53,7 @@ public class SecondaryControllerTest {
     }
 
     @Test
-    public void testSwitchToGameScreen_givenEmptyUsername_setsExpectedErrorText(FxRobot robot) {
+    public void testSwitchToGameScreenGivenEmptyUsernameSetsExpectedErrorText(FxRobot robot) {
         //When
         robot.clickOn("#startButton");
 
@@ -62,7 +62,7 @@ public class SecondaryControllerTest {
     }
 
     @Test
-    public void testSwitchToGameScreen_givenUnselectedDifficulty_throwsIDException(FxRobot robot) {
+    public void testSwitchToGameScreenGivenUnselectedDifficultyThrowsIDException(FxRobot robot) {
         //When
         robot.clickOn("#usernameField");
         robot.press(KeyCode.A);
@@ -73,7 +73,7 @@ public class SecondaryControllerTest {
     }
 
     @Test
-    public void testSwitchToGameScreen_givenUnselectedArchetype_throwsIAException(FxRobot robot) {
+    public void testSwitchToGameScreenGivenUnselectedArchetypeThrowsIAException(FxRobot robot) {
         //When
         robot.clickOn("#usernameField");
         robot.press(KeyCode.A);
@@ -85,7 +85,7 @@ public class SecondaryControllerTest {
     }
 
     @Test
-    public void testSwitchToGameScreen_givenValidInputs_doesNotReportExceptions(FxRobot robot) {
+    public void testSwitchToGameScreenGivenValidInputsDoesNotReportExceptions(FxRobot robot) {
         //When
         robot.clickOn("#usernameField");
         robot.press(KeyCode.A);
@@ -98,7 +98,7 @@ public class SecondaryControllerTest {
     }
 
     @Test
-    public void testSwitchToGameScreen_givenWhiteSpaceUsername_throwsIAException(FxRobot robot) {
+    public void testSwitchToGameScreenGivenWhiteSpaceUsernameThrowsIAException(FxRobot robot) {
         //When
         robot.clickOn("#usernameField").type(KeyCode.SPACE);
         robot.clickOn("#levelButton");

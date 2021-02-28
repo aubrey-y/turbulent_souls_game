@@ -23,7 +23,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
-import static org.testfx.api.FxAssert.verifyThat;
 
 @Disabled
 @ExtendWith(ApplicationExtension.class)
@@ -50,7 +49,7 @@ public class PrimaryControllerTest {
     }
 
     @Test
-    public void switchAudioToggle_givenAudioIsPlaying_turnsSoundPlayingOff(FxRobot robot) {
+    public void switchAudioToggleGivenAudioIsPlayingTurnsSoundPlayingOff(FxRobot robot) {
         //When
         robot.clickOn("#soundToggle");
 
