@@ -18,7 +18,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class PlayerStateTest {
 
     @Test
-    public void easyMageTest() throws PlayerCreationException {
+    public void testPlayerState_givenEasyMage_producesValidInit() throws PlayerCreationException {
         Archetype mage = Archetype.MAGE;
         Difficulty easy = Difficulty.EASY;
         PlayerState player = new PlayerState("Jeff", mage, easy);
@@ -30,7 +30,7 @@ public class PlayerStateTest {
     }
 
     @Test
-    public void mediumArcherTest() throws PlayerCreationException {
+    public void testPlayerState_givenMedArcher_producesValidInit() throws PlayerCreationException {
         Archetype archer = Archetype.ARCHER;
         Difficulty medium = Difficulty.MEDIUM;
         PlayerState player = new PlayerState("Jeff", archer, medium);
@@ -42,10 +42,10 @@ public class PlayerStateTest {
     }
 
     @Test
-    public void hardWarriorTest() throws PlayerCreationException {
-        Archetype WARRIOR = Archetype.WARRIOR;
+    public void testPlayerState_givenHrdWarrior_producesValidInit() throws PlayerCreationException {
+        Archetype warrior = Archetype.WARRIOR;
         Difficulty hard = Difficulty.HARD;
-        PlayerState player = new PlayerState("Jeff", WARRIOR, hard);
+        PlayerState player = new PlayerState("Jeff", warrior, hard);
         int goldAmount = player.getGoldAmount();
         Weapon weapon = player.getActiveWeapon();
 

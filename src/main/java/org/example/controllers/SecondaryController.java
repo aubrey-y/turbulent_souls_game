@@ -19,10 +19,10 @@ import org.example.exceptions.InvalidNameException;
 import org.example.exceptions.PlayerCreationException;
 import org.example.services.AppService;
 
-import static org.example.exceptions.ExceptionMessages.invalidArchetypeExceptionMessage;
-import static org.example.exceptions.ExceptionMessages.invalidDifficultyExceptionMessage;
-import static org.example.exceptions.ExceptionMessages.invalidNameExceptionMessage;
-import static org.example.exceptions.ExceptionMessages.unknownExceptionMessage;
+import static org.example.exceptions.ExceptionMessages.INVALID_ARCHETYPE_EXCEPTION_MESSAGE;
+import static org.example.exceptions.ExceptionMessages.INVALID_DIFFICULTY_EXCEPTION_MESSAGE;
+import static org.example.exceptions.ExceptionMessages.INVALID_NAME_EXCEPTION_MESSAGE;
+import static org.example.exceptions.ExceptionMessages.UNKNOWN_EXCEPTION_MESSAGE;
 
 public class SecondaryController implements Initializable {
 
@@ -64,13 +64,13 @@ public class SecondaryController implements Initializable {
                     new PlayerState(this.username, this.archetype, this.difficulty));
             this.appService.setRoot("gameScreen");
         } catch (InvalidNameException e) {
-            this.setErrorMessage(invalidNameExceptionMessage);
+            this.setErrorMessage(INVALID_NAME_EXCEPTION_MESSAGE);
         } catch (InvalidDifficultyException e) {
-            this.setErrorMessage(invalidDifficultyExceptionMessage);
+            this.setErrorMessage(INVALID_DIFFICULTY_EXCEPTION_MESSAGE);
         } catch (InvalidArchetypeException e) {
-            this.setErrorMessage(invalidArchetypeExceptionMessage);
+            this.setErrorMessage(INVALID_ARCHETYPE_EXCEPTION_MESSAGE);
         } catch (PlayerCreationException e) {
-            this.setErrorMessage(unknownExceptionMessage);
+            this.setErrorMessage(UNKNOWN_EXCEPTION_MESSAGE);
         }
     }
 

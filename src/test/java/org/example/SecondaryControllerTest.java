@@ -19,9 +19,9 @@ import org.testfx.framework.junit5.Start;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
-import static org.example.exceptions.ExceptionMessages.invalidArchetypeExceptionMessage;
-import static org.example.exceptions.ExceptionMessages.invalidDifficultyExceptionMessage;
-import static org.example.exceptions.ExceptionMessages.invalidNameExceptionMessage;
+import static org.example.exceptions.ExceptionMessages.INVALID_ARCHETYPE_EXCEPTION_MESSAGE;
+import static org.example.exceptions.ExceptionMessages.INVALID_DIFFICULTY_EXCEPTION_MESSAGE;
+import static org.example.exceptions.ExceptionMessages.INVALID_NAME_EXCEPTION_MESSAGE;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.spy;
@@ -58,22 +58,22 @@ public class SecondaryControllerTest {
         robot.clickOn("#startButton");
 
         //Then
-        verifyThat("#errorText", hasText(invalidNameExceptionMessage));
+        verifyThat("#errorText", hasText(INVALID_NAME_EXCEPTION_MESSAGE));
     }
 
     @Test
-    public void testSwitchToGameScreen_givenUnselectedDifficulty_throwsInvalidDifficultyException(FxRobot robot) {
+    public void testSwitchToGameScreen_givenUnselectedDifficulty_throwsIDException(FxRobot robot) {
         //When
         robot.clickOn("#usernameField");
         robot.press(KeyCode.A);
         robot.clickOn("#startButton");
 
         //Then
-        verifyThat("#errorText", hasText(invalidDifficultyExceptionMessage));
+        verifyThat("#errorText", hasText(INVALID_DIFFICULTY_EXCEPTION_MESSAGE));
     }
 
     @Test
-    public void testSwitchToGameScreen_givenUnselectedArchetype_throwsInvalidArchetypeException(FxRobot robot) {
+    public void testSwitchToGameScreen_givenUnselectedArchetype_throwsIAException(FxRobot robot) {
         //When
         robot.clickOn("#usernameField");
         robot.press(KeyCode.A);
@@ -81,7 +81,7 @@ public class SecondaryControllerTest {
         robot.clickOn("#startButton");
 
         //Then
-        verifyThat("#errorText", hasText(invalidArchetypeExceptionMessage));
+        verifyThat("#errorText", hasText(INVALID_ARCHETYPE_EXCEPTION_MESSAGE));
     }
 
     @Test
@@ -98,7 +98,7 @@ public class SecondaryControllerTest {
     }
 
     @Test
-    public void testSwitchToGameScreen_givenWhiteSpaceUsername_throwsInvalidArchetypeException(FxRobot robot) {
+    public void testSwitchToGameScreen_givenWhiteSpaceUsername_throwsIAException(FxRobot robot) {
         //When
         robot.clickOn("#usernameField").type(KeyCode.valueOf(" "));
         robot.clickOn("#levelButton");
@@ -106,7 +106,7 @@ public class SecondaryControllerTest {
         robot.clickOn("#startButton");
 
         //Then
-        verifyThat("#errorText", hasText(invalidNameExceptionMessage));
+        verifyThat("#errorText", hasText(INVALID_NAME_EXCEPTION_MESSAGE));
     }
 
     private void withMockedAppService() throws IOException {

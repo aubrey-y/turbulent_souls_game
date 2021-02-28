@@ -84,7 +84,9 @@ public class App extends Application {
         playerState = state;
     }
 
-    public static boolean getSoundPlaying() { return soundPlaying; }
+    public static boolean getSoundPlaying() {
+        return soundPlaying;
+    }
 
     public static void setSoundPlaying(boolean soundPlaying) {
         App.soundPlaying = soundPlaying;
