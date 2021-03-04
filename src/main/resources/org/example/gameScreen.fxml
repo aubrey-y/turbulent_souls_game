@@ -5,6 +5,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
@@ -15,6 +16,15 @@
             <Image url="@../../static/images/temp%20room%201.png" />
          </image>
       </ImageView>
+      <Pane prefHeight="1080.0" prefWidth="1920.0">
+         <children>
+            <ImageView fx:id="player" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../../static/images/player.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
       <StackPane alignment="BOTTOM_LEFT" layoutX="46.0" layoutY="-13.0" prefHeight="1032.0" prefWidth="1874.0" AnchorPane.bottomAnchor="61.0" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-13.0">
          <children>
             <Button id="clickable" fx:id="closeButton" alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE">

@@ -1,12 +1,10 @@
 package org.example;
 
 import javafx.application.Application;
-//import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
@@ -23,6 +21,8 @@ import java.nio.file.Paths;
  */
 public class App extends Application {
 
+    private static Parent root;
+
     private static Scene scene;
 
     private static MediaPlayer mediaPlayer;
@@ -36,7 +36,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("primary.fxml"));
+        root = FXMLLoader.load(getClass().getResource("primary.fxml"));
         scene = new Scene(root, 1920, 1080);
         Media media = new Media(Paths.get("src/main/resources/static/music/bardsadventure.mp3")
                 .toUri().toString());
@@ -46,7 +46,6 @@ public class App extends Application {
         clickSound = new AudioClip(Paths.get("src/main/resources/static/music/buttonPress.wav")
                 .toUri().toString());
         scene.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent -> clickSound.play());
-        scene.addEventFilter(KeyEvent.KEY_PRESSED, mouseEvent -> clickSound.play());
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.setFullScreen(true);
@@ -77,6 +76,22 @@ public class App extends Application {
 
     public static void main(String[] args) {
         launch();
+    }
+
+    public static Parent getRoot() {
+        return root;
+    }
+
+    public static void setRoot(Parent root) {
+        App.root = root;
+    }
+
+    public static Scene getScene() {
+        return scene;
+    }
+
+    public static void setScene(Scene scene) {
+        App.scene = scene;
     }
 
     public static PlayerState getPlayerState() {
