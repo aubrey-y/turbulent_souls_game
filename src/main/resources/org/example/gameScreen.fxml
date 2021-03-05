@@ -18,7 +18,7 @@
       </ImageView>
       <Pane prefHeight="1080.0" prefWidth="1920.0">
          <children>
-            <ImageView fx:id="player" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView fx:id="player" fitHeight="133.0" fitWidth="133.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../../static/images/player.png" />
                </image>
