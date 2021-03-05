@@ -33,7 +33,7 @@
                         <Font name="Pixeboy" size="28.0" />
                      </font>
                   </Label>
-                  <ImageView id="soundToggle" fx:id="muteEnabled" fitHeight="67.0" fitWidth="72.0" layoutX="1843.0" layoutY="4.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" style="-fx-padding: 0 0 0 100000;">
+                  <ImageView id="soundToggle" fx:id="muteEnabled" fitHeight="67.0" fitWidth="72.0" layoutX="1842.0" layoutY="4.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" style="-fx-padding: 0 0 0 100000;">
                      <image>
                         <Image url="@../../static/images/muteOn.PNG" />
                      </image>
@@ -182,7 +182,7 @@
                   </VBox>
                   <Pane prefHeight="200.0" prefWidth="580.0">
                      <children>
-                        <Button fx:id="soundToggle" layoutX="495.0" layoutY="9.0" mnemonicParsing="false" onAction="#toggleSound" prefHeight="67.0" prefWidth="70.0" style="-fx-background-color: 00;">
+                        <Button fx:id="soundToggle" layoutX="495.0" mnemonicParsing="false" onAction="#toggleSound" prefHeight="67.0" prefWidth="70.0" style="-fx-background-color: 00;">
                            <graphic>
                               <ImageView id="soundToggle" fx:id="muteDisabled" fitHeight="67.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true" style="-fx-padding: 0 0 0 100000;">
                                  <image>
