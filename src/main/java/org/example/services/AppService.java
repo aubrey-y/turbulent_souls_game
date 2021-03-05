@@ -1,5 +1,7 @@
 package org.example.services;
 
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import org.example.App;
 import org.example.dto.PlayerState;
@@ -12,6 +14,14 @@ import java.io.IOException;
  * difficult framework like PowerMock.
  */
 public class AppService {
+
+    public Parent getRoot() {
+        return App.getRoot();
+    }
+
+    public Scene getScene() {
+        return App.getScene();
+    }
 
     public void toggleSound(ImageView muteDisabled, ImageView muteEnabled) {
         App.toggleSound(muteDisabled, muteEnabled);
