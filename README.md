@@ -1,4 +1,5 @@
 # dungeon_crawler
+[![Build Status](https://dev.azure.com/ayan46/dungeon_crawler/_apis/build/status/ayan46.dungeon_crawler?branchName=master)](https://dev.azure.com/ayan46/dungeon_crawler/_build/latest?definitionId=1&branchName=master)
 
 Dungeon crawler group project for CS 2340, Georgia Institute of Technology
 
