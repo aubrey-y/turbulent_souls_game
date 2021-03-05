@@ -48,62 +48,64 @@ public class GameScreenController implements Initializable {
         this.playerService.moveX(400);
         this.playerService.moveY(540);
         this.playerService.setVisible(true);
-        this.appService.getScene().setOnKeyPressed(e -> {
-            switch (e.getCode()) {
-                case W:
-                    this.wPressed.set(true);
-                    break;
-                case A:
-                    this.aPressed.set(true);
-                    break;
-                case S:
-                    this.sPressed.set(true);
-                    break;
-                case D:
-                    this.dPressed.set(true);
-                    break;
-            }
-
-            if(this.waPressed.get()) {
-                this.playerService.moveUp();
-                this.playerService.moveLeft();
-            } else if(this.wdPressed.get()) {
-                this.playerService.moveUp();
-                this.playerService.moveRight();
-            } else if(this.saPressed.get()) {
-                this.playerService.moveDown();
-                this.playerService.moveLeft();
-            } else if(this.sdPressed.get()) {
-                this.playerService.moveDown();
-                this.playerService.moveRight();
-            } else {
-                if(this.wPressed.get()) {
-                    this.playerService.moveUp();
-                } else if(this.aPressed.get()) {
-                    this.playerService.moveLeft();
-                } else if(this.sPressed.get()) {
-                    this.playerService.moveDown();
-                } else if(this.dPressed.get()){
-                    this.playerService.moveRight();
-                }
-            }
-        });
-        this.appService.getScene().setOnKeyReleased(e -> {
-            switch (e.getCode()) {
-                case W:
-                    this.wPressed.set(false);
-                    break;
-                case A:
-                    this.aPressed.set(false);
-                    break;
-                case S:
-                    this.sPressed.set(false);
-                    break;
-                case D:
-                    this.dPressed.set(false);
-                    break;
-            }
-        });
+        //        this.appService.getScene().setOnKeyPressed(e -> {
+        //            switch (e.getCode()) {
+        //                case W:
+        //                    this.wPressed.set(true);
+        //                    break;
+        //                case A:
+        //                    this.aPressed.set(true);
+        //                    break;
+        //                case S:
+        //                    this.sPressed.set(true);
+        //                    break;
+        //                case D:
+        //                    this.dPressed.set(true);
+        //                    break;
+        //                default:
+        //                    break;
+        //            }
+        //
+        //            if(this.waPressed.get()) {
+        //                this.playerService.moveUp();
+        //                this.playerService.moveLeft();
+        //            } else if(this.wdPressed.get()) {
+        //                this.playerService.moveUp();
+        //                this.playerService.moveRight();
+        //            } else if(this.saPressed.get()) {
+        //                this.playerService.moveDown();
+        //                this.playerService.moveLeft();
+        //            } else if(this.sdPressed.get()) {
+        //                this.playerService.moveDown();
+        //                this.playerService.moveRight();
+        //            } else {
+        //                if(this.wPressed.get()) {
+        //                    this.playerService.moveUp();
+        //                } else if(this.aPressed.get()) {
+        //                    this.playerService.moveLeft();
+        //                } else if(this.sPressed.get()) {
+        //                    this.playerService.moveDown();
+        //                } else if(this.dPressed.get()){
+        //                    this.playerService.moveRight();
+        //                }
+        //            }
+        //        });
+        //        this.appService.getScene().setOnKeyReleased(e -> {
+        //            switch (e.getCode()) {
+        //                case W:
+        //                    this.wPressed.set(false);
+        //                    break;
+        //                case A:
+        //                    this.aPressed.set(false);
+        //                    break;
+        //                case S:
+        //                    this.sPressed.set(false);
+        //                    break;
+        //                case D:
+        //                    this.dPressed.set(false);
+        //                    break;
+        //            }
+        //        });
     }
     
     @FXML
