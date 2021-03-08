@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import org.example.App;
 import org.example.dto.PlayerState;
+import org.example.dto.Room;
 
 import java.io.IOException;
 
@@ -27,8 +28,12 @@ public class AppService {
         App.toggleSound(muteDisabled, muteEnabled);
     }
 
-    public void setRoot(String root) throws IOException {
-        App.setRoot(root);
+    public void setRoot(String root) {
+        try {
+            App.setRoot(root);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public PlayerState getPlayerState() {
@@ -41,5 +46,13 @@ public class AppService {
 
     public boolean getSoundPlaying() {
         return App.getSoundPlaying();
+    }
+
+    public Room getActiveRoom() {
+        return App.getActiveRoom();
+    }
+
+    public void setActiveRoom(Room room) {
+        App.setActiveRoom(room);
     }
 }

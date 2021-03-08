@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.shape.Rectangle;
 import org.example.dto.PlayerState;
+import org.example.dto.Room;
 import org.example.enums.Archetype;
 import org.example.enums.Difficulty;
 import org.example.exceptions.InvalidArchetypeException;
@@ -19,6 +20,9 @@ import org.example.exceptions.InvalidNameException;
 import org.example.exceptions.PlayerCreationException;
 import org.example.services.AppService;
 
+import static org.example.enums.Direction.DOWN;
+import static org.example.enums.RoomType.FOREST1;
+import static org.example.enums.RoomType.FOREST_TRADER;
 import static org.example.exceptions.ExceptionMessages.INVALID_ARCHETYPE_EXCEPTION_MESSAGE;
 import static org.example.exceptions.ExceptionMessages.INVALID_DIFFICULTY_EXCEPTION_MESSAGE;
 import static org.example.exceptions.ExceptionMessages.INVALID_NAME_EXCEPTION_MESSAGE;
@@ -60,6 +64,14 @@ public class SecondaryController extends BaseController implements Initializable
             validateArchetype();
             this.appService.setPlayerState(
                     new PlayerState(this.username, this.archetype, this.difficulty));
+            this.appService.setActiveRoom(
+                    new Room(FOREST1)
+                            .setDown(new Room())
+                            .setRight(new Room())
+                            .setUp(new Room())
+                            .setLeft(new Room())
+                            .setId(0)
+                            .setRoot("gameScreen"));
             this.appService.setRoot("gameScreen");
         } catch (InvalidNameException e) {
             this.setErrorMessage(INVALID_NAME_EXCEPTION_MESSAGE);

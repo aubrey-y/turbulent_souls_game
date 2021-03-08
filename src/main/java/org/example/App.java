@@ -12,6 +12,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.example.dto.PlayerState;
+import org.example.dto.Room;
 
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -33,6 +34,7 @@ public class App extends Application {
 
     private static PlayerState playerState;
 
+    private static Room activeRoom;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -108,5 +110,13 @@ public class App extends Application {
 
     public static void setSoundPlaying(boolean soundPlaying) {
         App.soundPlaying = soundPlaying;
+    }
+
+    public static Room getActiveRoom() {
+        return activeRoom;
+    }
+
+    public static void setActiveRoom(Room activeRoom) {
+        App.activeRoom = activeRoom;
     }
 }
