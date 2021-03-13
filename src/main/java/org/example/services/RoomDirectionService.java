@@ -101,13 +101,83 @@ public class RoomDirectionService {
                 .setDown(new Room())
                 .setId(11)
                 .setRoot("castleTrader"));
+        this.roomMapping.put(new RoomIdDirectionKey(8, DOWN), new Room(GARDEN1)
+                .setUp(new Room())
+                .setLeft(new Room())
+                .setRight(new Room())
+                .setDown(new Room())
+                .setId(13)
+                .setRoot("gardenStart"));
 
         //This represents room 9 on the diagram
         this.roomMapping.put(new RoomIdDirectionKey(9, UP), new Room(CASTLE_TRADER)
                 .setDown(new Room())
                 .setId(12)
                 .setRoot("castleTrader"));
+        this.roomMapping.put(new RoomIdDirectionKey(9, DOWN), new Room(GARDEN1)
+                .setUp(new Room())
+                .setLeft(new Room())
+                .setRight(new Room())
+                .setDown(new Room())
+                .setId(13)
+                .setRoot("gardenStart"));
 
+        //This represents room 13 on the diagram
+        this.roomMapping.put(new RoomIdDirectionKey(13, LEFT), new Room(GARDEN2)
+                .setUp(new Room())
+                .setRight(new Room())
+                .setDown(new Room())
+                .setId(14)
+                .setRoot("gardenLeft"));
+        this.roomMapping.put(new RoomIdDirectionKey(13, RIGHT), new Room(GARDEN2)
+                .setUp(new Room())
+                .setLeft(new Room())
+                .setDown(new Room())
+                .setId(15)
+                .setRoot("gardenRight"));
+
+        //This represents room 14 on the diagram
+        this.roomMapping.put(new RoomIdDirectionKey(14, UP), new Room(CASTLE3)
+                .setUp(new Room())
+                .setLeft(new Room())
+                .setRight(new Room())
+                .setDown(new Room())
+                .setId(19)
+                .setRoot("castleBossStart"));
+        this.roomMapping.put(new RoomIdDirectionKey(14, DOWN), new Room(GARDEN_TRADER)
+                .setUp(new Room())
+                .setId(17)
+                .setRoot("gardenTrader"));
+
+        //This represents room 15 on the diagram
+        this.roomMapping.put(new RoomIdDirectionKey(15, UP), new Room(CASTLE3)
+                .setUp(new Room())
+                .setLeft(new Room())
+                .setRight(new Room())
+                .setDown(new Room())
+                .setId(19)
+                .setRoot("castleBossStart"));
+        this.roomMapping.put(new RoomIdDirectionKey(15, DOWN), new Room(GARDEN_TRADER)
+                .setUp(new Room())
+                .setId(18)
+                .setRoot("gardenTrader"));
+
+        //Room 19 mappings would go here
+        this.roomMapping.put(new RoomIdDirectionKey(21, UP), new Room(BOSS)
+                .setUp(new Room())
+                .setDown(new Room())
+                .setId(21)
+                .setRoot("castleBossUp"));
+        this.roomMapping.put(new RoomIdDirectionKey(20, LEFT), new Room(BOSS)
+                .setLeft(new Room())
+                .setRight(new Room())
+                .setId(21)
+                .setRoot("castleBossLeft"));
+        this.roomMapping.put(new RoomIdDirectionKey(22, RIGHT), new Room(BOSS)
+                .setLeft(new Room())
+                .setRight(new Room())
+                .setId(21)
+                .setRoot("castleBossRight"));
     }
 
     public Room getRoomForRoomAndDirection(Room room, Direction direction) {

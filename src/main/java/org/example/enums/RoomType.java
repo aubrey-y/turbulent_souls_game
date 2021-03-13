@@ -4,6 +4,7 @@ public enum RoomType {
     BOSS,
     GARDEN2,
     GARDEN1,
+    CASTLE3,
     CASTLE2,
     CASTLE1,
     FOREST2,
