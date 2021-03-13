@@ -8,7 +8,7 @@ import org.example.enums.RoomType;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.example.enums.Direction.DOWN;
+import static org.example.enums.Direction.*;
 import static org.example.enums.RoomType.CASTLE_TRADER;
 import static org.example.enums.RoomType.FOREST_TRADER;
 import static org.example.enums.RoomType.GARDEN_TRADER;
@@ -74,11 +74,12 @@ public class PlayerService {
         Room currentRoom = this.appService.getActiveRoom();
         switch (exitDirection) {
             case UP:
-//                if(currentRoom.getUp() != null) {
-//                    if(currentRoom.getUp().getRoot() == null) {
-//                        this.appService.set
-//                    }
-//                }
+                if(currentRoom.getUp() != null) {
+                    currentRoom.setUp(this.roomDirectionService
+                            .getRoomForRoomAndDirection(currentRoom, UP));
+                    this.appService.setActiveRoom(currentRoom.getUp());
+                    this.appService.setRoot(currentRoom.getUp().getRoot());
+                }
                 break;
             case DOWN:
                 if(currentRoom.getDown() != null) {
@@ -86,6 +87,22 @@ public class PlayerService {
                             .getRoomForRoomAndDirection(currentRoom, DOWN));
                     this.appService.setActiveRoom(currentRoom.getDown());
                     this.appService.setRoot(currentRoom.getDown().getRoot());
+                }
+                break;
+            case LEFT:
+                if(currentRoom.getLeft() != null) {
+                    currentRoom.setLeft(this.roomDirectionService
+                            .getRoomForRoomAndDirection(currentRoom, LEFT));
+                    this.appService.setActiveRoom(currentRoom.getLeft());
+                    this.appService.setRoot(currentRoom.getLeft().getRoot());
+                }
+                break;
+            case RIGHT:
+                if(currentRoom.getRight() != null) {
+                    currentRoom.setDown(this.roomDirectionService
+                            .getRoomForRoomAndDirection(currentRoom, RIGHT));
+                    this.appService.setActiveRoom(currentRoom.getRight());
+                    this.appService.setRoot(currentRoom.getRight().getRoot());
                 }
                 break;
         }
