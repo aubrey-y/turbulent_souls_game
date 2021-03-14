@@ -76,8 +76,10 @@ public class PlayerService {
         switch (exitDirection) {
             case UP:
                 if(currentRoom.getUp() != null) {
-                    currentRoom.setUp(this.roomDirectionService
-                            .getRoomForRoomAndDirection(currentRoom, exitDirection));
+                    if(currentRoom.getUp().getRoot() == null) {
+                        currentRoom.setUp(this.roomDirectionService
+                                .getRoomForRoomAndDirection(currentRoom, exitDirection));
+                    }
                     this.appService.setActiveRoom(currentRoom.getUp());
                     this.setNewPlayerSpawnCoordinates(exitDirection);
                     this.appService.setRoot(currentRoom.getUp().getRoot());
@@ -85,8 +87,10 @@ public class PlayerService {
                 break;
             case DOWN:
                 if(currentRoom.getDown() != null) {
-                    currentRoom.setDown(this.roomDirectionService
-                            .getRoomForRoomAndDirection(currentRoom, exitDirection));
+                    if(currentRoom.getDown().getRoot() == null) {
+                        currentRoom.setDown(this.roomDirectionService
+                                .getRoomForRoomAndDirection(currentRoom, exitDirection));
+                    }
                     this.appService.setActiveRoom(currentRoom.getDown());
                     this.setNewPlayerSpawnCoordinates(exitDirection);
                     this.appService.setRoot(currentRoom.getDown().getRoot());
@@ -94,8 +98,10 @@ public class PlayerService {
                 break;
             case LEFT:
                 if(currentRoom.getLeft() != null) {
-                    currentRoom.setLeft(this.roomDirectionService
-                            .getRoomForRoomAndDirection(currentRoom, exitDirection));
+                    if(currentRoom.getLeft().getRoot() == null) {
+                        currentRoom.setLeft(this.roomDirectionService
+                                .getRoomForRoomAndDirection(currentRoom, exitDirection));
+                    }
                     this.appService.setActiveRoom(currentRoom.getLeft());
                     this.setNewPlayerSpawnCoordinates(exitDirection);
                     this.appService.setRoot(currentRoom.getLeft().getRoot());
@@ -103,8 +109,10 @@ public class PlayerService {
                 break;
             case RIGHT:
                 if(currentRoom.getRight() != null) {
-                    currentRoom.setDown(this.roomDirectionService
-                            .getRoomForRoomAndDirection(currentRoom, exitDirection));
+                    if(currentRoom.getRight().getRoot() == null) {
+                        currentRoom.setDown(this.roomDirectionService
+                                .getRoomForRoomAndDirection(currentRoom, exitDirection));
+                    }
                     this.appService.setActiveRoom(currentRoom.getRight());
                     this.setNewPlayerSpawnCoordinates(exitDirection);
                     this.appService.setRoot(currentRoom.getRight().getRoot());
