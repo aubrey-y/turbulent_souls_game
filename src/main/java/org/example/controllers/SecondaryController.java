@@ -74,7 +74,11 @@ public class SecondaryController extends BaseController implements Initializable
             validateDifficulty();
             validateArchetype();
             this.appService.setPlayerState(
-                    new PlayerState(this.username, this.archetype, this.difficulty));
+                    new PlayerState(
+                            this.username,
+                            this.archetype,
+                            this.difficulty,
+                            new int[]{400, 540}));
             this.appService.setActiveRoom(
                     new Room(FOREST1)
                             .setDown(new Room())

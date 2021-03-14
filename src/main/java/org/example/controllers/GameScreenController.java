@@ -1,7 +1,6 @@
 package org.example.controllers;
 
 
-import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
@@ -158,6 +157,24 @@ public class GameScreenController implements Initializable {
 
     public GameScreenController setScene(Scene scene) {
         this.scene = scene;
+        return this;
+    }
+
+    public Label getGoldAmount() {
+        return goldAmount;
+    }
+
+    public GameScreenController setGoldAmount(Label goldAmount) {
+        this.goldAmount = goldAmount;
+        return this;
+    }
+
+    public ImageView getPlayer() {
+        return player;
+    }
+
+    public GameScreenController setPlayer(ImageView player) {
+        this.player = player;
         return this;
     }
 }

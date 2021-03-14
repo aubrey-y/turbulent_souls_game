@@ -24,11 +24,12 @@ public class PlayerState {
 
     public PlayerState(String username,
                        Archetype archetype,
-                       Difficulty difficulty) throws PlayerCreationException {
+                       Difficulty difficulty,
+                       int[] spawnCoordinates) throws PlayerCreationException {
         this.username = username;
         this.archetype = archetype;
         this.difficulty = difficulty;
-        this.spawnCoordinates = new int[]{400, 540};
+        this.spawnCoordinates = spawnCoordinates;
         assignDefaultWeaponForClass();
         assignDefaultGoldForDifficulty();
     }

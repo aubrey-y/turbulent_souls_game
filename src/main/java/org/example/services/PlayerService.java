@@ -1,7 +1,6 @@
 package org.example.services;
 
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.image.ImageView;
 import org.example.App;
 import org.example.controllers.GameScreenController;
@@ -9,7 +8,6 @@ import org.example.dto.PlayerState;
 import org.example.dto.Room;
 import org.example.enums.Direction;
 
-import java.io.IOException;
 
 import static org.example.enums.Direction.*;
 
@@ -21,7 +19,7 @@ public class PlayerService {
 
     private RoomDirectionService roomDirectionService;
 
-    private static final double MOVE_SIZE = 6;
+    public static final double MOVE_SIZE = 6;
 
     public PlayerService(AppService appService,
                          RoomDirectionService roomDirectionService) {
@@ -50,11 +48,11 @@ public class PlayerService {
     }
 
     public void moveX(double value) {
-        this.imageView.setTranslateX(this.imageView.getTranslateX() + value);
+        this.imageView.setTranslateX(value);
     }
 
     public void moveY(double value) {
-        this.imageView.setTranslateY(this.imageView.getTranslateY() + value);
+        this.imageView.setTranslateY(value);
     }
 
     public void setVisible(boolean value) {
