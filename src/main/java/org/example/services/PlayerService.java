@@ -112,9 +112,18 @@ public class PlayerService {
         System.out.println(this.imageView.getTranslateX());
         System.out.println(this.imageView.getTranslateY());
         System.out.println("_________________________");
-        if(this.imageView.getTranslateX() >= 875 && this.imageView.getTranslateX() <= 1120 &&
-                this.imageView.getTranslateY() >= 1000) {
+        if(this.imageView.getTranslateX() >= 844 && this.imageView.getTranslateX() <= 982 &&
+                this.imageView.getTranslateY() >= 912) {
             return DOWN;
+        } else if(this.imageView.getTranslateX() <= 22 && this.imageView.getTranslateY() >= 420 &&
+                this.imageView.getTranslateY() <= 534) {
+            return LEFT;
+        } else if(this.imageView.getTranslateX() >= 1774 && this.imageView.getTranslateY() >= 420 &&
+                this.imageView.getTranslateY() <= 534) {
+            return RIGHT;
+        } else if(this.imageView.getTranslateX() >= 844 && this.imageView.getTranslateX() <= 982 &&
+                this.imageView.getTranslateY() <= 24) {
+            return UP;
         }
         return null;
     }
