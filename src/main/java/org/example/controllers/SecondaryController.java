@@ -6,10 +6,13 @@ import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.shape.Rectangle;
+import org.example.App;
 import org.example.dto.PlayerState;
 import org.example.dto.Room;
 import org.example.enums.Archetype;
@@ -19,16 +22,19 @@ import org.example.exceptions.InvalidDifficultyException;
 import org.example.exceptions.InvalidNameException;
 import org.example.exceptions.PlayerCreationException;
 import org.example.services.AppService;
+import org.example.services.DirectionService;
+import org.example.services.PlayerService;
+import org.example.services.RoomDirectionService;
 
-import static org.example.enums.Direction.DOWN;
 import static org.example.enums.RoomType.FOREST1;
-import static org.example.enums.RoomType.FOREST_TRADER;
 import static org.example.exceptions.ExceptionMessages.INVALID_ARCHETYPE_EXCEPTION_MESSAGE;
 import static org.example.exceptions.ExceptionMessages.INVALID_DIFFICULTY_EXCEPTION_MESSAGE;
 import static org.example.exceptions.ExceptionMessages.INVALID_NAME_EXCEPTION_MESSAGE;
 import static org.example.exceptions.ExceptionMessages.UNKNOWN_EXCEPTION_MESSAGE;
 
 public class SecondaryController extends BaseController implements Initializable {
+
+    private Scene scene;
 
     @FXML
     private TextField usernameField;
@@ -45,6 +51,10 @@ public class SecondaryController extends BaseController implements Initializable
 
     private Archetype archetype;
 
+    public SecondaryController(Scene scene) {
+        this.scene = scene;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initController();
@@ -52,7 +62,8 @@ public class SecondaryController extends BaseController implements Initializable
 
     @FXML
     private void switchToPrimary() throws IOException {
-        this.appService.setRoot("primary");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("primary.fxml"));
+        this.appService.setRoot(loader.load());
     }
 
     @FXML
@@ -71,8 +82,17 @@ public class SecondaryController extends BaseController implements Initializable
                             .setUp(new Room())
                             .setLeft(new Room())
                             .setId(0)
-                            .setRoot("gameScreen"));
-            this.appService.setRoot("gameScreen");
+                            .setRoot("gameScreen.fxml"));
+            FXMLLoader loader = new FXMLLoader(App.class.getResource("gameScreen.fxml"));
+            DirectionService directionService = new DirectionService();
+            RoomDirectionService roomDirectionService = new RoomDirectionService(directionService);
+            loader.setControllerFactory(GameScreenController -> new GameScreenController(
+                    this.appService,
+                    new PlayerService(this.appService, roomDirectionService),
+                    directionService,
+                    roomDirectionService,
+                    this.scene));
+            this.appService.setRoot(loader);
         } catch (InvalidNameException e) {
             this.setErrorMessage(INVALID_NAME_EXCEPTION_MESSAGE);
         } catch (InvalidDifficultyException e) {

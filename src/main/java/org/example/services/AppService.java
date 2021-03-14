@@ -1,5 +1,6 @@
 package org.example.services;
 
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
@@ -28,9 +29,9 @@ public class AppService {
         App.toggleSound(muteDisabled, muteEnabled);
     }
 
-    public void setRoot(String root) {
+    public void setRoot(FXMLLoader loader) {
         try {
-            App.setRoot(root);
+            App.setRoot(loader.load());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

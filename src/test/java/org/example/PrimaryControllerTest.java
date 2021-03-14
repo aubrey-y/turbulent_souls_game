@@ -35,7 +35,7 @@ public class PrimaryControllerTest {
     @Start
     public void setUp(Stage stage) throws IOException {
         withMockedAppService();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("primary.fxml"));
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("primary.fxml"));
         Parent root = loader.load();
         this.controller = loader.getController();
         this.controller.setAppService(this.appService);

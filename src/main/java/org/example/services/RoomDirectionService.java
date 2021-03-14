@@ -26,35 +26,35 @@ public class RoomDirectionService {
                 .setRight(new Room())
                 .setDown(new Room())
                 .setId(1)
-                .setRoot("forestLeft"));
+                .setRoot("forestLeft.fxml"));
         this.roomMapping.put(new RoomIdDirectionKey(0, UP), new Room(FOREST2)
                 .setUp(new Room())
                 .setDown(new Room())
                 .setId(2)
-                .setRoot("forestUp"));
+                .setRoot("forestUp.fxml"));
         this.roomMapping.put(new RoomIdDirectionKey(0, RIGHT), new Room(FOREST2)
                 .setUp(new Room())
                 .setLeft(new Room())
                 .setDown(new Room())
                 .setId(3)
-                .setRoot("forestRight"));
+                .setRoot("forestRight.fxml"));
         this.roomMapping.put(new RoomIdDirectionKey(0, DOWN), new Room(FOREST_TRADER)
                 .setUp(new Room())
                 .setId(4)
-                .setRoot("forestTrader"));
+                .setRoot("forestTrader.fxml"));
 
         //This represents room 1 on the diagram
         this.roomMapping.put(new RoomIdDirectionKey(1, DOWN), new Room(FOREST_TRADER)
                 .setUp(new Room())
                 .setId(5)
-                .setRoot("forestTrader"));
+                .setRoot("forestTrader.fxml"));
         this.roomMapping.put(new RoomIdDirectionKey(1, UP), new Room(CASTLE1)
                 .setUp(new Room())
                 .setLeft(new Room())
                 .setRight(new Room())
                 .setDown(new Room())
                 .setId(7)
-                .setRoot("castleStart"));
+                .setRoot("castleStart.fxml"));
 
         //This represents room 2 on the diagram
         this.roomMapping.put(new RoomIdDirectionKey(2, UP), new Room(CASTLE1)
@@ -63,7 +63,7 @@ public class RoomDirectionService {
                 .setRight(new Room())
                 .setDown(new Room())
                 .setId(7)
-                .setRoot("castleStart"));
+                .setRoot("castleStart.fxml"));
 
         //This represents room 3 on the diagram
         this.roomMapping.put(new RoomIdDirectionKey(3, UP), new Room(CASTLE1)
@@ -72,55 +72,55 @@ public class RoomDirectionService {
                 .setRight(new Room())
                 .setDown(new Room())
                 .setId(7)
-                .setRoot("castleStart"));
+                .setRoot("castleStart.fxml"));
         this.roomMapping.put(new RoomIdDirectionKey(3, DOWN), new Room(FOREST_TRADER)
                 .setUp(new Room())
                 .setId(6)
-                .setRoot("forestTrader"));
+                .setRoot("forestTrader.fxml"));
 
         //This represents room 7 on the diagram
         this.roomMapping.put(new RoomIdDirectionKey(7, UP), new Room(CASTLE_TRADER)
                 .setDown(new Room())
                 .setId(10)
-                .setRoot("castleTrader"));
+                .setRoot("castleTrader.fxml"));
         this.roomMapping.put(new RoomIdDirectionKey(7, LEFT), new Room(CASTLE2)
                 .setUp(new Room())
                 .setDown(new Room())
                 .setRight(new Room())
                 .setId(8)
-                .setRoot("castleLeft"));
+                .setRoot("castleLeft.fxml"));
         this.roomMapping.put(new RoomIdDirectionKey(7, RIGHT), new Room(CASTLE2)
                 .setUp(new Room())
                 .setDown(new Room())
                 .setLeft(new Room())
                 .setId(9)
-                .setRoot("castleRight"));
+                .setRoot("castleRight.fxml"));
 
         //This represents room 8 on the diagram
         this.roomMapping.put(new RoomIdDirectionKey(8, UP), new Room(CASTLE_TRADER)
                 .setDown(new Room())
                 .setId(11)
-                .setRoot("castleTrader"));
+                .setRoot("castleTrader.fxml"));
         this.roomMapping.put(new RoomIdDirectionKey(8, DOWN), new Room(GARDEN1)
                 .setUp(new Room())
                 .setLeft(new Room())
                 .setRight(new Room())
                 .setDown(new Room())
                 .setId(13)
-                .setRoot("gardenStart"));
+                .setRoot("gardenStart.fxml"));
 
         //This represents room 9 on the diagram
         this.roomMapping.put(new RoomIdDirectionKey(9, UP), new Room(CASTLE_TRADER)
                 .setDown(new Room())
                 .setId(12)
-                .setRoot("castleTrader"));
+                .setRoot("castleTrader.fxml"));
         this.roomMapping.put(new RoomIdDirectionKey(9, DOWN), new Room(GARDEN1)
                 .setUp(new Room())
                 .setLeft(new Room())
                 .setRight(new Room())
                 .setDown(new Room())
                 .setId(13)
-                .setRoot("gardenStart"));
+                .setRoot("gardenStart.fxml"));
 
         //This represents room 13 on the diagram
         this.roomMapping.put(new RoomIdDirectionKey(13, LEFT), new Room(GARDEN2)
@@ -128,13 +128,13 @@ public class RoomDirectionService {
                 .setRight(new Room())
                 .setDown(new Room())
                 .setId(14)
-                .setRoot("gardenLeft"));
+                .setRoot("gardenLeft.fxml"));
         this.roomMapping.put(new RoomIdDirectionKey(13, RIGHT), new Room(GARDEN2)
                 .setUp(new Room())
                 .setLeft(new Room())
                 .setDown(new Room())
                 .setId(15)
-                .setRoot("gardenRight"));
+                .setRoot("gardenRight.fxml"));
 
         //This represents room 14 on the diagram
         this.roomMapping.put(new RoomIdDirectionKey(14, UP), new Room(CASTLE3)
@@ -143,11 +143,11 @@ public class RoomDirectionService {
                 .setRight(new Room())
                 .setDown(new Room())
                 .setId(19)
-                .setRoot("castleBossStart"));
+                .setRoot("castleBossStart.fxml"));
         this.roomMapping.put(new RoomIdDirectionKey(14, DOWN), new Room(GARDEN_TRADER)
                 .setUp(new Room())
                 .setId(17)
-                .setRoot("gardenTrader"));
+                .setRoot("gardenTrader.fxml"));
 
         //This represents room 15 on the diagram
         this.roomMapping.put(new RoomIdDirectionKey(15, UP), new Room(CASTLE3)
@@ -156,28 +156,28 @@ public class RoomDirectionService {
                 .setRight(new Room())
                 .setDown(new Room())
                 .setId(19)
-                .setRoot("castleBossStart"));
+                .setRoot("castleBossStart.fxml"));
         this.roomMapping.put(new RoomIdDirectionKey(15, DOWN), new Room(GARDEN_TRADER)
                 .setUp(new Room())
                 .setId(18)
-                .setRoot("gardenTrader"));
+                .setRoot("gardenTrader.fxml"));
 
         //Room 19 mappings would go here
         this.roomMapping.put(new RoomIdDirectionKey(21, UP), new Room(BOSS)
                 .setUp(new Room())
                 .setDown(new Room())
                 .setId(21)
-                .setRoot("castleBossUp"));
+                .setRoot("castleBossUp.fxml"));
         this.roomMapping.put(new RoomIdDirectionKey(20, LEFT), new Room(BOSS)
                 .setLeft(new Room())
                 .setRight(new Room())
                 .setId(21)
-                .setRoot("castleBossLeft"));
+                .setRoot("castleBossLeft.fxml"));
         this.roomMapping.put(new RoomIdDirectionKey(22, RIGHT), new Room(BOSS)
                 .setLeft(new Room())
                 .setRight(new Room())
                 .setId(21)
-                .setRoot("castleBossRight"));
+                .setRoot("castleBossRight.fxml"));
     }
 
     public Room getRoomForRoomAndDirection(Room room, Direction direction) {
@@ -199,6 +199,15 @@ public class RoomDirectionService {
                 break;
         }
         return target;
+    }
+
+    public DirectionService getDirectionService() {
+        return directionService;
+    }
+
+    public RoomDirectionService setDirectionService(DirectionService directionService) {
+        this.directionService = directionService;
+        return this;
     }
 }
 

@@ -1,18 +1,17 @@
 package org.example.services;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.image.ImageView;
+import org.example.App;
+import org.example.controllers.GameScreenController;
 import org.example.dto.PlayerState;
 import org.example.dto.Room;
 import org.example.enums.Direction;
-import org.example.enums.RoomType;
 
-import java.util.Arrays;
-import java.util.List;
+import java.io.IOException;
 
 import static org.example.enums.Direction.*;
-import static org.example.enums.RoomType.CASTLE_TRADER;
-import static org.example.enums.RoomType.FOREST_TRADER;
-import static org.example.enums.RoomType.GARDEN_TRADER;
 
 public class PlayerService {
 
@@ -24,13 +23,8 @@ public class PlayerService {
 
     private static final double MOVE_SIZE = 6;
 
-    private static final List<RoomType> traderRooms =
-            Arrays.asList(FOREST_TRADER, CASTLE_TRADER, GARDEN_TRADER);
-
-    public PlayerService(ImageView imageView,
-                         AppService appService,
+    public PlayerService(AppService appService,
                          RoomDirectionService roomDirectionService) {
-        this.imageView = imageView;
         this.appService = appService;
         this.roomDirectionService = roomDirectionService;
     }
@@ -82,7 +76,7 @@ public class PlayerService {
                     }
                     this.appService.setActiveRoom(currentRoom.getUp());
                     this.setNewPlayerSpawnCoordinates(exitDirection);
-                    this.appService.setRoot(currentRoom.getUp().getRoot());
+                    this.appService.setRoot(this.getLoader(currentRoom.getUp().getRoot()));
                 }
                 break;
             case DOWN:
@@ -93,7 +87,7 @@ public class PlayerService {
                     }
                     this.appService.setActiveRoom(currentRoom.getDown());
                     this.setNewPlayerSpawnCoordinates(exitDirection);
-                    this.appService.setRoot(currentRoom.getDown().getRoot());
+                    this.appService.setRoot(this.getLoader(currentRoom.getDown().getRoot()));
                 }
                 break;
             case LEFT:
@@ -104,7 +98,7 @@ public class PlayerService {
                     }
                     this.appService.setActiveRoom(currentRoom.getLeft());
                     this.setNewPlayerSpawnCoordinates(exitDirection);
-                    this.appService.setRoot(currentRoom.getLeft().getRoot());
+                    this.appService.setRoot(this.getLoader(currentRoom.getLeft().getRoot()));
                 }
                 break;
             case RIGHT:
@@ -115,10 +109,21 @@ public class PlayerService {
                     }
                     this.appService.setActiveRoom(currentRoom.getRight());
                     this.setNewPlayerSpawnCoordinates(exitDirection);
-                    this.appService.setRoot(currentRoom.getRight().getRoot());
+                    this.appService.setRoot(this.getLoader(currentRoom.getRight().getRoot()));
                 }
                 break;
         }
+    }
+
+    private FXMLLoader getLoader(String root) {
+        FXMLLoader loader = new FXMLLoader(App.class.getResource(root));
+        loader.setControllerFactory(GameScreenController -> new GameScreenController(
+                this.appService,
+                this,
+                this.roomDirectionService.getDirectionService(),
+                this.roomDirectionService,
+                this.appService.getScene()));
+        return loader;
     }
 
     private void setNewPlayerSpawnCoordinates(Direction exitDirection) {
@@ -162,5 +167,32 @@ public class PlayerService {
             return UP;
         }
         return null;
+    }
+
+    public ImageView getImageView() {
+        return imageView;
+    }
+
+    public PlayerService setImageView(ImageView imageView) {
+        this.imageView = imageView;
+        return this;
+    }
+
+    public AppService getAppService() {
+        return appService;
+    }
+
+    public PlayerService setAppService(AppService appService) {
+        this.appService = appService;
+        return this;
+    }
+
+    public RoomDirectionService getRoomDirectionService() {
+        return roomDirectionService;
+    }
+
+    public PlayerService setRoomDirectionService(RoomDirectionService roomDirectionService) {
+        this.roomDirectionService = roomDirectionService;
+        return this;
     }
 }
