@@ -73,7 +73,7 @@ public class GameScreenControllerTest {
                 this.roomDirectionService,
                 mockedScene));
         Parent root = loader.load();
-        this.scene = new Scene(root, 0, 0);
+        this.scene = new Scene(root, 1920, 1080);
         withMockedAppService();
         this.controller = loader.getController();
         this.controller.setScene(this.scene);
