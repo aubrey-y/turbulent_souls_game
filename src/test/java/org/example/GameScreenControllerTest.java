@@ -7,6 +7,7 @@ import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import org.example.controllers.GameScreenController;
 import org.example.dto.PlayerState;
+import org.example.dto.Room;
 import org.example.exceptions.PlayerCreationException;
 import org.example.services.AppService;
 import org.example.services.DirectionService;
@@ -25,12 +26,14 @@ import org.testfx.framework.junit5.Start;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
+import static org.example.controllers.SecondaryController.STARTING_ROOM;
 import static org.example.enums.Archetype.WARRIOR;
 import static org.example.enums.Difficulty.EASY;
 import static org.example.services.PlayerService.MOVE_SIZE;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
@@ -40,6 +43,8 @@ import static org.mockito.Mockito.spy;
 public class GameScreenControllerTest {
 
     private GameScreenController controller;
+
+    private Scene scene;
 
     @Spy
     private AppService appService;
@@ -55,9 +60,9 @@ public class GameScreenControllerTest {
     @Start
     public void setUp(Stage stage) throws IOException {
         this.appService = spy(AppService.class);
-        this.playerService = new PlayerService(this.appService, this.roomDirectionService);
         this.directionService = new DirectionService();
         this.roomDirectionService = new RoomDirectionService(this.directionService);
+        this.playerService = new PlayerService(this.appService, this.roomDirectionService);
         withMockedAppService();
         FXMLLoader loader = new FXMLLoader(App.class.getResource("gameScreen.fxml"));
         Scene mockedScene = new Scene(new FXMLLoader(App.class.getResource("primary.fxml")).load());
@@ -68,17 +73,38 @@ public class GameScreenControllerTest {
                 this.roomDirectionService,
                 mockedScene));
         Parent root = loader.load();
-        Scene scene = new Scene(root, 0, 0);
+        this.scene = new Scene(root, 0, 0);
+        withMockedAppService();
         this.controller = loader.getController();
-        this.controller.setScene(scene);
+        this.controller.setScene(this.scene);
         this.controller.initialize(null, null);
-        stage.setScene(scene);
+        stage.setScene(this.scene);
         stage.show();
     }
 
     @AfterEach
     public void tearDown() throws TimeoutException {
         FxToolkit.hideStage();
+    }
+    @Test
+    public void testSwitch(FxRobot robot) {
+        //Given
+        int times = 130;
+        int times2 = 10;
+        //When
+        for (int i = 0; i < times2; i++) {
+            robot.press(KeyCode.W);
+            robot.release(KeyCode.W);
+        }
+        for(int i = 0; i < times; i++) {
+            robot.press(KeyCode.A);
+            robot.release(KeyCode.A);
+        }
+        //Then
+        assertThat(this.controller.getPlayer().getTranslateX(),
+                is((double) this.spawnCoordinates[0]));
+        assertThat(this.controller.getPlayer().getTranslateY(),
+                is(this.spawnCoordinates[1] + MOVE_SIZE * times));
     }
 
     @Test
@@ -146,8 +172,13 @@ public class GameScreenControllerTest {
     }
 
     private void withMockedAppService() {
-        doNothing().when(this.appService).setRoot(any());
+        doAnswer(invocationOnMock -> {
+            this.scene.setRoot(((FXMLLoader) invocationOnMock.getArgument(0)).load());
+            return null;
+        }).when(this.appService).setRoot(any());
+        doReturn(this.scene).when(this.appService).getScene();
         doReturn(this.getPlayerState()).when(this.appService).getPlayerState();
+        doReturn(STARTING_ROOM).when(this.appService).getActiveRoom();
     }
 
     private PlayerState getPlayerState() {

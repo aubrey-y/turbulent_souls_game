@@ -55,6 +55,14 @@ public class SecondaryController extends BaseController implements Initializable
         this.scene = scene;
     }
 
+    public static final Room STARTING_ROOM = new Room(FOREST1)
+            .setDown(new Room())
+            .setRight(new Room())
+            .setUp(new Room())
+            .setLeft(new Room())
+            .setId(0)
+            .setRoot("gameScreen.fxml");
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initController();
@@ -79,14 +87,7 @@ public class SecondaryController extends BaseController implements Initializable
                             this.archetype,
                             this.difficulty,
                             new int[]{400, 540}));
-            this.appService.setActiveRoom(
-                    new Room(FOREST1)
-                            .setDown(new Room())
-                            .setRight(new Room())
-                            .setUp(new Room())
-                            .setLeft(new Room())
-                            .setId(0)
-                            .setRoot("gameScreen.fxml"));
+            this.appService.setActiveRoom(STARTING_ROOM);
             FXMLLoader loader = new FXMLLoader(App.class.getResource("gameScreen.fxml"));
             DirectionService directionService = new DirectionService();
             RoomDirectionService roomDirectionService = new RoomDirectionService(directionService);
