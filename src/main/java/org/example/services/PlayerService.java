@@ -1,6 +1,7 @@
 package org.example.services;
 
 import javafx.scene.image.ImageView;
+import org.example.dto.PlayerState;
 import org.example.dto.Room;
 import org.example.enums.Direction;
 import org.example.enums.RoomType;
@@ -76,36 +77,63 @@ public class PlayerService {
             case UP:
                 if(currentRoom.getUp() != null) {
                     currentRoom.setUp(this.roomDirectionService
-                            .getRoomForRoomAndDirection(currentRoom, UP));
+                            .getRoomForRoomAndDirection(currentRoom, exitDirection));
                     this.appService.setActiveRoom(currentRoom.getUp());
+                    this.setNewPlayerSpawnCoordinates(exitDirection);
                     this.appService.setRoot(currentRoom.getUp().getRoot());
                 }
                 break;
             case DOWN:
                 if(currentRoom.getDown() != null) {
                     currentRoom.setDown(this.roomDirectionService
-                            .getRoomForRoomAndDirection(currentRoom, DOWN));
+                            .getRoomForRoomAndDirection(currentRoom, exitDirection));
                     this.appService.setActiveRoom(currentRoom.getDown());
+                    this.setNewPlayerSpawnCoordinates(exitDirection);
                     this.appService.setRoot(currentRoom.getDown().getRoot());
                 }
                 break;
             case LEFT:
                 if(currentRoom.getLeft() != null) {
                     currentRoom.setLeft(this.roomDirectionService
-                            .getRoomForRoomAndDirection(currentRoom, LEFT));
+                            .getRoomForRoomAndDirection(currentRoom, exitDirection));
                     this.appService.setActiveRoom(currentRoom.getLeft());
+                    this.setNewPlayerSpawnCoordinates(exitDirection);
                     this.appService.setRoot(currentRoom.getLeft().getRoot());
                 }
                 break;
             case RIGHT:
                 if(currentRoom.getRight() != null) {
                     currentRoom.setDown(this.roomDirectionService
-                            .getRoomForRoomAndDirection(currentRoom, RIGHT));
+                            .getRoomForRoomAndDirection(currentRoom, exitDirection));
                     this.appService.setActiveRoom(currentRoom.getRight());
+                    this.setNewPlayerSpawnCoordinates(exitDirection);
                     this.appService.setRoot(currentRoom.getRight().getRoot());
                 }
                 break;
         }
+    }
+
+    private void setNewPlayerSpawnCoordinates(Direction exitDirection) {
+        PlayerState playerState = this.appService.getPlayerState();
+        switch (exitDirection) {
+            case UP:
+                playerState.setSpawnCoordinates(
+                        new int[]{(int) this.imageView.getTranslateX(), 910});
+                break;
+            case DOWN:
+                playerState.setSpawnCoordinates(
+                        new int[]{(int) this.imageView.getTranslateX(), 30});
+                break;
+            case LEFT:
+                playerState.setSpawnCoordinates(
+                        new int[]{1770, (int) this.imageView.getTranslateY()});
+                break;
+            case RIGHT:
+                playerState.setSpawnCoordinates(
+                        new int[]{22, (int) this.imageView.getTranslateY()});
+                break;
+        }
+        this.appService.setPlayerState(playerState);
     }
 
     private Direction exitDirection() {

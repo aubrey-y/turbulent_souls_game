@@ -20,12 +20,15 @@ public class PlayerState {
 
     private int goldAmount;
 
+    private int[] spawnCoordinates;
+
     public PlayerState(String username,
                        Archetype archetype,
                        Difficulty difficulty) throws PlayerCreationException {
         this.username = username;
         this.archetype = archetype;
         this.difficulty = difficulty;
+        this.spawnCoordinates = new int[]{400, 540};
         assignDefaultWeaponForClass();
         assignDefaultGoldForDifficulty();
     }
@@ -115,6 +118,15 @@ public class PlayerState {
 
     public PlayerState setGoldAmount(int goldAmount) {
         this.goldAmount = goldAmount;
+        return this;
+    }
+
+    public int[] getSpawnCoordinates() {
+        return spawnCoordinates;
+    }
+
+    public PlayerState setSpawnCoordinates(int[] spawnCoordinates) {
+        this.spawnCoordinates = spawnCoordinates;
         return this;
     }
 }

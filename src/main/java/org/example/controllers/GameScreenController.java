@@ -50,8 +50,8 @@ public class GameScreenController implements Initializable {
         this.goldAmount.setText(String.valueOf(this.appService.getPlayerState().getGoldAmount()));
         this.playerService = new PlayerService(this.player, this.appService,
                 this.roomDirectionService);
-        this.playerService.moveX(400);
-        this.playerService.moveY(540);
+        this.playerService.moveX(this.appService.getPlayerState().getSpawnCoordinates()[0]);
+        this.playerService.moveY(this.appService.getPlayerState().getSpawnCoordinates()[1]);
         this.playerService.setVisible(true);
                 this.appService.getScene().setOnKeyPressed(e -> {
                     switch (e.getCode()) {
