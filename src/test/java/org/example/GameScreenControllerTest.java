@@ -86,7 +86,7 @@ public class GameScreenControllerTest {
         FxToolkit.hideStage();
     }
     @Test
-    public void testSwitch(FxRobot robot) {
+    public void testSwitchLeft(FxRobot robot) {
         //Given
         int times = 5;
         double startX = 22.0;
@@ -104,6 +104,69 @@ public class GameScreenControllerTest {
                 is(not(startX - MOVE_SIZE * times)));
         assertThat(this.controller.getPlayer().getTranslateY(),
                 is(startY));
+    }
+
+    @Test
+    public void testSwitchRight(FxRobot robot) {
+        //Given
+        int times = 5;
+        double startX = 1764.0;
+        double startY = 534.0;
+        //When
+        playerService.moveX(startX);
+        playerService.moveY(startY);
+        for(int i = 0; i < times; i++) {
+            robot.press(KeyCode.D);
+            robot.release(KeyCode.D);
+        }
+        this.controller = App.getActiveLoader().getController();
+        //Then
+        assertThat(this.controller.getPlayer().getTranslateX(),
+                is(not(startX - MOVE_SIZE * times)));
+        assertThat(this.controller.getPlayer().getTranslateY(),
+                is(startY));
+    }
+
+    @Test
+    public void testSwitchUp(FxRobot robot) {
+        //Given
+        int times = 5;
+        double startX = 900.0;
+        double startY = 24.0;
+        //When
+        playerService.moveX(startX);
+        playerService.moveY(startY);
+        for(int i = 0; i < times; i++) {
+            robot.press(KeyCode.W);
+            robot.release(KeyCode.W);
+        }
+        this.controller = App.getActiveLoader().getController();
+        //Then
+        assertThat(this.controller.getPlayer().getTranslateY(),
+                is(not(startY - MOVE_SIZE * times)));
+        assertThat(this.controller.getPlayer().getTranslateX(),
+                is(startX));
+    }
+
+    @Test
+    public void testSwitchDown(FxRobot robot) {
+        //Given
+        int times = 5;
+        double startX = 900.0;
+        double startY = 904.0;
+        //When
+        playerService.moveX(startX);
+        playerService.moveY(startY);
+        for(int i = 0; i < times; i++) {
+            robot.press(KeyCode.S);
+            robot.release(KeyCode.S);
+        }
+        this.controller = App.getActiveLoader().getController();
+        //Then
+        assertThat(this.controller.getPlayer().getTranslateY(),
+                is(not(startY - MOVE_SIZE * times)));
+        assertThat(this.controller.getPlayer().getTranslateX(),
+                is(startX));
     }
 
     @Test
