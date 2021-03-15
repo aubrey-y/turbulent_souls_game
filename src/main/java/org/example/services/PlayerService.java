@@ -121,6 +121,7 @@ public class PlayerService {
                 this.roomDirectionService.getDirectionService(),
                 this.roomDirectionService,
                 this.appService.getScene()));
+        App.setActiveLoader(loader);
         return loader;
     }
 

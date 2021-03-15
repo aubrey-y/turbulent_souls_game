@@ -36,6 +36,8 @@ public class App extends Application {
 
     private static Room activeRoom;
 
+    private static FXMLLoader activeLoader;
+
     @Override
     public void start(Stage stage) throws IOException {
         root = FXMLLoader.load(getClass().getResource("primary.fxml"));
@@ -109,5 +111,13 @@ public class App extends Application {
 
     public static void setActiveRoom(Room activeRoom) {
         App.activeRoom = activeRoom;
+    }
+
+    public static FXMLLoader getActiveLoader() {
+        return activeLoader;
+    }
+
+    public static void setActiveLoader(FXMLLoader activeLoader) {
+        App.activeLoader = activeLoader;
     }
 }

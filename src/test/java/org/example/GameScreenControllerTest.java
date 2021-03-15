@@ -7,7 +7,6 @@ import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import org.example.controllers.GameScreenController;
 import org.example.dto.PlayerState;
-import org.example.dto.Room;
 import org.example.exceptions.PlayerCreationException;
 import org.example.services.AppService;
 import org.example.services.DirectionService;
@@ -31,10 +30,10 @@ import static org.example.enums.Archetype.WARRIOR;
 import static org.example.enums.Difficulty.EASY;
 import static org.example.services.PlayerService.MOVE_SIZE;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
@@ -89,22 +88,22 @@ public class GameScreenControllerTest {
     @Test
     public void testSwitch(FxRobot robot) {
         //Given
-        int times = 130;
-        int times2 = 10;
+        int times = 5;
+        double startX = 22.0;
+        double startY = 444.0;
         //When
-        for (int i = 0; i < times2; i++) {
-            robot.press(KeyCode.W);
-            robot.release(KeyCode.W);
-        }
+        playerService.moveX(startX);
+        playerService.moveY(startY);
         for(int i = 0; i < times; i++) {
             robot.press(KeyCode.A);
             robot.release(KeyCode.A);
         }
+        this.controller = App.getActiveLoader().getController();
         //Then
         assertThat(this.controller.getPlayer().getTranslateX(),
-                is((double) this.spawnCoordinates[0]));
+                is(not(startX - MOVE_SIZE * times)));
         assertThat(this.controller.getPlayer().getTranslateY(),
-                is(this.spawnCoordinates[1] + MOVE_SIZE * times));
+                is(startY));
     }
 
     @Test
