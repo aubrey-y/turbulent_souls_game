@@ -218,6 +218,42 @@ public class GameScreenControllerTest {
     }
 
     @Test
+    public void testPlayerBasicMovementCombination1(FxRobot robot) {
+        //Given
+        int times = 3;
+        //When
+        for(int i = 0; i < times; i++) {
+            robot.press(KeyCode.D);
+            robot.release(KeyCode.D);
+            robot.press(KeyCode.W);
+            robot.release(KeyCode.W);
+        }
+        //Then
+        assertThat(this.controller.getPlayer().getTranslateX(),
+                is(this.spawnCoordinates[0] + MOVE_SIZE * times));
+        assertThat(this.controller.getPlayer().getTranslateY(),
+                is(this.spawnCoordinates[1] - MOVE_SIZE * times));
+    }
+
+    @Test
+    public void testPlayerBasicMovementCombination2(FxRobot robot) {
+        //Given
+        int times = 5;
+        //When
+        for(int i = 0; i < times; i++) {
+            robot.press(KeyCode.A);
+            robot.release(KeyCode.A);
+            robot.press(KeyCode.S);
+            robot.release(KeyCode.S);
+        }
+        //Then
+        assertThat(this.controller.getPlayer().getTranslateX(),
+                is(this.spawnCoordinates[0] - MOVE_SIZE * times));
+        assertThat(this.controller.getPlayer().getTranslateY(),
+                is(this.spawnCoordinates[1] + MOVE_SIZE * times));
+    }
+
+    @Test
     public void testPlayerBasicMovementLeft(FxRobot robot) {
         //Given
         int times = 3;
