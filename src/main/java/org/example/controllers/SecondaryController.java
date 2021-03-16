@@ -55,13 +55,13 @@ public class SecondaryController extends ErrorBaseController {
             .setRoot("gameScreen.fxml");
 
     @FXML
-    private void switchToPrimary() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("primary.fxml"));
-        this.appService.setRoot(loader.load());
+    private void switchToPrimary() {
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("primary.fxml"));
+        this.appService.setRoot(loader);
     }
 
     @FXML
-    public void switchToGameScreen(ActionEvent event) throws IOException {
+    public void switchToGameScreen(ActionEvent event) {
         this.hideErrorMessage();
         try {
             validatePlayerName();
