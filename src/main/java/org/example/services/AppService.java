@@ -29,6 +29,14 @@ public class AppService {
         App.toggleSound(muteDisabled, muteEnabled);
     }
 
+    public void setDevMode(boolean devMode) {
+        App.setDevMode(devMode);
+    }
+
+    public boolean getDevMode() {
+        return App.isDevMode();
+    }
+
     public void setRoot(FXMLLoader loader) {
         try {
             App.setRoot(loader.load());

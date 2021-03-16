@@ -30,6 +30,8 @@ public class App extends Application {
 
     private static boolean soundPlaying = true;
 
+    private static boolean devMode = false;
+
     private static AudioClip clickSound;
 
     private static PlayerState playerState;
@@ -103,6 +105,14 @@ public class App extends Application {
 
     public static void setSoundPlaying(boolean soundPlaying) {
         App.soundPlaying = soundPlaying;
+    }
+
+    public static boolean isDevMode() {
+        return devMode;
+    }
+
+    public static void setDevMode(boolean devMode) {
+        App.devMode = devMode;
     }
 
     public static Room getActiveRoom() {

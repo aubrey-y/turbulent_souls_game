@@ -27,23 +27,27 @@ public class PlayerService {
         this.roomDirectionService = roomDirectionService;
     }
 
-    public void moveUp() {
-        this.imageView.setTranslateY(this.imageView.getTranslateY() - MOVE_SIZE);
+    public void moveUp(boolean shift) {
+        this.imageView.setTranslateY(
+                this.imageView.getTranslateY() - (!shift ? MOVE_SIZE : MOVE_SIZE * 10));
         this.checkForExit();
     }
 
-    public void moveDown() {
-        this.imageView.setTranslateY(this.imageView.getTranslateY() + MOVE_SIZE);
+    public void moveDown(boolean shift) {
+        this.imageView.setTranslateY(
+                this.imageView.getTranslateY() + (!shift ? MOVE_SIZE : MOVE_SIZE * 10));
         this.checkForExit();
     }
 
-    public void moveRight() {
-        this.imageView.setTranslateX(this.imageView.getTranslateX() + MOVE_SIZE);
+    public void moveRight(boolean shift) {
+        this.imageView.setTranslateX(
+                this.imageView.getTranslateX() + (!shift ? MOVE_SIZE : MOVE_SIZE * 10));
         this.checkForExit();
     }
 
-    public void moveLeft() {
-        this.imageView.setTranslateX(this.imageView.getTranslateX() - MOVE_SIZE);
+    public void moveLeft(boolean shift) {
+        this.imageView.setTranslateX(
+                this.imageView.getTranslateX() - (!shift ? MOVE_SIZE : MOVE_SIZE * 10));
         this.checkForExit();
     }
 

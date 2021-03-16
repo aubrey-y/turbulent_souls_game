@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import org.example.services.AppService;
 import org.example.services.DirectionService;
@@ -16,6 +17,9 @@ import org.example.services.RoomDirectionService;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static javafx.scene.input.KeyCode.SHIFT;
+import static javafx.scene.input.KeyCode.SPACE;
 
 
 public class GameScreenController implements Initializable {
@@ -43,6 +47,7 @@ public class GameScreenController implements Initializable {
     private final BooleanProperty aPressed = new SimpleBooleanProperty(false);
     private final BooleanProperty sPressed = new SimpleBooleanProperty(false);
     private final BooleanProperty dPressed = new SimpleBooleanProperty(false);
+    private final BooleanProperty shiftPressed = new SimpleBooleanProperty(false);
 
     public GameScreenController(AppService appService,
                                 PlayerService playerService,
@@ -81,14 +86,18 @@ public class GameScreenController implements Initializable {
                     break;
             }
 
+            if(this.appService.getDevMode() && e.getCode() == SHIFT) {
+                this.shiftPressed.set(true);
+            }
+
             if(this.wPressed.get()) {
-                this.playerService.moveUp();
+                this.playerService.moveUp(this.shiftPressed.get());
             } else if(this.aPressed.get()) {
-                this.playerService.moveLeft();
+                this.playerService.moveLeft(this.shiftPressed.get());
             } else if(this.sPressed.get()) {
-                this.playerService.moveDown();
+                this.playerService.moveDown(this.shiftPressed.get());
             } else if(this.dPressed.get()){
-                this.playerService.moveRight();
+                this.playerService.moveRight(this.shiftPressed.get());
             }
         });
         this.scene.setOnKeyReleased(e -> {

@@ -32,18 +32,9 @@ import static org.example.exceptions.ExceptionMessages.INVALID_DIFFICULTY_EXCEPT
 import static org.example.exceptions.ExceptionMessages.INVALID_NAME_EXCEPTION_MESSAGE;
 import static org.example.exceptions.ExceptionMessages.UNKNOWN_EXCEPTION_MESSAGE;
 
-public class SecondaryController extends BaseController implements Initializable {
+public class SecondaryController extends ErrorBaseController {
 
     private Scene scene;
-
-    @FXML
-    private TextField usernameField;
-
-    @FXML
-    private Rectangle errorBox;
-
-    @FXML
-    private Label errorText;
 
     private String username;
 
@@ -62,11 +53,6 @@ public class SecondaryController extends BaseController implements Initializable
             .setLeft(new Room())
             .setId(0)
             .setRoot("gameScreen.fxml");
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        initController();
-    }
 
     @FXML
     private void switchToPrimary() throws IOException {
@@ -110,7 +96,7 @@ public class SecondaryController extends BaseController implements Initializable
     }
 
     private void validatePlayerName() throws InvalidNameException {
-        String username = usernameField.getText();
+        String username = this.usernameField.getText();
         if (username.isEmpty() || username.trim().equals("")) {
             throw new InvalidNameException("");
         } else {
@@ -129,19 +115,6 @@ public class SecondaryController extends BaseController implements Initializable
         if (this.archetype == null) {
             throw new InvalidArchetypeException("");
         }
-    }
-
-    @FXML
-    private void setErrorMessage(String message) {
-        this.errorBox.setOpacity(1.0);
-        this.errorText.setText(message);
-        this.errorText.setOpacity(1.0);
-    }
-
-    @FXML
-    private void hideErrorMessage() {
-        this.errorBox.setOpacity(0.0);
-        this.errorText.setOpacity(0.0);
     }
 
     @FXML
@@ -208,21 +181,6 @@ public class SecondaryController extends BaseController implements Initializable
     }
 
     //Class builders
-    public SecondaryController setUsernameField(TextField usernameField) {
-        this.usernameField = usernameField;
-        return this;
-    }
-
-    public SecondaryController setErrorBox(Rectangle errorBox) {
-        this.errorBox = errorBox;
-        return this;
-    }
-
-    public SecondaryController setErrorText(Label errorText) {
-        this.errorText = errorText;
-        return this;
-    }
-
     public SecondaryController setUsername(String username) {
         this.username = username;
         return this;
@@ -236,18 +194,6 @@ public class SecondaryController extends BaseController implements Initializable
     public SecondaryController setArchetype(Archetype archetype) {
         this.archetype = archetype;
         return this;
-    }
-
-    public TextField getUsernameField() {
-        return usernameField;
-    }
-
-    public Rectangle getErrorBox() {
-        return errorBox;
-    }
-
-    public Label getErrorText() {
-        return errorText;
     }
 
     public String getUsername() {
