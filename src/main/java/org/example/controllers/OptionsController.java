@@ -66,6 +66,7 @@ public class OptionsController extends ErrorBaseController {
         this.passwordEntry.setVisible(false);
         this.scene.setOnKeyReleased(e -> {});
         this.appService.setDevMode(true);
+        this.hideErrorMessage();
     }
 
     private void checkPassword() {
