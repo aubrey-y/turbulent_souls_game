@@ -176,19 +176,16 @@ public class RoomDirectionService {
                 .setRoot("gardenTrader.fxml"));
 
         //Room 19 mappings would go here
-        this.roomMapping.put(new RoomIdDirectionKey(23, UP), new Room(BOSS)
-                .setUp(new Room())
+        this.roomMapping.put(new RoomIdDirectionKey(20, UP), new Room(BOSS)
                 .setDown(new Room())
                 .setId(21)
                 .setRoot("castleBossUp.fxml"));
-        this.roomMapping.put(new RoomIdDirectionKey(22, LEFT), new Room(BOSS)
-                .setLeft(new Room())
+        this.roomMapping.put(new RoomIdDirectionKey(19, LEFT), new Room(BOSS)
                 .setRight(new Room())
                 .setId(21)
                 .setRoot("castleBossLeft.fxml"));
-        this.roomMapping.put(new RoomIdDirectionKey(24, RIGHT), new Room(BOSS)
+        this.roomMapping.put(new RoomIdDirectionKey(21, RIGHT), new Room(BOSS)
                 .setLeft(new Room())
-                .setRight(new Room())
                 .setId(21)
                 .setRoot("castleBossRight.fxml"));
     }
