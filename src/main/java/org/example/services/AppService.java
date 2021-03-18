@@ -1,12 +1,12 @@
 package org.example.services;
 
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import org.example.App;
 import org.example.dto.PlayerState;
-
-import java.io.IOException;
+import org.example.dto.Room;
 
 /**
  * All interactions with App.java should route through this wrapper class.
@@ -27,8 +27,20 @@ public class AppService {
         App.toggleSound(muteDisabled, muteEnabled);
     }
 
-    public void setRoot(String root) throws IOException {
-        App.setRoot(root);
+    public void setDevMode(boolean devMode) {
+        App.setDevMode(devMode);
+    }
+
+    public boolean getDevMode() {
+        return App.isDevMode();
+    }
+
+    public void setRoot(FXMLLoader loader) {
+        try {
+            App.setRoot(loader.load());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public PlayerState getPlayerState() {
@@ -41,5 +53,13 @@ public class AppService {
 
     public boolean getSoundPlaying() {
         return App.getSoundPlaying();
+    }
+
+    public Room getActiveRoom() {
+        return App.getActiveRoom();
+    }
+
+    public void setActiveRoom(Room room) {
+        App.setActiveRoom(room);
     }
 }
