@@ -70,50 +70,52 @@ public class PlayerService {
         }
         Room currentRoom = this.appService.getActiveRoom();
         switch (exitDirection) {
-            case UP:
-                if (currentRoom.getUp() != null) {
-                    if (currentRoom.getUp().getRoot() == null) {
-                        currentRoom.setUp(this.roomDirectionService
-                                .getRoomForRoomAndDirection(currentRoom, exitDirection));
-                    }
-                    this.appService.setActiveRoom(currentRoom.getUp());
-                    this.setNewPlayerSpawnCoordinates(exitDirection);
-                    this.appService.setRoot(this.getLoader(currentRoom.getUp().getRoot()));
+        case UP:
+            if (currentRoom.getUp() != null) {
+                if (currentRoom.getUp().getRoot() == null) {
+                    currentRoom.setUp(this.roomDirectionService
+                            .getRoomForRoomAndDirection(currentRoom, exitDirection));
                 }
-                break;
-            case DOWN:
-                if (currentRoom.getDown() != null) {
-                    if (currentRoom.getDown().getRoot() == null) {
-                        currentRoom.setDown(this.roomDirectionService
-                                .getRoomForRoomAndDirection(currentRoom, exitDirection));
-                    }
-                    this.appService.setActiveRoom(currentRoom.getDown());
-                    this.setNewPlayerSpawnCoordinates(exitDirection);
-                    this.appService.setRoot(this.getLoader(currentRoom.getDown().getRoot()));
+                this.appService.setActiveRoom(currentRoom.getUp());
+                this.setNewPlayerSpawnCoordinates(exitDirection);
+                this.appService.setRoot(this.getLoader(currentRoom.getUp().getRoot()));
+            }
+            break;
+        case DOWN:
+            if (currentRoom.getDown() != null) {
+                if (currentRoom.getDown().getRoot() == null) {
+                    currentRoom.setDown(this.roomDirectionService
+                            .getRoomForRoomAndDirection(currentRoom, exitDirection));
                 }
-                break;
-            case LEFT:
-                if (currentRoom.getLeft() != null) {
-                    if (currentRoom.getLeft().getRoot() == null) {
-                        currentRoom.setLeft(this.roomDirectionService
-                                .getRoomForRoomAndDirection(currentRoom, exitDirection));
-                    }
-                    this.appService.setActiveRoom(currentRoom.getLeft());
-                    this.setNewPlayerSpawnCoordinates(exitDirection);
-                    this.appService.setRoot(this.getLoader(currentRoom.getLeft().getRoot()));
+                this.appService.setActiveRoom(currentRoom.getDown());
+                this.setNewPlayerSpawnCoordinates(exitDirection);
+                this.appService.setRoot(this.getLoader(currentRoom.getDown().getRoot()));
+            }
+            break;
+        case LEFT:
+            if (currentRoom.getLeft() != null) {
+                if (currentRoom.getLeft().getRoot() == null) {
+                    currentRoom.setLeft(this.roomDirectionService
+                            .getRoomForRoomAndDirection(currentRoom, exitDirection));
                 }
-                break;
-            case RIGHT:
-                if (currentRoom.getRight() != null) {
-                    if (currentRoom.getRight().getRoot() == null) {
-                        currentRoom.setRight(this.roomDirectionService
-                                .getRoomForRoomAndDirection(currentRoom, exitDirection));
-                    }
-                    this.appService.setActiveRoom(currentRoom.getRight());
-                    this.setNewPlayerSpawnCoordinates(exitDirection);
-                    this.appService.setRoot(this.getLoader(currentRoom.getRight().getRoot()));
+                this.appService.setActiveRoom(currentRoom.getLeft());
+                this.setNewPlayerSpawnCoordinates(exitDirection);
+                this.appService.setRoot(this.getLoader(currentRoom.getLeft().getRoot()));
+            }
+            break;
+        case RIGHT:
+            if (currentRoom.getRight() != null) {
+                if (currentRoom.getRight().getRoot() == null) {
+                    currentRoom.setRight(this.roomDirectionService
+                            .getRoomForRoomAndDirection(currentRoom, exitDirection));
                 }
-                break;
+                this.appService.setActiveRoom(currentRoom.getRight());
+                this.setNewPlayerSpawnCoordinates(exitDirection);
+                this.appService.setRoot(this.getLoader(currentRoom.getRight().getRoot()));
+            }
+            break;
+        default:
+            break;
         }
     }
 
@@ -132,22 +134,24 @@ public class PlayerService {
     private void setNewPlayerSpawnCoordinates(Direction exitDirection) {
         PlayerState playerState = this.appService.getPlayerState();
         switch (exitDirection) {
-            case UP:
-                playerState.setSpawnCoordinates(
-                        new int[]{(int) this.imageView.getTranslateX(), 910});
-                break;
-            case DOWN:
-                playerState.setSpawnCoordinates(
-                        new int[]{(int) this.imageView.getTranslateX(), 30});
-                break;
-            case LEFT:
-                playerState.setSpawnCoordinates(
-                        new int[]{1770, (int) this.imageView.getTranslateY()});
-                break;
-            case RIGHT:
-                playerState.setSpawnCoordinates(
-                        new int[]{22, (int) this.imageView.getTranslateY()});
-                break;
+        case UP:
+            playerState.setSpawnCoordinates(
+                    new int[]{(int) this.imageView.getTranslateX(), 910});
+            break;
+        case DOWN:
+            playerState.setSpawnCoordinates(
+                    new int[]{(int) this.imageView.getTranslateX(), 30});
+            break;
+        case LEFT:
+            playerState.setSpawnCoordinates(
+                    new int[]{1770, (int) this.imageView.getTranslateY()});
+            break;
+        case RIGHT:
+            playerState.setSpawnCoordinates(
+                    new int[]{22, (int) this.imageView.getTranslateY()});
+            break;
+        default:
+            break;
         }
         this.appService.setPlayerState(playerState);
     }
@@ -159,13 +163,13 @@ public class PlayerService {
         if (this.imageView.getTranslateX() >= 844 && this.imageView.getTranslateX() <= 982
                 && this.imageView.getTranslateY() >= 912) {
             return DOWN;
-        } else if(this.imageView.getTranslateX() <= 22 && this.imageView.getTranslateY() >= 420
+        } else if (this.imageView.getTranslateX() <= 22 && this.imageView.getTranslateY() >= 420
                 && this.imageView.getTranslateY() <= 534) {
             return LEFT;
-        } else if(this.imageView.getTranslateX() >= 1774 && this.imageView.getTranslateY() >= 420
+        } else if (this.imageView.getTranslateX() >= 1774 && this.imageView.getTranslateY() >= 420
                 && this.imageView.getTranslateY() <= 556) {
             return RIGHT;
-        } else if(this.imageView.getTranslateX() >= 844 && this.imageView.getTranslateX() <= 982
+        } else if (this.imageView.getTranslateX() >= 844 && this.imageView.getTranslateX() <= 982
                 && this.imageView.getTranslateY() <= 24) {
             return UP;
         }

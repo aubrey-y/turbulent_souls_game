@@ -15,14 +15,16 @@ public class DirectionService {
 
     public Direction getOppositeDirection(Direction direction) {
         switch (direction) {
-            case UP:
-                return DOWN;
-            case DOWN:
-                return UP;
-            case RIGHT:
-                return LEFT;
-            case LEFT:
-                return RIGHT;
+        case UP:
+            return DOWN;
+        case DOWN:
+            return UP;
+        case RIGHT:
+            return LEFT;
+        case LEFT:
+            return RIGHT;
+        default:
+            break;
         }
         return null;
     }

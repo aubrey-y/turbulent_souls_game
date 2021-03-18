@@ -7,7 +7,7 @@ import java.util.Random;
 
 public class RandomRoom extends Room {
 
-    List<Room> rooms;
+    private List<Room> rooms;
 
     public RandomRoom(RoomType roomType, List<Room> rooms) {
         super(roomType);

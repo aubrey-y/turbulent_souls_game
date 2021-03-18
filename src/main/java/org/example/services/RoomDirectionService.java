@@ -2,12 +2,12 @@ package org.example.services;
 
 import org.example.dto.RandomRoom;
 import org.example.dto.Room;
+import org.example.dto.RoomIdDirectionKey;
 import org.example.enums.Direction;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import static org.example.enums.Direction.DOWN;
 import static org.example.enums.Direction.LEFT;
@@ -196,20 +196,20 @@ public class RoomDirectionService {
             target = ((RandomRoom) target).getRandomRoom();
         }
         switch (this.directionService.getOppositeDirection(direction)) {
-            case UP:
-                target.setUp(room);
-                break;
-            case DOWN:
-                target.setDown(room);
-                break;
-            case RIGHT:
-                target.setRight(room);
-                break;
-            case LEFT:
-                target.setLeft(room);
-                break;
-            default:
-                break;
+        case UP:
+            target.setUp(room);
+            break;
+        case DOWN:
+            target.setDown(room);
+            break;
+        case RIGHT:
+            target.setRight(room);
+            break;
+        case LEFT:
+            target.setLeft(room);
+            break;
+        default:
+            break;
         }
         return target;
     }
@@ -221,29 +221,5 @@ public class RoomDirectionService {
     public RoomDirectionService setDirectionService(DirectionService directionService) {
         this.directionService = directionService;
         return this;
-    }
-}
-
-class RoomIdDirectionKey {
-    private int id;
-    private Direction direction;
-
-    public RoomIdDirectionKey(int id, Direction direction) {
-        this.id = id;
-        this.direction = direction;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(this.id, this.direction);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == this) {
-            return true;
-        }
-        RoomIdDirectionKey roomIdDirectionKey = (RoomIdDirectionKey) o;
-        return this.id == roomIdDirectionKey.id && this.direction == roomIdDirectionKey.direction;
     }
 }

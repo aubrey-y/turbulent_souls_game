@@ -68,20 +68,20 @@ public class GameScreenController implements Initializable {
         this.playerService.setVisible(true);
         this.scene.setOnKeyPressed(e -> {
             switch (e.getCode()) {
-                case W:
-                    this.wPressed.set(true);
-                    break;
-                case A:
-                    this.aPressed.set(true);
-                    break;
-                case S:
-                    this.sPressed.set(true);
-                    break;
-                case D:
-                    this.dPressed.set(true);
-                    break;
-                default:
-                    break;
+            case W:
+                this.wPressed.set(true);
+                break;
+            case A:
+                this.aPressed.set(true);
+                break;
+            case S:
+                this.sPressed.set(true);
+                break;
+            case D:
+                this.dPressed.set(true);
+                break;
+            default:
+                break;
             }
 
             if (this.appService.getDevMode() && e.getCode() == SHIFT) {
@@ -94,23 +94,26 @@ public class GameScreenController implements Initializable {
                 this.playerService.moveLeft(this.shiftPressed.get());
             } else if (this.sPressed.get()) {
                 this.playerService.moveDown(this.shiftPressed.get());
-            } else if (this.dPressed.get()){
-                this.playerService.moveRight(this.shiftPressed.get()); }
+            } else if (this.dPressed.get()) {
+                this.playerService.moveRight(this.shiftPressed.get());
+            }
         });
         this.scene.setOnKeyReleased(e -> {
             switch (e.getCode()) {
-                case W:
-                    this.wPressed.set(false);
-                    break;
-                case A:
-                    this.aPressed.set(false);
-                    break;
-                case S:
-                    this.sPressed.set(false);
-                    break;
-                case D:
-                    this.dPressed.set(false);
-                    break;
+            case W:
+                this.wPressed.set(false);
+                break;
+            case A:
+                this.aPressed.set(false);
+                break;
+            case S:
+                this.sPressed.set(false);
+                break;
+            case D:
+                this.dPressed.set(false);
+                break;
+            default:
+                break;
             }
         });
     }
