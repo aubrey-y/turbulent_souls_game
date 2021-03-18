@@ -156,6 +156,10 @@ public class RoomDirectionService {
                 .setDown(new Room())
                 .setId(15)
                 .setRoot("gardenRight.fxml"));
+        this.roomMapping.put(new RoomIdDirectionKey(13, DOWN), new Room(GARDEN2)
+                .setUp(new Room())
+                .setId(16)
+                .setRoot("gardenTrader.fxml"));
 
         //This represents room 14 on the diagram
         this.roomMapping.put(new RoomIdDirectionKey(14, UP), this.castleBossStartRoom);
