@@ -5,11 +5,12 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.GameScreenController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.EndingRoomController">
    <children>
       <ImageView fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -27,6 +28,15 @@
       </Pane>
       <StackPane alignment="BOTTOM_LEFT" layoutX="46.0" layoutY="-13.0" prefHeight="1032.0" prefWidth="1874.0" AnchorPane.bottomAnchor="61.0" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-13.0">
          <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="leaveLabel" prefHeight="92.0" prefWidth="1485.0" stylesheets="@../../static/css/fontstyle.css" text="congratulations on winning, press exit to leave the room and quit the game " textFill="WHITE">
+                     <font>
+                        <Font size="40.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
             <Button id="clickable" fx:id="closeButton" alignment="BASELINE_CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE">
                <font>
                   <Font name="Pixeboy" size="30.0" />
