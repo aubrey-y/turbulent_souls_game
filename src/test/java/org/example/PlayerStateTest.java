@@ -17,11 +17,13 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class PlayerStateTest {
 
+    private final int[] spawnCoordinates = new int[]{400, 540};
+
     @Test
     public void testGivenEasyMageProducesValidInit() throws PlayerCreationException {
         Archetype mage = Archetype.MAGE;
         Difficulty easy = Difficulty.EASY;
-        PlayerState player = new PlayerState("Jeff", mage, easy);
+        PlayerState player = new PlayerState("Jeff", mage, easy, this.spawnCoordinates);
         int goldAmount = player.getGoldAmount();
         Weapon weapon = player.getActiveWeapon();
 
@@ -33,7 +35,7 @@ public class PlayerStateTest {
     public void testGivenMedArcherProducesValidInit() throws PlayerCreationException {
         Archetype archer = Archetype.ARCHER;
         Difficulty medium = Difficulty.MEDIUM;
-        PlayerState player = new PlayerState("Jeff", archer, medium);
+        PlayerState player = new PlayerState("Jeff", archer, medium, this.spawnCoordinates);
         int goldAmount = player.getGoldAmount();
         Weapon weapon = player.getActiveWeapon();
 
@@ -45,7 +47,7 @@ public class PlayerStateTest {
     public void testGivenHrdWarriorProducesValidInit() throws PlayerCreationException {
         Archetype warrior = Archetype.WARRIOR;
         Difficulty hard = Difficulty.HARD;
-        PlayerState player = new PlayerState("Jeff", warrior, hard);
+        PlayerState player = new PlayerState("Jeff", warrior, hard, this.spawnCoordinates);
         int goldAmount = player.getGoldAmount();
         Weapon weapon = player.getActiveWeapon();
 
@@ -57,7 +59,7 @@ public class PlayerStateTest {
     public void testGivenEasyWarriorProducesValidInit() throws PlayerCreationException {
         Archetype warrior = Archetype.WARRIOR;
         Difficulty easy = Difficulty.EASY;
-        PlayerState player = new PlayerState("Jeff", warrior, easy);
+        PlayerState player = new PlayerState("Jeff", warrior, easy, this.spawnCoordinates);
         int goldAmount = player.getGoldAmount();
         Weapon weapon = player.getActiveWeapon();
 

@@ -12,6 +12,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.example.dto.PlayerState;
+import org.example.dto.Room;
 
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -29,10 +30,15 @@ public class App extends Application {
 
     private static boolean soundPlaying = true;
 
+    private static boolean devMode = false;
+
     private static AudioClip clickSound;
 
     private static PlayerState playerState;
 
+    private static Room activeRoom;
+
+    private static FXMLLoader activeLoader;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -65,15 +71,6 @@ public class App extends Application {
         soundPlaying = !soundPlaying;
     }
 
-    public static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
-    }
-
-    private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-        return fxmlLoader.load();
-    }
-
     public static void main(String[] args) {
         launch();
     }
@@ -83,7 +80,7 @@ public class App extends Application {
     }
 
     public static void setRoot(Parent root) {
-        App.root = root;
+        scene.setRoot(root);
     }
 
     public static Scene getScene() {
@@ -108,5 +105,29 @@ public class App extends Application {
 
     public static void setSoundPlaying(boolean soundPlaying) {
         App.soundPlaying = soundPlaying;
+    }
+
+    public static boolean isDevMode() {
+        return devMode;
+    }
+
+    public static void setDevMode(boolean devMode) {
+        App.devMode = devMode;
+    }
+
+    public static Room getActiveRoom() {
+        return activeRoom;
+    }
+
+    public static void setActiveRoom(Room activeRoom) {
+        App.activeRoom = activeRoom;
+    }
+
+    public static FXMLLoader getActiveLoader() {
+        return activeLoader;
+    }
+
+    public static void setActiveLoader(FXMLLoader activeLoader) {
+        App.activeLoader = activeLoader;
     }
 }

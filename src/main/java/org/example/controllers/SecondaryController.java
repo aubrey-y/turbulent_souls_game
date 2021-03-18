@@ -1,16 +1,12 @@
 package org.example.controllers;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.shape.Rectangle;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import org.example.App;
 import org.example.dto.PlayerState;
+import org.example.dto.Room;
 import org.example.enums.Archetype;
 import org.example.enums.Difficulty;
 import org.example.exceptions.InvalidArchetypeException;
@@ -18,22 +14,19 @@ import org.example.exceptions.InvalidDifficultyException;
 import org.example.exceptions.InvalidNameException;
 import org.example.exceptions.PlayerCreationException;
 import org.example.services.AppService;
+import org.example.services.DirectionService;
+import org.example.services.PlayerService;
+import org.example.services.RoomDirectionService;
 
+import static org.example.enums.RoomType.FOREST1;
 import static org.example.exceptions.ExceptionMessages.INVALID_ARCHETYPE_EXCEPTION_MESSAGE;
 import static org.example.exceptions.ExceptionMessages.INVALID_DIFFICULTY_EXCEPTION_MESSAGE;
 import static org.example.exceptions.ExceptionMessages.INVALID_NAME_EXCEPTION_MESSAGE;
 import static org.example.exceptions.ExceptionMessages.UNKNOWN_EXCEPTION_MESSAGE;
 
-public class SecondaryController extends BaseController implements Initializable {
+public class SecondaryController extends ErrorBaseController {
 
-    @FXML
-    private TextField usernameField;
-
-    @FXML
-    private Rectangle errorBox;
-
-    @FXML
-    private Label errorText;
+    private Scene scene;
 
     private String username;
 
@@ -41,26 +34,48 @@ public class SecondaryController extends BaseController implements Initializable
 
     private Archetype archetype;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        initController();
+    public SecondaryController(Scene scene) {
+        this.scene = scene;
+    }
+
+    public static final Room STARTING_ROOM = new Room(FOREST1)
+            .setDown(new Room())
+            .setRight(new Room())
+            .setUp(new Room())
+            .setLeft(new Room())
+            .setId(0)
+            .setRoot("gameScreen.fxml");
+
+    @FXML
+    private void switchToPrimary() {
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("primary.fxml"));
+        this.appService.setRoot(loader);
     }
 
     @FXML
-    private void switchToPrimary() throws IOException {
-        this.appService.setRoot("primary");
-    }
-
-    @FXML
-    public void switchToGameScreen(ActionEvent event) throws IOException {
+    public void switchToGameScreen(ActionEvent event) {
         this.hideErrorMessage();
         try {
             validatePlayerName();
             validateDifficulty();
             validateArchetype();
             this.appService.setPlayerState(
-                    new PlayerState(this.username, this.archetype, this.difficulty));
-            this.appService.setRoot("gameScreen");
+                    new PlayerState(
+                            this.username,
+                            this.archetype,
+                            this.difficulty,
+                            new int[]{400, 540}));
+            this.appService.setActiveRoom(STARTING_ROOM);
+            FXMLLoader loader = new FXMLLoader(App.class.getResource("gameScreen.fxml"));
+            DirectionService directionService = new DirectionService();
+            RoomDirectionService roomDirectionService = new RoomDirectionService(directionService);
+            loader.setControllerFactory(GameScreenController -> new GameScreenController(
+                    this.appService,
+                    new PlayerService(this.appService, roomDirectionService),
+                    directionService,
+                    roomDirectionService,
+                    this.scene));
+            this.appService.setRoot(loader);
         } catch (InvalidNameException e) {
             this.setErrorMessage(INVALID_NAME_EXCEPTION_MESSAGE);
         } catch (InvalidDifficultyException e) {
@@ -73,7 +88,7 @@ public class SecondaryController extends BaseController implements Initializable
     }
 
     private void validatePlayerName() throws InvalidNameException {
-        String username = usernameField.getText();
+        String username = this.usernameField.getText();
         if (username.isEmpty() || username.trim().equals("")) {
             throw new InvalidNameException("");
         } else {
@@ -92,19 +107,6 @@ public class SecondaryController extends BaseController implements Initializable
         if (this.archetype == null) {
             throw new InvalidArchetypeException("");
         }
-    }
-
-    @FXML
-    private void setErrorMessage(String message) {
-        this.errorBox.setOpacity(1.0);
-        this.errorText.setText(message);
-        this.errorText.setOpacity(1.0);
-    }
-
-    @FXML
-    private void hideErrorMessage() {
-        this.errorBox.setOpacity(0.0);
-        this.errorText.setOpacity(0.0);
     }
 
     @FXML
@@ -171,21 +173,6 @@ public class SecondaryController extends BaseController implements Initializable
     }
 
     //Class builders
-    public SecondaryController setUsernameField(TextField usernameField) {
-        this.usernameField = usernameField;
-        return this;
-    }
-
-    public SecondaryController setErrorBox(Rectangle errorBox) {
-        this.errorBox = errorBox;
-        return this;
-    }
-
-    public SecondaryController setErrorText(Label errorText) {
-        this.errorText = errorText;
-        return this;
-    }
-
     public SecondaryController setUsername(String username) {
         this.username = username;
         return this;
@@ -199,18 +186,6 @@ public class SecondaryController extends BaseController implements Initializable
     public SecondaryController setArchetype(Archetype archetype) {
         this.archetype = archetype;
         return this;
-    }
-
-    public TextField getUsernameField() {
-        return usernameField;
-    }
-
-    public Rectangle getErrorBox() {
-        return errorBox;
-    }
-
-    public Label getErrorText() {
-        return errorText;
     }
 
     public String getUsername() {

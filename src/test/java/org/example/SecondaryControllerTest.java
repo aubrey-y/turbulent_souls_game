@@ -22,7 +22,7 @@ import java.util.concurrent.TimeoutException;
 import static org.example.exceptions.ExceptionMessages.INVALID_ARCHETYPE_EXCEPTION_MESSAGE;
 import static org.example.exceptions.ExceptionMessages.INVALID_DIFFICULTY_EXCEPTION_MESSAGE;
 import static org.example.exceptions.ExceptionMessages.INVALID_NAME_EXCEPTION_MESSAGE;
-import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.spy;
 import static org.testfx.api.FxAssert.verifyThat;
@@ -39,7 +39,7 @@ public class SecondaryControllerTest {
     @Start
     public void setUp(Stage stage) throws IOException {
         withMockedAppService();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("secondary.fxml"));
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("secondary.fxml"));
         Parent root = loader.load();
         this.controller = loader.getController();
         this.controller.setAppService(this.appService);
@@ -109,8 +109,8 @@ public class SecondaryControllerTest {
         verifyThat("#errorText", hasText(INVALID_NAME_EXCEPTION_MESSAGE));
     }
 
-    private void withMockedAppService() throws IOException {
+    private void withMockedAppService() {
         this.appService = spy(AppService.class);
-        doNothing().when(this.appService).setRoot(anyString());
+        doNothing().when(this.appService).setRoot(any());
     }
 }
