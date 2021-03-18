@@ -1,9 +1,11 @@
 package org.example.services;
 
+import org.example.dto.RandomRoom;
 import org.example.dto.Room;
 import org.example.enums.Direction;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -18,6 +20,25 @@ public class RoomDirectionService {
     private DirectionService directionService;
 
     private final Map<RoomIdDirectionKey, Room> roomMapping = new HashMap<>();
+
+    private final RandomRoom castleBossStartRoom = new RandomRoom(
+            CASTLE3,
+            List.of(new Room(CASTLE3)
+                            .setLeft(new Room())
+                            .setDown(new Room())
+                            .setId(19)
+                            .setRoot("castleBossStartLeft.fxml"),
+                    new Room(CASTLE3)
+                            .setUp(new Room())
+                            .setDown(new Room())
+                            .setId(20)
+                            .setRoot("castleBossStartUp.fxml"),
+                    new Room(CASTLE3)
+                            .setRight(new Room())
+                            .setDown(new Room())
+                            .setId(21)
+                            .setRoot("castleBossStartRight.fxml"))
+    );
 
     public RoomDirectionService(DirectionService directionService) {
         this.directionService = directionService;
@@ -137,43 +158,31 @@ public class RoomDirectionService {
                 .setRoot("gardenRight.fxml"));
 
         //This represents room 14 on the diagram
-        this.roomMapping.put(new RoomIdDirectionKey(14, UP), new Room(CASTLE3)
-                .setUp(new Room())
-                .setLeft(new Room())
-                .setRight(new Room())
-                .setDown(new Room())
-                .setId(19)
-                .setRoot("castleBossStart.fxml"));
+        this.roomMapping.put(new RoomIdDirectionKey(14, UP), this.castleBossStartRoom);
         this.roomMapping.put(new RoomIdDirectionKey(14, DOWN), new Room(GARDEN_TRADER)
                 .setUp(new Room())
                 .setId(17)
                 .setRoot("gardenTrader.fxml"));
 
         //This represents room 15 on the diagram
-        this.roomMapping.put(new RoomIdDirectionKey(15, UP), new Room(CASTLE3)
-                .setUp(new Room())
-                .setLeft(new Room())
-                .setRight(new Room())
-                .setDown(new Room())
-                .setId(19)
-                .setRoot("castleBossStart.fxml"));
+        this.roomMapping.put(new RoomIdDirectionKey(15, UP), this.castleBossStartRoom);
         this.roomMapping.put(new RoomIdDirectionKey(15, DOWN), new Room(GARDEN_TRADER)
                 .setUp(new Room())
                 .setId(18)
                 .setRoot("gardenTrader.fxml"));
 
         //Room 19 mappings would go here
-        this.roomMapping.put(new RoomIdDirectionKey(21, UP), new Room(BOSS)
+        this.roomMapping.put(new RoomIdDirectionKey(23, UP), new Room(BOSS)
                 .setUp(new Room())
                 .setDown(new Room())
                 .setId(21)
                 .setRoot("castleBossUp.fxml"));
-        this.roomMapping.put(new RoomIdDirectionKey(20, LEFT), new Room(BOSS)
+        this.roomMapping.put(new RoomIdDirectionKey(22, LEFT), new Room(BOSS)
                 .setLeft(new Room())
                 .setRight(new Room())
                 .setId(21)
                 .setRoot("castleBossLeft.fxml"));
-        this.roomMapping.put(new RoomIdDirectionKey(22, RIGHT), new Room(BOSS)
+        this.roomMapping.put(new RoomIdDirectionKey(24, RIGHT), new Room(BOSS)
                 .setLeft(new Room())
                 .setRight(new Room())
                 .setId(21)
@@ -182,6 +191,9 @@ public class RoomDirectionService {
 
     public Room getRoomForRoomAndDirection(Room room, Direction direction) {
         Room target = this.roomMapping.get(new RoomIdDirectionKey(room.getId(), direction));
+        if(target instanceof RandomRoom) {
+            target = ((RandomRoom) target).getRandomRoom();
+        }
         switch (this.directionService.getOppositeDirection(direction)) {
             case UP:
                 target.setUp(room);
