@@ -94,7 +94,7 @@ public class GameScreenControllerTest {
         //When
         playerService.moveX(startX);
         playerService.moveY(startY);
-        for(int i = 0; i < times; i++) {
+        for (int i = 0; i < times; i++) {
             robot.press(KeyCode.A);
             robot.release(KeyCode.A);
         }
@@ -115,7 +115,7 @@ public class GameScreenControllerTest {
         //When
         playerService.moveX(startX);
         playerService.moveY(startY);
-        for(int i = 0; i < times; i++) {
+        for (int i = 0; i < times; i++) {
             robot.press(KeyCode.D);
             robot.release(KeyCode.D);
         }
@@ -136,7 +136,7 @@ public class GameScreenControllerTest {
         //When
         playerService.moveX(startX);
         playerService.moveY(startY);
-        for(int i = 0; i < times; i++) {
+        for (int i = 0; i < times; i++) {
             robot.press(KeyCode.W);
             robot.release(KeyCode.W);
         }
@@ -157,7 +157,7 @@ public class GameScreenControllerTest {
         //When
         playerService.moveX(startX);
         playerService.moveY(startY);
-        for(int i = 0; i < times; i++) {
+        for (int i = 0; i < times; i++) {
             robot.press(KeyCode.S);
             robot.release(KeyCode.S);
         }
@@ -174,7 +174,7 @@ public class GameScreenControllerTest {
         //Given
         int times = 3;
         //When
-        for(int i = 0; i < times; i++) {
+        for (int i = 0; i < times; i++) {
             robot.press(KeyCode.S);
             robot.release(KeyCode.S);
         }
@@ -190,7 +190,7 @@ public class GameScreenControllerTest {
         //Given
         int times = 3;
         //When
-        for(int i = 0; i < times; i++) {
+        for (int i = 0; i < times; i++) {
             robot.press(KeyCode.W);
             robot.release(KeyCode.W);
         }
@@ -206,7 +206,7 @@ public class GameScreenControllerTest {
         //Given
         int times = 3;
         //When
-        for(int i = 0; i < times; i++) {
+        for (int i = 0; i < times; i++) {
             robot.press(KeyCode.D);
             robot.release(KeyCode.D);
         }
@@ -222,7 +222,7 @@ public class GameScreenControllerTest {
         //Given
         int times = 3;
         //When
-        for(int i = 0; i < times; i++) {
+        for (int i = 0; i < times; i++) {
             robot.press(KeyCode.D);
             robot.release(KeyCode.D);
             robot.press(KeyCode.W);
@@ -240,7 +240,7 @@ public class GameScreenControllerTest {
         //Given
         int times = 5;
         //When
-        for(int i = 0; i < times; i++) {
+        for (int i = 0; i < times; i++) {
             robot.press(KeyCode.A);
             robot.release(KeyCode.A);
             robot.press(KeyCode.S);
@@ -258,7 +258,7 @@ public class GameScreenControllerTest {
         //Given
         int times = 3;
         //When
-        for(int i = 0; i < times; i++) {
+        for (int i = 0; i < times; i++) {
             robot.press(KeyCode.A);
             robot.release(KeyCode.A);
         }

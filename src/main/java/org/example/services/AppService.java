@@ -8,8 +8,6 @@ import org.example.App;
 import org.example.dto.PlayerState;
 import org.example.dto.Room;
 
-import java.io.IOException;
-
 /**
  * All interactions with App.java should route through this wrapper class.
  * This enables Mockito to mock these (static) methods, without the need of a

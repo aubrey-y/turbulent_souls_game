@@ -192,7 +192,7 @@ public class RoomDirectionService {
 
     public Room getRoomForRoomAndDirection(Room room, Direction direction) {
         Room target = this.roomMapping.get(new RoomIdDirectionKey(room.getId(), direction));
-        if(target instanceof RandomRoom) {
+        if (target instanceof RandomRoom) {
             target = ((RandomRoom) target).getRandomRoom();
         }
         switch (this.directionService.getOppositeDirection(direction)) {
@@ -240,7 +240,7 @@ class RoomIdDirectionKey {
 
     @Override
     public boolean equals(Object o) {
-        if(o == this) {
+        if (o == this) {
             return true;
         }
         RoomIdDirectionKey roomIdDirectionKey = (RoomIdDirectionKey) o;

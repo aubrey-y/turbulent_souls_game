@@ -65,14 +65,14 @@ public class PlayerService {
 
     private void checkForExit() {
         Direction exitDirection = this.exitDirection();
-        if(exitDirection == null) {
+        if (exitDirection == null) {
             return;
         }
         Room currentRoom = this.appService.getActiveRoom();
         switch (exitDirection) {
             case UP:
-                if(currentRoom.getUp() != null) {
-                    if(currentRoom.getUp().getRoot() == null) {
+                if (currentRoom.getUp() != null) {
+                    if (currentRoom.getUp().getRoot() == null) {
                         currentRoom.setUp(this.roomDirectionService
                                 .getRoomForRoomAndDirection(currentRoom, exitDirection));
                     }
@@ -82,8 +82,8 @@ public class PlayerService {
                 }
                 break;
             case DOWN:
-                if(currentRoom.getDown() != null) {
-                    if(currentRoom.getDown().getRoot() == null) {
+                if (currentRoom.getDown() != null) {
+                    if (currentRoom.getDown().getRoot() == null) {
                         currentRoom.setDown(this.roomDirectionService
                                 .getRoomForRoomAndDirection(currentRoom, exitDirection));
                     }
@@ -93,8 +93,8 @@ public class PlayerService {
                 }
                 break;
             case LEFT:
-                if(currentRoom.getLeft() != null) {
-                    if(currentRoom.getLeft().getRoot() == null) {
+                if (currentRoom.getLeft() != null) {
+                    if (currentRoom.getLeft().getRoot() == null) {
                         currentRoom.setLeft(this.roomDirectionService
                                 .getRoomForRoomAndDirection(currentRoom, exitDirection));
                     }
@@ -104,8 +104,8 @@ public class PlayerService {
                 }
                 break;
             case RIGHT:
-                if(currentRoom.getRight() != null) {
-                    if(currentRoom.getRight().getRoot() == null) {
+                if (currentRoom.getRight() != null) {
+                    if (currentRoom.getRight().getRoot() == null) {
                         currentRoom.setRight(this.roomDirectionService
                                 .getRoomForRoomAndDirection(currentRoom, exitDirection));
                     }
@@ -156,17 +156,17 @@ public class PlayerService {
         System.out.println(this.imageView.getTranslateX());
         System.out.println(this.imageView.getTranslateY());
         System.out.println("_________________________");
-        if(this.imageView.getTranslateX() >= 844 && this.imageView.getTranslateX() <= 982 &&
-                this.imageView.getTranslateY() >= 912) {
+        if (this.imageView.getTranslateX() >= 844 && this.imageView.getTranslateX() <= 982
+                && this.imageView.getTranslateY() >= 912) {
             return DOWN;
-        } else if(this.imageView.getTranslateX() <= 22 && this.imageView.getTranslateY() >= 420 &&
-                this.imageView.getTranslateY() <= 534) {
+        } else if(this.imageView.getTranslateX() <= 22 && this.imageView.getTranslateY() >= 420
+                && this.imageView.getTranslateY() <= 534) {
             return LEFT;
-        } else if(this.imageView.getTranslateX() >= 1774 && this.imageView.getTranslateY() >= 420 &&
-                this.imageView.getTranslateY() <= 556) {
+        } else if(this.imageView.getTranslateX() >= 1774 && this.imageView.getTranslateY() >= 420
+                && this.imageView.getTranslateY() <= 556) {
             return RIGHT;
-        } else if(this.imageView.getTranslateX() >= 844 && this.imageView.getTranslateX() <= 982 &&
-                this.imageView.getTranslateY() <= 24) {
+        } else if(this.imageView.getTranslateX() >= 844 && this.imageView.getTranslateX() <= 982
+                && this.imageView.getTranslateY() <= 24) {
             return UP;
         }
         return null;

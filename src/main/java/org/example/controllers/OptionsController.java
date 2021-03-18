@@ -39,14 +39,14 @@ public class OptionsController extends ErrorBaseController {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.initController();
-        if(this.appService.getDevMode()) {
+        if (this.appService.getDevMode()) {
             this.devMode.setSelected(true);
         }
     }
 
     @FXML
     private void verifyCredentials() {
-        if(this.appService.getDevMode()) {
+        if (this.appService.getDevMode()) {
             this.appService.setDevMode(false);
             return;
         }
@@ -54,7 +54,7 @@ public class OptionsController extends ErrorBaseController {
         this.warningBackground.setVisible(true);
         this.passwordEntry.setVisible(true);
         this.scene.setOnKeyReleased(e -> {
-            if(e.getCode() == KeyCode.ENTER) {
+            if (e.getCode() == KeyCode.ENTER) {
                 checkPassword();
             }
         });
@@ -64,7 +64,7 @@ public class OptionsController extends ErrorBaseController {
         this.devMode.setOpacity(1.0);
         this.warningBackground.setVisible(false);
         this.passwordEntry.setVisible(false);
-        this.scene.setOnKeyReleased(e -> {});
+        this.scene.setOnKeyReleased(e -> { });
         this.appService.setDevMode(true);
         this.hideErrorMessage();
     }
@@ -78,7 +78,7 @@ public class OptionsController extends ErrorBaseController {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        if(passwordEntry.getText().equals(password)) {
+        if (passwordEntry.getText().equals(password)) {
             this.acceptCredentials();
         } else {
             this.setErrorMessage("Invalid password, this has been reported.");
@@ -87,7 +87,7 @@ public class OptionsController extends ErrorBaseController {
 
     @FXML
     private void switchToPrimary() {
-        this.scene.setOnKeyReleased(e -> {});
+        this.scene.setOnKeyReleased(e -> { });
         FXMLLoader loader = new FXMLLoader(App.class.getResource("primary.fxml"));
         this.appService.setRoot(loader);
     }
