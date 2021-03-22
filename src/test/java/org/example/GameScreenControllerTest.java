@@ -10,6 +10,7 @@ import org.example.dto.PlayerState;
 import org.example.exceptions.PlayerCreationException;
 import org.example.services.AppService;
 import org.example.services.DirectionService;
+import org.example.services.HealthService;
 import org.example.services.PlayerService;
 import org.example.services.RoomDirectionService;
 import org.junit.jupiter.api.AfterEach;
@@ -54,22 +55,28 @@ public class GameScreenControllerTest {
 
     private RoomDirectionService roomDirectionService;
 
+    private HealthService healthService;
+
     private final int[] spawnCoordinates = new int[]{400, 540};
 
     @Start
     public void setUp(Stage stage) throws IOException {
         this.appService = spy(AppService.class);
+        this.healthService = new HealthService(this.appService);
         this.directionService = new DirectionService();
         this.roomDirectionService = new RoomDirectionService(this.directionService);
-        this.playerService = new PlayerService(this.appService, this.roomDirectionService);
+        this.playerService = new PlayerService(
+                this.appService, this.roomDirectionService, this.healthService);
         withMockedAppService();
         FXMLLoader loader = new FXMLLoader(App.class.getResource("gameScreen.fxml"));
-        Scene mockedScene = new Scene(new FXMLLoader(App.class.getResource("primary.fxml")).load());
+        Scene mockedScene = new Scene(
+                new FXMLLoader(App.class.getResource("primary.fxml")).load());
         loader.setControllerFactory(GameScreenController -> new GameScreenController(
                 this.appService,
                 this.playerService,
                 this.directionService,
                 this.roomDirectionService,
+                this.healthService,
                 mockedScene));
         Parent root = loader.load();
         this.scene = new Scene(root, 1920, 1080);

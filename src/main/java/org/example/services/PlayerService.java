@@ -19,12 +19,16 @@ public class PlayerService {
 
     private RoomDirectionService roomDirectionService;
 
+    private HealthService healthService;
+
     public static final double MOVE_SIZE = 6;
 
     public PlayerService(AppService appService,
-                         RoomDirectionService roomDirectionService) {
+                         RoomDirectionService roomDirectionService,
+                         HealthService healthService) {
         this.appService = appService;
         this.roomDirectionService = roomDirectionService;
+        this.healthService = healthService;
     }
 
     public void moveUp(boolean shift) {
@@ -126,6 +130,7 @@ public class PlayerService {
                 this,
                 this.roomDirectionService.getDirectionService(),
                 this.roomDirectionService,
+                this.healthService,
                 this.appService.getScene()));
         App.setActiveLoader(loader);
         return loader;
@@ -191,6 +196,15 @@ public class PlayerService {
 
     public PlayerService setAppService(AppService appService) {
         this.appService = appService;
+        return this;
+    }
+
+    public HealthService getHealthService() {
+        return healthService;
+    }
+
+    public PlayerService setHealthService(HealthService healthService) {
+        this.healthService = healthService;
         return this;
     }
 
