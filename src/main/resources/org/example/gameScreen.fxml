@@ -42,18 +42,18 @@
             </Button>
          </children>
       </StackPane>
-      <Label fx:id="goldAmountLabel" layoutX="32.0" layoutY="6.0" prefHeight="92.0" prefWidth="145.0" stylesheets="@../../static/css/fontstyle.css" text="GOLD : " textFill="WHITE" AnchorPane.bottomAnchor="982.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="1743.0" AnchorPane.topAnchor="6.0">
+      <Label fx:id="goldAmountLabel" layoutX="15.0" layoutY="40.0" prefHeight="59.0" prefWidth="145.0" stylesheets="@../../static/css/fontstyle.css" text="GOLD : " textFill="WHITE">
          <font>
-            <Font size="59.0" />
+            <Font size="43.0" />
          </font>
       </Label>
-      <Label fx:id="goldAmount" layoutX="175.0" layoutY="6.0" prefHeight="92.0" prefWidth="385.0" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE">
+      <Label fx:id="goldAmount" layoutX="115.0" layoutY="40.0" prefHeight="59.0" prefWidth="385.0" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE">
          <font>
-            <Font size="59.0" />
+            <Font size="43.0" />
          </font>
       </Label>
-      <ProgressBar fx:id="healthBar" focusTraversable="false" layoutX="1200.0" layoutY="1020.0" opacity="0.8" prefHeight="40.0" prefWidth="700.0" progress="1.0" style="-fx-control-inner-background: #3E5155;" styleClass="green-bar" stylesheets="@../../static/css/fontstyle.css" />
-      <Label fx:id="healthText" alignment="CENTER" layoutX="1359.0" layoutY="1025.0" prefHeight="30.0" prefWidth="385.0" stylesheets="@../../static/css/fontstyle.css" text="100/100" textAlignment="CENTER" textFill="WHITE">
+      <ProgressBar fx:id="healthBar" focusTraversable="false" layoutX="15.0" layoutY="10.0" opacity="0.8" prefHeight="40.0" prefWidth="700.0" progress="1.0" style="-fx-control-inner-background: #3E5155;" styleClass="green-bar" stylesheets="@../../static/css/fontstyle.css" />
+      <Label fx:id="healthText" alignment="CENTER" layoutX="159.0" layoutY="15.0" prefHeight="30.0" prefWidth="385.0" stylesheets="@../../static/css/fontstyle.css" text="100/100" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="37.0" />
          </font>
