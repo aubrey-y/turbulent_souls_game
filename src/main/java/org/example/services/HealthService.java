@@ -28,11 +28,8 @@ public class HealthService {
         PlayerState currentPlayerState = this.appService.getPlayerState();
         double currentHealth = currentPlayerState.getHealth();
         currentHealth += modifier;
-        if(currentHealth <= 0.0) {
-            currentPlayerState.setHealth(0.0);
-        } else {
-            currentPlayerState.setHealth(currentHealth);
-        }
+        currentHealth = Math.max(0.0, currentHealth);
+        currentPlayerState.setHealth(currentHealth);
         this.healthBar.getStyleClass().removeAll(BAR_CSS_CLASSES);
         if(currentHealth <= HP_BAR_THRESHOLD * currentPlayerState.getHealthCapacity()) {
             this.healthBar.getStyleClass().add(RED_HP_BAR);
