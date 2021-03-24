@@ -24,6 +24,11 @@
                   <Image url="@../../static/images/player.png" />
                </image>
             </ImageView>
+            <ImageView fx:id="monster" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../static/images/monsters/forest%20slime%20monster.gif" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
       <StackPane alignment="BOTTOM_LEFT" layoutX="46.0" layoutY="-13.0" prefHeight="1032.0" prefWidth="1874.0" AnchorPane.bottomAnchor="61.0" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-13.0">

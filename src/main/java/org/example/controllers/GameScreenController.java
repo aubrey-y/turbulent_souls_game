@@ -51,6 +51,9 @@ public class GameScreenController implements Initializable {
     @FXML
     private Label healthText;
 
+    @FXML
+    private ImageView monster;
+
     private final BooleanProperty wPressed = new SimpleBooleanProperty(false);
     private final BooleanProperty aPressed = new SimpleBooleanProperty(false);
     private final BooleanProperty sPressed = new SimpleBooleanProperty(false);

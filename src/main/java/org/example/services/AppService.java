@@ -62,4 +62,5 @@ public class AppService {
     public void setActiveRoom(Room room) {
         App.setActiveRoom(room);
     }
+
 }
