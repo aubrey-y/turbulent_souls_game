@@ -10,6 +10,8 @@ public class MonsterService {
 
     private Map<Integer, Monster> monsterMapping = new HashMap<>();
 
+    public static final double TILE_SIZE = 100.0;
+
     public MonsterService() {
 
     }
@@ -26,7 +28,7 @@ public class MonsterService {
                 nearestMonster.getImageView().getTranslateY(),
                 playerX,
                 playerY
-        ) > weapon.getRange()) {
+        )/TILE_SIZE > weapon.getRange()) {
             return;
         }
     }
