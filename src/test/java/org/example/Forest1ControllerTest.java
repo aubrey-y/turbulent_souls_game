@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import org.example.controllers.GameScreenController;
+import org.example.controllers.rooms.Forest1Controller;
 import org.example.dto.PlayerState;
 import org.example.exceptions.PlayerCreationException;
 import org.example.services.AppService;
@@ -40,9 +41,9 @@ import static org.mockito.Mockito.spy;
 
 @Disabled
 @ExtendWith(ApplicationExtension.class)
-public class GameScreenControllerTest {
+public class Forest1ControllerTest {
 
-    private GameScreenController controller;
+    private Forest1Controller controller;
 
     private Scene scene;
 
@@ -71,7 +72,7 @@ public class GameScreenControllerTest {
         FXMLLoader loader = new FXMLLoader(App.class.getResource("gameScreen.fxml"));
         Scene mockedScene = new Scene(
                 new FXMLLoader(App.class.getResource("primary.fxml")).load());
-        loader.setControllerFactory(GameScreenController -> new GameScreenController(
+        loader.setControllerFactory(GameScreenController -> new Forest1Controller(
                 this.appService,
                 this.playerService,
                 this.directionService,

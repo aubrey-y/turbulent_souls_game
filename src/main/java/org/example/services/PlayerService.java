@@ -1,6 +1,7 @@
 package org.example.services;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import org.example.App;
 import org.example.controllers.GameScreenController;
@@ -8,6 +9,9 @@ import org.example.dto.PlayerState;
 import org.example.dto.Room;
 import org.example.enums.Direction;
 
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
 import static org.example.enums.Direction.*;
 
@@ -20,6 +24,8 @@ public class PlayerService {
     private RoomDirectionService roomDirectionService;
 
     private HealthService healthService;
+
+    private Class<?> activeController;
 
     public static final double MOVE_SIZE = 6;
 
@@ -125,13 +131,32 @@ public class PlayerService {
 
     private FXMLLoader getLoader(String root) {
         FXMLLoader loader = new FXMLLoader(App.class.getResource(root));
-        loader.setControllerFactory(GameScreenController -> new GameScreenController(
-                this.appService,
-                this,
-                this.roomDirectionService.getDirectionService(),
-                this.roomDirectionService,
-                this.healthService,
-                this.appService.getScene()));
+        Constructor<?> controllerConstructor;
+        try {
+            controllerConstructor = this.activeController.getConstructor(
+                    AppService.class,
+                    PlayerService.class,
+                    DirectionService.class,
+                    RoomDirectionService.class,
+                    HealthService.class,
+                    Scene.class);
+            loader.setControllerFactory(GameScreenController -> {
+                try {
+                    return controllerConstructor.newInstance(this.appService,
+                            this,
+                            this.roomDirectionService.getDirectionService(),
+                            this.roomDirectionService,
+                            this.healthService,
+                            this.appService.getScene());
+                } catch (InstantiationException | InvocationTargetException |
+                        IllegalAccessException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        }
+
         App.setActiveLoader(loader);
         return loader;
     }
@@ -214,6 +239,15 @@ public class PlayerService {
 
     public PlayerService setRoomDirectionService(RoomDirectionService roomDirectionService) {
         this.roomDirectionService = roomDirectionService;
+        return this;
+    }
+
+    public Class<?> getActiveController() {
+        return activeController;
+    }
+
+    public PlayerService setActiveController(Class<?> activeController) {
+        this.activeController = activeController;
         return this;
     }
 }

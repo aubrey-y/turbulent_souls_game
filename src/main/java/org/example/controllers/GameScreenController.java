@@ -4,7 +4,6 @@ package org.example.controllers;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -16,13 +15,10 @@ import org.example.services.HealthService;
 import org.example.services.PlayerService;
 import org.example.services.RoomDirectionService;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import static javafx.scene.input.KeyCode.SHIFT;
 
 
-public class GameScreenController implements Initializable {
+public class GameScreenController {
 
     private AppService appService;
 
@@ -51,9 +47,6 @@ public class GameScreenController implements Initializable {
     @FXML
     private Label healthText;
 
-    @FXML
-    private ImageView monster;
-
     private final BooleanProperty wPressed = new SimpleBooleanProperty(false);
     private final BooleanProperty aPressed = new SimpleBooleanProperty(false);
     private final BooleanProperty sPressed = new SimpleBooleanProperty(false);
@@ -74,9 +67,9 @@ public class GameScreenController implements Initializable {
         this.scene = scene;
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    protected void initGameScreenController(Class<?> controllerClass) {
         this.goldAmount.setText(String.valueOf(this.appService.getPlayerState().getGoldAmount()));
+        this.playerService.setActiveController(controllerClass);
         this.playerService.setImageView(this.player);
         this.healthService.setHealthBar(this.healthBar).setHealthText(this.healthText);
         this.playerService.moveX(this.appService.getPlayerState().getSpawnCoordinates()[0]);
@@ -84,24 +77,24 @@ public class GameScreenController implements Initializable {
         this.playerService.setVisible(true);
         this.scene.setOnKeyPressed(e -> {
             switch (e.getCode()) {
-            case W:
-                this.wPressed.set(true);
-                break;
-            case A:
-                this.aPressed.set(true);
-                break;
-            case S:
-                this.sPressed.set(true);
-                break;
-            case D:
-                this.dPressed.set(true);
-                break;
-            //solely for testing hp
-            case P:
-                this.healthService.applyHealthModifier(-10.0);
-                break;
-            default:
-                break;
+                case W:
+                    this.wPressed.set(true);
+                    break;
+                case A:
+                    this.aPressed.set(true);
+                    break;
+                case S:
+                    this.sPressed.set(true);
+                    break;
+                case D:
+                    this.dPressed.set(true);
+                    break;
+                //solely for testing hp
+                case P:
+                    this.healthService.applyHealthModifier(-10.0);
+                    break;
+                default:
+                    break;
             }
 
             if (this.appService.getDevMode() && e.getCode() == SHIFT) {
@@ -120,20 +113,20 @@ public class GameScreenController implements Initializable {
         });
         this.scene.setOnKeyReleased(e -> {
             switch (e.getCode()) {
-            case W:
-                this.wPressed.set(false);
-                break;
-            case A:
-                this.aPressed.set(false);
-                break;
-            case S:
-                this.sPressed.set(false);
-                break;
-            case D:
-                this.dPressed.set(false);
-                break;
-            default:
-                break;
+                case W:
+                    this.wPressed.set(false);
+                    break;
+                case A:
+                    this.aPressed.set(false);
+                    break;
+                case S:
+                    this.sPressed.set(false);
+                    break;
+                case D:
+                    this.dPressed.set(false);
+                    break;
+                default:
+                    break;
             }
         });
     }

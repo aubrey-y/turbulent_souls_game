@@ -1,26 +1,37 @@
 package org.example.services;
 
-import javafx.scene.image.ImageView;
+import org.example.dto.Monster;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MonsterService {
 
-    private ImageView imageView;
+    private Map<Integer, Monster> monsterMapping = new HashMap<>();
 
+    public MonsterService() {
 
-    public void moveX(double value) {
-        this.imageView.setTranslateX(value);
     }
 
-    public void moveY(double value) {
-        this.imageView.setTranslateY(value);
+    public void addMonster(Integer key, Monster value) {
+        this.monsterMapping.put(key, value);
     }
 
-    public ImageView getImageView() {
-        return imageView;
-    }
 
-    public MonsterService setImageView(ImageView imageView) {
-        this.imageView = imageView;
-        return this;
-    }
+//    public void moveX(double value) {
+//        this.imageView.setTranslateX(value);
+//    }
+//
+//    public void moveY(double value) {
+//        this.imageView.setTranslateY(value);
+//    }
+//
+//    public ImageView getImageView() {
+//        return imageView;
+//    }
+//
+//    public MonsterService setImageView(ImageView imageView) {
+//        this.imageView = imageView;
+//        return this;
+//    }
 }

@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import org.example.App;
+import org.example.controllers.rooms.Forest1Controller;
 import org.example.dto.PlayerState;
 import org.example.dto.Room;
 import org.example.enums.Archetype;
@@ -71,7 +72,7 @@ public class SecondaryController extends ErrorBaseController {
             DirectionService directionService = new DirectionService();
             RoomDirectionService roomDirectionService = new RoomDirectionService(directionService);
             HealthService healthService = new HealthService(this.appService);
-            loader.setControllerFactory(GameScreenController -> new GameScreenController(
+            loader.setControllerFactory(GameScreenController -> new Forest1Controller(
                     this.appService,
                     new PlayerService(this.appService, roomDirectionService, healthService),
                     directionService,
