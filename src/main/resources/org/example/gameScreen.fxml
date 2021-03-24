@@ -24,7 +24,7 @@
                   <Image url="@../../static/images/player.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="monster" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="monster" fitHeight="242.0" fitWidth="236.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../static/images/monsters/forest%20slime%20monster.gif" />
                </image>
