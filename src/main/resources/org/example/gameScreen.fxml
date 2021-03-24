@@ -24,7 +24,7 @@
                   <Image url="@../../static/images/player.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="slime_1" fitHeight="296.0" fitWidth="324.0" layoutX="1500.0" layoutY="400.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="slime1" fitHeight="296.0" fitWidth="324.0" layoutX="1500.0" layoutY="400.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../static/images/monsters/forest%20slime%20monster.gif" />
                </image>
@@ -63,5 +63,6 @@
             <Font size="37.0" />
          </font>
       </Label>
+      <ProgressBar fx:id="slime1HealthBar" focusTraversable="false" layoutX="1570.0" layoutY="400.0" opacity="0.8" prefHeight="10.0" prefWidth="150.0" progress="1.0" style="-fx-control-inner-background: #3E5155;" styleClass="green-bar" stylesheets="@../../static/css/fontstyle.css" />
    </children>
 </AnchorPane>

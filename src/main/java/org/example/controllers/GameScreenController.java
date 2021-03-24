@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import org.example.services.AppService;
 import org.example.services.DirectionService;
 import org.example.services.HealthService;
+import org.example.services.MonsterService;
 import org.example.services.PlayerService;
 import org.example.services.RoomDirectionService;
 
@@ -67,7 +68,8 @@ public class GameScreenController {
         this.scene = scene;
     }
 
-    protected void initGameScreenController(Class<?> controllerClass) {
+    protected void initGameScreenController(
+            Class<?> controllerClass, MonsterService monsterService) {
         this.goldAmount.setText(String.valueOf(this.appService.getPlayerState().getGoldAmount()));
         this.playerService.setActiveController(controllerClass);
         this.playerService.setImageView(this.player);
@@ -93,6 +95,8 @@ public class GameScreenController {
             case P:
                 this.healthService.applyHealthModifier(-10.0);
                 break;
+            case SPACE:
+
             default:
                 break;
             }
