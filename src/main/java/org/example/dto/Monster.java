@@ -9,6 +9,8 @@ public class Monster {
 
     private double healthCapacity;
 
+    private double range;
+
     private MonsterType monsterType;
 
     private ImageView imageView;
@@ -24,12 +26,14 @@ public class Monster {
     public Monster(MonsterType monsterType,
                    double health,
                    double healthCapacity,
+                   double range,
                    ImageView imageView,
                    ProgressBar healthBar,
                    Label healthText) {
         this.monsterType = monsterType;
         this.health = health;
         this.healthCapacity = healthCapacity;
+        this.range = range;
         this.imageView = imageView;
         this.healthBar = healthBar;
         this.healthText = healthText;
@@ -50,6 +54,15 @@ public class Monster {
 
     public Monster setHealthCapacity(double healthCapacity) {
         this.healthCapacity = healthCapacity;
+        return this;
+    }
+
+    public double getRange() {
+        return range;
+    }
+
+    public Monster setRange(double range) {
+        this.range = range;
         return this;
     }
 
