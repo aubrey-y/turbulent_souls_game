@@ -1,13 +1,15 @@
 package org.example.services;
 
-import org.example.dto.HealthBarConstants;
 import org.example.dto.Monster;
 import org.example.dto.Weapon;
 
 import java.util.HashMap;
 import java.util.Map;
+import static org.example.dto.HealthBarConstants.GREEN_HP_BAR;
+import static org.example.dto.HealthBarConstants.RED_HP_BAR;
+import static org.example.dto.HealthBarConstants.HP_BAR_THRESHOLD;
+import static org.example.dto.HealthBarConstants.BAR_CSS_CLASSES;
 
-import static org.example.dto.HealthBarConstants.*;
 
 public class MonsterService {
 
