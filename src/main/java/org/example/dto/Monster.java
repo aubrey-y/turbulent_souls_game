@@ -35,10 +35,6 @@ public class Monster {
         this.healthText = healthText;
     }
 
-    public ProgressBar getMonsterHealthBar() {
-        return healthBar;
-    }
-
     public double getHealth() {
         return health;
     }

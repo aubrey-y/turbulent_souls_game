@@ -97,8 +97,8 @@ public class GameScreenController {
                 this.healthService.applyHealthModifier(-10.0);
                 break;
             case SPACE:
-                monsterService.attackNearestMonster(this.appService.getPlayerState().getActiveWeapon()
-                        , this.player.getTranslateX(), this.player.getTranslateY());
+                monsterService.attackNearestMonster(this.appService.getPlayerState().getActiveWeapon(),
+                        this.player.getTranslateX(), this.player.getTranslateY());
                 break;
             default:
                 break;

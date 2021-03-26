@@ -1,5 +1,6 @@
 package org.example.services;
 
+import org.example.dto.HealthBarData;
 import org.example.dto.Monster;
 import org.example.dto.Weapon;
 
@@ -11,14 +12,6 @@ public class MonsterService {
     private Map<Integer, Monster> monsterMapping = new HashMap<>();
 
     public static final double TILE_SIZE = 100.0;
-
-    public static final double HP_BAR_THRESHOLD = 0.5;
-
-    public static final String GREEN_HP_BAR = "green-bar";
-
-    public static final String RED_HP_BAR = "red-bar";
-
-    public static final String[] BAR_CSS_CLASSES = {GREEN_HP_BAR, RED_HP_BAR};
 
     public MonsterService() {
 
@@ -43,13 +36,13 @@ public class MonsterService {
         currentHealth += (-1 * weapon.getAttack());
         currentHealth = Math.max(0.0, currentHealth);
         nearestMonster.setHealth(currentHealth);
-        nearestMonster.getMonsterHealthBar().getStyleClass().removeAll(BAR_CSS_CLASSES);
-        if(currentHealth <= HP_BAR_THRESHOLD * nearestMonster.getHealthCapacity()) {
-            nearestMonster.getMonsterHealthBar().getStyleClass().add(RED_HP_BAR);
+        nearestMonster.getHealthBar().getStyleClass().removeAll(HealthBarData.BAR_CSS_CLASSES);
+        if(currentHealth <= HealthBarData.HP_BAR_THRESHOLD * nearestMonster.getHealthCapacity()) {
+            nearestMonster.getHealthBar().getStyleClass().add(HealthBarData.RED_HP_BAR);
         } else {
-            nearestMonster.getMonsterHealthBar().getStyleClass().add(GREEN_HP_BAR);
+            nearestMonster.getHealthBar().getStyleClass().add(HealthBarData.GREEN_HP_BAR);
         }
-        nearestMonster.getMonsterHealthBar().setProgress(currentHealth / nearestMonster.getHealthCapacity());
+        nearestMonster.getHealthBar().setProgress(currentHealth / nearestMonster.getHealthCapacity());
         addMonster(nearestMonsterKey, nearestMonster);
     }
 
