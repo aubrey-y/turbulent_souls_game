@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import org.example.controllers.GameScreenController;
@@ -27,6 +28,7 @@ public class Forest1Controller extends GameScreenController implements Initializ
     private MonsterService monsterService;
 
     private Timeline slime1AttackSchedule;
+    private Timeline resetPlayerHueSchedule;
 
     @FXML
     private ImageView slime1;
@@ -61,6 +63,10 @@ public class Forest1Controller extends GameScreenController implements Initializ
         slime1HealthBar.setVisible(true);
         slime1HealthBar.setTranslateX(1570);
         slime1HealthBar.setTranslateY(400);
+        this.resetPlayerHueSchedule = new Timeline((new KeyFrame(Duration.seconds(0.5),
+                resetActionEvent -> this.getPlayer().setEffect(
+                        new ColorAdjust(0.0, 0.0, 0.0, 0.0)))));
+        this.resetPlayerHueSchedule.setCycleCount(1);
         this.monsterService.addMonster(
                 this.slime1Key,
                 new Monster()
@@ -84,6 +90,8 @@ public class Forest1Controller extends GameScreenController implements Initializ
                 Integer attack = this.monsterService.rollMonsterAttack(this.slime1Key);
                 if(attack != null) {
                     this.healthService.applyHealthModifier(-1 * attack);
+                    this.getPlayer().setEffect(new ColorAdjust(-0.17, 0.0, 0.0, 0.0));
+                    this.resetPlayerHueSchedule.play();
                 }
             }
         }));
