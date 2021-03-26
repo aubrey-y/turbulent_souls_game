@@ -130,4 +130,5 @@ public class App extends Application {
     public static void setActiveLoader(FXMLLoader activeLoader) {
         App.activeLoader = activeLoader;
     }
+
 }

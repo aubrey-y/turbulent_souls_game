@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import org.example.App;
+import org.example.controllers.rooms.Forest1Controller;
 import org.example.dto.PlayerState;
 import org.example.dto.Room;
 import org.example.enums.Archetype;
@@ -15,6 +16,7 @@ import org.example.exceptions.InvalidNameException;
 import org.example.exceptions.PlayerCreationException;
 import org.example.services.AppService;
 import org.example.services.DirectionService;
+import org.example.services.HealthService;
 import org.example.services.PlayerService;
 import org.example.services.RoomDirectionService;
 
@@ -69,11 +71,13 @@ public class SecondaryController extends ErrorBaseController {
             FXMLLoader loader = new FXMLLoader(App.class.getResource("gameScreen.fxml"));
             DirectionService directionService = new DirectionService();
             RoomDirectionService roomDirectionService = new RoomDirectionService(directionService);
-            loader.setControllerFactory(GameScreenController -> new GameScreenController(
+            HealthService healthService = new HealthService(this.appService);
+            loader.setControllerFactory(GameScreenController -> new Forest1Controller(
                     this.appService,
-                    new PlayerService(this.appService, roomDirectionService),
+                    new PlayerService(this.appService, roomDirectionService, healthService),
                     directionService,
                     roomDirectionService,
+                    healthService,
                     this.scene));
             this.appService.setRoot(loader);
         } catch (InvalidNameException e) {

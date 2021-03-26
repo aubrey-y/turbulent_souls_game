@@ -7,5 +7,6 @@ public class BasicSword extends Weapon {
         this.name = "Basic Sword";
         this.type = WeaponType.SWORD;
         this.attack = 10;
+        this.range = 2;
     }
 }

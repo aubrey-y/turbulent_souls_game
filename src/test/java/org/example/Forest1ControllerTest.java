@@ -6,10 +6,12 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import org.example.controllers.GameScreenController;
+import org.example.controllers.rooms.Forest1Controller;
 import org.example.dto.PlayerState;
 import org.example.exceptions.PlayerCreationException;
 import org.example.services.AppService;
 import org.example.services.DirectionService;
+import org.example.services.HealthService;
 import org.example.services.PlayerService;
 import org.example.services.RoomDirectionService;
 import org.junit.jupiter.api.AfterEach;
@@ -39,9 +41,9 @@ import static org.mockito.Mockito.spy;
 
 @Disabled
 @ExtendWith(ApplicationExtension.class)
-public class GameScreenControllerTest {
+public class Forest1ControllerTest {
 
-    private GameScreenController controller;
+    private Forest1Controller controller;
 
     private Scene scene;
 
@@ -54,22 +56,28 @@ public class GameScreenControllerTest {
 
     private RoomDirectionService roomDirectionService;
 
+    private HealthService healthService;
+
     private final int[] spawnCoordinates = new int[]{400, 540};
 
     @Start
     public void setUp(Stage stage) throws IOException {
         this.appService = spy(AppService.class);
+        this.healthService = new HealthService(this.appService);
         this.directionService = new DirectionService();
         this.roomDirectionService = new RoomDirectionService(this.directionService);
-        this.playerService = new PlayerService(this.appService, this.roomDirectionService);
+        this.playerService = new PlayerService(
+                this.appService, this.roomDirectionService, this.healthService);
         withMockedAppService();
         FXMLLoader loader = new FXMLLoader(App.class.getResource("gameScreen.fxml"));
-        Scene mockedScene = new Scene(new FXMLLoader(App.class.getResource("primary.fxml")).load());
-        loader.setControllerFactory(GameScreenController -> new GameScreenController(
+        Scene mockedScene = new Scene(
+                new FXMLLoader(App.class.getResource("primary.fxml")).load());
+        loader.setControllerFactory(GameScreenController -> new Forest1Controller(
                 this.appService,
                 this.playerService,
                 this.directionService,
                 this.roomDirectionService,
+                this.healthService,
                 mockedScene));
         Parent root = loader.load();
         this.scene = new Scene(root, 1920, 1080);

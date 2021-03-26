@@ -4,23 +4,22 @@ package org.example.controllers;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.example.services.AppService;
 import org.example.services.DirectionService;
+import org.example.services.HealthService;
+import org.example.services.MonsterService;
 import org.example.services.PlayerService;
 import org.example.services.RoomDirectionService;
-
-import java.net.URL;
-import java.util.ResourceBundle;
 
 import static javafx.scene.input.KeyCode.SHIFT;
 
 
-public class GameScreenController implements Initializable {
+public class GameScreenController {
 
     private AppService appService;
 
@@ -29,6 +28,9 @@ public class GameScreenController implements Initializable {
     private DirectionService directionService;
 
     private RoomDirectionService roomDirectionService;
+
+    private HealthService healthService;
+
 
     private Scene scene;
 
@@ -41,6 +43,12 @@ public class GameScreenController implements Initializable {
     @FXML
     private ImageView player;
 
+    @FXML
+    private ProgressBar healthBar;
+
+    @FXML
+    private Label healthText;
+
     private final BooleanProperty wPressed = new SimpleBooleanProperty(false);
     private final BooleanProperty aPressed = new SimpleBooleanProperty(false);
     private final BooleanProperty sPressed = new SimpleBooleanProperty(false);
@@ -51,18 +59,22 @@ public class GameScreenController implements Initializable {
                                 PlayerService playerService,
                                 DirectionService directionService,
                                 RoomDirectionService roomDirectionService,
+                                HealthService healthService,
                                 Scene scene) {
         this.appService = appService;
         this.playerService = playerService;
         this.directionService = directionService;
         this.roomDirectionService = roomDirectionService;
+        this.healthService = healthService;
         this.scene = scene;
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    protected void initGameScreenController(
+            Class<?> controllerClass, MonsterService monsterService) {
         this.goldAmount.setText(String.valueOf(this.appService.getPlayerState().getGoldAmount()));
+        this.playerService.setActiveController(controllerClass);
         this.playerService.setImageView(this.player);
+        this.healthService.setHealthBar(this.healthBar).setHealthText(this.healthText);
         this.playerService.moveX(this.appService.getPlayerState().getSpawnCoordinates()[0]);
         this.playerService.moveY(this.appService.getPlayerState().getSpawnCoordinates()[1]);
         this.playerService.setVisible(true);
@@ -79,6 +91,14 @@ public class GameScreenController implements Initializable {
                 break;
             case D:
                 this.dPressed.set(true);
+                break;
+            //solely for testing hp
+            case P:
+                this.healthService.applyHealthModifier(-10.0);
+                break;
+            case SPACE:
+                monsterService.attackNearestMonster(this.appService.getPlayerState().getActiveWeapon(),
+                        this.player.getTranslateX(), this.player.getTranslateY());
                 break;
             default:
                 break;
