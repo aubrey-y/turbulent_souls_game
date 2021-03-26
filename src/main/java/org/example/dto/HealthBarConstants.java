@@ -1,6 +1,6 @@
 package org.example.dto;
 
-public class HealthBarData {
+public class HealthBarConstants {
     public static final double HP_BAR_THRESHOLD = 0.5;
 
     public static final String GREEN_HP_BAR = "green-bar";

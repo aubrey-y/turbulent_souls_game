@@ -2,8 +2,10 @@ package org.example.services;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import org.example.dto.HealthBarData;
+import org.example.dto.HealthBarConstants;
 import org.example.dto.PlayerState;
+
+import static org.example.dto.HealthBarConstants.*;
 
 public class HealthService {
 
@@ -23,11 +25,11 @@ public class HealthService {
         currentHealth += modifier;
         currentHealth = Math.max(0.0, currentHealth);
         currentPlayerState.setHealth(currentHealth);
-        this.healthBar.getStyleClass().removeAll(HealthBarData.BAR_CSS_CLASSES);
-        if(currentHealth <= HealthBarData.HP_BAR_THRESHOLD * currentPlayerState.getHealthCapacity()) {
-            this.healthBar.getStyleClass().add(HealthBarData.RED_HP_BAR);
+        this.healthBar.getStyleClass().removeAll(BAR_CSS_CLASSES);
+        if(currentHealth <= HP_BAR_THRESHOLD * currentPlayerState.getHealthCapacity()) {
+            this.healthBar.getStyleClass().add(RED_HP_BAR);
         } else {
-            this.healthBar.getStyleClass().add(HealthBarData.GREEN_HP_BAR);
+            this.healthBar.getStyleClass().add(GREEN_HP_BAR);
         }
         this.healthText.setText(
                 (int) currentHealth + "/" + (int) currentPlayerState.getHealthCapacity());

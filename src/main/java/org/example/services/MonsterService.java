@@ -1,11 +1,13 @@
 package org.example.services;
 
-import org.example.dto.HealthBarData;
+import org.example.dto.HealthBarConstants;
 import org.example.dto.Monster;
 import org.example.dto.Weapon;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static org.example.dto.HealthBarConstants.*;
 
 public class MonsterService {
 
@@ -36,11 +38,11 @@ public class MonsterService {
         currentHealth += (-1 * weapon.getAttack());
         currentHealth = Math.max(0.0, currentHealth);
         nearestMonster.setHealth(currentHealth);
-        nearestMonster.getHealthBar().getStyleClass().removeAll(HealthBarData.BAR_CSS_CLASSES);
-        if(currentHealth <= HealthBarData.HP_BAR_THRESHOLD * nearestMonster.getHealthCapacity()) {
-            nearestMonster.getHealthBar().getStyleClass().add(HealthBarData.RED_HP_BAR);
+        nearestMonster.getHealthBar().getStyleClass().removeAll(BAR_CSS_CLASSES);
+        if(currentHealth <= HP_BAR_THRESHOLD * nearestMonster.getHealthCapacity()) {
+            nearestMonster.getHealthBar().getStyleClass().add(RED_HP_BAR);
         } else {
-            nearestMonster.getHealthBar().getStyleClass().add(HealthBarData.GREEN_HP_BAR);
+            nearestMonster.getHealthBar().getStyleClass().add(GREEN_HP_BAR);
         }
         nearestMonster.getHealthBar().setProgress(currentHealth / nearestMonster.getHealthCapacity());
         addMonster(nearestMonsterKey, nearestMonster);
