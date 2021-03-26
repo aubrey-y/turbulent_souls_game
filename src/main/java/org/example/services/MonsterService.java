@@ -12,6 +12,14 @@ public class MonsterService {
 
     public static final double TILE_SIZE = 100.0;
 
+    public static final double HP_BAR_THRESHOLD = 0.5;
+
+    public static final String GREEN_HP_BAR = "green-bar";
+
+    public static final String RED_HP_BAR = "red-bar";
+
+    public static final String[] BAR_CSS_CLASSES = {GREEN_HP_BAR, RED_HP_BAR};
+
     public MonsterService() {
 
     }
@@ -31,6 +39,18 @@ public class MonsterService {
         )/TILE_SIZE > weapon.getRange()) {
             return;
         }
+        double currentHealth = nearestMonster.getHealth();
+        currentHealth += (-1 * weapon.getAttack());
+        currentHealth = Math.max(0.0, currentHealth);
+        nearestMonster.setHealth(currentHealth);
+        nearestMonster.getMonsterHealthBar().getStyleClass().removeAll(BAR_CSS_CLASSES);
+        if(currentHealth <= HP_BAR_THRESHOLD * nearestMonster.getHealthCapacity()) {
+            nearestMonster.getMonsterHealthBar().getStyleClass().add(RED_HP_BAR);
+        } else {
+            nearestMonster.getMonsterHealthBar().getStyleClass().add(GREEN_HP_BAR);
+        }
+        nearestMonster.getMonsterHealthBar().setProgress(currentHealth / nearestMonster.getHealthCapacity());
+        addMonster(nearestMonsterKey, nearestMonster);
     }
 
     private Integer getNearestMonster(double playerX, double playerY) {
@@ -54,7 +74,7 @@ public class MonsterService {
     private double distanceBetween(double x1, double y1, double x2, double y2) {
         return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
     }
-
+//
 //    public void moveX(double value) {
 //        this.imageView.setTranslateX(value);
 //    }
