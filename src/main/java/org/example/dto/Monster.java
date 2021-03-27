@@ -9,6 +9,12 @@ public class Monster {
 
     private double healthCapacity;
 
+    private double range;
+
+    private int attack;
+
+    private double accuracy;
+
     private MonsterType monsterType;
 
     private ImageView imageView;
@@ -24,15 +30,25 @@ public class Monster {
     public Monster(MonsterType monsterType,
                    double health,
                    double healthCapacity,
+                   double range,
+                   int attack,
+                   double accuracy,
                    ImageView imageView,
                    ProgressBar healthBar,
                    Label healthText) {
         this.monsterType = monsterType;
         this.health = health;
         this.healthCapacity = healthCapacity;
+        this.range = range;
+        this.attack = attack;
+        this.accuracy = accuracy;
         this.imageView = imageView;
         this.healthBar = healthBar;
         this.healthText = healthText;
+    }
+
+    public boolean isAlive() {
+        return this.health > 0.0;
     }
 
     public double getHealth() {
@@ -50,6 +66,33 @@ public class Monster {
 
     public Monster setHealthCapacity(double healthCapacity) {
         this.healthCapacity = healthCapacity;
+        return this;
+    }
+
+    public double getRange() {
+        return range;
+    }
+
+    public Monster setRange(double range) {
+        this.range = range;
+        return this;
+    }
+
+    public int getAttack() {
+        return attack;
+    }
+
+    public Monster setAttack(int attack) {
+        this.attack = attack;
+        return this;
+    }
+
+    public double getAccuracy() {
+        return accuracy;
+    }
+
+    public Monster setAccuracy(double accuracy) {
+        this.accuracy = accuracy;
         return this;
     }
 
