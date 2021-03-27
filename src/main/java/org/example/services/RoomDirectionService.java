@@ -1,5 +1,6 @@
 package org.example.services;
 
+import org.example.controllers.rooms.Forest2Controller;
 import org.example.dto.RandomRoom;
 import org.example.dto.Room;
 import org.example.dto.RoomIdDirectionKey;
@@ -47,6 +48,7 @@ public class RoomDirectionService {
                 .setRight(new Room())
                 .setDown(new Room())
                 .setId(1)
+                .setControllerClass(Forest2Controller.class)
                 .setRoot("forestLeft.fxml"));
         this.roomMapping.put(new RoomIdDirectionKey(0, UP), new Room(FOREST2)
                 .setUp(new Room())

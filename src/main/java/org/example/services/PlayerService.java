@@ -25,8 +25,6 @@ public class PlayerService {
 
     private HealthService healthService;
 
-    private Class<?> activeController;
-
     public static final double MOVE_SIZE = 6;
 
     public PlayerService(AppService appService,
@@ -88,7 +86,7 @@ public class PlayerService {
                 }
                 this.appService.setActiveRoom(currentRoom.getUp());
                 this.setNewPlayerSpawnCoordinates(exitDirection);
-                this.appService.setRoot(this.getLoader(currentRoom.getUp().getRoot()));
+                this.appService.setRoot(this.getLoader(currentRoom.getUp()));
             }
             break;
         case DOWN:
@@ -99,7 +97,7 @@ public class PlayerService {
                 }
                 this.appService.setActiveRoom(currentRoom.getDown());
                 this.setNewPlayerSpawnCoordinates(exitDirection);
-                this.appService.setRoot(this.getLoader(currentRoom.getDown().getRoot()));
+                this.appService.setRoot(this.getLoader(currentRoom.getDown()));
             }
             break;
         case LEFT:
@@ -110,7 +108,7 @@ public class PlayerService {
                 }
                 this.appService.setActiveRoom(currentRoom.getLeft());
                 this.setNewPlayerSpawnCoordinates(exitDirection);
-                this.appService.setRoot(this.getLoader(currentRoom.getLeft().getRoot()));
+                this.appService.setRoot(this.getLoader(currentRoom.getLeft()));
             }
             break;
         case RIGHT:
@@ -121,7 +119,7 @@ public class PlayerService {
                 }
                 this.appService.setActiveRoom(currentRoom.getRight());
                 this.setNewPlayerSpawnCoordinates(exitDirection);
-                this.appService.setRoot(this.getLoader(currentRoom.getRight().getRoot()));
+                this.appService.setRoot(this.getLoader(currentRoom.getRight()));
             }
             break;
         default:
@@ -129,11 +127,11 @@ public class PlayerService {
         }
     }
 
-    private FXMLLoader getLoader(String root) {
-        FXMLLoader loader = new FXMLLoader(App.class.getResource(root));
+    private FXMLLoader getLoader(Room room) {
+        FXMLLoader loader = new FXMLLoader(App.class.getResource(room.getRoot()));
         Constructor<?> controllerConstructor;
         try {
-            controllerConstructor = this.activeController.getConstructor(
+            controllerConstructor = room.getControllerClass().getConstructor(
                     AppService.class,
                     PlayerService.class,
                     DirectionService.class,
@@ -239,15 +237,6 @@ public class PlayerService {
 
     public PlayerService setRoomDirectionService(RoomDirectionService roomDirectionService) {
         this.roomDirectionService = roomDirectionService;
-        return this;
-    }
-
-    public Class<?> getActiveController() {
-        return activeController;
-    }
-
-    public PlayerService setActiveController(Class<?> activeController) {
-        this.activeController = activeController;
         return this;
     }
 }

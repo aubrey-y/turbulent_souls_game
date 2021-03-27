@@ -73,10 +73,8 @@ public class GameScreenController {
         this.scene = scene;
     }
 
-    protected void initGameScreenController(
-            Class<?> controllerClass, MonsterService monsterService) {
+    protected void initGameScreenController(MonsterService monsterService) {
         this.goldAmount.setText(String.valueOf(this.appService.getPlayerState().getGoldAmount()));
-        this.playerService.setActiveController(controllerClass);
         this.playerService.setImageView(this.player);
         this.healthService.setHealthBar(this.healthBar).setHealthText(this.healthText);
         this.playerService.moveX(this.appService.getPlayerState().getSpawnCoordinates()[0]);

@@ -56,7 +56,7 @@ public class Forest1Controller extends GameScreenController implements Initializ
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.monsterService = new MonsterService();
-        this.initGameScreenController(Forest1Controller.class, this.monsterService);
+        this.initGameScreenController(this.monsterService);
         slime1.setVisible(true);
         slime1.setTranslateX(1500);
         slime1.setTranslateY(400);

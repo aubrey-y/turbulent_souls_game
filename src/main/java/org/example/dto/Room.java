@@ -15,6 +15,8 @@ public class Room {
 
     private int id;
 
+    private Class<?> controllerClass;
+
     public Room() {
 
     }
@@ -83,6 +85,15 @@ public class Room {
 
     public Room setId(int id) {
         this.id = id;
+        return this;
+    }
+
+    public Class<?> getControllerClass() {
+        return controllerClass;
+    }
+
+    public Room setControllerClass(Class<?> controllerClass) {
+        this.controllerClass = controllerClass;
         return this;
     }
 }
