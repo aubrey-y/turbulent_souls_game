@@ -1,8 +1,9 @@
-package org.example.controllers;
+package org.example.controllers.rooms;
 
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import org.example.controllers.GameScreenController;
 import org.example.services.AppService;
 import org.example.services.DirectionService;
 import org.example.services.HealthService;
