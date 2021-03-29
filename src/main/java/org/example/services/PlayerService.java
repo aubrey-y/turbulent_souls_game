@@ -1,10 +1,10 @@
 package org.example.services;
 
+import javafx.animation.Timeline;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import org.example.App;
-import org.example.controllers.GameScreenController;
 import org.example.dto.PlayerState;
 import org.example.dto.Room;
 import org.example.enums.Direction;
@@ -12,6 +12,8 @@ import org.example.enums.Direction;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.example.enums.Direction.*;
 
@@ -25,6 +27,8 @@ public class PlayerService {
 
     private HealthService healthService;
 
+    private Set<Timeline> controllerTimelines;
+
     public static final double MOVE_SIZE = 6;
 
     public PlayerService(AppService appService,
@@ -33,6 +37,7 @@ public class PlayerService {
         this.appService = appService;
         this.roomDirectionService = roomDirectionService;
         this.healthService = healthService;
+        this.controllerTimelines = new HashSet<>();
     }
 
     public void moveUp(boolean shift) {
@@ -76,6 +81,7 @@ public class PlayerService {
         if (exitDirection == null) {
             return;
         }
+        this.terminateExistingTimelines();
         Room currentRoom = this.appService.getActiveRoom();
         switch (exitDirection) {
         case UP:
@@ -125,6 +131,13 @@ public class PlayerService {
         default:
             break;
         }
+    }
+
+    private void terminateExistingTimelines() {
+        for(Timeline timeline: this.controllerTimelines) {
+            timeline.stop();
+        }
+        this.controllerTimelines.clear();
     }
 
     private FXMLLoader getLoader(Room room) {
@@ -202,6 +215,10 @@ public class PlayerService {
             return UP;
         }
         return null;
+    }
+
+    public void registerTimeline(Timeline timeline) {
+        this.controllerTimelines.add(timeline);
     }
 
     public ImageView getImageView() {
