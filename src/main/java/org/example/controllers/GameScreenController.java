@@ -146,11 +146,7 @@ public class GameScreenController {
     }
 
     private void initializePlayerImageView(PlayerState playerState) {
-        if(playerState.getSpawnOrientation() == LEFT) {
-            this.displayPlayerLeftOrientation(playerState);
-        } else {
-            this.displayPlayerRightOrientation(playerState);
-        }
+        this.displayCorrectPlayerOrientation(playerState);
         this.playerService.setImageView(this.player);
         this.playerService.moveX(playerState.getSpawnCoordinates()[0]);
         this.playerService.moveY(playerState.getSpawnCoordinates()[1]);
@@ -205,6 +201,14 @@ public class GameScreenController {
             break;
         default:
             break;
+        }
+    }
+
+    protected void displayCorrectPlayerOrientation(PlayerState playerState) {
+        if(playerState.getSpawnOrientation() == LEFT) {
+            this.displayPlayerLeftOrientation(playerState);
+        } else {
+            this.displayPlayerRightOrientation(playerState);
         }
     }
     

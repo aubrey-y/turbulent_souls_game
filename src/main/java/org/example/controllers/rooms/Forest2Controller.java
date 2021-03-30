@@ -21,9 +21,21 @@ public class Forest2Controller extends GameScreenController implements Initializ
 
     @FXML
     private ImageView guineapig1;
+    private final String guineapig1Key = "forest2guineapig1";
+    private final int guineapig1HealthCapacity = 10;
 
-    public Forest2Controller(AppService appService, PlayerService playerService, DirectionService directionService, RoomDirectionService roomDirectionService, HealthService healthService, Scene scene) {
-        super(appService, playerService, directionService, roomDirectionService, healthService, scene);
+    public Forest2Controller(AppService appService,
+                             PlayerService playerService,
+                             DirectionService directionService,
+                             RoomDirectionService roomDirectionService,
+                             HealthService healthService, Scene scene) {
+        super(
+                appService,
+                playerService,
+                directionService,
+                roomDirectionService,
+                healthService, scene
+        );
     }
 
     @Override
