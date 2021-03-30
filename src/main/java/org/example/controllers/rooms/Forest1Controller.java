@@ -17,6 +17,7 @@ import org.example.services.HealthService;
 import org.example.services.MonsterService;
 import org.example.services.PlayerService;
 import org.example.services.RoomDirectionService;
+import org.example.util.ScheduleUtility;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -85,24 +86,16 @@ public class Forest1Controller extends GameScreenController implements Initializ
                         .setMonsterType(SLIME)
                         .setImageView(this.slime1)
                         .setHealthBar(this.slime1HealthBar));
-        this.slime1AttackSchedule = new Timeline(new KeyFrame(Duration.seconds(1), actionEvent -> {
-            if(this.appService.getMonstersKilled().contains(this.slime1Key)) {
-                this.slime1AttackSchedule.stop();
-                return;
-            }
-            if(this.monsterService.playerIsInRangeOfMonster(
-                    this.slime1Key,
-                    this.playerService.getImageView().getTranslateX(),
-                    this.playerService.getImageView().getTranslateY())) {
-                Integer attack = this.monsterService.rollMonsterAttack(this.slime1Key);
-                if(attack != null) {
-                    this.healthService.applyHealthModifier(-1 * attack);
-                    this.getPlayer().setEffect(new ColorAdjust(-0.17, 0.0, 0.0, 0.0));
-                    this.resetPlayerHueSchedule.play();
-                }
-            }
-        }));
-        this.slime1AttackSchedule.setCycleCount(Timeline.INDEFINITE);
+        this.slime1AttackSchedule = ScheduleUtility.generateMonsterAttackSchedule(
+                1.0,
+                this.appService,
+                this.slime1Key,
+                this.playerService,
+                this.monsterService,
+                this.healthService,
+                this.resetPlayerHueSchedule,
+                Timeline.INDEFINITE
+        );
         this.playerService.registerTimeline(this.slime1AttackSchedule);
         this.slime1AttackSchedule.play();
     }
