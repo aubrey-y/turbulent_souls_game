@@ -42,4 +42,16 @@ public class ScheduleUtility {
         timeline.setCycleCount(cycleCount);
         return timeline;
     }
+
+    public static Timeline generatePlayerResetSchedule(double duration,
+                                                       PlayerService playerService) {
+        Timeline timeline = new Timeline();
+        Timeline finalTimeline = timeline;
+        timeline = new Timeline(new KeyFrame(Duration.seconds(duration), actionEvent -> {
+            playerService.getImageView().setEffect(
+                    new ColorAdjust(0.0, 0.0, 0.0, 0.0));
+        }));
+        timeline.setCycleCount(1);
+        return timeline;
+    }
 }

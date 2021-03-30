@@ -1,5 +1,6 @@
 package org.example.controllers.rooms;
 
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -18,6 +19,9 @@ import java.util.ResourceBundle;
 public class Forest2Controller extends GameScreenController implements Initializable {
 
     private MonsterService monsterService;
+
+    private Timeline guineapig1AttackSchedule;
+    private Timeline resetPlayerSchedule;
 
     @FXML
     private ImageView guineapig1;
