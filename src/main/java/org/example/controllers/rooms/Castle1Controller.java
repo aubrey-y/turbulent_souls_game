@@ -30,7 +30,7 @@ public class Castle1Controller extends GameScreenController implements Initializ
 
     @FXML
     private ImageView whitedragon1;
-    private final String whitedragon1Key = "whitedragon1";
+    private final String whitedragon1Key = "castle1whitedragon1";
     private final int whitedragon1HealthCapacity = 10;
 
     @FXML

@@ -30,7 +30,7 @@ public class Garden1Controller extends GameScreenController implements Initializ
 
     @FXML
     private ImageView serpent1;
-    private final String serpent1Key = "serpent1";
+    private final String serpent1Key = "garden1serpent1";
     private final int serpent1HealthCapacity = 10;
 
     @FXML

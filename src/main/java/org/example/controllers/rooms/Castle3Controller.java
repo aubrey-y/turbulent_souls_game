@@ -30,7 +30,7 @@ public class Castle3Controller extends GameScreenController implements Initializ
 
     @FXML
     private ImageView darkknight1;
-    private final String darkknight1Key = "darkknight1";
+    private final String darkknight1Key = "castle3darkknight1";
     private final int darkknight1HealthCapacity = 10;
 
     @FXML

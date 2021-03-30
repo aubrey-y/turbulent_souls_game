@@ -19,7 +19,6 @@ import org.example.util.ScheduleUtility;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static org.example.enums.MonsterType.CASTLE_BULL;
 import static org.example.enums.MonsterType.WATER_BULL;
 
 public class Garden2Controller extends GameScreenController implements Initializable {
@@ -31,7 +30,7 @@ public class Garden2Controller extends GameScreenController implements Initializ
 
     @FXML
     private ImageView waterbull1;
-    private final String waterbull1Key = "waterbull1";
+    private final String waterbull1Key = "garden2waterbull1";
     private final int waterbull1HealthCapacity = 10;
 
     @FXML
