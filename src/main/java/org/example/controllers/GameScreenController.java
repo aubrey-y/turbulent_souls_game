@@ -16,9 +16,6 @@ import org.example.services.MonsterService;
 import org.example.services.PlayerService;
 import org.example.services.RoomDirectionService;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import static javafx.scene.input.KeyCode.SHIFT;
 
 
@@ -35,8 +32,6 @@ public class GameScreenController {
     protected HealthService healthService;
 
     private Scene scene;
-
-    protected Set<Integer> monstersKilled = new HashSet<>();
 
     @FXML
     private javafx.scene.control.Button closeButton;
@@ -99,11 +94,11 @@ public class GameScreenController {
                 this.healthService.applyHealthModifier(-10.0);
                 break;
             case SPACE:
-                Integer monsterKilled = monsterService.attackNearestMonster(
+                String monsterKilled = monsterService.attackNearestMonster(
                         this.appService.getPlayerState().getActiveWeapon(),
                         this.player.getTranslateX(), this.player.getTranslateY());
                 if(monsterKilled != null) {
-                    this.monstersKilled.add(monsterKilled);
+                    this.appService.addMonsterKilled(monsterKilled);
                 }
                 break;
             default:

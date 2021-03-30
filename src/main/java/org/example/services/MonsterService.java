@@ -13,7 +13,7 @@ import static org.example.dto.HealthBarConstants.BAR_CSS_CLASSES;
 
 public class MonsterService {
 
-    private Map<Integer, Monster> monsterMapping = new HashMap<>();
+    private Map<String, Monster> monsterMapping = new HashMap<>();
 
     public static final double TILE_SIZE = 100.0;
 
@@ -23,13 +23,13 @@ public class MonsterService {
 
     }
 
-    public void addMonster(Integer key, Monster value) {
+    public void addMonster(String key, Monster value) {
         this.monsterMapping.put(key, value);
     }
 
-    public Integer attackNearestMonster(Weapon weapon, double playerX, double playerY) {
-        Integer monsterKeyIfDead = null;
-        Integer nearestMonsterKey = this.getNearestLivingMonster(playerX, playerY);
+    public String attackNearestMonster(Weapon weapon, double playerX, double playerY) {
+        String monsterKeyIfDead = null;
+        String nearestMonsterKey = this.getNearestLivingMonster(playerX, playerY);
         Monster nearestMonster = this.monsterMapping.get(nearestMonsterKey);
         if(nearestMonster == null || distanceBetween(
                 nearestMonster.getImageView().getTranslateX(),
@@ -58,10 +58,10 @@ public class MonsterService {
         return monsterKeyIfDead;
     }
 
-    private Integer getNearestLivingMonster(double playerX, double playerY) {
+    private String getNearestLivingMonster(double playerX, double playerY) {
         Double minDistance = Double.MAX_VALUE;
-        Integer closestMonsterKey = null;
-        for(Integer key : this.monsterMapping.keySet()) {
+        String closestMonsterKey = null;
+        for(String key : this.monsterMapping.keySet()) {
             Monster currentMonster = this.monsterMapping.get(key);
             if(!currentMonster.isAlive()) {
                 continue;
@@ -83,7 +83,7 @@ public class MonsterService {
         return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
     }
 
-    public boolean playerIsInRangeOfMonster(Integer monsterKey, double playerX, double playerY) {
+    public boolean playerIsInRangeOfMonster(String monsterKey, double playerX, double playerY) {
         Monster monster = this.monsterMapping.get(monsterKey);
         return this.distanceBetween(
                 monster.getImageView().getTranslateX(),
@@ -92,7 +92,7 @@ public class MonsterService {
                 playerY)/TILE_SIZE <= monster.getRange();
     }
 
-    public Integer rollMonsterAttack(Integer monsterKey) {
+    public Integer rollMonsterAttack(String monsterKey) {
         Monster monster = this.monsterMapping.get(monsterKey);
         if(Math.random() >= monster.getAccuracy()) {
             return monster.getAttack();
