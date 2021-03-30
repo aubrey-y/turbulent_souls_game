@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import org.example.dto.PlayerState;
 import org.example.services.AppService;
 import org.example.services.DirectionService;
 import org.example.services.HealthService;
@@ -69,11 +70,12 @@ public class GameScreenController {
     }
 
     protected void initGameScreenController(MonsterService monsterService) {
+        PlayerState playerState = this.appService.getPlayerState();
         this.goldAmount.setText(String.valueOf(this.appService.getPlayerState().getGoldAmount()));
         this.playerService.setImageView(this.player);
-        this.healthService.setHealthBar(this.healthBar).setHealthText(this.healthText);
-        this.playerService.moveX(this.appService.getPlayerState().getSpawnCoordinates()[0]);
-        this.playerService.moveY(this.appService.getPlayerState().getSpawnCoordinates()[1]);
+        this.initializePlayerHealth(playerState);
+        this.playerService.moveX(playerState.getSpawnCoordinates()[0]);
+        this.playerService.moveY(playerState.getSpawnCoordinates()[1]);
         this.playerService.setVisible(true);
         this.scene.setOnKeyPressed(e -> {
             switch (e.getCode()) {
@@ -137,6 +139,13 @@ public class GameScreenController {
                 break;
             }
         });
+    }
+
+    private void initializePlayerHealth(PlayerState playerState) {
+        this.healthBar.setProgress(playerState.getHealth()/playerState.getHealthCapacity());
+        this.healthText.setText(
+                (int) playerState.getHealth() + "/" + (int) playerState.getHealthCapacity());
+        this.healthService.setHealthBar(this.healthBar).setHealthText(this.healthText);
     }
     
     @FXML
