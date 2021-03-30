@@ -68,9 +68,9 @@ public class Forest1Controller extends GameScreenController implements Initializ
     }
 
     private void setupSlime1() {
-        this.slime1.setVisible(true);
         this.slime1.setTranslateX(1500);
         this.slime1.setTranslateY(400);
+        this.slime1.setVisible(true);
         this.slime1HealthBar.setVisible(true);
         this.slime1HealthBar.setTranslateX(1570);
         this.slime1HealthBar.setTranslateY(400);

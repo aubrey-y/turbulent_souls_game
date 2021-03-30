@@ -63,5 +63,6 @@
             <Font size="37.0" />
          </font>
       </Label>
+      <ProgressBar fx:id="guineapig1HealthBar" focusTraversable="false" layoutX="10.0" layoutY="10.0" opacity="0.8" prefHeight="10.0" prefWidth="150.0" progress="1.0" style="-fx-control-inner-background: #3E5155;" styleClass="green-bar" stylesheets="@../../static/css/fontstyle.css" visible="false" />
    </children>
 </AnchorPane>
