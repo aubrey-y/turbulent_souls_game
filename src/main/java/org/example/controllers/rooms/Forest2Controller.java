@@ -19,7 +19,7 @@ import org.example.util.ScheduleUtility;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static org.example.enums.MonsterType.SLIME;
+import static org.example.enums.MonsterType.GUINEA_PIG;
 
 public class Forest2Controller extends GameScreenController implements Initializable {
 
@@ -78,7 +78,7 @@ public class Forest2Controller extends GameScreenController implements Initializ
                         .setRange(5.0)
                         .setAttack(2)
                         .setAccuracy(0.5)
-                        .setMonsterType(SLIME)
+                        .setMonsterType(GUINEA_PIG)
                         .setImageView(this.guineapig1)
                         .setHealthBar(this.guineapig1HealthBar));
         this.guineapig1AttackSchedule = ScheduleUtility.generateMonsterAttackSchedule(
