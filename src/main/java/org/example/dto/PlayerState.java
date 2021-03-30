@@ -2,6 +2,7 @@ package org.example.dto;
 
 import org.example.enums.Archetype;
 import org.example.enums.Difficulty;
+import org.example.enums.Direction;
 import org.example.exceptions.PlayerCreationException;
 
 import java.util.List;
@@ -21,6 +22,8 @@ public class PlayerState {
     private int goldAmount;
 
     private int[] spawnCoordinates;
+
+    private Direction spawnOrientation;
 
     private double health;
 
@@ -134,6 +137,15 @@ public class PlayerState {
 
     public PlayerState setSpawnCoordinates(int[] spawnCoordinates) {
         this.spawnCoordinates = spawnCoordinates;
+        return this;
+    }
+
+    public Direction getSpawnOrientation() {
+        return spawnOrientation;
+    }
+
+    public PlayerState setSpawnOrientation(Direction spawnOrientation) {
+        this.spawnOrientation = spawnOrientation;
         return this;
     }
 

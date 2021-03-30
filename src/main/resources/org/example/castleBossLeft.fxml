@@ -25,19 +25,16 @@
                   <Image url="@../../static/images/player.png" />
                </image>
             </ImageView>
+            <ImageView fx:id="boss1" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../../static/images/monsters/gifs/dark_knight_right.gif" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
       <StackPane alignment="BOTTOM_LEFT" layoutX="46.0" layoutY="-13.0" prefHeight="1032.0" prefWidth="1874.0" AnchorPane.bottomAnchor="61.0" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-13.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Label fx:id="leaveLabel" prefHeight="92.0" prefWidth="1485.0" stylesheets="@../../static/css/fontstyle.css" text="congratulations on winning, press exit to leave the room and quit the game " textFill="WHITE">
-                     <font>
-                        <Font size="40.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" />
             <Button id="clickable" fx:id="closeButton" alignment="BASELINE_CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE">
                <font>
                   <Font name="Pixeboy" size="30.0" />
@@ -68,5 +65,6 @@
             <Font size="37.0" />
          </font>
       </Label>
+      <ProgressBar fx:id="boss1HealthBar" focusTraversable="false" layoutX="90.0" layoutY="90.0" opacity="0.8" prefHeight="10.0" prefWidth="150.0" progress="1.0" style="-fx-control-inner-background: #3E5155;" styleClass="green-bar" stylesheets="@../../static/css/fontstyle.css" visible="false" />
    </children>
 </AnchorPane>

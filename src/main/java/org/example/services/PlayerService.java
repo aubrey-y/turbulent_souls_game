@@ -186,10 +186,12 @@ public class PlayerService {
         case LEFT:
             playerState.setSpawnCoordinates(
                     new int[]{1770, (int) this.imageView.getTranslateY()});
+            playerState.setSpawnOrientation(LEFT);
             break;
         case RIGHT:
             playerState.setSpawnCoordinates(
                     new int[]{22, (int) this.imageView.getTranslateY()});
+            playerState.setSpawnOrientation(RIGHT);
             break;
         default:
             break;

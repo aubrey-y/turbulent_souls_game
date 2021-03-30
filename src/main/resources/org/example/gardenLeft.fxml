@@ -24,6 +24,11 @@
                   <Image url="@../../static/images/player.png" />
                </image>
             </ImageView>
+            <ImageView fx:id="waterbull1" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../../static/images/monsters/idle/water_bull_left.PNG" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
       <StackPane alignment="BOTTOM_LEFT" layoutX="46.0" layoutY="-13.0" prefHeight="1032.0" prefWidth="1874.0" AnchorPane.bottomAnchor="61.0" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-13.0">
@@ -58,5 +63,6 @@
             <Font size="37.0" />
          </font>
       </Label>
+      <ProgressBar fx:id="waterbull1HealthBar" focusTraversable="false" layoutX="50.0" layoutY="50.0" opacity="0.8" prefHeight="10.0" prefWidth="150.0" progress="1.0" style="-fx-control-inner-background: #3E5155;" styleClass="green-bar" stylesheets="@../../static/css/fontstyle.css" visible="false" />
    </children>
 </AnchorPane>

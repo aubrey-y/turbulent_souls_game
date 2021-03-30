@@ -8,6 +8,8 @@ import org.example.App;
 import org.example.dto.PlayerState;
 import org.example.dto.Room;
 
+import java.util.Set;
+
 /**
  * All interactions with App.java should route through this wrapper class.
  * This enables Mockito to mock these (static) methods, without the need of a
@@ -63,4 +65,15 @@ public class AppService {
         App.setActiveRoom(room);
     }
 
+    public Set<String> getMonstersKilled() {
+        return App.getMonstersKilled();
+    }
+
+    public void setMonstersKilled(Set<String> monstersKilled) {
+        App.setMonstersKilled(monstersKilled);
+    }
+
+    public void addMonsterKilled(String id) {
+        App.getMonstersKilled().add(id);
+    }
 }

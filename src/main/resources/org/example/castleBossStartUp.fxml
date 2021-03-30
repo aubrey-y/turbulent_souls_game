@@ -58,5 +58,11 @@
             <Font size="37.0" />
          </font>
       </Label>
+      <ImageView fx:id="darkknight1" fitHeight="150.0" fitWidth="200.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../static/images/monsters/gifs/dark_knight_right.gif" />
+         </image>
+      </ImageView>
+      <ProgressBar fx:id="darkknight1HealthBar" focusTraversable="false" layoutX="80.0" layoutY="80.0" opacity="0.8" prefHeight="10.0" prefWidth="150.0" progress="1.0" style="-fx-control-inner-background: #3E5155;" styleClass="green-bar" stylesheets="@../../static/css/fontstyle.css" visible="false" />
    </children>
 </AnchorPane>
