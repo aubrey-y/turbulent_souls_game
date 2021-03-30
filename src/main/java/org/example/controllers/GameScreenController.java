@@ -7,9 +7,11 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.example.dto.PlayerState;
+import org.example.enums.Direction;
 import org.example.services.AppService;
 import org.example.services.DirectionService;
 import org.example.services.HealthService;
@@ -17,7 +19,10 @@ import org.example.services.MonsterService;
 import org.example.services.PlayerService;
 import org.example.services.RoomDirectionService;
 
+import java.nio.file.Paths;
+
 import static javafx.scene.input.KeyCode.SHIFT;
+import static org.example.enums.Direction.LEFT;
 
 
 public class GameScreenController {
@@ -72,11 +77,8 @@ public class GameScreenController {
     protected void initGameScreenController(MonsterService monsterService) {
         PlayerState playerState = this.appService.getPlayerState();
         this.goldAmount.setText(String.valueOf(this.appService.getPlayerState().getGoldAmount()));
-        this.playerService.setImageView(this.player);
         this.initializePlayerHealth(playerState);
-        this.playerService.moveX(playerState.getSpawnCoordinates()[0]);
-        this.playerService.moveY(playerState.getSpawnCoordinates()[1]);
-        this.playerService.setVisible(true);
+        this.initializePlayerImageView(playerState);
         this.scene.setOnKeyPressed(e -> {
             switch (e.getCode()) {
             case W:
@@ -84,12 +86,14 @@ public class GameScreenController {
                 break;
             case A:
                 this.aPressed.set(true);
+                this.displayPlayerLeftOrientation(this.appService.getPlayerState());
                 break;
             case S:
                 this.sPressed.set(true);
                 break;
             case D:
                 this.dPressed.set(true);
+                this.displayPlayerRightOrientation(this.appService.getPlayerState());
                 break;
             //solely for testing hp
             case P:
@@ -141,11 +145,67 @@ public class GameScreenController {
         });
     }
 
+    private void initializePlayerImageView(PlayerState playerState) {
+        if(playerState.getSpawnOrientation() == LEFT) {
+            this.displayPlayerLeftOrientation(playerState);
+        } else {
+            this.displayPlayerRightOrientation(playerState);
+        }
+        this.playerService.setImageView(this.player);
+        this.playerService.moveX(playerState.getSpawnCoordinates()[0]);
+        this.playerService.moveY(playerState.getSpawnCoordinates()[1]);
+        this.playerService.setVisible(true);
+    }
+
     private void initializePlayerHealth(PlayerState playerState) {
         this.healthBar.setProgress(playerState.getHealth()/playerState.getHealthCapacity());
         this.healthText.setText(
                 (int) playerState.getHealth() + "/" + (int) playerState.getHealthCapacity());
         this.healthService.setHealthBar(this.healthBar).setHealthText(this.healthText);
+    }
+
+    private void displayPlayerRightOrientation(PlayerState playerState) {
+        switch (playerState.getActiveWeapon().getType()) {
+        case BOW:
+            this.player.setImage(new Image(
+                    Paths.get("src/main/resources/static/images/player/wizard_right.gif")
+                            .toUri().toString()));
+            break;
+        case STAFF:
+            this.player.setImage(new Image(
+                    Paths.get("src/main/resources/static/images/player/staff_right.gif")
+                            .toUri().toString()));
+            break;
+        case SWORD:
+            this.player.setImage(new Image(
+                    Paths.get("src/main/resources/static/images/player/sword_right.gif")
+                            .toUri().toString()));
+            break;
+        default:
+            break;
+        }
+    }
+
+    private void displayPlayerLeftOrientation(PlayerState playerState) {
+        switch (playerState.getActiveWeapon().getType()) {
+        case BOW:
+            this.player.setImage(new Image(
+                    Paths.get("src/main/resources/static/images/player/wizard_left.gif")
+                            .toUri().toString()));
+            break;
+        case STAFF:
+            this.player.setImage(new Image(
+                    Paths.get("src/main/resources/static/images/player/staff_left.gif")
+                            .toUri().toString()));
+            break;
+        case SWORD:
+            this.player.setImage(new Image(
+                    Paths.get("src/main/resources/static/images/player/sword_left.gif")
+                            .toUri().toString()));
+            break;
+        default:
+            break;
+        }
     }
     
     @FXML
