@@ -46,6 +46,7 @@ public class SecondaryController extends ErrorBaseController {
             .setUp(new Room())
             .setLeft(new Room())
             .setId(0)
+            .setControllerClass(Forest1Controller.class)
             .setRoot("gameScreen.fxml");
 
     @FXML

@@ -56,7 +56,7 @@ public class Forest1Controller extends GameScreenController implements Initializ
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.monsterService = new MonsterService();
-        this.initGameScreenController(Forest1Controller.class, this.monsterService);
+        this.initGameScreenController(this.monsterService);
         slime1.setVisible(true);
         slime1.setTranslateX(1500);
         slime1.setTranslateY(400);
@@ -67,6 +67,7 @@ public class Forest1Controller extends GameScreenController implements Initializ
                 resetActionEvent -> this.getPlayer().setEffect(
                         new ColorAdjust(0.0, 0.0, 0.0, 0.0)))));
         this.resetPlayerHueSchedule.setCycleCount(1);
+        this.playerService.registerTimeline(this.resetPlayerHueSchedule);
         this.monsterService.addMonster(
                 this.slime1Key,
                 new Monster()
@@ -96,6 +97,7 @@ public class Forest1Controller extends GameScreenController implements Initializ
             }
         }));
         this.slime1AttackSchedule.setCycleCount(Timeline.INDEFINITE);
+        this.playerService.registerTimeline(this.slime1AttackSchedule);
         this.slime1AttackSchedule.play();
     }
 }
