@@ -62,7 +62,7 @@ public class GardenTraderController extends GameScreenController implements Init
                 this.playerService);
         this.playerService.registerTimeline(this.resetPlayerHueSchedule);
         this.slime1ResetSchedule = ScheduleUtility.generateMonsterResetSchedule(
-                0.5,
+                1.0,
                 this.monsterService,
                 this.slime1Key,
                 this.slime1,
@@ -104,7 +104,7 @@ public class GardenTraderController extends GameScreenController implements Init
                 this.resetPlayerHueSchedule,
                 this.slime1ResetSchedule,
                 Timeline.INDEFINITE,
-                "src/main/resources/static/images/monsters/gifs/slime.gif",
+                "src/main/resources/static/images/monsters/gifs/slime_attack.gif",
                 null
         );
         this.slime1AttackSchedule.play();
