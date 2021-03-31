@@ -10,6 +10,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import org.example.dto.HealthBarConstants;
 import org.example.dto.PlayerState;
 import org.example.services.AppService;
 import org.example.services.DirectionService;
@@ -21,6 +22,7 @@ import org.example.services.RoomDirectionService;
 import java.nio.file.Paths;
 
 import static javafx.scene.input.KeyCode.SHIFT;
+import static org.example.dto.HealthBarConstants.HP_BAR_THRESHOLD;
 import static org.example.enums.Direction.LEFT;
 
 
@@ -94,6 +96,11 @@ public class GameScreenController {
                 this.dPressed.set(true);
                 this.displayPlayerRightOrientation(this.appService.getPlayerState());
                 break;
+            case P:
+                if(this.appService.getDevMode()) {
+                    this.healthService.applyHealthModifier(-10);
+                }
+                break;
             case SPACE:
                 String monsterKilled = monsterService.attackNearestMonster(
                         this.appService.getPlayerState().getActiveWeapon(),
@@ -154,6 +161,7 @@ public class GameScreenController {
         this.healthText.setText(
                 (int) playerState.getHealth() + "/" + (int) playerState.getHealthCapacity());
         this.healthService.setHealthBar(this.healthBar).setHealthText(this.healthText);
+        this.healthService.applyHealthModifier(0.0);
     }
 
     private void displayPlayerRightOrientation(PlayerState playerState) {
