@@ -2,10 +2,12 @@ package org.example.controllers.rooms;
 
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
+import org.example.App;
 import org.example.controllers.GameScreenController;
 import org.example.dto.Monster;
 import org.example.services.AppService;
@@ -27,6 +29,7 @@ public class BossRoomController extends GameScreenController implements Initiali
 
     private Timeline boss1AttackSchedule;
     private Timeline resetPlayerSchedule;
+    private Timeline boss1Dead;
 
     @FXML
     private ImageView boss1;
@@ -61,6 +64,7 @@ public class BossRoomController extends GameScreenController implements Initiali
         if(!this.appService.getMonstersKilled().contains(this.boss1Key)) {
             this.setupBoss1();
             this.playerService.registerTimeline(this.boss1AttackSchedule);
+            this.playerService.registerTimeline(this.boss1Dead);
         }
     }
 
@@ -93,5 +97,12 @@ public class BossRoomController extends GameScreenController implements Initiali
                 Timeline.INDEFINITE
         );
         this.boss1AttackSchedule.play();
+
+        this.boss1Dead = ScheduleUtility.checkBoss(
+                this.appService,
+                this.monsterService
+
+        );
+        this.boss1Dead.play();
     }
 }
