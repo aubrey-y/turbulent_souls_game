@@ -5,9 +5,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.example.controllers.GameScreenController;
 import org.example.dto.Monster;
+import org.example.enums.Direction;
 import org.example.services.AppService;
 import org.example.services.DirectionService;
 import org.example.services.HealthService;
@@ -17,8 +19,10 @@ import org.example.services.RoomDirectionService;
 import org.example.util.ScheduleUtility;
 
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.ResourceBundle;
 
+import static org.example.enums.Direction.LEFT;
 import static org.example.enums.MonsterType.SERPENT;
 
 public class Garden1Controller extends GameScreenController implements Initializable {
@@ -26,6 +30,7 @@ public class Garden1Controller extends GameScreenController implements Initializ
     private MonsterService monsterService;
 
     private Timeline serpent1AttackSchedule;
+    private Timeline serpent1ResetSchedule;
     private Timeline resetPlayerSchedule;
 
     @FXML
@@ -58,6 +63,14 @@ public class Garden1Controller extends GameScreenController implements Initializ
         this.resetPlayerSchedule = ScheduleUtility.generatePlayerResetSchedule(0.5,
                 this.playerService);
         this.playerService.registerTimeline(this.resetPlayerSchedule);
+        this.serpent1ResetSchedule = ScheduleUtility.generateMonsterResetSchedule(
+                0.5,
+                this.monsterService,
+                this.serpent1Key,
+                this.serpent1,
+                "src/main/resources/static/images/monsters/gifs/serpent_left.gif",
+                "src/main/resources/static/images/monsters/gifs/serpent_right.gif"
+        );
         if(!this.appService.getMonstersKilled().contains(this.serpent1Key)) {
             this.setupSerpent1();
             this.playerService.registerTimeline(this.serpent1AttackSchedule);
@@ -81,7 +94,10 @@ public class Garden1Controller extends GameScreenController implements Initializ
                         .setAccuracy(0.5)
                         .setMonsterType(SERPENT)
                         .setImageView(this.serpent1)
-                        .setHealthBar(this.serpent1HealthBar));
+                        .setHealthBar(this.serpent1HealthBar)
+                        .setOrientation(LEFT)
+                        .setDeathAnimationLeft(new Image(Paths.get("src/main/resources/static/images/monsters/gifs/serpent_death_left.gif").toUri().toString()))
+                        .setDeathAnimationRight(new Image(Paths.get("src/main/resources/static/images/monsters/gifs/serpent_death_right.gif").toUri().toString())));
         this.serpent1AttackSchedule = ScheduleUtility.generateMonsterAttackSchedule(
                 1.0,
                 this.appService,
@@ -90,7 +106,10 @@ public class Garden1Controller extends GameScreenController implements Initializ
                 this.monsterService,
                 this.healthService,
                 this.resetPlayerSchedule,
-                Timeline.INDEFINITE
+                this.serpent1ResetSchedule,
+                Timeline.INDEFINITE,
+                "src/main/resources/static/images/monsters/gifs/serpent_attack_left.gif",
+                null
         );
         this.serpent1AttackSchedule.play();
     }

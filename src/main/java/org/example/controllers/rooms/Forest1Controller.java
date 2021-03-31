@@ -1,16 +1,12 @@
 package org.example.controllers.rooms;
 
-import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.effect.ColorAdjust;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.util.Duration;
-import org.example.App;
 import org.example.controllers.GameScreenController;
 import org.example.dto.Monster;
 import org.example.services.AppService;
@@ -22,8 +18,10 @@ import org.example.services.RoomDirectionService;
 import org.example.util.ScheduleUtility;
 
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.ResourceBundle;
 
+import static org.example.enums.Direction.LEFT;
 import static org.example.enums.MonsterType.SLIME;
 
 public class Forest1Controller extends GameScreenController implements Initializable {
@@ -31,6 +29,7 @@ public class Forest1Controller extends GameScreenController implements Initializ
     private MonsterService monsterService;
 
     private Timeline slime1AttackSchedule;
+    private Timeline slime1ResetSchedule;
     private Timeline resetPlayerHueSchedule;
 
     @FXML
@@ -64,6 +63,14 @@ public class Forest1Controller extends GameScreenController implements Initializ
         this.resetPlayerHueSchedule = ScheduleUtility.generatePlayerResetSchedule(0.5,
                 this.playerService);
         this.playerService.registerTimeline(this.resetPlayerHueSchedule);
+        this.slime1ResetSchedule = ScheduleUtility.generateMonsterResetSchedule(
+                1.0,
+                this.monsterService,
+                this.slime1Key,
+                this.slime1,
+                "src/main/resources/static/images/monsters/gifs/slime.gif",
+                null
+        );
         if(!this.appService.getMonstersKilled().contains(this.slime1Key)) {
             this.setupSlime1();
             this.playerService.registerTimeline(this.slime1AttackSchedule);
@@ -87,7 +94,9 @@ public class Forest1Controller extends GameScreenController implements Initializ
                         .setAccuracy(0.5)
                         .setMonsterType(SLIME)
                         .setImageView(this.slime1)
-                        .setHealthBar(this.slime1HealthBar));
+                        .setHealthBar(this.slime1HealthBar)
+                        .setOrientation(LEFT)
+                        .setDeathAnimationLeft(new Image(Paths.get("src/main/resources/static/images/monsters/gifs/slime_death.gif").toUri().toString())));
         this.slime1AttackSchedule = ScheduleUtility.generateMonsterAttackSchedule(
                 1.0,
                 this.appService,
@@ -96,7 +105,10 @@ public class Forest1Controller extends GameScreenController implements Initializ
                 this.monsterService,
                 this.healthService,
                 this.resetPlayerHueSchedule,
-                Timeline.INDEFINITE
+                this.slime1ResetSchedule,
+                Timeline.INDEFINITE,
+                "src/main/resources/static/images/monsters/gifs/slime_attack.gif",
+                null
         );
         this.slime1AttackSchedule.play();
     }

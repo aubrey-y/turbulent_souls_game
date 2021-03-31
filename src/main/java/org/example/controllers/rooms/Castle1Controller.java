@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.example.controllers.GameScreenController;
 import org.example.dto.Monster;
@@ -17,8 +18,10 @@ import org.example.services.RoomDirectionService;
 import org.example.util.ScheduleUtility;
 
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.ResourceBundle;
 
+import static org.example.enums.Direction.LEFT;
 import static org.example.enums.MonsterType.WHITE_DRAGON;
 
 public class Castle1Controller extends GameScreenController implements Initializable {
@@ -26,6 +29,7 @@ public class Castle1Controller extends GameScreenController implements Initializ
     private MonsterService monsterService;
 
     private Timeline whiteDragon1AttackSchedule;
+    private Timeline whiteDragon1ResetSchedule;
     private Timeline resetPlayerSchedule;
 
     @FXML
@@ -58,6 +62,14 @@ public class Castle1Controller extends GameScreenController implements Initializ
         this.resetPlayerSchedule = ScheduleUtility.generatePlayerResetSchedule(0.5,
                 this.playerService);
         this.playerService.registerTimeline(this.resetPlayerSchedule);
+        this.whiteDragon1ResetSchedule = ScheduleUtility.generateMonsterResetSchedule(
+                0.5,
+                this.monsterService,
+                this.whitedragon1Key,
+                this.whitedragon1,
+                "src/main/resources/static/images/monsters/gifs/white_dragon_left.gif",
+                "src/main/resources/static/images/monsters/gifs/white_dragon_right.gif"
+        );
         if(!this.appService.getMonstersKilled().contains(this.whitedragon1Key)) {
             this.setupWhitedragon1();
             this.playerService.registerTimeline(this.whiteDragon1AttackSchedule);
@@ -81,7 +93,10 @@ public class Castle1Controller extends GameScreenController implements Initializ
                         .setAccuracy(0.5)
                         .setMonsterType(WHITE_DRAGON)
                         .setImageView(this.whitedragon1)
-                        .setHealthBar(this.whitedragon1HealthBar));
+                        .setHealthBar(this.whitedragon1HealthBar)
+                        .setOrientation(LEFT)
+                        .setDeathAnimationLeft(new Image(Paths.get("src/main/resources/static/images/monsters/gifs/white_dragon_death_left.gif").toUri().toString()))
+                        .setDeathAnimationRight(new Image(Paths.get("src/main/resources/static/images/monsters/gifs/white_dragon_death_right.gif").toUri().toString())));
         this.whiteDragon1AttackSchedule = ScheduleUtility.generateMonsterAttackSchedule(
                 1.0,
                 this.appService,
@@ -90,7 +105,10 @@ public class Castle1Controller extends GameScreenController implements Initializ
                 this.monsterService,
                 this.healthService,
                 this.resetPlayerSchedule,
-                Timeline.INDEFINITE
+                this.whiteDragon1ResetSchedule,
+                Timeline.INDEFINITE,
+                "src/main/resources/static/images/monsters/gifs/white_dragon_attack_left.gif",
+                null
         );
         this.whiteDragon1AttackSchedule.play();
     }
