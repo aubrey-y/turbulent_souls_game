@@ -92,4 +92,15 @@ public class ScheduleUtility {
         timeline.setCycleCount(1);
         return timeline;
     }
+
+    public static Timeline generateMonsterDeathResetSchedule(double duration,
+                                                             Monster monster) {
+        Timeline timeline = new Timeline();
+        Timeline finalTimeline = timeline;
+        timeline = new Timeline(new KeyFrame(Duration.seconds(duration), actionEvent -> {
+            monster.getImageView().setVisible(false);
+        }));
+        timeline.setCycleCount(1);
+        return timeline;
+    }
 }

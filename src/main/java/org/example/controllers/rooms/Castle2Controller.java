@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.example.controllers.GameScreenController;
 import org.example.dto.Monster;
@@ -17,6 +18,7 @@ import org.example.services.RoomDirectionService;
 import org.example.util.ScheduleUtility;
 
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.ResourceBundle;
 
 import static org.example.enums.Direction.LEFT;
@@ -92,7 +94,8 @@ public class Castle2Controller extends GameScreenController implements Initializ
                         .setMonsterType(CASTLE_BULL)
                         .setImageView(this.castlebull1)
                         .setHealthBar(this.castlebull1HealthBar)
-                        .setOrientation(LEFT));
+                        .setOrientation(LEFT)
+                        .setDeathAnimationLeft(new Image(Paths.get("src/main/resources/static/images/monsters/gifs/white_dragon_death_left.gif").toUri().toString())));
         this.castlebull1AttackSchedule = ScheduleUtility.generateMonsterAttackSchedule(
                 1.0,
                 this.appService,

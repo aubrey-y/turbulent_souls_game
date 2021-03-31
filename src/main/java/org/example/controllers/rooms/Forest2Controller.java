@@ -98,7 +98,9 @@ public class Forest2Controller extends GameScreenController implements Initializ
                         .setMonsterType(GUINEA_PIG)
                         .setImageView(this.guineapig1)
                         .setHealthBar(this.guineapig1HealthBar)
-                        .setOrientation(LEFT));
+                        .setOrientation(LEFT)
+                        .setDeathAnimationLeft(new Image(Paths.get("src/main/resources/static/images/monsters/gifs/guineapig_death_left.gif").toUri().toString()))
+                        .setDeathAnimationRight(new Image(Paths.get("src/main/resources/static/images/monsters/gifs/guineapig_death_right.gif").toUri().toString())));
         this.guineapig1AttackSchedule = ScheduleUtility.generateMonsterAttackSchedule(
                 1.0,
                 this.appService,

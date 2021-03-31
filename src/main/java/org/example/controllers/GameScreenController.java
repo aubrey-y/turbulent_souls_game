@@ -11,7 +11,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.example.dto.PlayerState;
-import org.example.enums.Direction;
 import org.example.services.AppService;
 import org.example.services.DirectionService;
 import org.example.services.HealthService;
@@ -100,6 +99,7 @@ public class GameScreenController {
                         this.appService.getPlayerState().getActiveWeapon(),
                         this.player.getTranslateX(), this.player.getTranslateY());
                 if(monsterKilled != null) {
+                    monsterService.initiateDeathAnimation(monsterKilled);
                     this.appService.addMonsterKilled(monsterKilled);
                 }
                 break;

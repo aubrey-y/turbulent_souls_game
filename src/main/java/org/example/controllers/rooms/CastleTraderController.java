@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.example.controllers.GameScreenController;
 import org.example.dto.Monster;
@@ -17,6 +18,7 @@ import org.example.services.RoomDirectionService;
 import org.example.util.ScheduleUtility;
 
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.ResourceBundle;
 
 import static org.example.enums.Direction.LEFT;
@@ -93,7 +95,8 @@ public class CastleTraderController extends GameScreenController implements Init
                         .setMonsterType(SLIME)
                         .setImageView(this.slime1)
                         .setHealthBar(this.slime1HealthBar)
-                        .setOrientation(LEFT));
+                        .setOrientation(LEFT)
+                        .setDeathAnimationLeft(new Image(Paths.get("src/main/resources/static/images/monsters/gifs/slime_death.gif").toUri().toString())));
         this.slime1AttackSchedule = ScheduleUtility.generateMonsterAttackSchedule(
                 1.0,
                 this.appService,

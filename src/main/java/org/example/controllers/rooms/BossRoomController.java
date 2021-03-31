@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.example.controllers.GameScreenController;
 import org.example.dto.Monster;
@@ -17,6 +18,7 @@ import org.example.services.RoomDirectionService;
 import org.example.util.ScheduleUtility;
 
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.ResourceBundle;
 
 import static org.example.enums.Direction.LEFT;
@@ -83,16 +85,7 @@ public class BossRoomController extends GameScreenController implements Initiali
         this.boss1HealthBar.setVisible(true);
         this.monsterService.addMonster(
                 this.boss1Key,
-                new Monster()
-                        .setHealth(this.boss1HealthCapacity)
-                        .setHealthCapacity(this.boss1HealthCapacity)
-                        .setRange(5.0)
-                        .setAttack(2)
-                        .setAccuracy(0.5)
-                        .setMonsterType(DARK_KNIGHT)
-                        .setImageView(this.boss1)
-                        .setHealthBar(this.boss1HealthBar)
-                        .setOrientation(LEFT));
+                this.createBoss1());
         this.boss1AttackSchedule = ScheduleUtility.generateMonsterAttackSchedule(
                 1.0,
                 this.appService,
@@ -107,5 +100,23 @@ public class BossRoomController extends GameScreenController implements Initiali
                 "src/main/resources/static/images/monsters/gifs/dark_knight_right.gif"
         );
         this.boss1AttackSchedule.play();
+    }
+
+    private Monster createBoss1() {
+        return new Monster()
+                .setHealth(this.boss1HealthCapacity)
+                .setHealthCapacity(this.boss1HealthCapacity)
+                .setRange(5.0)
+                .setAttack(2)
+                .setAccuracy(0.5)
+                .setMonsterType(DARK_KNIGHT)
+                .setImageView(this.boss1)
+                .setHealthBar(this.boss1HealthBar)
+                .setOrientation(LEFT)
+                .setDeathAnimationLeft(
+                        new Image(Paths.get("src/main/resources/static/images/monsters/gifs/dark_knight_death_left.gif").toUri().toString()))
+                .setDeathAnimationRight(
+                        new Image(Paths.get("src/main/resources/static/images/monsters/gifs/dark_knight_death_right.gif").toUri().toString()));
+
     }
 }

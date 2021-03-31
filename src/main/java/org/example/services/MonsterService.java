@@ -3,6 +3,8 @@ package org.example.services;
 import org.example.dto.Monster;
 import org.example.dto.Weapon;
 import org.example.enums.Direction;
+import org.example.util.DeathDurationUtility;
+import org.example.util.ScheduleUtility;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,6 +12,7 @@ import static org.example.dto.HealthBarConstants.GREEN_HP_BAR;
 import static org.example.dto.HealthBarConstants.RED_HP_BAR;
 import static org.example.dto.HealthBarConstants.HP_BAR_THRESHOLD;
 import static org.example.dto.HealthBarConstants.BAR_CSS_CLASSES;
+import static org.example.enums.Direction.LEFT;
 
 
 public class MonsterService {
@@ -112,5 +115,18 @@ public class MonsterService {
 
     public Monster getMonsterForKey(String key) {
         return this.monsterMapping.get(key);
+    }
+
+    public void initiateDeathAnimation(String key) {
+        Monster monster = this.monsterMapping.get(key);
+        monster.getHealthBar().setVisible(false);
+        if(monster.getOrientation() == LEFT) {
+            monster.getImageView().setImage(monster.getDeathAnimationLeft());
+        } else {
+            monster.getImageView().setImage(monster.getDeathAnimationRight());
+        }
+        ScheduleUtility.generateMonsterDeathResetSchedule(
+                DeathDurationUtility.getDurationForMonsterType(monster.getMonsterType()), monster
+        ).play();
     }
 }
