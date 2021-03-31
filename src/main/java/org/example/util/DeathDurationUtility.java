@@ -17,7 +17,7 @@ public class DeathDurationUtility {
     private static Map<MonsterType, Double> durationMap = Map.of(
             SLIME, 1.0,
             GUINEA_PIG, 1.0,
-            WHITE_DRAGON, 1.0,
+            WHITE_DRAGON, 0.8,
             CASTLE_BULL, 1.0,
             SERPENT, 1.0,
             WATER_BULL, 1.0,

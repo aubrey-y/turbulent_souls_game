@@ -95,7 +95,7 @@ public class Castle2Controller extends GameScreenController implements Initializ
                         .setImageView(this.castlebull1)
                         .setHealthBar(this.castlebull1HealthBar)
                         .setOrientation(LEFT)
-                        .setDeathAnimationLeft(new Image(Paths.get("src/main/resources/static/images/monsters/gifs/white_dragon_death_left.gif").toUri().toString())));
+                        .setDeathAnimationLeft(new Image(Paths.get("src/main/resources/static/images/monsters/gifs/bull_death_left.gif").toUri().toString())));
         this.castlebull1AttackSchedule = ScheduleUtility.generateMonsterAttackSchedule(
                 1.0,
                 this.appService,
