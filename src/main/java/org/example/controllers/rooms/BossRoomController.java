@@ -31,6 +31,7 @@ public class BossRoomController extends GameScreenController implements Initiali
     private Timeline boss1AttackSchedule;
     private Timeline boss1ResetSchedule;
     private Timeline resetPlayerSchedule;
+    private Timeline boss1DeadSchedule;
 
     @FXML
     private ImageView boss1;
@@ -73,6 +74,7 @@ public class BossRoomController extends GameScreenController implements Initiali
         if(!this.appService.getMonstersKilled().contains(this.boss1Key)) {
             this.setupBoss1();
             this.playerService.registerTimeline(this.boss1AttackSchedule);
+            this.playerService.registerTimeline(this.boss1DeadSchedule);
         }
     }
 
@@ -100,6 +102,12 @@ public class BossRoomController extends GameScreenController implements Initiali
                 "src/main/resources/static/images/monsters/gifs/dark_knight_right.gif"
         );
         this.boss1AttackSchedule.play();
+
+        this.boss1DeadSchedule = ScheduleUtility.generateBossCheckSchedule(
+                this.appService,
+                this.monsterService
+        );
+        this.boss1DeadSchedule.play();
     }
 
     private Monster createBoss1() {

@@ -2,11 +2,13 @@ package org.example.util;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import org.example.dto.Monster;
+import org.example.App;
 import org.example.services.AppService;
 import org.example.services.HealthService;
 import org.example.services.MonsterService;
@@ -101,6 +103,19 @@ public class ScheduleUtility {
             monster.getImageView().setVisible(false);
         }));
         timeline.setCycleCount(1);
+        return timeline;
+    }
+
+    public static Timeline generateBossCheckSchedule(AppService appService, MonsterService monsterService) {
+        Timeline timeline = new Timeline();
+        Timeline finalTimeline = timeline;
+        timeline = new Timeline(new KeyFrame(Duration.seconds(1.0), actionEvent -> {
+            if (monsterService.getMonstersRemaining() == 0) {
+                FXMLLoader loader = new FXMLLoader(App.class.getResource("winScreen.fxml"));
+                appService.setRoot(loader);
+            }
+        }));
+        timeline.setCycleCount(Timeline.INDEFINITE);
         return timeline;
     }
 }
