@@ -45,7 +45,12 @@ public class ScheduleUtility {
                     playerService.getImageView().getTranslateY())) {
                 Integer attack = monsterService.rollMonsterAttack(monsterKey);
                 if(attack != null) {
-                    healthService.applyHealthModifier(-1 * attack);
+                    boolean playerAlive = healthService.applyHealthModifier(-1 * attack);
+                    if(!playerAlive) {
+                        playerService.terminateExistingTimelines();
+                        FXMLLoader loader = new FXMLLoader(App.class.getResource("gameOver.fxml"));
+                        appService.setRoot(loader);
+                    }
                     playerService.getImageView().setEffect(new ColorAdjust(-0.17, 0.0, 0.0, 0.0));
                     Monster monster = monsterService.getMonsterForKey(monsterKey);
                     if(monster.getOrientation() == LEFT) {

@@ -143,7 +143,7 @@ public class PlayerService {
         }
     }
 
-    private void terminateExistingTimelines() {
+    public void terminateExistingTimelines() {
         for(Timeline timeline: this.controllerTimelines) {
             timeline.stop();
         }
