@@ -57,7 +57,7 @@ public class ScheduleUtility {
         return timeline;
     }
 
-    public static Timeline checkBoss(AppService appService, MonsterService monsterService) {
+    public static Timeline generateBossCheckSchedule(AppService appService, MonsterService monsterService) {
         Timeline timeline = new Timeline();
         Timeline finalTimeline = timeline;
         timeline = new Timeline(new KeyFrame(Duration.seconds(1.0), actionEvent -> {
