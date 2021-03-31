@@ -57,6 +57,7 @@ public class Forest1Controller extends GameScreenController implements Initializ
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.monsterService = new MonsterService();
+        this.playerService.setMonsterService(this.monsterService);
         this.initGameScreenController(this.monsterService);
         this.resetPlayerHueSchedule = ScheduleUtility.generatePlayerResetSchedule(0.5,
                 this.playerService);
