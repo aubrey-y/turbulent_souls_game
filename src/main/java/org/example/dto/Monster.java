@@ -2,6 +2,7 @@ package org.example.dto;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
+import org.example.enums.Direction;
 import org.example.enums.MonsterType;
 
 public class Monster {
@@ -22,6 +23,8 @@ public class Monster {
     private ProgressBar healthBar;
 
     private Label healthText;
+
+    private Direction orientation;
 
     public Monster() {
 
@@ -129,6 +132,15 @@ public class Monster {
 
     public Monster setHealthText(Label healthText) {
         this.healthText = healthText;
+        return this;
+    }
+
+    public Direction getOrientation() {
+        return orientation;
+    }
+
+    public Monster setOrientation(Direction orientation) {
+        this.orientation = orientation;
         return this;
     }
 }

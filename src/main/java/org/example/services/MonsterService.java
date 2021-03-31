@@ -2,6 +2,7 @@ package org.example.services;
 
 import org.example.dto.Monster;
 import org.example.dto.Weapon;
+import org.example.enums.Direction;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -103,5 +104,13 @@ public class MonsterService {
 
     public int getMonstersRemaining() {
         return this.monsterMapping.size() - this.monstersKilled;
+    }
+
+    public Direction getMonsterOrientation(String key) {
+        return this.monsterMapping.get(key).getOrientation();
+    }
+
+    public Monster getMonsterForKey(String key) {
+        return this.monsterMapping.get(key);
     }
 }

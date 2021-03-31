@@ -19,6 +19,7 @@ import org.example.util.ScheduleUtility;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static org.example.enums.Direction.LEFT;
 import static org.example.enums.MonsterType.DARK_KNIGHT;
 
 public class Castle3Controller extends GameScreenController implements Initializable {
@@ -26,6 +27,7 @@ public class Castle3Controller extends GameScreenController implements Initializ
     private MonsterService monsterService;
 
     private Timeline darkknight1AttackSchedule;
+    private Timeline darkknight1ResetSchedule;
     private Timeline resetPlayerSchedule;
 
     @FXML
@@ -58,6 +60,14 @@ public class Castle3Controller extends GameScreenController implements Initializ
         this.resetPlayerSchedule = ScheduleUtility.generatePlayerResetSchedule(0.5,
                 this.playerService);
         this.playerService.registerTimeline(this.resetPlayerSchedule);
+        this.darkknight1ResetSchedule = ScheduleUtility.generateMonsterResetSchedule(
+                0.5,
+                this.monsterService,
+                this.darkknight1Key,
+                this.darkknight1,
+                "src/main/resources/static/images/monsters/gifs/dark_knight_attack_left.gif",
+                null
+        );
         if(!this.appService.getMonstersKilled().contains(this.darkknight1Key)) {
             this.setupDarkknight1();
             this.playerService.registerTimeline(this.darkknight1AttackSchedule);
@@ -81,7 +91,8 @@ public class Castle3Controller extends GameScreenController implements Initializ
                         .setAccuracy(0.5)
                         .setMonsterType(DARK_KNIGHT)
                         .setImageView(this.darkknight1)
-                        .setHealthBar(this.darkknight1HealthBar));
+                        .setHealthBar(this.darkknight1HealthBar)
+                        .setOrientation(LEFT));
         this.darkknight1AttackSchedule = ScheduleUtility.generateMonsterAttackSchedule(
                 1.0,
                 this.appService,
@@ -90,7 +101,10 @@ public class Castle3Controller extends GameScreenController implements Initializ
                 this.monsterService,
                 this.healthService,
                 this.resetPlayerSchedule,
-                Timeline.INDEFINITE
+                this.darkknight1ResetSchedule,
+                Timeline.INDEFINITE,
+                "src/main/resources/static/images/monsters/gifs/dark_knight_left.gif",
+                "src/main/resources/static/images/monsters/gifs/dark_knight_right.gif"
         );
         this.darkknight1AttackSchedule.play();
     }

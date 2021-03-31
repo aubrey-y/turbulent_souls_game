@@ -95,10 +95,6 @@ public class GameScreenController {
                 this.dPressed.set(true);
                 this.displayPlayerRightOrientation(this.appService.getPlayerState());
                 break;
-            //solely for testing hp
-            case P:
-                this.healthService.applyHealthModifier(-10.0);
-                break;
             case SPACE:
                 String monsterKilled = monsterService.attackNearestMonster(
                         this.appService.getPlayerState().getActiveWeapon(),

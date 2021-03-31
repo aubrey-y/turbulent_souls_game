@@ -19,6 +19,7 @@ import org.example.util.ScheduleUtility;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static org.example.enums.Direction.LEFT;
 import static org.example.enums.MonsterType.DARK_KNIGHT;
 
 public class BossRoomController extends GameScreenController implements Initializable {
@@ -26,6 +27,7 @@ public class BossRoomController extends GameScreenController implements Initiali
     private MonsterService monsterService;
 
     private Timeline boss1AttackSchedule;
+    private Timeline boss1ResetSchedule;
     private Timeline resetPlayerSchedule;
 
     @FXML
@@ -58,6 +60,14 @@ public class BossRoomController extends GameScreenController implements Initiali
         this.resetPlayerSchedule = ScheduleUtility.generatePlayerResetSchedule(0.5,
                 this.playerService);
         this.playerService.registerTimeline(this.resetPlayerSchedule);
+        this.boss1ResetSchedule = ScheduleUtility.generateMonsterResetSchedule(
+                0.5,
+                this.monsterService,
+                this.boss1Key,
+                this.boss1,
+                "src/main/resources/static/images/monsters/gifs/dark_knight_attack_left.gif",
+                null
+        );
         if(!this.appService.getMonstersKilled().contains(this.boss1Key)) {
             this.setupBoss1();
             this.playerService.registerTimeline(this.boss1AttackSchedule);
@@ -81,7 +91,8 @@ public class BossRoomController extends GameScreenController implements Initiali
                         .setAccuracy(0.5)
                         .setMonsterType(DARK_KNIGHT)
                         .setImageView(this.boss1)
-                        .setHealthBar(this.boss1HealthBar));
+                        .setHealthBar(this.boss1HealthBar)
+                        .setOrientation(LEFT));
         this.boss1AttackSchedule = ScheduleUtility.generateMonsterAttackSchedule(
                 1.0,
                 this.appService,
@@ -90,7 +101,10 @@ public class BossRoomController extends GameScreenController implements Initiali
                 this.monsterService,
                 this.healthService,
                 this.resetPlayerSchedule,
-                Timeline.INDEFINITE
+                this.boss1ResetSchedule,
+                Timeline.INDEFINITE,
+                "src/main/resources/static/images/monsters/gifs/dark_knight_left.gif",
+                "src/main/resources/static/images/monsters/gifs/dark_knight_right.gif"
         );
         this.boss1AttackSchedule.play();
     }
