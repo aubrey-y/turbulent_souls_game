@@ -27,7 +27,13 @@ public class PlayerService {
 
     private HealthService healthService;
 
+    private MonsterService monsterService;
+
+    private DirectionService directionService = new DirectionService();
+
     private Set<Timeline> controllerTimelines;
+
+    private Direction lastExitDirection;
 
     public static final double MOVE_SIZE = 6;
 
@@ -78,9 +84,13 @@ public class PlayerService {
 
     private void checkForExit() {
         Direction exitDirection = this.exitDirection();
-        if (exitDirection == null) {
+        if (exitDirection == null ||
+                (this.monsterService.getMonstersRemaining() > 0
+                        && this.directionService.getOppositeDirection(
+                                this.lastExitDirection) != exitDirection)) {
             return;
         }
+        this.lastExitDirection = exitDirection;
         this.terminateExistingTimelines();
         Room currentRoom = this.appService.getActiveRoom();
         switch (exitDirection) {
@@ -256,6 +266,15 @@ public class PlayerService {
 
     public PlayerService setRoomDirectionService(RoomDirectionService roomDirectionService) {
         this.roomDirectionService = roomDirectionService;
+        return this;
+    }
+
+    public MonsterService getMonsterService() {
+        return monsterService;
+    }
+
+    public PlayerService setMonsterService(MonsterService monsterService) {
+        this.monsterService = monsterService;
         return this;
     }
 }
