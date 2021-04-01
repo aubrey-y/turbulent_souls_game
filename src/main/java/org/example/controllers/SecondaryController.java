@@ -142,9 +142,9 @@ public class SecondaryController extends ErrorBaseController {
     }
 
     @FXML
-    private void selectArcherArchetype() {
-        if (this.archetype != Archetype.ARCHER) {
-            this.archetype = Archetype.ARCHER;
+    private void selectWizardArchetype() {
+        if (this.archetype != Archetype.WIZARD) {
+            this.archetype = Archetype.WIZARD;
         } else {
             this.archetype = null;
         }
@@ -203,5 +203,14 @@ public class SecondaryController extends ErrorBaseController {
 
     public Archetype getArchetype() {
         return archetype;
+    }
+
+    public Scene getScene() {
+        return scene;
+    }
+
+    public SecondaryController setScene(Scene scene) {
+        this.scene = scene;
+        return this;
     }
 }

@@ -106,14 +106,14 @@
                         </Label>
                         <HBox alignment="CENTER" layoutX="10.0" layoutY="625.0" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <ToggleButton mnemonicParsing="false" onAction="#selectArcherArchetype" prefHeight="66.0" prefWidth="193.0" stylesheets="@../../static/css/button.css" textFill="WHITE">
+                              <ToggleButton mnemonicParsing="false" onAction="#selectWizardArchetype" prefHeight="66.0" prefWidth="193.0" stylesheets="@../../static/css/button.css" textFill="WHITE">
                                  <font>
                                     <Font name="Pixeboy" size="39.0" />
                                  </font>
                                  <graphic>
                                     <ImageView id="archetypeButton" fitHeight="200.0" fitWidth="182.0" preserveRatio="true">
                                        <image>
-                                          <Image url="@../../static/images/bow.png" />
+                                          <Image url="@../../static/images/BlackMagic.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>

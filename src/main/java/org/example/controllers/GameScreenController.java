@@ -166,7 +166,7 @@ public class GameScreenController {
 
     private void displayPlayerRightOrientation(PlayerState playerState) {
         switch (playerState.getActiveWeapon().getType()) {
-        case BOW:
+        case MAGIC:
             this.player.setImage(new Image(
                     Paths.get("src/main/resources/static/images/player/wizard_right.gif")
                             .toUri().toString()));
@@ -188,7 +188,7 @@ public class GameScreenController {
 
     private void displayPlayerLeftOrientation(PlayerState playerState) {
         switch (playerState.getActiveWeapon().getType()) {
-        case BOW:
+        case MAGIC:
             this.player.setImage(new Image(
                     Paths.get("src/main/resources/static/images/player/wizard_left.gif")
                             .toUri().toString()));
