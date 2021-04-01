@@ -6,6 +6,8 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import org.example.controllers.rooms.Forest1Controller;
+import org.example.controllers.rooms.Forest2Controller;
+import org.example.controllers.rooms.ForestTraderController;
 import org.example.dto.Monster;
 import org.example.dto.PlayerState;
 import org.example.enums.Archetype;
@@ -58,6 +60,8 @@ public class Forest1ControllerTest {
 
     private HealthService healthService;
 
+    private MonsterService monsterService;
+
     private final int[] spawnCoordinates = new int[]{400, 540};
 
     @Start
@@ -96,6 +100,7 @@ public class Forest1ControllerTest {
     @Test
     public void testSwitchLeft(FxRobot robot) {
         //Given
+        this.withMockedMonsterService();
         int times = 5;
         double startX = 22.0;
         double startY = 444.0;
@@ -106,17 +111,18 @@ public class Forest1ControllerTest {
             robot.press(KeyCode.A);
             robot.release(KeyCode.A);
         }
-        this.controller = App.getActiveLoader().getController();
+        Forest2Controller forest2Controller = App.getActiveLoader().getController();
         //Then
-        assertThat(this.controller.getPlayer().getTranslateX(),
+        assertThat(forest2Controller.getPlayer().getTranslateX(),
                 is(not(startX - MOVE_SIZE * times)));
-        assertThat(this.controller.getPlayer().getTranslateY(),
+        assertThat(forest2Controller.getPlayer().getTranslateY(),
                 is(startY));
     }
 
     @Test
     public void testSwitchRight(FxRobot robot) {
         //Given
+        this.withMockedMonsterService();
         int times = 5;
         double startX = 1764.0;
         double startY = 534.0;
@@ -127,17 +133,18 @@ public class Forest1ControllerTest {
             robot.press(KeyCode.D);
             robot.release(KeyCode.D);
         }
-        this.controller = App.getActiveLoader().getController();
+        Forest2Controller forest2Controller = App.getActiveLoader().getController();
         //Then
-        assertThat(this.controller.getPlayer().getTranslateX(),
+        assertThat(forest2Controller.getPlayer().getTranslateX(),
                 is(not(startX - MOVE_SIZE * times)));
-        assertThat(this.controller.getPlayer().getTranslateY(),
+        assertThat(forest2Controller.getPlayer().getTranslateY(),
                 is(startY));
     }
 
     @Test
     public void testSwitchUp(FxRobot robot) {
         //Given
+        this.withMockedMonsterService();
         int times = 5;
         double startX = 900.0;
         double startY = 24.0;
@@ -148,17 +155,18 @@ public class Forest1ControllerTest {
             robot.press(KeyCode.W);
             robot.release(KeyCode.W);
         }
-        this.controller = App.getActiveLoader().getController();
+        Forest2Controller forest2Controller = App.getActiveLoader().getController();
         //Then
-        assertThat(this.controller.getPlayer().getTranslateY(),
+        assertThat(forest2Controller.getPlayer().getTranslateY(),
                 is(not(startY - MOVE_SIZE * times)));
-        assertThat(this.controller.getPlayer().getTranslateX(),
+        assertThat(forest2Controller.getPlayer().getTranslateX(),
                 is(startX));
     }
 
     @Test
     public void testSwitchDown(FxRobot robot) {
         //Given
+        this.withMockedMonsterService();
         int times = 5;
         double startX = 900.0;
         double startY = 904.0;
@@ -169,11 +177,11 @@ public class Forest1ControllerTest {
             robot.press(KeyCode.S);
             robot.release(KeyCode.S);
         }
-        this.controller = App.getActiveLoader().getController();
+        ForestTraderController forestTraderController = App.getActiveLoader().getController();
         //Then
-        assertThat(this.controller.getPlayer().getTranslateY(),
+        assertThat(forestTraderController.getPlayer().getTranslateY(),
                 is(not(startY - MOVE_SIZE * times)));
-        assertThat(this.controller.getPlayer().getTranslateX(),
+        assertThat(forestTraderController.getPlayer().getTranslateX(),
                 is(startX));
     }
 
@@ -376,6 +384,13 @@ public class Forest1ControllerTest {
         doReturn(this.getPlayerState()).when(this.appService).getPlayerState();
         doReturn(STARTING_ROOM).when(this.appService).getActiveRoom();
         doReturn(new HashSet<>()).when(this.appService).getMonstersKilled();
+    }
+
+    private void withMockedMonsterService() {
+        this.monsterService = spy(MonsterService.class);
+        this.controller.setMonsterService(this.monsterService);
+        this.controller.getPlayerService().setMonsterService(this.monsterService);
+        doReturn(0).when(this.monsterService).getMonstersRemaining();
     }
 
     private PlayerState getPlayerState() {
