@@ -45,8 +45,8 @@ public class PlayerState {
 
     private void assignDefaultWeaponForClass() throws PlayerCreationException {
         switch (this.archetype) {
-        case ARCHER:
-            this.activeWeapon = new BasicBow();
+        case WIZARD:
+            this.activeWeapon = new BasicMagic();
             break;
         case MAGE:
             this.activeWeapon = new BasicStaff();

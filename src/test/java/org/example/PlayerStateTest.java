@@ -1,6 +1,6 @@
 package org.example;
 
-import org.example.dto.BasicBow;
+import org.example.dto.BasicMagic;
 import org.example.dto.BasicStaff;
 import org.example.dto.BasicSword;
 import org.example.dto.PlayerState;
@@ -32,15 +32,15 @@ public class PlayerStateTest {
     }
 
     @Test
-    public void testGivenMedArcherProducesValidInit() throws PlayerCreationException {
-        Archetype archer = Archetype.ARCHER;
+    public void testGivenMedWizardProducesValidInit() throws PlayerCreationException {
+        Archetype wizard = Archetype.WIZARD;
         Difficulty medium = Difficulty.MEDIUM;
-        PlayerState player = new PlayerState("Jeff", archer, medium, this.spawnCoordinates);
+        PlayerState player = new PlayerState("Jeff", wizard, medium, this.spawnCoordinates);
         int goldAmount = player.getGoldAmount();
         Weapon weapon = player.getActiveWeapon();
 
         assertThat(goldAmount, is(equalTo(800)));
-        assertThat(weapon, is(instanceOf(BasicBow.class)));
+        assertThat(weapon, is(instanceOf(BasicMagic.class)));
     }
 
     @Test
