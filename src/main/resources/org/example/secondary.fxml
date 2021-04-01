@@ -113,7 +113,7 @@
                                  <graphic>
                                     <ImageView id="archetypeButton" fitHeight="200.0" fitWidth="182.0" preserveRatio="true">
                                        <image>
-                                          <Image url="@../../static/images/bow.png" />
+                                          <Image url="@../../static/images/BlackMagic.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
