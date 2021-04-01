@@ -11,7 +11,6 @@ import org.example.controllers.rooms.ForestTraderController;
 import org.example.dto.Monster;
 import org.example.dto.PlayerState;
 import org.example.enums.Archetype;
-import org.example.enums.Difficulty;
 import org.example.exceptions.PlayerCreationException;
 import org.example.services.*;
 import org.junit.jupiter.api.AfterEach;
@@ -307,51 +306,6 @@ public class Forest1ControllerTest {
     }
 
     @Test
-    public void testMonsterHealthDecrease(FxRobot robot) {
-        Archetype mage = Archetype.MAGE;
-        double startX = 1500;
-        double startY = 400;
-
-        playerService.moveX(startX);
-        playerService.moveY(startY);
-
-        robot.press(KeyCode.SPACE);
-
-        Monster slime1 = this.controller.getSlime1();
-        this.controller.getMonsterService().addMonster(Forest1Controller.SLIME_1_KEY, slime1);
-
-        robot.press(KeyCode.SPACE);
-        robot.release(KeyCode.SPACE);
-
-        // Check that slime health decreased
-        //assertThat(this.controller.getAppService().)
-    }
-
-    @Test
-    public void testMonsterDeath(FxRobot robot) {
-        Archetype mage = Archetype.MAGE;
-
-        double startX = 1500;
-        double startY = 400;
-
-        playerService.moveX(startX);
-        playerService.moveY(startY);
-
-        // Make new slime
-        Monster slime1 = this.controller.getSlime1();
-        this.controller.getMonsterService().addMonster(Forest1Controller.SLIME_1_KEY, slime1);
-
-        robot.press(KeyCode.SPACE);
-        robot.release(KeyCode.SPACE);
-        robot.press(KeyCode.SPACE);
-        robot.release(KeyCode.SPACE);
-
-        assertThat(this.controller.getSlime1().getHealthCapacity(),
-                is(0.0));
-
-    }
-
-    @Test
     public void testPlayerDeath(FxRobot robot) {
         double startX = 1500;
         double startY = 400;
@@ -390,6 +344,66 @@ public class Forest1ControllerTest {
                 is(startX - MOVE_SIZE * times));
         assertThat(this.controller.getPlayer().getTranslateY(),
                 is(startY));
+    }
+
+    @Test
+    public void testRoomLockRight(FxRobot robot) {
+        //Given
+        int times = 5;
+        double startX = 1764.0;
+        double startY = 534.0;
+        //When
+        playerService.moveX(startX);
+        playerService.moveY(startY);
+        for (int i = 0; i < times; i++) {
+            robot.press(KeyCode.D);
+            robot.release(KeyCode.D);
+        }
+        //Then
+        assertThat(this.controller.getPlayer().getTranslateX(),
+                is(startX - MOVE_SIZE * times));
+        assertThat(this.controller.getPlayer().getTranslateY(),
+                is(startY));
+    }
+
+    @Test
+    public void testRoomLockUp(FxRobot robot) {
+        //Given
+        int times = 5;
+        double startX = 900.0;
+        double startY = 24.0;
+        //When
+        playerService.moveX(startX);
+        playerService.moveY(startY);
+        for (int i = 0; i < times; i++) {
+            robot.press(KeyCode.W);
+            robot.release(KeyCode.W);
+        }
+        //Then
+        assertThat(this.controller.getPlayer().getTranslateY(),
+                is(startY - MOVE_SIZE * times));
+        assertThat(this.controller.getPlayer().getTranslateX(),
+                is(startX));
+    }
+
+    @Test
+    public void testRoomLockDown(FxRobot robot) {
+        //Given
+        int times = 5;
+        double startX = 900.0;
+        double startY = 904.0;
+        //When
+        playerService.moveX(startX);
+        playerService.moveY(startY);
+        for (int i = 0; i < times; i++) {
+            robot.press(KeyCode.S);
+            robot.release(KeyCode.S);
+        }
+        //Then
+        assertThat(this.controller.getPlayer().getTranslateY(),
+                is(startY - MOVE_SIZE * times));
+        assertThat(this.controller.getPlayer().getTranslateX(),
+                is(startX));
     }
 
 
