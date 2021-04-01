@@ -26,8 +26,6 @@ import static org.example.enums.MonsterType.CASTLE_BULL;
 
 public class Castle2Controller extends GameScreenController implements Initializable {
 
-    private MonsterService monsterService;
-
     private Timeline castlebull1AttackSchedule;
     private Timeline castlebull1ResetSchedule;
     private Timeline resetPlayerSchedule;

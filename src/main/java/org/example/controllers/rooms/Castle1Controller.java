@@ -26,8 +26,6 @@ import static org.example.enums.MonsterType.WHITE_DRAGON;
 
 public class Castle1Controller extends GameScreenController implements Initializable {
 
-    private MonsterService monsterService;
-
     private Timeline whiteDragon1AttackSchedule;
     private Timeline whiteDragon1ResetSchedule;
     private Timeline resetPlayerSchedule;

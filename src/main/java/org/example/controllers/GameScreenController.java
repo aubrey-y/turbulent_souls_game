@@ -22,7 +22,6 @@ import org.example.services.RoomDirectionService;
 import java.nio.file.Paths;
 
 import static javafx.scene.input.KeyCode.SHIFT;
-import static org.example.dto.HealthBarConstants.HP_BAR_THRESHOLD;
 import static org.example.enums.Direction.LEFT;
 
 
@@ -37,6 +36,8 @@ public class GameScreenController {
     protected RoomDirectionService roomDirectionService;
 
     protected HealthService healthService;
+
+    protected MonsterService monsterService;
 
     private Scene scene;
 
@@ -282,6 +283,15 @@ public class GameScreenController {
 
     public GameScreenController setPlayer(ImageView player) {
         this.player = player;
+        return this;
+    }
+
+    public MonsterService getMonsterService() {
+        return monsterService;
+    }
+
+    public GameScreenController setMonsterService(MonsterService monsterService) {
+        this.monsterService = monsterService;
         return this;
     }
 }

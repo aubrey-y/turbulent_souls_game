@@ -26,8 +26,6 @@ import static org.example.enums.MonsterType.DARK_KNIGHT;
 
 public class Castle3Controller extends GameScreenController implements Initializable {
 
-    private MonsterService monsterService;
-
     private Timeline darkknight1AttackSchedule;
     private Timeline darkknight1ResetSchedule;
     private Timeline resetPlayerSchedule;
