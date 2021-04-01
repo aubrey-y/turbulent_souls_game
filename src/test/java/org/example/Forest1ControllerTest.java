@@ -11,6 +11,7 @@ import org.example.controllers.rooms.ForestTraderController;
 import org.example.dto.Monster;
 import org.example.dto.PlayerState;
 import org.example.enums.Archetype;
+import org.example.enums.Difficulty;
 import org.example.exceptions.PlayerCreationException;
 import org.example.services.*;
 import org.junit.jupiter.api.AfterEach;
@@ -307,7 +308,7 @@ public class Forest1ControllerTest {
 
     @Test
     public void testMonsterHealthDecrease(FxRobot robot) {
-        Archetype archer = Archetype.ARCHER;
+        Archetype mage = Archetype.MAGE;
         double startX = 1500;
         double startY = 400;
 
@@ -316,13 +317,19 @@ public class Forest1ControllerTest {
 
         robot.press(KeyCode.SPACE);
 
+        Monster slime1 = this.controller.getSlime1();
+        this.controller.getMonsterService().addMonster(Forest1Controller.SLIME_1_KEY, slime1);
+
+        robot.press(KeyCode.SPACE);
+        robot.release(KeyCode.SPACE);
+
         // Check that slime health decreased
-        // assertThat()
+        //assertThat(this.controller.getAppService().)
     }
 
     @Test
     public void testMonsterDeath(FxRobot robot) {
-        Archetype archer = Archetype.ARCHER;
+        Archetype mage = Archetype.MAGE;
 
         double startX = 1500;
         double startY = 400;
@@ -330,16 +337,17 @@ public class Forest1ControllerTest {
         playerService.moveX(startX);
         playerService.moveY(startY);
 
-        // Make new slime - lower health to make test quicker
-        // this.controller.
+        // Make new slime
+        Monster slime1 = this.controller.getSlime1();
+        this.controller.getMonsterService().addMonster(Forest1Controller.SLIME_1_KEY, slime1);
 
         robot.press(KeyCode.SPACE);
         robot.release(KeyCode.SPACE);
         robot.press(KeyCode.SPACE);
         robot.release(KeyCode.SPACE);
 
-        assertThat(this.appService.getMonstersKilled(),
-        is(1));
+        assertThat(this.controller.getSlime1().getHealthCapacity(),
+                is(0.0));
 
     }
 
@@ -351,27 +359,37 @@ public class Forest1ControllerTest {
         playerService.moveX(startX);
         playerService.moveY(startY);
 
-        // Make new slime - increase attack to make test quicker
-        //this.controller.
+        // Make new slime - stronger attack to make test quicker
+        Monster slime1 = this.controller.getSlime1();
+        slime1.setAttack(100);
+        slime1.setAccuracy(1.0);
+        this.controller.getMonsterService().addMonster(Forest1Controller.SLIME_1_KEY, slime1);
+
+        robot.sleep(ONE_SECOND + 100);
+
+        // Check that player health is 0
+        assertThat(this.controller.getAppService().getPlayerState().getHealthCapacity() - slime1.getAttack(),
+                is(equalTo(0.0)));
     }
 
     @Test
-    public void testRoomLock(FxRobot robot) {
+    public void testRoomLockLeft(FxRobot robot) {
+        //Given
         int times = 5;
         double startX = 22.0;
         double startY = 444.0;
-
+        //When
         playerService.moveX(startX);
         playerService.moveY(startY);
         for (int i = 0; i < times; i++) {
             robot.press(KeyCode.A);
             robot.release(KeyCode.A);
         }
-        this.controller = App.getActiveLoader().getController();
-
-        // Check that active room is still forest1
-        //assertThat(this.controller.,
-        //        is());
+        //Then
+        assertThat(this.controller.getPlayer().getTranslateX(),
+                is(startX - MOVE_SIZE * times));
+        assertThat(this.controller.getPlayer().getTranslateY(),
+                is(startY));
     }
 
 
