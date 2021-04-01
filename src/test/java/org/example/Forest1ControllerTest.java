@@ -5,7 +5,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
-import org.example.controllers.GameScreenController;
 import org.example.controllers.rooms.Forest1Controller;
 import org.example.dto.Monster;
 import org.example.dto.PlayerState;
@@ -23,12 +22,15 @@ import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.concurrent.TimeoutException;
 
+import static org.example.ConstantUtil.ONE_SECOND;
 import static org.example.controllers.SecondaryController.STARTING_ROOM;
 import static org.example.enums.Archetype.WARRIOR;
 import static org.example.enums.Difficulty.EASY;
 import static org.example.services.PlayerService.MOVE_SIZE;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -284,12 +286,15 @@ public class Forest1ControllerTest {
         playerService.moveY(startY);
 
         // Make new slime - stronger attack to make test quicker
-      //  this.controller.
+        Monster slime1 = this.controller.getSlime1();
+        slime1.setAccuracy(1.0);
+        this.controller.getMonsterService().addMonster(Forest1Controller.SLIME_1_KEY, slime1);
 
-        robot.sleep(1000);
+        robot.sleep(ONE_SECOND + 100);
 
         // Check that player health decreased
-        // assertThat()
+        assertThat(this.controller.getAppService().getPlayerState().getHealth(),
+                is(equalTo(this.controller.getAppService().getPlayerState().getHealthCapacity() - slime1.getAttack())));
     }
 
     @Test
@@ -370,6 +375,7 @@ public class Forest1ControllerTest {
         doReturn(this.scene).when(this.appService).getScene();
         doReturn(this.getPlayerState()).when(this.appService).getPlayerState();
         doReturn(STARTING_ROOM).when(this.appService).getActiveRoom();
+        doReturn(new HashSet<>()).when(this.appService).getMonstersKilled();
     }
 
     private PlayerState getPlayerState() {

@@ -32,7 +32,7 @@ public class Forest1Controller extends GameScreenController implements Initializ
 
     @FXML
     private ImageView slime1;
-    private final String slime1Key = "forest1slime1";
+    public static final String SLIME_1_KEY = "forest1slime1";
     private final int slime1HealthCapacity = 10;
 
     @FXML
@@ -64,12 +64,12 @@ public class Forest1Controller extends GameScreenController implements Initializ
         this.slime1ResetSchedule = ScheduleUtility.generateMonsterResetSchedule(
                 1.0,
                 this.monsterService,
-                this.slime1Key,
+                SLIME_1_KEY,
                 this.slime1,
                 "src/main/resources/static/images/monsters/gifs/slime.gif",
                 null
         );
-        if(!this.appService.getMonstersKilled().contains(this.slime1Key)) {
+        if(!this.appService.getMonstersKilled().contains(SLIME_1_KEY)) {
             this.setupSlime1();
             this.playerService.registerTimeline(this.slime1AttackSchedule);
         }
@@ -83,22 +83,12 @@ public class Forest1Controller extends GameScreenController implements Initializ
         this.slime1HealthBar.setTranslateX(1570);
         this.slime1HealthBar.setTranslateY(400);
         this.monsterService.addMonster(
-                this.slime1Key,
-                new Monster()
-                        .setHealth(this.slime1HealthCapacity)
-                        .setHealthCapacity(this.slime1HealthCapacity)
-                        .setRange(5.0)
-                        .setAttack(2)
-                        .setAccuracy(0.5)
-                        .setMonsterType(SLIME)
-                        .setImageView(this.slime1)
-                        .setHealthBar(this.slime1HealthBar)
-                        .setOrientation(LEFT)
-                        .setDeathAnimationLeft(new Image(Paths.get("src/main/resources/static/images/monsters/gifs/slime_death.gif").toUri().toString())));
+                SLIME_1_KEY,
+                this.getSlime1());
         this.slime1AttackSchedule = ScheduleUtility.generateMonsterAttackSchedule(
                 1.0,
                 this.appService,
-                this.slime1Key,
+                SLIME_1_KEY,
                 this.playerService,
                 this.monsterService,
                 this.healthService,
@@ -109,5 +99,21 @@ public class Forest1Controller extends GameScreenController implements Initializ
                 null
         );
         this.slime1AttackSchedule.play();
+    }
+
+    public Monster getSlime1() {
+        return new Monster()
+                .setHealth(this.slime1HealthCapacity)
+                .setHealthCapacity(this.slime1HealthCapacity)
+                .setRange(5.0)
+                .setAttack(2)
+                .setAccuracy(0.5)
+                .setMonsterType(SLIME)
+                .setImageView(this.slime1)
+                .setHealthBar(this.slime1HealthBar)
+                .setOrientation(LEFT)
+                .setDeathAnimationLeft(new Image(Paths.get(
+                        "src/main/resources/static/images/monsters/gifs/slime_death.gif")
+                        .toUri().toString()));
     }
 }
