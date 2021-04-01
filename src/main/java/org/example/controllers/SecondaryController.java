@@ -204,4 +204,13 @@ public class SecondaryController extends ErrorBaseController {
     public Archetype getArchetype() {
         return archetype;
     }
+
+    public Scene getScene() {
+        return scene;
+    }
+
+    public SecondaryController setScene(Scene scene) {
+        this.scene = scene;
+        return this;
+    }
 }
