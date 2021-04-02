@@ -98,7 +98,7 @@ public class MonsterService {
 
     public Integer rollMonsterAttack(String monsterKey) {
         Monster monster = this.monsterMapping.get(monsterKey);
-        if(Math.random() >= monster.getAccuracy()) {
+        if(Math.random() <= monster.getAccuracy()) {
             return monster.getAttack();
         } else {
             return null;
