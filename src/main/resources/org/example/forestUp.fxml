@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -9,7 +10,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.GameScreenController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.rooms.Forest2Controller">
    <children>
       <ImageView fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -21,6 +22,11 @@
             <ImageView fx:id="player" fitHeight="133.0" fitWidth="133.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../../static/images/player.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="guineapig1" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../../static/images/monsters/idle/guinea_pig_right.png" />
                </image>
             </ImageView>
          </children>
@@ -41,15 +47,22 @@
             </Button>
          </children>
       </StackPane>
-      <Label fx:id="goldAmountLabel" layoutX="32.0" layoutY="6.0" prefHeight="92.0" prefWidth="145.0" stylesheets="@../../static/css/fontstyle.css" text="GOLD : " textFill="WHITE" AnchorPane.bottomAnchor="982.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="1743.0" AnchorPane.topAnchor="6.0">
+      <Label fx:id="goldAmountLabel" layoutX="35.0" layoutY="60.0" prefHeight="59.0" prefWidth="145.0" stylesheets="@../../static/css/fontstyle.css" text="GOLD : " textFill="WHITE">
          <font>
-            <Font size="59.0" />
+            <Font size="43.0" />
          </font>
       </Label>
-      <Label fx:id="goldAmount" layoutX="175.0" layoutY="6.0" prefHeight="92.0" prefWidth="385.0" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE">
+      <Label fx:id="goldAmount" layoutX="135.0" layoutY="60.0" prefHeight="59.0" prefWidth="385.0" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE">
          <font>
-            <Font size="59.0" />
+            <Font size="43.0" />
          </font>
       </Label>
+      <ProgressBar fx:id="healthBar" focusTraversable="false" layoutX="35.0" layoutY="30.0" opacity="0.8" prefHeight="40.0" prefWidth="591.0" progress="1.0" style="-fx-control-inner-background: #3E5155;" styleClass="green-bar" stylesheets="@../../static/css/fontstyle.css" />
+      <Label fx:id="healthText" alignment="CENTER" layoutX="140.0" layoutY="35.0" prefHeight="30.0" prefWidth="385.0" stylesheets="@../../static/css/fontstyle.css" text="100/100" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="37.0" />
+         </font>
+      </Label>
+      <ProgressBar fx:id="guineapig1HealthBar" focusTraversable="false" layoutX="20.0" layoutY="20.0" opacity="0.8" prefHeight="10.0" prefWidth="150.0" progress="1.0" style="-fx-control-inner-background: #3E5155;" styleClass="green-bar" stylesheets="@../../static/css/fontstyle.css" visible="false" />
    </children>
 </AnchorPane>

@@ -7,5 +7,6 @@ public class BasicStaff extends Weapon {
         this.name = "Basic Staff";
         this.type = WeaponType.STAFF;
         this.attack = 7;
+        this.range = 100.0;
     }
 }

@@ -4,31 +4,39 @@ package org.example.controllers;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import org.example.dto.PlayerState;
 import org.example.services.AppService;
 import org.example.services.DirectionService;
+import org.example.services.HealthService;
+import org.example.services.MonsterService;
 import org.example.services.PlayerService;
 import org.example.services.RoomDirectionService;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.nio.file.Paths;
 
 import static javafx.scene.input.KeyCode.SHIFT;
+import static org.example.enums.Direction.LEFT;
 
 
-public class GameScreenController implements Initializable {
+public class GameScreenController {
 
-    private AppService appService;
+    protected AppService appService;
 
-    private PlayerService playerService;
+    protected PlayerService playerService;
 
-    private DirectionService directionService;
+    protected DirectionService directionService;
 
-    private RoomDirectionService roomDirectionService;
+    protected RoomDirectionService roomDirectionService;
+
+    protected HealthService healthService;
+
+    protected MonsterService monsterService;
 
     private Scene scene;
 
@@ -41,6 +49,12 @@ public class GameScreenController implements Initializable {
     @FXML
     private ImageView player;
 
+    @FXML
+    private ProgressBar healthBar;
+
+    @FXML
+    private Label healthText;
+
     private final BooleanProperty wPressed = new SimpleBooleanProperty(false);
     private final BooleanProperty aPressed = new SimpleBooleanProperty(false);
     private final BooleanProperty sPressed = new SimpleBooleanProperty(false);
@@ -51,21 +65,21 @@ public class GameScreenController implements Initializable {
                                 PlayerService playerService,
                                 DirectionService directionService,
                                 RoomDirectionService roomDirectionService,
+                                HealthService healthService,
                                 Scene scene) {
         this.appService = appService;
         this.playerService = playerService;
         this.directionService = directionService;
         this.roomDirectionService = roomDirectionService;
+        this.healthService = healthService;
         this.scene = scene;
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    protected void initGameScreenController(MonsterService monsterService) {
+        PlayerState playerState = this.appService.getPlayerState();
         this.goldAmount.setText(String.valueOf(this.appService.getPlayerState().getGoldAmount()));
-        this.playerService.setImageView(this.player);
-        this.playerService.moveX(this.appService.getPlayerState().getSpawnCoordinates()[0]);
-        this.playerService.moveY(this.appService.getPlayerState().getSpawnCoordinates()[1]);
-        this.playerService.setVisible(true);
+        this.initializePlayerHealth(playerState);
+        this.initializePlayerImageView(playerState);
         this.scene.setOnKeyPressed(e -> {
             switch (e.getCode()) {
             case W:
@@ -73,12 +87,28 @@ public class GameScreenController implements Initializable {
                 break;
             case A:
                 this.aPressed.set(true);
+                this.displayPlayerLeftOrientation(this.appService.getPlayerState());
                 break;
             case S:
                 this.sPressed.set(true);
                 break;
             case D:
                 this.dPressed.set(true);
+                this.displayPlayerRightOrientation(this.appService.getPlayerState());
+                break;
+            case P:
+                if (this.appService.getDevMode()) {
+                    this.healthService.applyHealthModifier(-10);
+                }
+                break;
+            case SPACE:
+                String monsterKilled = monsterService.attackNearestMonster(
+                        this.appService.getPlayerState().getActiveWeapon(),
+                        this.player.getTranslateX(), this.player.getTranslateY());
+                if (monsterKilled != null) {
+                    monsterService.initiateDeathAnimation(monsterKilled);
+                    this.appService.addMonsterKilled(monsterKilled);
+                }
                 break;
             default:
                 break;
@@ -116,6 +146,74 @@ public class GameScreenController implements Initializable {
                 break;
             }
         });
+    }
+
+    private void initializePlayerImageView(PlayerState playerState) {
+        this.displayCorrectPlayerOrientation(playerState);
+        this.playerService.setImageView(this.player);
+        this.playerService.moveX(playerState.getSpawnCoordinates()[0]);
+        this.playerService.moveY(playerState.getSpawnCoordinates()[1]);
+        this.playerService.setVisible(true);
+    }
+
+    private void initializePlayerHealth(PlayerState playerState) {
+        this.healthBar.setProgress(playerState.getHealth() / playerState.getHealthCapacity());
+        this.healthText.setText(
+                (int) playerState.getHealth() + "/" + (int) playerState.getHealthCapacity());
+        this.healthService.setHealthBar(this.healthBar).setHealthText(this.healthText);
+        this.healthService.applyHealthModifier(0.0);
+    }
+
+    private void displayPlayerRightOrientation(PlayerState playerState) {
+        switch (playerState.getActiveWeapon().getType()) {
+        case MAGIC:
+            this.player.setImage(new Image(
+                    Paths.get("src/main/resources/static/images/player/wizard_right.gif")
+                            .toUri().toString()));
+            break;
+        case STAFF:
+            this.player.setImage(new Image(
+                    Paths.get("src/main/resources/static/images/player/staff_right.gif")
+                            .toUri().toString()));
+            break;
+        case SWORD:
+            this.player.setImage(new Image(
+                    Paths.get("src/main/resources/static/images/player/sword_right.gif")
+                            .toUri().toString()));
+            break;
+        default:
+            break;
+        }
+    }
+
+    private void displayPlayerLeftOrientation(PlayerState playerState) {
+        switch (playerState.getActiveWeapon().getType()) {
+        case MAGIC:
+            this.player.setImage(new Image(
+                    Paths.get("src/main/resources/static/images/player/wizard_left.gif")
+                            .toUri().toString()));
+            break;
+        case STAFF:
+            this.player.setImage(new Image(
+                    Paths.get("src/main/resources/static/images/player/staff_left.gif")
+                            .toUri().toString()));
+            break;
+        case SWORD:
+            this.player.setImage(new Image(
+                    Paths.get("src/main/resources/static/images/player/sword_left.gif")
+                            .toUri().toString()));
+            break;
+        default:
+            break;
+        }
+    }
+
+    protected void displayCorrectPlayerOrientation(PlayerState playerState) {
+        if (playerState.getSpawnOrientation() == LEFT) {
+            this.displayPlayerLeftOrientation(playerState);
+        } else {
+            this.displayPlayerRightOrientation(playerState);
+        }
     }
     
     @FXML
@@ -184,6 +282,15 @@ public class GameScreenController implements Initializable {
 
     public GameScreenController setPlayer(ImageView player) {
         this.player = player;
+        return this;
+    }
+
+    public MonsterService getMonsterService() {
+        return monsterService;
+    }
+
+    public GameScreenController setMonsterService(MonsterService monsterService) {
+        this.monsterService = monsterService;
         return this;
     }
 }

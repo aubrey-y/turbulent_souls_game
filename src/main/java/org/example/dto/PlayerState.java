@@ -2,6 +2,7 @@ package org.example.dto;
 
 import org.example.enums.Archetype;
 import org.example.enums.Difficulty;
+import org.example.enums.Direction;
 import org.example.exceptions.PlayerCreationException;
 
 import java.util.List;
@@ -22,6 +23,12 @@ public class PlayerState {
 
     private int[] spawnCoordinates;
 
+    private Direction spawnOrientation;
+
+    private double health;
+
+    private double healthCapacity;
+
     public PlayerState(String username,
                        Archetype archetype,
                        Difficulty difficulty,
@@ -30,14 +37,16 @@ public class PlayerState {
         this.archetype = archetype;
         this.difficulty = difficulty;
         this.spawnCoordinates = spawnCoordinates;
+        this.health = 100.0;
+        this.healthCapacity = 100.0;
         assignDefaultWeaponForClass();
         assignDefaultGoldForDifficulty();
     }
 
     private void assignDefaultWeaponForClass() throws PlayerCreationException {
         switch (this.archetype) {
-        case ARCHER:
-            this.activeWeapon = new BasicBow();
+        case WIZARD:
+            this.activeWeapon = new BasicMagic();
             break;
         case MAGE:
             this.activeWeapon = new BasicStaff();
@@ -128,6 +137,33 @@ public class PlayerState {
 
     public PlayerState setSpawnCoordinates(int[] spawnCoordinates) {
         this.spawnCoordinates = spawnCoordinates;
+        return this;
+    }
+
+    public Direction getSpawnOrientation() {
+        return spawnOrientation;
+    }
+
+    public PlayerState setSpawnOrientation(Direction spawnOrientation) {
+        this.spawnOrientation = spawnOrientation;
+        return this;
+    }
+
+    public double getHealth() {
+        return health;
+    }
+
+    public PlayerState setHealth(double health) {
+        this.health = health;
+        return this;
+    }
+
+    public double getHealthCapacity() {
+        return healthCapacity;
+    }
+
+    public PlayerState setHealthCapacity(double healthCapacity) {
+        this.healthCapacity = healthCapacity;
         return this;
     }
 }

@@ -14,6 +14,9 @@ public class DirectionService {
     }
 
     public Direction getOppositeDirection(Direction direction) {
+        if (direction == null) {
+            return null;
+        }
         switch (direction) {
         case UP:
             return DOWN;

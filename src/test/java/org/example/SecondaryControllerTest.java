@@ -36,14 +36,21 @@ public class SecondaryControllerTest {
 
     private AppService appService;
 
+    private Scene scene;
+
     @Start
     public void setUp(Stage stage) throws IOException {
         withMockedAppService();
+        Scene mockedScene = new Scene(
+                new FXMLLoader(App.class.getResource("primary.fxml")).load());
         FXMLLoader loader = new FXMLLoader(App.class.getResource("secondary.fxml"));
+        loader.setControllerFactory(SecondaryController -> new SecondaryController(mockedScene));
         Parent root = loader.load();
+        this.scene = new Scene(root, 1920, 1080);
         this.controller = loader.getController();
+        this.controller.setScene(this.scene);
         this.controller.setAppService(this.appService);
-        stage.setScene(new Scene(root, 0, 0));
+        stage.setScene(this.scene);
         stage.show();
     }
 

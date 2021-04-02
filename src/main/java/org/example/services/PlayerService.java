@@ -1,13 +1,19 @@
 package org.example.services;
 
+import javafx.animation.Timeline;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import org.example.App;
-import org.example.controllers.GameScreenController;
 import org.example.dto.PlayerState;
 import org.example.dto.Room;
 import org.example.enums.Direction;
 
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.example.enums.Direction.*;
 
@@ -19,12 +25,25 @@ public class PlayerService {
 
     private RoomDirectionService roomDirectionService;
 
+    private HealthService healthService;
+
+    private MonsterService monsterService;
+
+    private DirectionService directionService = new DirectionService();
+
+    private Set<Timeline> controllerTimelines;
+
+    private Direction lastExitDirection;
+
     public static final double MOVE_SIZE = 6;
 
     public PlayerService(AppService appService,
-                         RoomDirectionService roomDirectionService) {
+                         RoomDirectionService roomDirectionService,
+                         HealthService healthService) {
         this.appService = appService;
         this.roomDirectionService = roomDirectionService;
+        this.healthService = healthService;
+        this.controllerTimelines = new HashSet<>();
     }
 
     public void moveUp(boolean shift) {
@@ -65,9 +84,13 @@ public class PlayerService {
 
     private void checkForExit() {
         Direction exitDirection = this.exitDirection();
-        if (exitDirection == null) {
+        if (exitDirection == null || (this.monsterService.getMonstersRemaining() > 0
+                        && this.directionService.getOppositeDirection(
+                                this.lastExitDirection) != exitDirection)) {
             return;
         }
+        this.lastExitDirection = exitDirection;
+        this.terminateExistingTimelines();
         Room currentRoom = this.appService.getActiveRoom();
         switch (exitDirection) {
         case UP:
@@ -78,7 +101,7 @@ public class PlayerService {
                 }
                 this.appService.setActiveRoom(currentRoom.getUp());
                 this.setNewPlayerSpawnCoordinates(exitDirection);
-                this.appService.setRoot(this.getLoader(currentRoom.getUp().getRoot()));
+                this.appService.setRoot(this.getLoader(currentRoom.getUp()));
             }
             break;
         case DOWN:
@@ -89,7 +112,7 @@ public class PlayerService {
                 }
                 this.appService.setActiveRoom(currentRoom.getDown());
                 this.setNewPlayerSpawnCoordinates(exitDirection);
-                this.appService.setRoot(this.getLoader(currentRoom.getDown().getRoot()));
+                this.appService.setRoot(this.getLoader(currentRoom.getDown()));
             }
             break;
         case LEFT:
@@ -100,7 +123,7 @@ public class PlayerService {
                 }
                 this.appService.setActiveRoom(currentRoom.getLeft());
                 this.setNewPlayerSpawnCoordinates(exitDirection);
-                this.appService.setRoot(this.getLoader(currentRoom.getLeft().getRoot()));
+                this.appService.setRoot(this.getLoader(currentRoom.getLeft()));
             }
             break;
         case RIGHT:
@@ -111,7 +134,7 @@ public class PlayerService {
                 }
                 this.appService.setActiveRoom(currentRoom.getRight());
                 this.setNewPlayerSpawnCoordinates(exitDirection);
-                this.appService.setRoot(this.getLoader(currentRoom.getRight().getRoot()));
+                this.appService.setRoot(this.getLoader(currentRoom.getRight()));
             }
             break;
         default:
@@ -119,14 +142,41 @@ public class PlayerService {
         }
     }
 
-    private FXMLLoader getLoader(String root) {
-        FXMLLoader loader = new FXMLLoader(App.class.getResource(root));
-        loader.setControllerFactory(GameScreenController -> new GameScreenController(
-                this.appService,
-                this,
-                this.roomDirectionService.getDirectionService(),
-                this.roomDirectionService,
-                this.appService.getScene()));
+    public void terminateExistingTimelines() {
+        for (Timeline timeline: this.controllerTimelines) {
+            timeline.stop();
+        }
+        this.controllerTimelines.clear();
+    }
+
+    private FXMLLoader getLoader(Room room) {
+        FXMLLoader loader = new FXMLLoader(App.class.getResource(room.getRoot()));
+        Constructor<?> controllerConstructor;
+        try {
+            controllerConstructor = room.getControllerClass().getConstructor(
+                    AppService.class,
+                    PlayerService.class,
+                    DirectionService.class,
+                    RoomDirectionService.class,
+                    HealthService.class,
+                    Scene.class);
+            loader.setControllerFactory(GameScreenController -> {
+                try {
+                    return controllerConstructor.newInstance(this.appService,
+                            this,
+                            this.roomDirectionService.getDirectionService(),
+                            this.roomDirectionService,
+                            this.healthService,
+                            this.appService.getScene());
+                } catch (InstantiationException | InvocationTargetException
+                        | IllegalAccessException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        }
+
         App.setActiveLoader(loader);
         return loader;
     }
@@ -145,10 +195,12 @@ public class PlayerService {
         case LEFT:
             playerState.setSpawnCoordinates(
                     new int[]{1770, (int) this.imageView.getTranslateY()});
+            playerState.setSpawnOrientation(LEFT);
             break;
         case RIGHT:
             playerState.setSpawnCoordinates(
                     new int[]{22, (int) this.imageView.getTranslateY()});
+            playerState.setSpawnOrientation(RIGHT);
             break;
         default:
             break;
@@ -176,6 +228,10 @@ public class PlayerService {
         return null;
     }
 
+    public void registerTimeline(Timeline timeline) {
+        this.controllerTimelines.add(timeline);
+    }
+
     public ImageView getImageView() {
         return imageView;
     }
@@ -194,12 +250,30 @@ public class PlayerService {
         return this;
     }
 
+    public HealthService getHealthService() {
+        return healthService;
+    }
+
+    public PlayerService setHealthService(HealthService healthService) {
+        this.healthService = healthService;
+        return this;
+    }
+
     public RoomDirectionService getRoomDirectionService() {
         return roomDirectionService;
     }
 
     public PlayerService setRoomDirectionService(RoomDirectionService roomDirectionService) {
         this.roomDirectionService = roomDirectionService;
+        return this;
+    }
+
+    public MonsterService getMonsterService() {
+        return monsterService;
+    }
+
+    public PlayerService setMonsterService(MonsterService monsterService) {
+        this.monsterService = monsterService;
         return this;
     }
 }

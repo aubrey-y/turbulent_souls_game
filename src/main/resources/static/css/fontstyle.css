@@ -15,4 +15,9 @@
     -fx-rotate: 10;
 }
 
-
+.green-bar {
+    -fx-accent: #94D521;
+}
+.red-bar {
+    -fx-accent: #EE475B;
+}
