@@ -23,6 +23,9 @@ import java.util.ResourceBundle;
 
 import static org.example.enums.Direction.LEFT;
 import static org.example.enums.MonsterType.SLIME;
+import static org.example.util.ResourcePathUtility.SLIME_ATTACK_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.SLIME_DEATH_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.SLIME_LEFT_PATH;
 
 public class GardenTraderController extends GameScreenController implements Initializable {
 
@@ -66,10 +69,10 @@ public class GardenTraderController extends GameScreenController implements Init
                 this.monsterService,
                 this.slime1Key,
                 this.slime1,
-                "src/main/resources/static/images/monsters/gifs/slime.gif",
+                SLIME_LEFT_PATH,
                 null
         );
-        if(!this.appService.getMonstersKilled().contains(this.slime1Key)) {
+        if (!this.appService.getMonstersKilled().contains(this.slime1Key)) {
             this.setupSlime1();
             this.playerService.registerTimeline(this.slime1AttackSchedule);
         }
@@ -94,7 +97,8 @@ public class GardenTraderController extends GameScreenController implements Init
                         .setImageView(this.slime1)
                         .setHealthBar(this.slime1HealthBar)
                         .setOrientation(LEFT)
-                        .setDeathAnimationLeft(new Image(Paths.get("src/main/resources/static/images/monsters/gifs/slime_death.gif").toUri().toString())));
+                        .setDeathAnimationLeft(
+                                new Image(Paths.get(SLIME_DEATH_LEFT_PATH).toUri().toString())));
         this.slime1AttackSchedule = ScheduleUtility.generateMonsterAttackSchedule(
                 1.0,
                 this.appService,
@@ -105,7 +109,7 @@ public class GardenTraderController extends GameScreenController implements Init
                 this.resetPlayerHueSchedule,
                 this.slime1ResetSchedule,
                 Timeline.INDEFINITE,
-                "src/main/resources/static/images/monsters/gifs/slime_attack.gif",
+                SLIME_ATTACK_LEFT_PATH,
                 null
         );
         this.slime1AttackSchedule.play();

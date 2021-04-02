@@ -84,8 +84,7 @@ public class PlayerService {
 
     private void checkForExit() {
         Direction exitDirection = this.exitDirection();
-        if (exitDirection == null ||
-                (this.monsterService.getMonstersRemaining() > 0
+        if (exitDirection == null || (this.monsterService.getMonstersRemaining() > 0
                         && this.directionService.getOppositeDirection(
                                 this.lastExitDirection) != exitDirection)) {
             return;
@@ -144,7 +143,7 @@ public class PlayerService {
     }
 
     public void terminateExistingTimelines() {
-        for(Timeline timeline: this.controllerTimelines) {
+        for (Timeline timeline: this.controllerTimelines) {
             timeline.stop();
         }
         this.controllerTimelines.clear();
@@ -169,8 +168,8 @@ public class PlayerService {
                             this.roomDirectionService,
                             this.healthService,
                             this.appService.getScene());
-                } catch (InstantiationException | InvocationTargetException |
-                        IllegalAccessException e) {
+                } catch (InstantiationException | InvocationTargetException
+                        | IllegalAccessException e) {
                     throw new RuntimeException(e);
                 }
             });

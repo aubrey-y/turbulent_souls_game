@@ -35,29 +35,31 @@ public class MonsterService {
         String monsterKeyIfDead = null;
         String nearestMonsterKey = this.getNearestLivingMonster(playerX, playerY);
         Monster nearestMonster = this.monsterMapping.get(nearestMonsterKey);
-        if(nearestMonster == null || distanceBetween(
+        if (nearestMonster == null || distanceBetween(
                 nearestMonster.getImageView().getTranslateX(),
                 nearestMonster.getImageView().getTranslateY(),
                 playerX,
                 playerY
-        )/TILE_SIZE > weapon.getRange()) {
+        ) / TILE_SIZE > weapon.getRange()) {
             return null;
         }
         double currentHealth = nearestMonster.getHealth();
         currentHealth += (-1 * weapon.getAttack());
-        if(currentHealth <= 0.0) {
+        if (currentHealth <= 0.0) {
             this.monstersKilled++;
             monsterKeyIfDead = nearestMonsterKey;
             currentHealth = 0.0;
         }
         nearestMonster.setHealth(currentHealth);
         nearestMonster.getHealthBar().getStyleClass().removeAll(BAR_CSS_CLASSES);
-        if(currentHealth <= HP_BAR_THRESHOLD * nearestMonster.getHealthCapacity()) {
+        if (currentHealth <= HP_BAR_THRESHOLD * nearestMonster.getHealthCapacity()) {
             nearestMonster.getHealthBar().getStyleClass().add(RED_HP_BAR);
         } else {
             nearestMonster.getHealthBar().getStyleClass().add(GREEN_HP_BAR);
         }
-        nearestMonster.getHealthBar().setProgress(currentHealth / nearestMonster.getHealthCapacity());
+        nearestMonster
+                .getHealthBar()
+                .setProgress(currentHealth / nearestMonster.getHealthCapacity());
         addMonster(nearestMonsterKey, nearestMonster);
         return monsterKeyIfDead;
     }
@@ -65,9 +67,9 @@ public class MonsterService {
     private String getNearestLivingMonster(double playerX, double playerY) {
         Double minDistance = Double.MAX_VALUE;
         String closestMonsterKey = null;
-        for(String key : this.monsterMapping.keySet()) {
+        for (String key : this.monsterMapping.keySet()) {
             Monster currentMonster = this.monsterMapping.get(key);
-            if(!currentMonster.isAlive()) {
+            if (!currentMonster.isAlive()) {
                 continue;
             }
             double currentDistance = this.distanceBetween(
@@ -75,7 +77,7 @@ public class MonsterService {
                     currentMonster.getImageView().getTranslateY(),
                     playerX,
                     playerY);
-            if(currentDistance < minDistance) {
+            if (currentDistance < minDistance) {
                 minDistance = currentDistance;
                 closestMonsterKey = key;
             }
@@ -93,12 +95,12 @@ public class MonsterService {
                 monster.getImageView().getTranslateX(),
                 monster.getImageView().getTranslateY(),
                 playerX,
-                playerY)/TILE_SIZE <= monster.getRange();
+                playerY) / TILE_SIZE <= monster.getRange();
     }
 
     public Integer rollMonsterAttack(String monsterKey) {
         Monster monster = this.monsterMapping.get(monsterKey);
-        if(Math.random() <= monster.getAccuracy()) {
+        if (Math.random() <= monster.getAccuracy()) {
             return monster.getAttack();
         } else {
             return null;
@@ -120,7 +122,7 @@ public class MonsterService {
     public void initiateDeathAnimation(String key) {
         Monster monster = this.monsterMapping.get(key);
         monster.getHealthBar().setVisible(false);
-        if(monster.getOrientation() == LEFT) {
+        if (monster.getOrientation() == LEFT) {
             monster.getImageView().setImage(monster.getDeathAnimationLeft());
         } else {
             monster.getImageView().setImage(monster.getDeathAnimationRight());

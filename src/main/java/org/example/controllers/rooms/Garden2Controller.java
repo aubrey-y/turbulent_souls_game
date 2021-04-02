@@ -9,7 +9,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.example.controllers.GameScreenController;
 import org.example.dto.Monster;
-import org.example.enums.Direction;
 import org.example.services.AppService;
 import org.example.services.DirectionService;
 import org.example.services.HealthService;
@@ -24,6 +23,9 @@ import java.util.ResourceBundle;
 
 import static org.example.enums.Direction.LEFT;
 import static org.example.enums.MonsterType.WATER_BULL;
+import static org.example.util.ResourcePathUtility.WATER_BULL_ATTACK_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.WATER_BULL_DEATH_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.WATER_BULL_IDLE_LEFT_PATH;
 
 public class Garden2Controller extends GameScreenController implements Initializable {
 
@@ -66,10 +68,10 @@ public class Garden2Controller extends GameScreenController implements Initializ
                 this.monsterService,
                 this.waterbull1Key,
                 this.waterbull1,
-                "src/main/resources/static/images/monsters/idle/water_bull_left.png",
+                WATER_BULL_IDLE_LEFT_PATH,
                 null
         );
-        if(!this.appService.getMonstersKilled().contains(this.waterbull1Key)) {
+        if (!this.appService.getMonstersKilled().contains(this.waterbull1Key)) {
             this.setupWaterbull1();
             this.playerService.registerTimeline(this.waterbull1AttackSchedule);
         }
@@ -94,7 +96,9 @@ public class Garden2Controller extends GameScreenController implements Initializ
                         .setImageView(this.waterbull1)
                         .setHealthBar(this.waterbull1HealthBar)
                         .setOrientation(LEFT)
-                        .setDeathAnimationLeft(new Image(Paths.get("src/main/resources/static/images/monsters/gifs/waterbull_death_left.gif").toUri().toString())));
+                        .setDeathAnimationLeft(
+                                new Image(
+                                        Paths.get(WATER_BULL_DEATH_LEFT_PATH).toUri().toString())));
         this.waterbull1AttackSchedule = ScheduleUtility.generateMonsterAttackSchedule(
                 1.0,
                 this.appService,
@@ -105,7 +109,7 @@ public class Garden2Controller extends GameScreenController implements Initializ
                 this.resetPlayerSchedule,
                 this.waterbull1ResetSchedule,
                 Timeline.INDEFINITE,
-                "src/main/resources/static/images/monsters/gifs/waterbull_attack_left.gif",
+                WATER_BULL_ATTACK_LEFT_PATH,
                 null
         );
         this.waterbull1AttackSchedule.play();

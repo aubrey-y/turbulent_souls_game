@@ -69,7 +69,7 @@ public class Forest1Controller extends GameScreenController implements Initializ
                 "src/main/resources/static/images/monsters/gifs/slime.gif",
                 null
         );
-        if(!this.appService.getMonstersKilled().contains(SLIME_1_KEY)) {
+        if (!this.appService.getMonstersKilled().contains(SLIME_1_KEY)) {
             this.setupSlime1();
             this.playerService.registerTimeline(this.slime1AttackSchedule);
         }
