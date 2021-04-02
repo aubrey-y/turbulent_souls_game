@@ -23,6 +23,11 @@ import java.util.ResourceBundle;
 
 import static org.example.enums.Direction.LEFT;
 import static org.example.enums.MonsterType.DARK_KNIGHT;
+import static org.example.util.ResourcePathUtility.DARK_KNIGHT_ATTACK_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.DARK_KNIGHT_DEATH_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.DARK_KNIGHT_DEATH_RIGHT_PATH;
+import static org.example.util.ResourcePathUtility.DARK_KNIGHT_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.DARK_KNIGHT_RIGHT_PATH;
 
 public class Castle3Controller extends GameScreenController implements Initializable {
 
@@ -65,10 +70,10 @@ public class Castle3Controller extends GameScreenController implements Initializ
                 this.monsterService,
                 this.darkknight1Key,
                 this.darkknight1,
-                "src/main/resources/static/images/monsters/gifs/dark_knight_attack_left.gif",
+                DARK_KNIGHT_ATTACK_LEFT_PATH,
                 null
         );
-        if(!this.appService.getMonstersKilled().contains(this.darkknight1Key)) {
+        if (!this.appService.getMonstersKilled().contains(this.darkknight1Key)) {
             this.setupDarkknight1();
             this.playerService.registerTimeline(this.darkknight1AttackSchedule);
         }
@@ -94,9 +99,12 @@ public class Castle3Controller extends GameScreenController implements Initializ
                         .setHealthBar(this.darkknight1HealthBar)
                         .setOrientation(LEFT)
                         .setDeathAnimationLeft(
-                                new Image(Paths.get("src/main/resources/static/images/monsters/gifs/dark_knight_death_left.gif").toUri().toString()))
+                                new Image(
+                                        Paths.get(DARK_KNIGHT_DEATH_LEFT_PATH).toUri().toString()))
                         .setDeathAnimationRight(
-                                new Image(Paths.get("src/main/resources/static/images/monsters/gifs/dark_knight_death_right.gif").toUri().toString())));
+                                new Image(
+                                        Paths.get(DARK_KNIGHT_DEATH_RIGHT_PATH).toUri().toString()))
+        );
         this.darkknight1AttackSchedule = ScheduleUtility.generateMonsterAttackSchedule(
                 1.0,
                 this.appService,
@@ -107,8 +115,8 @@ public class Castle3Controller extends GameScreenController implements Initializ
                 this.resetPlayerSchedule,
                 this.darkknight1ResetSchedule,
                 Timeline.INDEFINITE,
-                "src/main/resources/static/images/monsters/gifs/dark_knight_left.gif",
-                "src/main/resources/static/images/monsters/gifs/dark_knight_right.gif"
+                DARK_KNIGHT_LEFT_PATH,
+                DARK_KNIGHT_RIGHT_PATH
         );
         this.darkknight1AttackSchedule.play();
     }

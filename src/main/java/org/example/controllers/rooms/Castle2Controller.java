@@ -23,6 +23,9 @@ import java.util.ResourceBundle;
 
 import static org.example.enums.Direction.LEFT;
 import static org.example.enums.MonsterType.CASTLE_BULL;
+import static org.example.util.ResourcePathUtility.CASTLE_BULL_ATTACK_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.CASTLE_BULL_DEATH_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.CASTLE_BULL_IDLE_LEFT_PATH;
 
 public class Castle2Controller extends GameScreenController implements Initializable {
 
@@ -65,10 +68,10 @@ public class Castle2Controller extends GameScreenController implements Initializ
                 this.monsterService,
                 this.castlebull1Key,
                 this.castlebull1,
-                "src/main/resources/static/images/monsters/gifs/bull_attack_left.gif",
+                CASTLE_BULL_ATTACK_LEFT_PATH,
                 null
         );
-        if(!this.appService.getMonstersKilled().contains(this.castlebull1Key)) {
+        if (!this.appService.getMonstersKilled().contains(this.castlebull1Key)) {
             this.setupCastlebull1();
             this.playerService.registerTimeline(this.castlebull1AttackSchedule);
         }
@@ -93,7 +96,10 @@ public class Castle2Controller extends GameScreenController implements Initializ
                         .setImageView(this.castlebull1)
                         .setHealthBar(this.castlebull1HealthBar)
                         .setOrientation(LEFT)
-                        .setDeathAnimationLeft(new Image(Paths.get("src/main/resources/static/images/monsters/gifs/bull_death_left.gif").toUri().toString())));
+                        .setDeathAnimationLeft(
+                                new Image(
+                                        Paths.get(CASTLE_BULL_DEATH_LEFT_PATH).toUri().toString()))
+        );
         this.castlebull1AttackSchedule = ScheduleUtility.generateMonsterAttackSchedule(
                 1.0,
                 this.appService,
@@ -104,7 +110,7 @@ public class Castle2Controller extends GameScreenController implements Initializ
                 this.resetPlayerSchedule,
                 this.castlebull1ResetSchedule,
                 Timeline.INDEFINITE,
-                "src/main/resources/static/images/monsters/idle/bull_left.png",
+                CASTLE_BULL_IDLE_LEFT_PATH,
                 null
         );
         this.castlebull1AttackSchedule.play();

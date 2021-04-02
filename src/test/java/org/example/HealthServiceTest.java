@@ -81,7 +81,7 @@ public class HealthServiceTest {
     @Test
     public void testApplyHealthModifierIncreasesHealth() {
         //Given
-        this.withMockedAppService(this.maximumStartingHealth/2);
+        this.withMockedAppService(this.maximumStartingHealth / 2);
         double healthDiff = 1.0;
 
         //When
@@ -90,7 +90,7 @@ public class HealthServiceTest {
         //Then
         assertThat(playerAlive, is(true));
         assertThat(this.finalPlayerState.getHealth(),
-                is(equalTo(this.maximumStartingHealth/2 + healthDiff)));
+                is(equalTo(this.maximumStartingHealth / 2 + healthDiff)));
     }
 
     @Test
@@ -109,7 +109,8 @@ public class HealthServiceTest {
     }
 
     private void withMockedAppService(double startingHealth) {
-        doReturn(this.getStandardPlayerState(startingHealth)).when(this.appService).getPlayerState();
+        doReturn(this.getStandardPlayerState(startingHealth))
+                .when(this.appService).getPlayerState();
         doAnswer(invocationOnMock -> {
             this.finalPlayerState = invocationOnMock.getArgument(0);
             return null;

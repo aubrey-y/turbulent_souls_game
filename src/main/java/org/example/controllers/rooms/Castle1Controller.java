@@ -23,6 +23,9 @@ import java.util.ResourceBundle;
 
 import static org.example.enums.Direction.LEFT;
 import static org.example.enums.MonsterType.WHITE_DRAGON;
+import static org.example.util.ResourcePathUtility.WHITE_DRAGON_ATTACK_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.WHITE_DRAGON_DEATH_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.WHITE_DRAGON_DEATH_RIGHT_PATH;
 
 public class Castle1Controller extends GameScreenController implements Initializable {
 
@@ -68,7 +71,7 @@ public class Castle1Controller extends GameScreenController implements Initializ
                 "src/main/resources/static/images/monsters/gifs/white_dragon_left.gif",
                 "src/main/resources/static/images/monsters/gifs/white_dragon_right.gif"
         );
-        if(!this.appService.getMonstersKilled().contains(this.whitedragon1Key)) {
+        if (!this.appService.getMonstersKilled().contains(this.whitedragon1Key)) {
             this.setupWhitedragon1();
             this.playerService.registerTimeline(this.whiteDragon1AttackSchedule);
         }
@@ -93,8 +96,13 @@ public class Castle1Controller extends GameScreenController implements Initializ
                         .setImageView(this.whitedragon1)
                         .setHealthBar(this.whitedragon1HealthBar)
                         .setOrientation(LEFT)
-                        .setDeathAnimationLeft(new Image(Paths.get("src/main/resources/static/images/monsters/gifs/white_dragon_death_left.gif").toUri().toString()))
-                        .setDeathAnimationRight(new Image(Paths.get("src/main/resources/static/images/monsters/gifs/white_dragon_death_right.gif").toUri().toString())));
+                        .setDeathAnimationLeft(
+                                new Image(
+                                        Paths.get(WHITE_DRAGON_DEATH_LEFT_PATH).toUri().toString()))
+                        .setDeathAnimationRight(
+                                new Image(
+                                        Paths.get(WHITE_DRAGON_DEATH_RIGHT_PATH).toUri().toString())
+                        ));
         this.whiteDragon1AttackSchedule = ScheduleUtility.generateMonsterAttackSchedule(
                 1.0,
                 this.appService,
@@ -105,7 +113,7 @@ public class Castle1Controller extends GameScreenController implements Initializ
                 this.resetPlayerSchedule,
                 this.whiteDragon1ResetSchedule,
                 Timeline.INDEFINITE,
-                "src/main/resources/static/images/monsters/gifs/white_dragon_attack_left.gif",
+                WHITE_DRAGON_ATTACK_LEFT_PATH,
                 null
         );
         this.whiteDragon1AttackSchedule.play();

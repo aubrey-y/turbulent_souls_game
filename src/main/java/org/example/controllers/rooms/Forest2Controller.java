@@ -1,18 +1,14 @@
 package org.example.controllers.rooms;
 
-import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.util.Duration;
 import org.example.controllers.GameScreenController;
 import org.example.dto.Monster;
-import org.example.enums.Direction;
 import org.example.services.AppService;
 import org.example.services.DirectionService;
 import org.example.services.HealthService;
@@ -27,6 +23,11 @@ import java.util.ResourceBundle;
 
 import static org.example.enums.Direction.LEFT;
 import static org.example.enums.MonsterType.GUINEA_PIG;
+import static org.example.util.ResourcePathUtility.GUINEA_PIG_ATTACK_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.GUINEA_PIG_DEATH_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.GUINEA_PIG_DEATH_RIGHT_PATH;
+import static org.example.util.ResourcePathUtility.GUINEA_PIG_IDLE_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.GUINEA_PIG_IDLE_RIGHT_PATH;
 
 public class Forest2Controller extends GameScreenController implements Initializable {
 
@@ -69,10 +70,10 @@ public class Forest2Controller extends GameScreenController implements Initializ
                 this.monsterService,
                 this.guineapig1Key,
                 this.guineapig1,
-                "src/main/resources/static/images/monsters/idle/guinea_pig_left.png",
-                "src/main/resources/static/images/monsters/idle/guinea_pig_right.png"
+                GUINEA_PIG_IDLE_LEFT_PATH,
+                GUINEA_PIG_IDLE_RIGHT_PATH
         );
-        if(!this.appService.getMonstersKilled().contains(this.guineapig1Key)) {
+        if (!this.appService.getMonstersKilled().contains(this.guineapig1Key)) {
             this.setupGuineapig1();
             this.playerService.registerTimeline(this.guineapig1AttackSchedule);
         }
@@ -97,8 +98,13 @@ public class Forest2Controller extends GameScreenController implements Initializ
                         .setImageView(this.guineapig1)
                         .setHealthBar(this.guineapig1HealthBar)
                         .setOrientation(LEFT)
-                        .setDeathAnimationLeft(new Image(Paths.get("src/main/resources/static/images/monsters/gifs/guineapig_death_left.gif").toUri().toString()))
-                        .setDeathAnimationRight(new Image(Paths.get("src/main/resources/static/images/monsters/gifs/guineapig_death_right.gif").toUri().toString())));
+                        .setDeathAnimationLeft(
+                                new Image(
+                                        Paths.get(GUINEA_PIG_DEATH_LEFT_PATH).toUri().toString()))
+                        .setDeathAnimationRight(
+                                new Image(
+                                        Paths.get(GUINEA_PIG_DEATH_RIGHT_PATH).toUri().toString()))
+        );
         this.guineapig1AttackSchedule = ScheduleUtility.generateMonsterAttackSchedule(
                 1.0,
                 this.appService,
@@ -109,7 +115,7 @@ public class Forest2Controller extends GameScreenController implements Initializ
                 this.resetPlayerSchedule,
                 this.guineapig1ResetSchedule,
                 Timeline.INDEFINITE,
-                "src/main/resources/static/images/monsters/gifs/guineapig_attack_left.gif",
+                GUINEA_PIG_ATTACK_LEFT_PATH,
                 null
         );
         this.guineapig1AttackSchedule.play();

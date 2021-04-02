@@ -27,33 +27,34 @@ public class ScheduleUtility {
                                                          PlayerService playerService,
                                                          MonsterService monsterService,
                                                          HealthService healthService,
-                                                         Timeline resetPlayerHitSchedule,
-                                                         Timeline resetMonsterSchedule,
-                                                         int cycleCount,
-                                                         String leftUri,
-                                                         String rightUri) {
+                                                         Object... varargs) {
+        Timeline resetPlayerHitSchedule = (Timeline) varargs[0];
+        Timeline resetMonsterSchedule = (Timeline) varargs[1];
+        Integer cycleCount = (Integer) varargs[2];
+        String leftUri = (String) varargs[3];
+        String rightUri = (String) varargs[4];
         Timeline timeline = new Timeline();
         Timeline finalTimeline = timeline;
-        timeline = new Timeline(new KeyFrame(Duration.seconds(1/attacksPerSecond), actionEvent -> {
-            if(appService.getMonstersKilled().contains(monsterKey)) {
+        timeline = new Timeline(new KeyFrame(Duration.seconds(1 / attacksPerSecond), actionEvnt -> {
+            if (appService.getMonstersKilled().contains(monsterKey)) {
                 finalTimeline.stop();
                 return;
             }
-            if(monsterService.playerIsInRangeOfMonster(
+            if (monsterService.playerIsInRangeOfMonster(
                     monsterKey,
                     playerService.getImageView().getTranslateX(),
                     playerService.getImageView().getTranslateY())) {
                 Integer attack = monsterService.rollMonsterAttack(monsterKey);
-                if(attack != null) {
+                if (attack != null) {
                     boolean playerAlive = healthService.applyHealthModifier(-1 * attack);
-                    if(!playerAlive) {
+                    if (!playerAlive) {
                         playerService.terminateExistingTimelines();
                         FXMLLoader loader = new FXMLLoader(App.class.getResource("gameOver.fxml"));
                         appService.setRoot(loader);
                     }
                     playerService.getImageView().setEffect(new ColorAdjust(-0.17, 0.0, 0.0, 0.0));
                     Monster monster = monsterService.getMonsterForKey(monsterKey);
-                    if(monster.getOrientation() == LEFT) {
+                    if (monster.getOrientation() == LEFT) {
                         monster.getImageView()
                                 .setImage(new Image(Paths.get(leftUri).toUri().toString()));
                     } else {
@@ -90,7 +91,7 @@ public class ScheduleUtility {
         Timeline timeline = new Timeline();
         Timeline finalTimeline = timeline;
         timeline = new Timeline(new KeyFrame(Duration.seconds(duration), actionEvent -> {
-            if(monsterService.getMonsterOrientation(monsterKey) == LEFT) {
+            if (monsterService.getMonsterOrientation(monsterKey) == LEFT) {
                 monster.setImage(new Image(Paths.get(leftUri).toUri().toString()));
             } else {
                 monster.setImage(new Image(Paths.get(rightUri).toUri().toString()));
@@ -111,7 +112,8 @@ public class ScheduleUtility {
         return timeline;
     }
 
-    public static Timeline generateBossCheckSchedule(AppService appService, MonsterService monsterService) {
+    public static Timeline generateBossCheckSchedule(AppService appService,
+                                                     MonsterService monsterService) {
         Timeline timeline = new Timeline();
         Timeline finalTimeline = timeline;
         timeline = new Timeline(new KeyFrame(Duration.seconds(1.0), actionEvent -> {

@@ -302,8 +302,14 @@ public class Forest1ControllerTest {
         robot.sleep(ONE_SECOND + 100);
 
         assertThat(this.controller.getAppService().getPlayerState().getHealth(),
-                anyOf(equalTo(this.controller.getAppService().getPlayerState().getHealthCapacity() - slime1.getAttack()),
-                        equalTo(this.controller.getAppService().getPlayerState().getHealthCapacity() -  (2 * slime1.getAttack()))));
+                anyOf(equalTo(this.controller
+                                .getAppService()
+                                .getPlayerState()
+                                .getHealthCapacity() - slime1.getAttack()),
+                        equalTo(this.controller
+                                .getAppService()
+                                .getPlayerState()
+                                .getHealthCapacity() -  (2 * slime1.getAttack()))));
     }
 
     @Test
@@ -323,7 +329,10 @@ public class Forest1ControllerTest {
         robot.sleep(ONE_SECOND + 100);
 
         // Check that player health is 0
-        assertThat(this.controller.getAppService().getPlayerState().getHealthCapacity() - slime1.getAttack(),
+        assertThat(this.controller
+                        .getAppService()
+                        .getPlayerState()
+                        .getHealthCapacity() - slime1.getAttack(),
                 is(equalTo(0.0)));
     }
 

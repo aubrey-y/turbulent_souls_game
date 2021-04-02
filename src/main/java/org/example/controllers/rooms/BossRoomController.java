@@ -23,6 +23,11 @@ import java.util.ResourceBundle;
 
 import static org.example.enums.Direction.LEFT;
 import static org.example.enums.MonsterType.DARK_KNIGHT;
+import static org.example.util.ResourcePathUtility.DARK_KNIGHT_ATTACK_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.DARK_KNIGHT_DEATH_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.DARK_KNIGHT_DEATH_RIGHT_PATH;
+import static org.example.util.ResourcePathUtility.DARK_KNIGHT_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.DARK_KNIGHT_RIGHT_PATH;
 
 public class BossRoomController extends GameScreenController implements Initializable {
 
@@ -66,10 +71,10 @@ public class BossRoomController extends GameScreenController implements Initiali
                 this.monsterService,
                 this.boss1Key,
                 this.boss1,
-                "src/main/resources/static/images/monsters/gifs/dark_knight_attack_left.gif",
+                DARK_KNIGHT_ATTACK_LEFT_PATH,
                 null
         );
-        if(!this.appService.getMonstersKilled().contains(this.boss1Key)) {
+        if (!this.appService.getMonstersKilled().contains(this.boss1Key)) {
             this.setupBoss1();
             this.playerService.registerTimeline(this.boss1AttackSchedule);
             this.playerService.registerTimeline(this.boss1DeadSchedule);
@@ -96,8 +101,8 @@ public class BossRoomController extends GameScreenController implements Initiali
                 this.resetPlayerSchedule,
                 this.boss1ResetSchedule,
                 Timeline.INDEFINITE,
-                "src/main/resources/static/images/monsters/gifs/dark_knight_left.gif",
-                "src/main/resources/static/images/monsters/gifs/dark_knight_right.gif"
+                DARK_KNIGHT_LEFT_PATH,
+                DARK_KNIGHT_RIGHT_PATH
         );
         this.boss1AttackSchedule.play();
 
@@ -120,9 +125,9 @@ public class BossRoomController extends GameScreenController implements Initiali
                 .setHealthBar(this.boss1HealthBar)
                 .setOrientation(LEFT)
                 .setDeathAnimationLeft(
-                        new Image(Paths.get("src/main/resources/static/images/monsters/gifs/dark_knight_death_left.gif").toUri().toString()))
+                        new Image(Paths.get(DARK_KNIGHT_DEATH_RIGHT_PATH).toUri().toString()))
                 .setDeathAnimationRight(
-                        new Image(Paths.get("src/main/resources/static/images/monsters/gifs/dark_knight_death_right.gif").toUri().toString()));
+                        new Image(Paths.get(DARK_KNIGHT_DEATH_LEFT_PATH).toUri().toString()));
 
     }
 }

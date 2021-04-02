@@ -10,7 +10,6 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import org.example.dto.HealthBarConstants;
 import org.example.dto.PlayerState;
 import org.example.services.AppService;
 import org.example.services.DirectionService;
@@ -98,7 +97,7 @@ public class GameScreenController {
                 this.displayPlayerRightOrientation(this.appService.getPlayerState());
                 break;
             case P:
-                if(this.appService.getDevMode()) {
+                if (this.appService.getDevMode()) {
                     this.healthService.applyHealthModifier(-10);
                 }
                 break;
@@ -106,7 +105,7 @@ public class GameScreenController {
                 String monsterKilled = monsterService.attackNearestMonster(
                         this.appService.getPlayerState().getActiveWeapon(),
                         this.player.getTranslateX(), this.player.getTranslateY());
-                if(monsterKilled != null) {
+                if (monsterKilled != null) {
                     monsterService.initiateDeathAnimation(monsterKilled);
                     this.appService.addMonsterKilled(monsterKilled);
                 }
@@ -158,7 +157,7 @@ public class GameScreenController {
     }
 
     private void initializePlayerHealth(PlayerState playerState) {
-        this.healthBar.setProgress(playerState.getHealth()/playerState.getHealthCapacity());
+        this.healthBar.setProgress(playerState.getHealth() / playerState.getHealthCapacity());
         this.healthText.setText(
                 (int) playerState.getHealth() + "/" + (int) playerState.getHealthCapacity());
         this.healthService.setHealthBar(this.healthBar).setHealthText(this.healthText);
@@ -210,7 +209,7 @@ public class GameScreenController {
     }
 
     protected void displayCorrectPlayerOrientation(PlayerState playerState) {
-        if(playerState.getSpawnOrientation() == LEFT) {
+        if (playerState.getSpawnOrientation() == LEFT) {
             this.displayPlayerLeftOrientation(playerState);
         } else {
             this.displayPlayerRightOrientation(playerState);

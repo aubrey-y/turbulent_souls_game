@@ -1,5 +1,5 @@
 package org.example.dto;
-import javafx.animation.Timeline;
+
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
@@ -42,18 +42,16 @@ public class Monster {
                    double range,
                    int attack,
                    double accuracy,
-                   ImageView imageView,
-                   ProgressBar healthBar,
-                   Label healthText) {
+                   Object... varargs) {
         this.monsterType = monsterType;
         this.health = health;
         this.healthCapacity = healthCapacity;
         this.range = range;
         this.attack = attack;
         this.accuracy = accuracy;
-        this.imageView = imageView;
-        this.healthBar = healthBar;
-        this.healthText = healthText;
+        this.imageView = (ImageView) varargs[0];
+        this.healthBar = (ProgressBar) varargs[1];
+        this.healthText = (Label) varargs[2];
     }
 
     public boolean isAlive() {
