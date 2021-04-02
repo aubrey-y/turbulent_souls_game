@@ -30,8 +30,6 @@ import static org.example.enums.MonsterType.GUINEA_PIG;
 
 public class Forest2Controller extends GameScreenController implements Initializable {
 
-    private MonsterService monsterService;
-
     private Timeline guineapig1AttackSchedule;
     private Timeline guineapig1ResetSchedule;
     private Timeline resetPlayerSchedule;

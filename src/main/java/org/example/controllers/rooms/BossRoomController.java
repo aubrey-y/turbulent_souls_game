@@ -26,8 +26,6 @@ import static org.example.enums.MonsterType.DARK_KNIGHT;
 
 public class BossRoomController extends GameScreenController implements Initializable {
 
-    private MonsterService monsterService;
-
     private Timeline boss1AttackSchedule;
     private Timeline boss1ResetSchedule;
     private Timeline resetPlayerSchedule;

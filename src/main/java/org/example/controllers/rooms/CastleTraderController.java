@@ -26,8 +26,6 @@ import static org.example.enums.MonsterType.SLIME;
 
 public class CastleTraderController extends GameScreenController implements Initializable {
 
-    private MonsterService monsterService;
-
     private Timeline slime1AttackSchedule;
     private Timeline slime1ResetSchedule;
     private Timeline resetPlayerHueSchedule;

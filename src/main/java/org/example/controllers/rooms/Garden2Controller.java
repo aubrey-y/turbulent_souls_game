@@ -27,8 +27,6 @@ import static org.example.enums.MonsterType.WATER_BULL;
 
 public class Garden2Controller extends GameScreenController implements Initializable {
 
-    private MonsterService monsterService;
-
     private Timeline waterbull1AttackSchedule;
     private Timeline waterbull1ResetSchedule;
     private Timeline resetPlayerSchedule;
