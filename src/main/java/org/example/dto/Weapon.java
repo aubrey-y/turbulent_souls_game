@@ -2,24 +2,13 @@ package org.example.dto;
 
 import org.example.enums.WeaponType;
 
-public abstract class Weapon {
-
-    protected String name;
+public abstract class Weapon extends Item {
 
     protected WeaponType type;
 
     protected int attack;
 
     protected double range;
-
-    public String getName() {
-        return name;
-    }
-
-    public Weapon setName(String name) {
-        this.name = name;
-        return this;
-    }
 
     public WeaponType getType() {
         return type;

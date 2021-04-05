@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -55,22 +54,6 @@
             </ImageView>
          </children>
       </Pane>
-      <StackPane alignment="BOTTOM_LEFT" layoutX="46.0" layoutY="-13.0" prefHeight="1032.0" prefWidth="1874.0" AnchorPane.bottomAnchor="61.0" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-13.0">
-         <children>
-            <Button id="clickable" fx:id="closeButton" alignment="BASELINE_CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE">
-               <font>
-                  <Font name="Pixeboy" size="30.0" />
-               </font>
-               <graphic>
-                  <Label id="clickable" stylesheets="@../../static/css/fontstyle.css" text="Exit" textFill="WHITE">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                  </Label>
-               </graphic>
-            </Button>
-         </children>
-      </StackPane>
       <Label fx:id="goldAmountLabel" layoutX="25.0" layoutY="50.0" prefHeight="59.0" prefWidth="145.0" stylesheets="@../../static/css/fontstyle.css" text="GOLD : " textFill="WHITE">
          <font>
             <Font size="43.0" />
@@ -111,5 +94,17 @@
             <HBox fx:id="inventoryRow5" prefHeight="150.0" prefWidth="1200.0" />
          </children>
       </VBox>
+      <Button id="clickable" fx:id="closeButton" alignment="BASELINE_CENTER" focusTraversable="false" layoutX="100.0" layoutY="950.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE">
+         <font>
+            <Font name="Pixeboy" size="30.0" />
+         </font>
+         <graphic>
+            <Label id="clickable" stylesheets="@../../static/css/fontstyle.css" text="Exit" textFill="WHITE">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>
