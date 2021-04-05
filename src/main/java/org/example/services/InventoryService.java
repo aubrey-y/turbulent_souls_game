@@ -48,7 +48,8 @@ public class InventoryService {
             for(Weapon weapon : weaponInventory.values()) {
                 ToggleButton toggleButton = new ToggleButton();
                 toggleButton.setToggleGroup(this.inventoryToggleGroup);
-                toggleButton.getStylesheets().add(TOGGLE_BUTTON_STYLE_PATH);
+                toggleButton.getStylesheets()
+                        .add(Paths.get(TOGGLE_BUTTON_STYLE_PATH).toUri().toString());
                 toggleButton.setGraphic(
                         new ImageView(Paths.get(weapon.getImagePath()).toUri().toString()));
                 toggleButton.setOnAction(actionEvent -> {
