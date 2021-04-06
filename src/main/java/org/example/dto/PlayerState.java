@@ -5,7 +5,8 @@ import org.example.enums.Difficulty;
 import org.example.enums.Direction;
 import org.example.exceptions.PlayerCreationException;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PlayerState {
 
@@ -15,7 +16,9 @@ public class PlayerState {
 
     private Weapon activeWeapon;
 
-    private List<Weapon> weaponInventory;
+    private Map<String, Weapon> weaponInventory = new HashMap<>();
+
+    private Map<String, Item> generalInventory = new HashMap<>();
 
     private Difficulty difficulty;
 
@@ -58,6 +61,7 @@ public class PlayerState {
             throw new PlayerCreationException("Invalid archetype passed "
             + "for player weapon assignment");
         }
+        this.weaponInventory.put(this.activeWeapon.getImagePath(), this.activeWeapon);
     }
 
     private void assignDefaultGoldForDifficulty() throws PlayerCreationException {
@@ -113,11 +117,11 @@ public class PlayerState {
         return this;
     }
 
-    public List<Weapon> getWeaponInventory() {
+    public Map<String, Weapon> getWeaponInventory() {
         return weaponInventory;
     }
 
-    public PlayerState setWeaponInventory(List<Weapon> weaponInventory) {
+    public PlayerState setWeaponInventory(Map<String, Weapon> weaponInventory) {
         this.weaponInventory = weaponInventory;
         return this;
     }

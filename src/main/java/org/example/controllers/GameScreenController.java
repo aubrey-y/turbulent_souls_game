@@ -14,6 +14,7 @@ import org.example.dto.PlayerState;
 import org.example.services.AppService;
 import org.example.services.DirectionService;
 import org.example.services.HealthService;
+import org.example.services.InventoryService;
 import org.example.services.MonsterService;
 import org.example.services.PlayerService;
 import org.example.services.RoomDirectionService;
@@ -24,7 +25,7 @@ import static javafx.scene.input.KeyCode.SHIFT;
 import static org.example.enums.Direction.LEFT;
 
 
-public class GameScreenController {
+public class GameScreenController extends InventoryController {
 
     protected AppService appService;
 
@@ -37,6 +38,8 @@ public class GameScreenController {
     protected HealthService healthService;
 
     protected MonsterService monsterService;
+
+    protected InventoryService inventoryService;
 
     private Scene scene;
 
@@ -80,6 +83,8 @@ public class GameScreenController {
         this.goldAmount.setText(String.valueOf(this.appService.getPlayerState().getGoldAmount()));
         this.initializePlayerHealth(playerState);
         this.initializePlayerImageView(playerState);
+        this.inventoryService = new InventoryService(this.appService);
+        this.initializeInventoryService(this.inventoryService);
         this.scene.setOnKeyPressed(e -> {
             switch (e.getCode()) {
             case W:
@@ -100,6 +105,9 @@ public class GameScreenController {
                 if (this.appService.getDevMode()) {
                     this.healthService.applyHealthModifier(-10);
                 }
+                break;
+            case B:
+                this.inventoryService.toggleInventoryOpen();
                 break;
             case SPACE:
                 String monsterKilled = monsterService.attackNearestMonster(
@@ -162,6 +170,33 @@ public class GameScreenController {
                 (int) playerState.getHealth() + "/" + (int) playerState.getHealthCapacity());
         this.healthService.setHealthBar(this.healthBar).setHealthText(this.healthText);
         this.healthService.applyHealthModifier(0.0);
+    }
+
+    private void initializeInventoryService(InventoryService inventoryService) {
+        this.inventoryPreviewBackground.setLayoutX(1400);
+        this.inventoryPreviewBackground.setLayoutY(100);
+        this.inventoryPreviewImage.setLayoutX(1400);
+        this.inventoryPreviewImage.setLayoutY(150);
+        this.inventoryPreviewTitle.setLayoutX(1410);
+        this.inventoryPreviewTitle.setLayoutY(100);
+        this.inventoryPreviewStat.setLayoutX(1410);
+        this.inventoryPreviewStat.setLayoutY(593);
+        this.inventoryPreviewDescription.setLayoutX(1410);
+        this.inventoryPreviewDescription.setLayoutY(643);
+        this.inventoryVBox.setLayoutX(50);
+        this.inventoryVBox.setLayoutY(150);
+        inventoryService
+                .setInventoryBackground(this.inventoryBackground)
+                .setInventoryPreviewBackground(this.inventoryPreviewBackground)
+                .setInventoryPreviewImage(this.inventoryPreviewImage)
+                .setInventoryPreviewTitle(this.inventoryPreviewTitle)
+                .setInventoryPreviewStat(this.inventoryPreviewStat)
+                .setInventoryPreviewDescription(this.inventoryPreviewDescription)
+                .setInventoryRow1(this.inventoryRow1)
+                .setInventoryRow2(this.inventoryRow2)
+                .setInventoryRow3(this.inventoryRow3)
+                .setInventoryRow4(this.inventoryRow4)
+                .setInventoryRow5(this.inventoryRow5);
     }
 
     private void displayPlayerRightOrientation(PlayerState playerState) {
@@ -285,12 +320,30 @@ public class GameScreenController {
         return this;
     }
 
+    public HealthService getHealthService() {
+        return healthService;
+    }
+
+    public GameScreenController setHealthService(HealthService healthService) {
+        this.healthService = healthService;
+        return this;
+    }
+
     public MonsterService getMonsterService() {
         return monsterService;
     }
 
     public GameScreenController setMonsterService(MonsterService monsterService) {
         this.monsterService = monsterService;
+        return this;
+    }
+
+    public InventoryService getInventoryService() {
+        return inventoryService;
+    }
+
+    public GameScreenController setInventoryService(InventoryService inventoryService) {
+        this.inventoryService = inventoryService;
         return this;
     }
 }

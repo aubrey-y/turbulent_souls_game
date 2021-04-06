@@ -81,8 +81,8 @@ public class Castle2Controller extends GameScreenController implements Initializ
         this.castlebull1.setTranslateX(1000);
         this.castlebull1.setTranslateY(400);
         this.castlebull1.setVisible(true);
-        this.castlebull1HealthBar.setTranslateX(965);
-        this.castlebull1HealthBar.setTranslateY(360);
+        this.castlebull1HealthBar.setTranslateX(995);
+        this.castlebull1HealthBar.setTranslateY(390);
         this.castlebull1HealthBar.setVisible(true);
         this.monsterService.addMonster(
                 this.castlebull1Key,

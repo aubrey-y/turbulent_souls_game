@@ -81,7 +81,7 @@ public class Castle1Controller extends GameScreenController implements Initializ
         this.whitedragon1.setTranslateX(1000);
         this.whitedragon1.setTranslateY(400);
         this.whitedragon1.setVisible(true);
-        this.whitedragon1HealthBar.setTranslateX(970);
+        this.whitedragon1HealthBar.setTranslateX(980);
         this.whitedragon1HealthBar.setTranslateY(360);
         this.whitedragon1HealthBar.setVisible(true);
         this.monsterService.addMonster(

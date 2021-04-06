@@ -85,8 +85,8 @@ public class BossRoomController extends GameScreenController implements Initiali
         this.boss1.setTranslateX(1000);
         this.boss1.setTranslateY(400);
         this.boss1.setVisible(true);
-        this.boss1HealthBar.setTranslateX(875);
-        this.boss1HealthBar.setTranslateY(300);
+        this.boss1HealthBar.setTranslateX(975);
+        this.boss1HealthBar.setTranslateY(350);
         this.boss1HealthBar.setVisible(true);
         this.monsterService.addMonster(
                 this.boss1Key,

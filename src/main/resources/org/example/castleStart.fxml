@@ -3,11 +3,15 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.GaussianBlur?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.rooms.Castle1Controller">
@@ -29,24 +33,27 @@
                   <Image url="@../../static/images/monsters/gifs/white_dragon_left.gif" />
                </image>
             </ImageView>
+            <ProgressBar fx:id="whitedragon1HealthBar" focusTraversable="false" opacity="0.8" prefHeight="10.0" prefWidth="150.0" progress="1.0" style="-fx-control-inner-background: #3E5155;" styleClass="green-bar" stylesheets="@../../static/css/fontstyle.css" visible="false" />
+            <ImageView fx:id="inventoryBackground" fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../../static/images/rooms/castleRooms/castleStart.png" />
+               </image>
+               <effect>
+                  <GaussianBlur radius="49.75" />
+               </effect>
+            </ImageView>
+            <Rectangle fx:id="inventoryPreviewBackground" arcHeight="5.0" arcWidth="5.0" fill="#c6a264" height="800.0" stroke="TRANSPARENT" strokeType="INSIDE" visible="false" width="450.0">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Rectangle>
+            <ImageView id="archetypeButton" fx:id="inventoryPreviewImage" fitHeight="450.0" fitWidth="512.0" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../../static/images/swordR.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
-      <StackPane alignment="BOTTOM_LEFT" layoutX="46.0" layoutY="-13.0" prefHeight="1032.0" prefWidth="1874.0" AnchorPane.bottomAnchor="61.0" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-13.0">
-         <children>
-            <Button id="clickable" fx:id="closeButton" alignment="BASELINE_CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE">
-               <font>
-                  <Font name="Pixeboy" size="30.0" />
-               </font>
-               <graphic>
-                  <Label id="clickable" stylesheets="@../../static/css/fontstyle.css" text="Exit" textFill="WHITE">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                  </Label>
-               </graphic>
-            </Button>
-         </children>
-      </StackPane>
       <Label fx:id="goldAmountLabel" layoutX="35.0" layoutY="60.0" prefHeight="59.0" prefWidth="145.0" stylesheets="@../../static/css/fontstyle.css" text="GOLD : " textFill="WHITE">
          <font>
             <Font size="43.0" />
@@ -63,6 +70,41 @@
             <Font size="37.0" />
          </font>
       </Label>
-      <ProgressBar fx:id="whitedragon1HealthBar" focusTraversable="false" layoutX="20.0" layoutY="20.0" opacity="0.8" prefHeight="10.0" prefWidth="150.0" progress="1.0" style="-fx-control-inner-background: #3E5155;" styleClass="green-bar" stylesheets="@../../static/css/fontstyle.css" visible="false" />
+      <Label fx:id="inventoryPreviewTitle" layoutX="1420.0" layoutY="110.0" prefHeight="59.0" prefWidth="431.0" stylesheets="@../../static/css/fontstyle.css" text="Placeholder" textFill="WHITE" visible="false">
+         <font>
+            <Font size="43.0" />
+         </font>
+      </Label>
+      <Label fx:id="inventoryPreviewStat" layoutX="1420.0" layoutY="603.0" prefHeight="50.0" prefWidth="431.0" stylesheets="@../../static/css/fontstyle.css" text="Base ATK: " textFill="WHITE" visible="false">
+         <font>
+            <Font size="43.0" />
+         </font>
+      </Label>
+      <Label fx:id="inventoryPreviewDescription" alignment="TOP_LEFT" layoutX="1420.0" layoutY="653.0" prefHeight="245.0" prefWidth="431.0" stylesheets="@../../static/css/fontstyle.css" text="lorum ipsum" textFill="WHITE" visible="false" wrapText="true">
+         <font>
+            <Font size="43.0" />
+         </font>
+      </Label>
+      <VBox fx:id="inventoryVBox" layoutX="60.0" layoutY="160.0" prefHeight="800.0" prefWidth="1200.0">
+         <children>
+            <HBox fx:id="inventoryRow1" prefHeight="150.0" prefWidth="1200.0" />
+            <HBox fx:id="inventoryRow2" prefHeight="150.0" prefWidth="1200.0" />
+            <HBox fx:id="inventoryRow3" prefHeight="150.0" prefWidth="1200.0" />
+            <HBox fx:id="inventoryRow4" prefHeight="150.0" prefWidth="1200.0" />
+            <HBox fx:id="inventoryRow5" prefHeight="150.0" prefWidth="1200.0" />
+         </children>
+      </VBox>
+      <Button id="clickable" fx:id="closeButton" alignment="BASELINE_CENTER" focusTraversable="false" layoutX="110.0" layoutY="960.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE">
+         <font>
+            <Font name="Pixeboy" size="30.0" />
+         </font>
+         <graphic>
+            <Label id="clickable" stylesheets="@../../static/css/fontstyle.css" text="Exit Game" textFill="WHITE">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>

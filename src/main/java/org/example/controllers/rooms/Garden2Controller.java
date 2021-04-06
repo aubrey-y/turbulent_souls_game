@@ -81,8 +81,8 @@ public class Garden2Controller extends GameScreenController implements Initializ
         this.waterbull1.setTranslateX(1000);
         this.waterbull1.setTranslateY(400);
         this.waterbull1.setVisible(true);
-        this.waterbull1HealthBar.setTranslateX(945);
-        this.waterbull1HealthBar.setTranslateY(360);
+        this.waterbull1HealthBar.setTranslateX(975);
+        this.waterbull1HealthBar.setTranslateY(390);
         this.waterbull1HealthBar.setVisible(true);
         this.monsterService.addMonster(
                 this.waterbull1Key,

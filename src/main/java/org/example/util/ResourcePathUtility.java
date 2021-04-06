@@ -82,4 +82,16 @@ public class ResourcePathUtility {
 
     public static final String WATER_BULL_ATTACK_LEFT_PATH = "" 
             + "src/main/resources/static/images/monsters/gifs/waterbull_attack_left.gif";
+
+    public static final String BASIC_SWORD_PATH = ""
+            + "src/main/resources/static/images/swordR.png";
+
+    public static final String BASIC_STAFF_PATH = ""
+            + "src/main/resources/static/images/staff.png";
+
+    public static final String BASIC_MAGIC_PATH = ""
+            + "src/main/resources/static/images/BlackMagic.png";
+
+    public static final String TOGGLE_BUTTON_STYLE_PATH = ""
+            + "src/main/resources/static/css/button.css";
 }

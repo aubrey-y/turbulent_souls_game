@@ -83,7 +83,7 @@ public class Garden1Controller extends GameScreenController implements Initializ
         this.serpent1.setTranslateX(1000);
         this.serpent1.setTranslateY(400);
         this.serpent1.setVisible(true);
-        this.serpent1HealthBar.setTranslateX(975);
+        this.serpent1HealthBar.setTranslateX(1010);
         this.serpent1HealthBar.setTranslateY(360);
         this.serpent1HealthBar.setVisible(true);
         this.monsterService.addMonster(
