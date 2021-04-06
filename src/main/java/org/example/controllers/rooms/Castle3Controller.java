@@ -83,8 +83,8 @@ public class Castle3Controller extends GameScreenController implements Initializ
         this.darkknight1.setTranslateX(1000);
         this.darkknight1.setTranslateY(400);
         this.darkknight1.setVisible(true);
-        this.darkknight1HealthBar.setTranslateX(895);
-        this.darkknight1HealthBar.setTranslateY(300);
+        this.darkknight1HealthBar.setTranslateX(995);
+        this.darkknight1HealthBar.setTranslateY(350);
         this.darkknight1HealthBar.setVisible(true);
         this.monsterService.addMonster(
                 this.darkknight1Key,
