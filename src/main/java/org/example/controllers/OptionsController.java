@@ -70,15 +70,7 @@ public class OptionsController extends ErrorBaseController {
     }
 
     private void checkPassword() {
-        String password;
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader("password.txt"));
-            password = reader.readLine().strip();
-            reader.close();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        if (passwordEntry.getText().equals(password)) {
+        if (passwordEntry.getText().equals(System.getenv("DEVMODE_PW"))) {
             this.acceptCredentials();
         } else {
             this.setErrorMessage("Invalid password, this has been reported.");
