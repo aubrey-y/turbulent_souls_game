@@ -173,6 +173,18 @@ public class GameScreenController extends InventoryController {
     }
 
     private void initializeInventoryService(InventoryService inventoryService) {
+        this.inventoryPreviewBackground.setLayoutX(1400);
+        this.inventoryPreviewBackground.setLayoutY(100);
+        this.inventoryPreviewImage.setLayoutX(1400);
+        this.inventoryPreviewImage.setLayoutY(150);
+        this.inventoryPreviewTitle.setLayoutX(1410);
+        this.inventoryPreviewTitle.setLayoutY(100);
+        this.inventoryPreviewStat.setLayoutX(1410);
+        this.inventoryPreviewStat.setLayoutY(593);
+        this.inventoryPreviewDescription.setLayoutX(1410);
+        this.inventoryPreviewDescription.setLayoutY(643);
+        this.inventoryVBox.setLayoutX(50);
+        this.inventoryVBox.setLayoutY(150);
         inventoryService
                 .setInventoryBackground(this.inventoryBackground)
                 .setInventoryPreviewBackground(this.inventoryPreviewBackground)

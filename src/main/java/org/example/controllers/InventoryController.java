@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 
 public abstract class InventoryController {
@@ -25,6 +26,9 @@ public abstract class InventoryController {
 
     @FXML
     protected Label inventoryPreviewDescription;
+
+    @FXML
+    protected VBox inventoryVBox;
 
     @FXML
     protected HBox inventoryRow1;
