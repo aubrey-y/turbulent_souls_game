@@ -99,7 +99,7 @@
             <Font name="Pixeboy" size="30.0" />
          </font>
          <graphic>
-            <Label id="clickable" stylesheets="@../../static/css/fontstyle.css" text="Exit" textFill="WHITE">
+            <Label id="clickable" stylesheets="@../../static/css/fontstyle.css" text="Exit Game" textFill="WHITE">
                <font>
                   <Font size="36.0" />
                </font>
