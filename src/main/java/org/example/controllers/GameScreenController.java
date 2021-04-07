@@ -119,9 +119,7 @@ public class GameScreenController extends InventoryController {
                 }
                 break;
             case E:
-                if (this.inventoryService.getInventoryOpen()) {
-                    //Will use item upon pressing e
-                }
+                this.inventoryService.useItem();
                 break;
             default:
                 break;

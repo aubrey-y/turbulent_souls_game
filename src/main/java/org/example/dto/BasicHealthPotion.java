@@ -14,4 +14,5 @@ public class BasicHealthPotion extends Potion {
         this.imagePath = BASIC_HEALTH_PATH;
         this.description = "This is that feel good juice";
     }
+
 }

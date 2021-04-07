@@ -7,6 +7,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Rectangle;
+import org.example.dto.BasicHealthPotion;
+import org.example.dto.BasicSword;
 import org.example.dto.Item;
 import org.example.dto.Potion;
 import org.example.dto.Weapon;
@@ -40,6 +42,8 @@ public class InventoryService {
     public InventoryService(AppService appService) {
         this.appService = appService;
     }
+
+    private String recentlySelected;
 
     public void toggleInventoryOpen() {
         if(!this.inventoryOpen) {
@@ -98,6 +102,7 @@ public class InventoryService {
                 .getWeaponInventory();
         Map<String, Item> generalInventory = this.appService.getPlayerState()
                 .getGeneralInventory();
+        recentlySelected = pathId;
 
         Weapon weapon = weaponInventory.get(pathId);
         if (weapon != null) {
@@ -118,6 +123,25 @@ public class InventoryService {
             }
         }
 
+    }
+
+    public void useItem() {
+        Map<String, Weapon> weaponInventory = this.appService.getPlayerState()
+                .getWeaponInventory();
+        Map<String, Item> generalInventory = this.appService.getPlayerState()
+                .getGeneralInventory();
+        Weapon weapon = weaponInventory.get(recentlySelected);
+
+        if (weapon != null) {
+            //Switch weapons here
+        } else {
+            Item item = generalInventory.get(recentlySelected);
+            if (item != null) {
+                if (item instanceof BasicHealthPotion) {
+                    //on call heal
+                }
+            }
+        }
     }
 
     public ImageView getInventoryBackground() {
