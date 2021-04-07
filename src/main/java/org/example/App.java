@@ -34,6 +34,8 @@ public class App extends Application {
 
     private static boolean devMode = false;
 
+    private static String loggedInEmail;
+
     private static AudioClip clickSound;
 
     private static PlayerState playerState;
@@ -118,6 +120,14 @@ public class App extends Application {
 
     public static void setDevMode(boolean devMode) {
         App.devMode = devMode;
+    }
+
+    public static String getLoggedInEmail() {
+        return loggedInEmail;
+    }
+
+    public static void setLoggedInEmail(String loggedInEmail) {
+        App.loggedInEmail = loggedInEmail;
     }
 
     public static Room getActiveRoom() {

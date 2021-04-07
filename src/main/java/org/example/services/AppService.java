@@ -37,6 +37,14 @@ public class AppService {
         return App.isDevMode();
     }
 
+    public boolean getLoggedIn() {
+        return App.getLoggedInEmail() != null;
+    }
+
+    public void setLoggedInEmail(String loggedInEmail) {
+        App.setLoggedInEmail(loggedInEmail);
+    }
+
     public void setRoot(FXMLLoader loader) {
         try {
             App.setRoot(loader.load());

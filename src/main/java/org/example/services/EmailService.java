@@ -27,7 +27,7 @@ public class EmailService {
         this.httpTransport = httpTransport;
     }
 
-    public boolean sendEmail(String targetEmail, int code) throws MessagingException, IOException {
+    public boolean sendEmail(String targetEmail, String code) throws MessagingException, IOException {
         Gmail gmail = this.getGmail();
         Message message = this.createMessageWithEmail(
                 this.createEmail(
@@ -35,7 +35,10 @@ public class EmailService {
                         System.getenv("GOOGLE_EMAIL"),
                         "Your Authentication Code",
                         "Here is your authentication code: " + code
-                                + "\nIt is valid for the next 60 seconds.")
+                                + "\n\nIt is valid for the next 60 seconds."
+                                + "\n\nIf you are not the intended recipient of this email,"
+                                + "please ignore this communication or report this incident"
+                                + "by replying to this email.")
         );
         return this.sendMessage(gmail, System.getenv("GOOGLE_EMAIL"), message);
     }
@@ -71,8 +74,7 @@ public class EmailService {
                                           String subject,
                                           String bodyText)
             throws MessagingException {
-        Properties props = new Properties();
-        Session session = Session.getDefaultInstance(props, null);
+        Session session = Session.getDefaultInstance(new Properties(), null);
 
         MimeMessage email = new MimeMessage(session);
 
@@ -116,8 +118,7 @@ public class EmailService {
      */
     public boolean sendMessage(Gmail service,
                                       String userId,
-                                      Message emailContent)
-            throws MessagingException, IOException {
+                                      Message emailContent) throws IOException {
         Message message = service.users().messages().send(userId, emailContent).execute();
 
         System.out.println("Message id: " + message.getId());
