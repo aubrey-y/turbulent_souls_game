@@ -97,7 +97,7 @@ Dungeon crawler group project for CS 2340, Georgia Institute of Technology
     If you see some kind of authorization error, you did not properly add the email to your test users in step 14.
     
     You will see a few redirects and eventually a blank screen
-    (localhost). Inside the final url in your browser's address bar, you'll see `code=<something>`.
+    (localhost). Inside the final url in your browser's address bar, you'll see `http://localhost/?code=<REDACTED>&scope=https://www.googleapis.com/auth/gmail.send`.
     
     Save that code somewhere. It's not needed for this application but it's needed for the next step.
 
