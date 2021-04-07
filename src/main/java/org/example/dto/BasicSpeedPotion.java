@@ -8,7 +8,7 @@ public class BasicSpeedPotion extends Potion {
         this.name = "Basic Speed Potion";
         this.type = SPEED;
         this.statLabel = "Speed Increase:";
-        this.statValue = 10;
+        this.statValue = 100;
         this.quantity = 1;
         this.imagePath = BASIC_SPEED_PATH;
         this.description = "This will enhance your movement speed";

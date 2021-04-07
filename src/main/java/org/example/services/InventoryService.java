@@ -100,22 +100,24 @@ public class InventoryService {
                 .getGeneralInventory();
 
         Weapon weapon = weaponInventory.get(pathId);
-        if (weapon instanceof Weapon) {
+        if (weapon != null) {
             this.inventoryPreviewTitle.setText(weapon.getName());
             this.inventoryPreviewImage.setImage(
                     new Image(Paths.get(weapon.getImagePath()).toUri().toString()));
             this.inventoryPreviewStat.setText("Base ATK: " + weapon.getAttack());
             this.inventoryPreviewDescription.setText(weapon.getDescription());
-        }
-
-        Item item = generalInventory.get(pathId);
-        if (item instanceof Item) {
-            this.inventoryPreviewTitle.setText(Item.getName());
+        } else {
+            Item item = generalInventory.get(pathId);
+            this.inventoryPreviewTitle.setText(item.getName());
             this.inventoryPreviewImage.setImage(
                     new Image(Paths.get(item.getImagePath()).toUri().toString()));
-            this.inventoryPreviewStat.setText("Base ATK: " + weapon.getAttack());
-            this.inventoryPreviewDescription.setText(weapon.getDescription());
+            if (item instanceof Potion) {
+                Potion potion = (Potion) item;
+                this.inventoryPreviewStat.setText(potion.getStatLabel() + " " + potion.getStatValue());
+                this.inventoryPreviewDescription.setText(potion.getDescription());
+            }
         }
+
     }
 
     public ImageView getInventoryBackground() {

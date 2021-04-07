@@ -93,13 +93,13 @@ public class ResourcePathUtility {
             + "src/main/resources/static/images/BlackMagic.png";
 
     public static final String BASIC_HEALTH_PATH = ""
-            + "src/main/resources/static/images/BasicHealthPotion.png";
+            + "src/main/resources/static/images/TradersAndItems/BasicHealthPotion.PNG";
 
     public static final String BASIC_STRENGTH_PATH = ""
-            + "src/main/resources/static/images/BasicStrengthPotion.png";
+            + "src/main/resources/static/images/TradersAndItems/BasicStrengthPotion.PNG";
 
     public static final String BASIC_SPEED_PATH = ""
-            + "src/main/resources/static/images/BasicSpeedPotion.png";
+            + "src/main/resources/static/images/TradersAndItems/BasicSpeedPotion.PNG";
 
     public static final String TOGGLE_BUTTON_STYLE_PATH = ""
             + "src/main/resources/static/css/button.css";
