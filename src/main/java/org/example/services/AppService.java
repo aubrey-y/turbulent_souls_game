@@ -38,11 +38,11 @@ public class AppService {
     }
 
     public boolean getLoggedIn() {
-        return App.getLoggedInEmail() != null;
+        return App.getPlayerState().getEmail() != null;
     }
 
     public void setLoggedInEmail(String loggedInEmail) {
-        App.setLoggedInEmail(loggedInEmail);
+        App.setPlayerState(App.getPlayerState().setEmail(loggedInEmail));
     }
 
     public void setRoot(FXMLLoader loader) {

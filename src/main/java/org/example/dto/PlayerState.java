@@ -32,6 +32,12 @@ public class PlayerState {
 
     private double healthCapacity;
 
+    private String email;
+
+    public PlayerState() {
+
+    }
+
     public PlayerState(String username,
                        Archetype archetype,
                        Difficulty difficulty,
@@ -126,6 +132,15 @@ public class PlayerState {
         return this;
     }
 
+    public Map<String, Item> getGeneralInventory() {
+        return generalInventory;
+    }
+
+    public PlayerState setGeneralInventory(Map<String, Item> generalInventory) {
+        this.generalInventory = generalInventory;
+        return this;
+    }
+
     public int getGoldAmount() {
         return goldAmount;
     }
@@ -168,6 +183,15 @@ public class PlayerState {
 
     public PlayerState setHealthCapacity(double healthCapacity) {
         this.healthCapacity = healthCapacity;
+        return this;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public PlayerState setEmail(String email) {
+        this.email = email;
         return this;
     }
 }

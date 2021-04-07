@@ -29,6 +29,8 @@ public class PlayerService {
 
     private MonsterService monsterService;
 
+    private SaveService saveService;
+
     private DirectionService directionService = new DirectionService();
 
     private Set<Timeline> controllerTimelines;
@@ -39,10 +41,12 @@ public class PlayerService {
 
     public PlayerService(AppService appService,
                          RoomDirectionService roomDirectionService,
-                         HealthService healthService) {
+                         HealthService healthService,
+                         SaveService saveService) {
         this.appService = appService;
         this.roomDirectionService = roomDirectionService;
         this.healthService = healthService;
+        this.saveService = saveService;
         this.controllerTimelines = new HashSet<>();
     }
 
@@ -159,6 +163,7 @@ public class PlayerService {
                     DirectionService.class,
                     RoomDirectionService.class,
                     HealthService.class,
+                    SaveService.class,
                     Scene.class);
             loader.setControllerFactory(GameScreenController -> {
                 try {
@@ -167,6 +172,7 @@ public class PlayerService {
                             this.roomDirectionService.getDirectionService(),
                             this.roomDirectionService,
                             this.healthService,
+                            this.saveService,
                             this.appService.getScene());
                 } catch (InstantiationException | InvocationTargetException
                         | IllegalAccessException e) {

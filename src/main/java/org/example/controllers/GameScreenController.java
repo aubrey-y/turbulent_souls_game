@@ -18,6 +18,7 @@ import org.example.services.InventoryService;
 import org.example.services.MonsterService;
 import org.example.services.PlayerService;
 import org.example.services.RoomDirectionService;
+import org.example.services.SaveService;
 
 import java.nio.file.Paths;
 
@@ -42,6 +43,8 @@ public class GameScreenController extends InventoryController {
     protected InventoryService inventoryService;
 
     private Scene scene;
+
+    protected SaveService saveService;
 
     @FXML
     private javafx.scene.control.Button closeButton;
@@ -69,6 +72,7 @@ public class GameScreenController extends InventoryController {
                                 DirectionService directionService,
                                 RoomDirectionService roomDirectionService,
                                 HealthService healthService,
+                                SaveService saveService,
                                 Scene scene) {
         this.appService = appService;
         this.playerService = playerService;

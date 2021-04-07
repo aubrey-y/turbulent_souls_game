@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.example.dto.PlayerState;
 import org.example.dto.Room;
+import org.example.exceptions.PlayerCreationException;
 
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -34,11 +35,9 @@ public class App extends Application {
 
     private static boolean devMode = false;
 
-    private static String loggedInEmail;
-
     private static AudioClip clickSound;
 
-    private static PlayerState playerState;
+    private static PlayerState playerState = new PlayerState();
 
     private static Room activeRoom;
 
@@ -120,14 +119,6 @@ public class App extends Application {
 
     public static void setDevMode(boolean devMode) {
         App.devMode = devMode;
-    }
-
-    public static String getLoggedInEmail() {
-        return loggedInEmail;
-    }
-
-    public static void setLoggedInEmail(String loggedInEmail) {
-        App.loggedInEmail = loggedInEmail;
     }
 
     public static Room getActiveRoom() {
