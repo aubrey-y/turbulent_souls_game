@@ -3,6 +3,13 @@ module org.example {
     requires javafx.fxml;
     requires javafx.graphics;
     requires javafx.media;
+    requires com.google.api.services.gmail;
+    requires com.google.api.client;
+    requires google.api.client;
+    requires com.google.api.client.auth;
+    requires com.google.api.client.json.jackson2;
+    requires java.mail;
+    requires com.fasterxml.jackson.core;
 
     requires org.junit.jupiter.api;
 
