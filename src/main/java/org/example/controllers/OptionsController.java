@@ -96,7 +96,6 @@ public class OptionsController extends ErrorBaseController {
         this.scene.setOnKeyReleased(e -> {
             if (e.getCode() == KeyCode.ENTER) {
                 boolean success = this.sendVerificationEmail();
-                System.out.println(success);
                 if (success) {
                     USER_EMAIL = this.getCredentialInput();
                     this.setErrorMessage(String.format(

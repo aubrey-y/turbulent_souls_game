@@ -9,6 +9,7 @@ module org.example {
     requires com.google.api.client.auth;
     requires com.google.api.client.json.jackson2;
     requires java.mail;
+    requires com.fasterxml.jackson.core;
 
     requires org.junit.jupiter.api;
 
