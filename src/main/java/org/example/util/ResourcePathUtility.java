@@ -92,6 +92,15 @@ public class ResourcePathUtility {
     public static final String BASIC_MAGIC_PATH = ""
             + "src/main/resources/static/images/BlackMagic.png";
 
+    public static final String BASIC_HEALTH_PATH = ""
+            + "src/main/resources/static/images/BasicHealthPotion.png";
+
+    public static final String BASIC_STRENGTH_PATH = ""
+            + "src/main/resources/static/images/BasicStrengthPotion.png";
+
+    public static final String BASIC_SPEED_PATH = ""
+            + "src/main/resources/static/images/BasicSpeedPotion.png";
+
     public static final String TOGGLE_BUTTON_STYLE_PATH = ""
             + "src/main/resources/static/css/button.css";
 }

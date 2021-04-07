@@ -8,6 +8,9 @@ import org.example.exceptions.PlayerCreationException;
 import java.util.HashMap;
 import java.util.Map;
 
+//This import is directly for testing purposes
+import static org.example.util.ResourcePathUtility.BASIC_HEALTH_PATH;
+
 public class PlayerState {
 
     private String username;
@@ -62,6 +65,9 @@ public class PlayerState {
             + "for player weapon assignment");
         }
         this.weaponInventory.put(this.activeWeapon.getImagePath(), this.activeWeapon);
+
+        //This line is directly for testing purposes
+        this.generalInventory.put(BASIC_HEALTH_PATH, new BasicHealthPotion());
     }
 
     private void assignDefaultGoldForDifficulty() throws PlayerCreationException {
@@ -123,6 +129,15 @@ public class PlayerState {
 
     public PlayerState setWeaponInventory(Map<String, Weapon> weaponInventory) {
         this.weaponInventory = weaponInventory;
+        return this;
+    }
+
+    public Map<String, Item> getGeneralInventory() {
+        return generalInventory;
+    }
+
+    public PlayerState setGeneralInventory(Map<String, Item> generalInventory) {
+        this.generalInventory = generalInventory;
         return this;
     }
 

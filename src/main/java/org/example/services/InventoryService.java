@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Rectangle;
 import org.example.dto.Item;
+import org.example.dto.Potion;
 import org.example.dto.Weapon;
 
 import java.nio.file.Paths;
@@ -44,6 +45,8 @@ public class InventoryService {
         if(!this.inventoryOpen) {
             Map<String, Weapon> weaponInventory = this.appService.getPlayerState()
                     .getWeaponInventory();
+            Map<String, Item> generalInventory = this.appService.getPlayerState()
+                    .getGeneralInventory();
             boolean selected = false;
             for(Weapon weapon : weaponInventory.values()) {
                 ToggleButton toggleButton = new ToggleButton();
@@ -61,6 +64,18 @@ public class InventoryService {
                     this.selectToggleButton(weapon.getImagePath());
                     selected = true;
                 }
+            }
+            for (Item item : generalInventory.values()) {
+                ToggleButton toggleButton = new ToggleButton();
+                toggleButton.setToggleGroup(this.inventoryToggleGroup);
+                toggleButton.getStylesheets()
+                        .add(Paths.get(TOGGLE_BUTTON_STYLE_PATH).toUri().toString());
+                toggleButton.setGraphic(
+                        new ImageView(Paths.get(item.getImagePath()).toUri().toString()));
+                toggleButton.setOnAction(actionEvent -> {
+                    this.selectToggleButton(item.getImagePath());
+                });
+                this.inventoryRow2.getChildren().add(toggleButton);
             }
         } else {
             this.inventoryRow1.getChildren().clear();
@@ -81,12 +96,26 @@ public class InventoryService {
     private void selectToggleButton(String pathId) {
         Map<String, Weapon> weaponInventory = this.appService.getPlayerState()
                 .getWeaponInventory();
+        Map<String, Item> generalInventory = this.appService.getPlayerState()
+                .getGeneralInventory();
+
         Weapon weapon = weaponInventory.get(pathId);
-        this.inventoryPreviewTitle.setText(weapon.getName());
-        this.inventoryPreviewImage.setImage(
-                new Image(Paths.get(weapon.getImagePath()).toUri().toString()));
-        this.inventoryPreviewStat.setText("Base ATK: " + weapon.getAttack());
-        this.inventoryPreviewDescription.setText(weapon.getDescription());
+        if (weapon instanceof Weapon) {
+            this.inventoryPreviewTitle.setText(weapon.getName());
+            this.inventoryPreviewImage.setImage(
+                    new Image(Paths.get(weapon.getImagePath()).toUri().toString()));
+            this.inventoryPreviewStat.setText("Base ATK: " + weapon.getAttack());
+            this.inventoryPreviewDescription.setText(weapon.getDescription());
+        }
+
+        Item item = generalInventory.get(pathId);
+        if (item instanceof Item) {
+            this.inventoryPreviewTitle.setText(Item.getName());
+            this.inventoryPreviewImage.setImage(
+                    new Image(Paths.get(item.getImagePath()).toUri().toString()));
+            this.inventoryPreviewStat.setText("Base ATK: " + weapon.getAttack());
+            this.inventoryPreviewDescription.setText(weapon.getDescription());
+        }
     }
 
     public ImageView getInventoryBackground() {
@@ -195,5 +224,9 @@ public class InventoryService {
     public InventoryService setAppService(AppService appService) {
         this.appService = appService;
         return this;
+    }
+
+    public boolean getInventoryOpen() {
+        return inventoryOpen;
     }
 }

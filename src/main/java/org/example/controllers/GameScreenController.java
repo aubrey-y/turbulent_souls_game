@@ -118,6 +118,11 @@ public class GameScreenController extends InventoryController {
                     this.appService.addMonsterKilled(monsterKilled);
                 }
                 break;
+            case E:
+                if (this.inventoryService.getInventoryOpen()) {
+
+                }
+                break;
             default:
                 break;
             }
