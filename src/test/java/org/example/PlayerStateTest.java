@@ -10,6 +10,7 @@ import org.example.enums.Difficulty;
 import org.example.exceptions.PlayerCreationException;
 import org.junit.jupiter.api.Test;
 
+import static org.example.controllers.SecondaryController.SPAWN_COORDINATES;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
@@ -23,7 +24,7 @@ public class PlayerStateTest {
     public void testGivenEasyMageProducesValidInit() throws PlayerCreationException {
         Archetype mage = Archetype.MAGE;
         Difficulty easy = Difficulty.EASY;
-        PlayerState player = new PlayerState("Jeff", mage, easy, this.spawnCoordinates);
+        PlayerState player = new PlayerState("Jeff", mage, easy, SPAWN_COORDINATES);
         int goldAmount = player.getGoldAmount();
         Weapon weapon = player.getActiveWeapon();
 
@@ -35,7 +36,7 @@ public class PlayerStateTest {
     public void testGivenMedWizardProducesValidInit() throws PlayerCreationException {
         Archetype wizard = Archetype.WIZARD;
         Difficulty medium = Difficulty.MEDIUM;
-        PlayerState player = new PlayerState("Jeff", wizard, medium, this.spawnCoordinates);
+        PlayerState player = new PlayerState("Jeff", wizard, medium, SPAWN_COORDINATES);
         int goldAmount = player.getGoldAmount();
         Weapon weapon = player.getActiveWeapon();
 
@@ -47,7 +48,7 @@ public class PlayerStateTest {
     public void testGivenHrdWarriorProducesValidInit() throws PlayerCreationException {
         Archetype warrior = Archetype.WARRIOR;
         Difficulty hard = Difficulty.HARD;
-        PlayerState player = new PlayerState("Jeff", warrior, hard, this.spawnCoordinates);
+        PlayerState player = new PlayerState("Jeff", warrior, hard, SPAWN_COORDINATES);
         int goldAmount = player.getGoldAmount();
         Weapon weapon = player.getActiveWeapon();
 
@@ -59,7 +60,7 @@ public class PlayerStateTest {
     public void testGivenEasyWarriorProducesValidInit() throws PlayerCreationException {
         Archetype warrior = Archetype.WARRIOR;
         Difficulty easy = Difficulty.EASY;
-        PlayerState player = new PlayerState("Jeff", warrior, easy, this.spawnCoordinates);
+        PlayerState player = new PlayerState("Jeff", warrior, easy, SPAWN_COORDINATES);
         int goldAmount = player.getGoldAmount();
         Weapon weapon = player.getActiveWeapon();
 

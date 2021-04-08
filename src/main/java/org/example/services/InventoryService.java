@@ -32,10 +32,11 @@ public class InventoryService {
     private HBox inventoryRow5;
 
     private boolean inventoryOpen;
+
     private AppService appService;
+
     private ToggleGroup inventoryToggleGroup = new ToggleGroup();
     private String recentlySelectedItem;
-
     private static int selectedSaveIndex;
 
     public InventoryService(AppService appService) {
@@ -58,14 +59,14 @@ public class InventoryService {
     }
 
     private void loadInventoryElements() {
-        Map<String, Weapon> weaponInventory = this.appService.getPlayerState()
+        Map<String, Item> weaponInventory = this.appService.getPlayerState()
                 .getWeaponInventory();
         Map<String, Item> generalInventory = this.appService.getPlayerState()
                 .getGeneralInventory();
         boolean selected = false;
         int index = 0;
         for (String key : weaponInventory.keySet()) {
-            Weapon weapon = weaponInventory.get(key);
+            Weapon weapon = (Weapon) weaponInventory.get(key);
             ToggleButton toggleButton = new ToggleButton();
             toggleButton.setToggleGroup(this.inventoryToggleGroup);
             toggleButton.getStylesheets()
@@ -104,13 +105,13 @@ public class InventoryService {
 
     private void selectToggleButton(String pathId, int index) {
         selectedSaveIndex = index;
-        Map<String, Weapon> weaponInventory = this.appService.getPlayerState()
+        Map<String, Item> weaponInventory = this.appService.getPlayerState()
                 .getWeaponInventory();
         Map<String, Item> generalInventory = this.appService.getPlayerState()
                 .getGeneralInventory();
         recentlySelectedItem = pathId;
 
-        Weapon weapon = weaponInventory.get(pathId);
+        Weapon weapon = (Weapon) weaponInventory.get(pathId);
         if (weapon != null) {
             this.inventoryPreviewTitle.setText(weapon.getName());
             this.inventoryPreviewImage.setImage(
@@ -132,11 +133,11 @@ public class InventoryService {
     }
 
     public void consumeItem(ConsumableService consumableService) {
-        Map<String, Weapon> weaponInventory = this.appService.getPlayerState()
+        Map<String, Item> weaponInventory = this.appService.getPlayerState()
                 .getWeaponInventory();
         Map<String, Item> generalInventory = this.appService.getPlayerState()
                 .getGeneralInventory();
-        Weapon weapon = weaponInventory.get(recentlySelectedItem);
+        Weapon weapon = (Weapon) weaponInventory.get(recentlySelectedItem);
         if (weapon != null) {
             this.appService.getPlayerState().setActiveWeapon(weapon);
         } else {

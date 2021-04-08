@@ -5,6 +5,7 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
@@ -19,6 +20,7 @@ import org.example.services.InventoryService;
 import org.example.services.MonsterService;
 import org.example.services.PlayerService;
 import org.example.services.RoomDirectionService;
+import org.example.services.SaveService;
 
 import java.nio.file.Paths;
 
@@ -46,8 +48,13 @@ public class GameScreenController extends InventoryController {
 
     private Scene scene;
 
+    protected SaveService saveService;
+
     @FXML
-    private javafx.scene.control.Button closeButton;
+    private Button closeButton;
+
+    @FXML
+    private Button saveButton;
 
     @FXML
     private Label goldAmount;
@@ -72,17 +79,22 @@ public class GameScreenController extends InventoryController {
                                 DirectionService directionService,
                                 RoomDirectionService roomDirectionService,
                                 HealthService healthService,
+                                SaveService saveService,
                                 Scene scene) {
         this.appService = appService;
         this.playerService = playerService;
         this.directionService = directionService;
         this.roomDirectionService = roomDirectionService;
         this.healthService = healthService;
+        this.saveService = saveService;
         this.scene = scene;
     }
 
     protected void initGameScreenController(MonsterService monsterService) {
         PlayerState playerState = this.appService.getPlayerState();
+        if (playerState.getEmail() == null) {
+            this.saveButton.setDisable(true);
+        }
         this.goldAmount.setText(String.valueOf(this.appService.getPlayerState().getGoldAmount()));
         this.initializePlayerHealth(playerState);
         this.initializePlayerImageView(playerState);
@@ -195,8 +207,8 @@ public class GameScreenController extends InventoryController {
     private void initializePlayerImageView(PlayerState playerState) {
         this.displayCorrectPlayerOrientation(playerState);
         this.playerService.setImageView(this.player);
-        this.playerService.moveX(playerState.getSpawnCoordinates()[0]);
-        this.playerService.moveY(playerState.getSpawnCoordinates()[1]);
+        this.playerService.moveX(playerState.getSpawnCoordinates().getX());
+        this.playerService.moveY(playerState.getSpawnCoordinates().getY());
         this.playerService.setVisible(true);
     }
 
@@ -266,6 +278,12 @@ public class GameScreenController extends InventoryController {
     private void closeButtonAction() {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
+    }
+
+    @FXML
+    private void saveGameAction() {
+        this.appService.updatePlayerStateLastSaved();
+        this.saveService.upsertPlayerStateSave(this.appService.getPlayerState());
     }
 
     public AppService getAppService() {

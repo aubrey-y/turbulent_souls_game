@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import org.example.App;
+import org.example.dto.Coordinate;
 import org.example.dto.PlayerState;
 import org.example.dto.Room;
 import org.example.enums.Direction;
@@ -29,6 +30,8 @@ public class PlayerService {
 
     private MonsterService monsterService;
 
+    private SaveService saveService;
+
     private DirectionService directionService = new DirectionService();
 
     private Set<Timeline> controllerTimelines;
@@ -41,10 +44,12 @@ public class PlayerService {
 
     public PlayerService(AppService appService,
                          RoomDirectionService roomDirectionService,
-                         HealthService healthService) {
+                         HealthService healthService,
+                         SaveService saveService) {
         this.appService = appService;
         this.roomDirectionService = roomDirectionService;
         this.healthService = healthService;
+        this.saveService = saveService;
         this.controllerTimelines = new HashSet<>();
     }
 
@@ -161,6 +166,7 @@ public class PlayerService {
                     DirectionService.class,
                     RoomDirectionService.class,
                     HealthService.class,
+                    SaveService.class,
                     Scene.class);
             loader.setControllerFactory(GameScreenController -> {
                 try {
@@ -169,6 +175,7 @@ public class PlayerService {
                             this.roomDirectionService.getDirectionService(),
                             this.roomDirectionService,
                             this.healthService,
+                            this.saveService,
                             this.appService.getScene());
                 } catch (InstantiationException | InvocationTargetException
                         | IllegalAccessException e) {
@@ -188,20 +195,20 @@ public class PlayerService {
         switch (exitDirection) {
         case UP:
             playerState.setSpawnCoordinates(
-                    new int[]{(int) this.imageView.getTranslateX(), 910});
+                    new Coordinate().setX((int) this.imageView.getTranslateX()).setY(910));
             break;
         case DOWN:
             playerState.setSpawnCoordinates(
-                    new int[]{(int) this.imageView.getTranslateX(), 30});
+                    new Coordinate().setX((int) this.imageView.getTranslateX()).setY(30));
             break;
         case LEFT:
             playerState.setSpawnCoordinates(
-                    new int[]{1770, (int) this.imageView.getTranslateY()});
+                    new Coordinate().setX(1770).setY((int) this.imageView.getTranslateY()));
             playerState.setSpawnOrientation(LEFT);
             break;
         case RIGHT:
             playerState.setSpawnCoordinates(
-                    new int[]{22, (int) this.imageView.getTranslateY()});
+                    new Coordinate().setX(22).setY((int) this.imageView.getTranslateY()));
             playerState.setSpawnOrientation(RIGHT);
             break;
         default:

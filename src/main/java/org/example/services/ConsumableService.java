@@ -1,5 +1,6 @@
 package org.example.services;
 
+import org.example.dto.Item;
 import org.example.dto.Potion;
 import org.example.dto.Weapon;
 
@@ -26,9 +27,9 @@ public class ConsumableService {
             this.healthService.applyHealthModifier(potion.getStatValue());
             break;
         case STRENGTH:
-            Map<String, Weapon> weaponInventory = this.appService.getPlayerState().getWeaponInventory();
+            Map<String, Item> weaponInventory = this.appService.getPlayerState().getWeaponInventory();
             for (String key : weaponInventory.keySet()) {
-                Weapon weapon = weaponInventory.get(key);
+                Weapon weapon = (Weapon) weaponInventory.get(key);
                 weapon.setAttack(weapon.getAttack() + potion.getStatValue());
                 weaponInventory.put(key, weapon);
             }

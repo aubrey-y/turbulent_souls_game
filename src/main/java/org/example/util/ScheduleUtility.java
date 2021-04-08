@@ -7,6 +7,7 @@ import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
+import org.example.dto.Item;
 import org.example.dto.Monster;
 import org.example.App;
 import org.example.dto.Potion;
@@ -145,9 +146,9 @@ public class ScheduleUtility {
         Timeline timeline = new Timeline();
         Timeline finalTimeLine = timeline;
         timeline = new Timeline(new KeyFrame(Duration.seconds(30), actionEvent -> {
-            Map<String, Weapon> weaponInventory = appService.getPlayerState().getWeaponInventory();
+            Map<String, Item> weaponInventory = appService.getPlayerState().getWeaponInventory();
             for (String key : weaponInventory.keySet()) {
-                Weapon weapon = weaponInventory.get(key);
+                Weapon weapon = (Weapon) weaponInventory.get(key);
                 weapon.setAttack(weapon.getAttack() - potion.getStatValue());
                 weaponInventory.put(key, weapon);
             }

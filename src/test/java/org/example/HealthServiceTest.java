@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.framework.junit5.ApplicationExtension;
 
+import static org.example.controllers.SecondaryController.SPAWN_COORDINATES;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -120,7 +121,7 @@ public class HealthServiceTest {
     private PlayerState getStandardPlayerState(double startingHealth) {
         PlayerState playerState;
         try {
-            playerState = new PlayerState("Jimmy", WARRIOR, HARD, new int[]{100, 100})
+            playerState = new PlayerState("Jimmy", WARRIOR, HARD, SPAWN_COORDINATES)
                     .setHealth(startingHealth);
         } catch (PlayerCreationException e) {
             throw new RuntimeException(e);
