@@ -271,6 +271,7 @@ public class GameScreenController extends InventoryController {
 
     @FXML
     private void saveGameAction() {
+        this.appService.updatePlayerStateLastSaved();
         this.saveService.upsertPlayerStateSave(this.appService.getPlayerState());
     }
 

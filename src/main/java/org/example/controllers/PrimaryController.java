@@ -54,14 +54,7 @@ public class PrimaryController extends BaseController implements Initializable {
         CodecRegistry pojoCodecRegistry = fromProviders(
                 PojoCodecProvider.builder()
                         .automatic(true)
-                        .register(
-                                PlayerState.class,
-                                Archetype.class,
-                                Weapon.class,
-                                Item.class,
-                                Difficulty.class,
-                                Coordinate.class,
-                                Direction.class).build());
+                        .build());
         CodecRegistry codecRegistry = fromRegistries(
                 MongoClientSettings.getDefaultCodecRegistry(), pojoCodecRegistry);
         MongoClientSettings clientSettings = MongoClientSettings.builder()

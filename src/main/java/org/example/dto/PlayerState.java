@@ -34,6 +34,8 @@ public class PlayerState {
 
     private String email;
 
+    private String lastUpdated;
+
     public PlayerState() {
 
     }
@@ -55,6 +57,7 @@ public class PlayerState {
         this.health = playerState.health;
         this.healthCapacity = playerState.healthCapacity;
         this.email = playerState.email;
+        this.lastUpdated = playerState.lastUpdated;
     }
 
     public PlayerState(String username,
@@ -211,6 +214,15 @@ public class PlayerState {
 
     public PlayerState setEmail(String email) {
         this.email = email;
+        return this;
+    }
+
+    public String getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public PlayerState setLastUpdated(String lastUpdated) {
+        this.lastUpdated = lastUpdated;
         return this;
     }
 }
