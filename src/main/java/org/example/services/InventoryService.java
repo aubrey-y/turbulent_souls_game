@@ -6,8 +6,10 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import org.example.dto.Item;
+import org.example.dto.Potion;
 import org.example.dto.Weapon;
 
 import java.nio.file.Paths;
@@ -34,39 +36,18 @@ public class InventoryService {
     private AppService appService;
 
     private ToggleGroup inventoryToggleGroup = new ToggleGroup();
+    private String recentlySelectedItem;
+    private static int selectedSaveIndex;
 
     public InventoryService(AppService appService) {
         this.appService = appService;
     }
 
     public void toggleInventoryOpen() {
-        if(!this.inventoryOpen) {
-            Map<String, Item> weaponInventory = this.appService.getPlayerState()
-                    .getWeaponInventory();
-            boolean selected = false;
-            for(Item weapon : weaponInventory.values()) {
-                ToggleButton toggleButton = new ToggleButton();
-                toggleButton.setToggleGroup(this.inventoryToggleGroup);
-                toggleButton.getStylesheets()
-                        .add(Paths.get(TOGGLE_BUTTON_STYLE_PATH).toUri().toString());
-                toggleButton.setGraphic(
-                        new ImageView(Paths.get(weapon.getImagePath()).toUri().toString()));
-                toggleButton.setOnAction(actionEvent -> {
-                    this.selectToggleButton(weapon.getImagePath());
-                });
-                this.inventoryRow1.getChildren().add(toggleButton);
-                if (!selected) {
-                    toggleButton.setSelected(true);
-                    this.selectToggleButton(weapon.getImagePath());
-                    selected = true;
-                }
-            }
+        if (!this.inventoryOpen) {
+            this.loadInventoryElements();
         } else {
-            this.inventoryRow1.getChildren().clear();
-            this.inventoryRow2.getChildren().clear();
-            this.inventoryRow3.getChildren().clear();
-            this.inventoryRow4.getChildren().clear();
-            this.inventoryRow5.getChildren().clear();
+            this.clearInventoryRows();
         }
         this.inventoryBackground.setVisible(!this.inventoryOpen);
         this.inventoryPreviewBackground.setVisible(!this.inventoryOpen);
@@ -77,15 +58,119 @@ public class InventoryService {
         this.inventoryOpen = !inventoryOpen;
     }
 
-    private void selectToggleButton(String pathId) {
+    private void loadInventoryElements() {
         Map<String, Item> weaponInventory = this.appService.getPlayerState()
                 .getWeaponInventory();
+        Map<String, Item> generalInventory = this.appService.getPlayerState()
+                .getGeneralInventory();
+        boolean selected = false;
+        int index = 0;
+        for (String key : weaponInventory.keySet()) {
+            Weapon weapon = (Weapon) weaponInventory.get(key);
+            ToggleButton toggleButton = new ToggleButton();
+            toggleButton.setToggleGroup(this.inventoryToggleGroup);
+            toggleButton.getStylesheets()
+                    .add(Paths.get(TOGGLE_BUTTON_STYLE_PATH).toUri().toString());
+            toggleButton.setGraphic(
+                    new ImageView(Paths.get(weapon.getImagePath()).toUri().toString()));
+            int finalI = index;
+            toggleButton.setOnAction(actionEvent -> {
+                this.selectToggleButton(weapon.getImagePath(), finalI);
+            });
+            this.inventoryRow1.getChildren().add(toggleButton);
+            index++;
+            if (!selected) {
+                toggleButton.setSelected(true);
+                this.selectToggleButton(weapon.getImagePath(), finalI);
+                selected = true;
+            }
+        }
+        index = 0;
+        for (String key : generalInventory.keySet()) {
+            Item item = generalInventory.get(key);
+            ToggleButton toggleButton = new ToggleButton();
+            toggleButton.setToggleGroup(this.inventoryToggleGroup);
+            toggleButton.getStylesheets()
+                    .add(Paths.get(TOGGLE_BUTTON_STYLE_PATH).toUri().toString());
+            toggleButton.setGraphic(
+                    new ImageView(Paths.get(item.getImagePath()).toUri().toString()));
+            int finalI = index;
+            toggleButton.setOnAction(actionEvent -> {
+                this.selectToggleButton(item.getImagePath(), finalI);
+            });
+            this.inventoryRow2.getChildren().add(toggleButton);
+            index++;
+        }
+    }
+
+    private void selectToggleButton(String pathId, int index) {
+        selectedSaveIndex = index;
+        Map<String, Item> weaponInventory = this.appService.getPlayerState()
+                .getWeaponInventory();
+        Map<String, Item> generalInventory = this.appService.getPlayerState()
+                .getGeneralInventory();
+        recentlySelectedItem = pathId;
+
         Weapon weapon = (Weapon) weaponInventory.get(pathId);
-        this.inventoryPreviewTitle.setText(weapon.getName());
-        this.inventoryPreviewImage.setImage(
-                new Image(Paths.get(weapon.getImagePath()).toUri().toString()));
-        this.inventoryPreviewStat.setText("Base ATK: " + weapon.getAttack());
-        this.inventoryPreviewDescription.setText(weapon.getDescription());
+        if (weapon != null) {
+            this.inventoryPreviewTitle.setText(weapon.getName());
+            this.inventoryPreviewImage.setImage(
+                    new Image(Paths.get(weapon.getImagePath()).toUri().toString()));
+            this.inventoryPreviewStat.setText("Base ATK: " + weapon.getAttack());
+            this.inventoryPreviewDescription.setText(weapon.getDescription());
+        } else {
+            Item item = generalInventory.get(pathId);
+            this.inventoryPreviewTitle.setText(item.getName());
+            this.inventoryPreviewImage.setImage(
+                    new Image(Paths.get(item.getImagePath()).toUri().toString()));
+            if (item instanceof Potion) {
+                Potion potion = (Potion) item;
+                this.inventoryPreviewStat.setText(potion.getStatLabel() + " " + potion.getStatValue());
+                this.inventoryPreviewDescription.setText(potion.getDescription());
+            }
+        }
+
+    }
+
+    public void consumeItem(ConsumableService consumableService) {
+        Map<String, Item> weaponInventory = this.appService.getPlayerState()
+                .getWeaponInventory();
+        Map<String, Item> generalInventory = this.appService.getPlayerState()
+                .getGeneralInventory();
+        Weapon weapon = (Weapon) weaponInventory.get(recentlySelectedItem);
+        if (weapon != null) {
+            this.appService.getPlayerState().setActiveWeapon(weapon);
+        } else {
+            Item item = generalInventory.get(recentlySelectedItem);
+            if (item != null) {
+                if (item instanceof Potion) {
+                    Potion potion = (Potion) item;
+                    consumableService.consumePotion(potion);
+                }
+                Integer newQuantity = item.getQuantity();
+                if (newQuantity > 0) {
+                    newQuantity -= 1;
+                }
+                item.setQuantity(newQuantity);
+                if (item.getQuantity() == 0) {
+                    this.inventoryRow2.getChildren().remove(selectedSaveIndex);
+                    generalInventory.remove(recentlySelectedItem);
+                    this.appService.getPlayerState().setGeneralInventory(generalInventory);
+                    this.clearInventoryRows();
+                    this.loadInventoryElements();
+                }
+            } else {
+                throw new RuntimeException("Item cannot be null");
+            }
+        }
+    }
+
+    private void clearInventoryRows() {
+        this.inventoryRow1.getChildren().clear();
+        this.inventoryRow2.getChildren().clear();
+        this.inventoryRow3.getChildren().clear();
+        this.inventoryRow4.getChildren().clear();
+        this.inventoryRow5.getChildren().clear();
     }
 
     public ImageView getInventoryBackground() {
@@ -194,5 +279,9 @@ public class InventoryService {
     public InventoryService setAppService(AppService appService) {
         this.appService = appService;
         return this;
+    }
+
+    public boolean getInventoryOpen() {
+        return inventoryOpen;
     }
 }

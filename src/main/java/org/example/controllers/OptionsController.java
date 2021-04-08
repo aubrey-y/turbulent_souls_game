@@ -140,6 +140,7 @@ public class OptionsController extends ErrorBaseController {
         this.login.setDisable(false);
         this.warningBackground.setVisible(false);
         this.credentialEntry.setVisible(false);
+        this.credentialEntry.clear();
         this.scene.setOnKeyReleased(e -> { });
         this.hideErrorMessage();
     }

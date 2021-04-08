@@ -7,7 +7,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME)
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = Weapon.class, name = "WEAPON")
+        @JsonSubTypes.Type(value = Weapon.class, name = "WEAPON"),
+        @JsonSubTypes.Type(value = Potion.class, name = "POTION")
 })
 public abstract class Item {
 

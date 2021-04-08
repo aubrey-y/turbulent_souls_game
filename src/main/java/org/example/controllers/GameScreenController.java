@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.example.dto.PlayerState;
 import org.example.services.AppService;
+import org.example.services.ConsumableService;
 import org.example.services.DirectionService;
 import org.example.services.HealthService;
 import org.example.services.InventoryService;
@@ -42,6 +43,8 @@ public class GameScreenController extends InventoryController {
     protected MonsterService monsterService;
 
     protected InventoryService inventoryService;
+
+    protected ConsumableService consumableService;
 
     private Scene scene;
 
@@ -97,6 +100,7 @@ public class GameScreenController extends InventoryController {
         this.initializePlayerImageView(playerState);
         this.inventoryService = new InventoryService(this.appService);
         this.initializeInventoryService(this.inventoryService);
+        this.consumableService = new ConsumableService(this.healthService, this.playerService, this.appService);
         this.scene.setOnKeyPressed(e -> {
             switch (e.getCode()) {
             case W:
@@ -128,6 +132,11 @@ public class GameScreenController extends InventoryController {
                 if (monsterKilled != null) {
                     monsterService.initiateDeathAnimation(monsterKilled);
                     this.appService.addMonsterKilled(monsterKilled);
+                }
+                break;
+            case E:
+                if (this.inventoryService.getInventoryOpen()) {
+                    this.inventoryService.consumeItem(this.consumableService);
                 }
                 break;
             default:
@@ -168,22 +177,6 @@ public class GameScreenController extends InventoryController {
         });
     }
 
-    private void initializePlayerImageView(PlayerState playerState) {
-        this.displayCorrectPlayerOrientation(playerState);
-        this.playerService.setImageView(this.player);
-        this.playerService.moveX(playerState.getSpawnCoordinates().getX());
-        this.playerService.moveY(playerState.getSpawnCoordinates().getY());
-        this.playerService.setVisible(true);
-    }
-
-    private void initializePlayerHealth(PlayerState playerState) {
-        this.healthBar.setProgress(playerState.getHealth() / playerState.getHealthCapacity());
-        this.healthText.setText(
-                (int) playerState.getHealth() + "/" + (int) playerState.getHealthCapacity());
-        this.healthService.setHealthBar(this.healthBar).setHealthText(this.healthText);
-        this.healthService.applyHealthModifier(0.0);
-    }
-
     private void initializeInventoryService(InventoryService inventoryService) {
         this.inventoryPreviewBackground.setLayoutX(1400);
         this.inventoryPreviewBackground.setLayoutY(100);
@@ -210,6 +203,24 @@ public class GameScreenController extends InventoryController {
                 .setInventoryRow4(this.inventoryRow4)
                 .setInventoryRow5(this.inventoryRow5);
     }
+
+    private void initializePlayerImageView(PlayerState playerState) {
+        this.displayCorrectPlayerOrientation(playerState);
+        this.playerService.setImageView(this.player);
+        this.playerService.moveX(playerState.getSpawnCoordinates().getX());
+        this.playerService.moveY(playerState.getSpawnCoordinates().getY());
+        this.playerService.setVisible(true);
+    }
+
+    private void initializePlayerHealth(PlayerState playerState) {
+        this.healthBar.setProgress(playerState.getHealth() / playerState.getHealthCapacity());
+        this.healthText.setText(
+                (int) playerState.getHealth() + "/" + (int) playerState.getHealthCapacity());
+        this.healthService.setHealthBar(this.healthBar).setHealthText(this.healthText);
+        this.healthService.applyHealthModifier(0.0);
+    }
+
+
 
     private void displayPlayerRightOrientation(PlayerState playerState) {
         switch (playerState.getActiveWeapon().getType()) {

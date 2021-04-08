@@ -10,6 +10,11 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+//This import is directly for testing purposes
+import static org.example.util.ResourcePathUtility.BASIC_HEALTH_PATH;
+import static org.example.util.ResourcePathUtility.BASIC_SPEED_PATH;
+import static org.example.util.ResourcePathUtility.BASIC_STRENGTH_PATH;
+
 public class PlayerState {
 
     private String username;
@@ -95,6 +100,11 @@ public class PlayerState {
             + "for player weapon assignment");
         }
         this.weaponInventory.put(this.activeWeapon.getImagePath(), this.activeWeapon);
+
+        //This line is directly for testing purposes
+        this.generalInventory.put(BASIC_HEALTH_PATH, new BasicHealthPotion());
+        this.generalInventory.put(BASIC_SPEED_PATH, new BasicSpeedPotion());
+        this.generalInventory.put(BASIC_STRENGTH_PATH, new BasicStrengthPotion());
     }
 
     private void assignDefaultGoldForDifficulty() throws PlayerCreationException {
