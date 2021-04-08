@@ -44,6 +44,7 @@ public class LoadGameController implements Initializable {
     private ToggleGroup savesToggleGroup = new ToggleGroup();
 
     private static PlayerState SELECTED_PLAYER_STATE;
+    private static int SELECTED_SAVE_INDEX;
 
     public LoadGameController(AppService appService,
                               SaveService saveService,
@@ -64,7 +65,8 @@ public class LoadGameController implements Initializable {
                 this.setMessage(String.format("No save files found for %s",
                         this.appService.getPlayerState().getEmail()));
             }
-            for (PlayerState playerState : playerStates) {
+            for (int i = 0; i < playerStates.size(); i++) {
+                PlayerState playerState = playerStates.get(i);
                 ToggleButton toggleButton = new ToggleButton();
                 toggleButton.setToggleGroup(this.savesToggleGroup);
                 toggleButton.setFocusTraversable(false);
@@ -76,7 +78,9 @@ public class LoadGameController implements Initializable {
                 toggleButton.setPrefWidth(1780);
                 toggleButton.setPrefHeight(100);
                 toggleButton.setFont(new Font(60));
-                toggleButton.setOnAction(actionEvent -> this.selectToggleButton(playerState));
+                int finalI = i;
+                toggleButton.setOnAction(actionEvent -> this.selectToggleButton(
+                        playerState, finalI));
                 toggleButton.setText(
                         String.format("Username: %s | Last saved: %s",
                                 playerState.getUsername(), playerState.getLastUpdated()));
@@ -107,6 +111,13 @@ public class LoadGameController implements Initializable {
                                 this.saveService,
                                 this.scene));
                         this.appService.setRoot(loader);
+                    } else if (e.getCode() == KeyCode.BACK_SPACE) {
+                        boolean success = this.saveService.removePlayerStateSave(
+                                SELECTED_PLAYER_STATE.getEmail(),
+                                SELECTED_PLAYER_STATE.getUsername());
+                        if (success) {
+                            this.savesVBox.getChildren().remove(SELECTED_SAVE_INDEX);
+                        }
                     }
                 }
             });
@@ -120,8 +131,9 @@ public class LoadGameController implements Initializable {
         this.appService.setRoot(loader);
     }
 
-    private void selectToggleButton(PlayerState playerState) {
+    private void selectToggleButton(PlayerState playerState, int index) {
         SELECTED_PLAYER_STATE = playerState;
+        SELECTED_SAVE_INDEX = index;
     }
 
     private void setMessage(String message) {
