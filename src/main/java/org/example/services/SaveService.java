@@ -10,7 +10,9 @@ import org.example.dto.PlayerState;
 import org.example.repository.SaveRepository;
 import org.example.util.FieldComplianceUtility;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.example.util.PlayerStateByLastUpdatedComparator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
@@ -37,14 +39,18 @@ public class SaveService {
         this.objectMapper.configure(FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
-//    public List<PlayerState> findPlayerStates(String email) {
-//        List<PlayerState> playerStates = this.saveRepository
-//                .findManyPlayerStateSaves(findByEmail(email));
-//        for (int i = 0; i < playerStates.size(); i++) {
-//            playerStates.set(i, this.restorePlayerState(playerStates.get(i)));
-//        }
-//        return playerStates;
-//    }
+    public List<PlayerState> findPlayerStates(String email) {
+        List<Document> playerStateDocuments = this.saveRepository
+                .findManyPlayerStateSaves(findByEmail(email));
+        List<PlayerState> playerStates = new ArrayList<>();
+        for (Document playerStateDocument : playerStateDocuments) {
+            playerStates.add(
+                    this.restorePlayerState(
+                            this.convertJsonToPlayerState(playerStateDocument.toJson())));
+        }
+        playerStates.sort(new PlayerStateByLastUpdatedComparator());
+        return playerStates;
+    }
 
     public boolean upsertPlayerStateSave(PlayerState playerState) {
         PlayerState cleansedPlayerState = this.cleansePlayerState(new PlayerState(playerState));
@@ -92,6 +98,16 @@ public class SaveService {
             throw new RuntimeException(e);
         }
         return json;
+    }
+
+    private PlayerState convertJsonToPlayerState(String json) {
+        PlayerState playerState;
+        try {
+            playerState = this.objectMapper.readValue(json, PlayerState.class);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        return playerState;
     }
 
     public MongoClient getMongoClient() {

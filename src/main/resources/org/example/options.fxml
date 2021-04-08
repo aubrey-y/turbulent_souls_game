@@ -43,7 +43,7 @@
                <children>
                   <Pane prefHeight="200.0" prefWidth="580.0">
                      <children>
-                        <Button id="backButton" alignment="BASELINE_CENTER" layoutX="200.0" layoutY="900.0" mnemonicParsing="false" onAction="#switchToPrimary" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE">
+                        <Button id="backButton" alignment="BASELINE_CENTER" layoutX="200.0" layoutY="950.0" mnemonicParsing="false" onAction="#switchToPrimary" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE">
                            <font>
                               <Font name="Pixeboy" size="30.0" />
                            </font>

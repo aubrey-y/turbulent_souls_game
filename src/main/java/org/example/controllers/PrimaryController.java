@@ -89,6 +89,17 @@ public class PrimaryController extends BaseController implements Initializable {
         this.appService.setRoot(loader);
     }
 
+    @FXML
+    private void switchToLoadGame() {
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("loadGame.fxml"));
+        loader.setControllerFactory(OptionsController -> new LoadGameController(
+                this.appService,
+                this.saveService,
+                this.appService.getScene()
+        ));
+        this.appService.setRoot(loader);
+    }
+
     public AppService getAppService() {
         return appService;
     }

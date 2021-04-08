@@ -94,4 +94,7 @@ public class ResourcePathUtility {
 
     public static final String TOGGLE_BUTTON_STYLE_PATH = ""
             + "src/main/resources/static/css/button.css";
+
+    public static final String FONT_STYLE_PATH = ""
+            + "src/main/resources/static/css/fontstyle.css";
 }
