@@ -4,6 +4,8 @@ import org.example.enums.PotionType;
 
 public class Potion extends Item {
 
+    public Potion() { }
+
     protected PotionType type;
 
     protected String statLabel;

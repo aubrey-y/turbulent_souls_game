@@ -27,18 +27,18 @@ public class ConsumableService {
             break;
         case STRENGTH:
             Map<String, Weapon> weaponInventory = this.appService.getPlayerState().getWeaponInventory();
-            for (String weaponKey : weaponInventory.keySet()) {
-                Weapon weapon = weaponInventory.get(weaponKey);
+            for (String key : weaponInventory.keySet()) {
+                Weapon weapon = weaponInventory.get(key);
                 weapon.setAttack(weapon.getAttack() + potion.getStatValue());
-                weaponInventory.put(weaponKey, weapon);
+                weaponInventory.put(key, weapon);
             }
             this.appService.getPlayerState().setWeaponInventory(weaponInventory);
-            generateStrengthPotionSchedule(appService, potion);
+            generateStrengthPotionSchedule(appService, potion).play();
             break;
         case SPEED:
             this.playerService.setMoveSize(playerService.getMoveSize()
                     + playerService.getMoveSize() * potion.getStatValue() / 100);
-            generateSpeedPotionSchedule(appService, playerService);
+            generateSpeedPotionSchedule(appService, playerService).play();
             break;
         default:
             break;

@@ -36,17 +36,13 @@ public class InventoryService {
     private HBox inventoryRow5;
 
     private boolean inventoryOpen;
-
     private AppService appService;
-
-
     private ToggleGroup inventoryToggleGroup = new ToggleGroup();
+    private String recentlySelected;
 
     public InventoryService(AppService appService) {
         this.appService = appService;
     }
-
-    private String recentlySelected;
 
     public void toggleInventoryOpen() {
         if(!this.inventoryOpen) {

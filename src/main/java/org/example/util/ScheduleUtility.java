@@ -20,7 +20,7 @@ import java.nio.file.Paths;
 import java.util.Map;
 
 import static org.example.enums.Direction.LEFT;
-import static org.example.services.PlayerService.MOVE_SIZE;
+import static org.example.services.PlayerService.DEFAULT_MOVE_SIZE;
 
 
 public class ScheduleUtility {
@@ -135,7 +135,7 @@ public class ScheduleUtility {
         Timeline timeline = new Timeline();
         Timeline finalTimeLine = timeline;
         timeline = new Timeline(new KeyFrame(Duration.seconds(30), actionEvent -> {
-            playerService.setMoveSize(MOVE_SIZE);
+            playerService.setMoveSize(DEFAULT_MOVE_SIZE);
         }));
         timeline.setCycleCount(1);
         return timeline;
@@ -146,12 +146,12 @@ public class ScheduleUtility {
         Timeline finalTimeLine = timeline;
         timeline = new Timeline(new KeyFrame(Duration.seconds(30), actionEvent -> {
             Map<String, Weapon> weaponInventory = appService.getPlayerState().getWeaponInventory();
-            for (String weaponKey : weaponInventory.keySet()) {
-                Weapon weapon = weaponInventory.get(weaponKey);
+            for (String key : weaponInventory.keySet()) {
+                Weapon weapon = weaponInventory.get(key);
                 weapon.setAttack(weapon.getAttack() - potion.getStatValue());
-                weaponInventory.put(weaponKey, weapon);
+                weaponInventory.put(key, weapon);
             }
-            appService.getPlayerState().setWeaponInventory(weaponInventory);
+            appService.setPlayerState(appService.getPlayerState().setWeaponInventory(weaponInventory));
         }));
         timeline.setCycleCount(1);
         return timeline;
