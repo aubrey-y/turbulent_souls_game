@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.example.dto.PlayerState;
 import org.example.dto.Room;
+import org.example.exceptions.PlayerCreationException;
 
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -34,15 +35,11 @@ public class App extends Application {
 
     private static boolean devMode = false;
 
-    private static String loggedInEmail;
-
     private static AudioClip clickSound;
 
-    private static PlayerState playerState;
+    private static PlayerState playerState = new PlayerState();
 
     private static Room activeRoom;
-
-    private static Set<String> monstersKilled;
 
     private static FXMLLoader activeLoader;
 
@@ -55,7 +52,6 @@ public class App extends Application {
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
         mediaPlayer.play();
-        monstersKilled = new HashSet<>();
         clickSound = new AudioClip(Paths.get("src/main/resources/static/music/buttonPress.wav")
                 .toUri().toString());
         scene.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent -> clickSound.play());
@@ -122,28 +118,12 @@ public class App extends Application {
         App.devMode = devMode;
     }
 
-    public static String getLoggedInEmail() {
-        return loggedInEmail;
-    }
-
-    public static void setLoggedInEmail(String loggedInEmail) {
-        App.loggedInEmail = loggedInEmail;
-    }
-
     public static Room getActiveRoom() {
         return activeRoom;
     }
 
     public static void setActiveRoom(Room activeRoom) {
         App.activeRoom = activeRoom;
-    }
-
-    public static Set<String> getMonstersKilled() {
-        return monstersKilled;
-    }
-
-    public static void setMonstersKilled(Set<String> monstersKilled) {
-        App.monstersKilled = monstersKilled;
     }
 
     public static FXMLLoader getActiveLoader() {

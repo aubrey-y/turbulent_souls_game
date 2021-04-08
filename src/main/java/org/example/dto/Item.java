@@ -1,5 +1,14 @@
 package org.example.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Weapon.class, name = "WEAPON")
+})
 public abstract class Item {
 
     protected String name;
@@ -9,6 +18,10 @@ public abstract class Item {
     protected String imagePath;
 
     protected String description;
+
+    public Item() {
+
+    }
 
     public String getName() {
         return name;

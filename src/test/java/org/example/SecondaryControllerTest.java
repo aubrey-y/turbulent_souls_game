@@ -7,6 +7,7 @@ import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import org.example.controllers.SecondaryController;
 import org.example.services.AppService;
+import org.example.services.SaveService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -24,6 +25,7 @@ import static org.example.exceptions.ExceptionMessages.INVALID_DIFFICULTY_EXCEPT
 import static org.example.exceptions.ExceptionMessages.INVALID_NAME_EXCEPTION_MESSAGE;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.control.LabeledMatchers.hasText;
@@ -44,7 +46,8 @@ public class SecondaryControllerTest {
         Scene mockedScene = new Scene(
                 new FXMLLoader(App.class.getResource("primary.fxml")).load());
         FXMLLoader loader = new FXMLLoader(App.class.getResource("secondary.fxml"));
-        loader.setControllerFactory(SecondaryController -> new SecondaryController(mockedScene));
+        loader.setControllerFactory(SecondaryController -> new SecondaryController(
+                mock(SaveService.class), mockedScene));
         Parent root = loader.load();
         this.scene = new Scene(root, 1920, 1080);
         this.controller = loader.getController();

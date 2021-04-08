@@ -71,8 +71,7 @@ public class OptionsController extends ErrorBaseController {
             this.appService.setDevMode(false);
             return;
         }
-        this.devMode.setOpacity(0.2);
-        this.login.setOpacity(0.2);
+        this.disableInteraction();
         this.warningBackground.setVisible(true);
         this.credentialEntry.setPromptText("Password");
         this.credentialEntry.setVisible(true);
@@ -89,8 +88,7 @@ public class OptionsController extends ErrorBaseController {
             this.appService.setLoggedInEmail(null);
             return;
         }
-        this.devMode.setOpacity(0.2);
-        this.login.setOpacity(0.2);
+        this.disableInteraction();
         this.credentialEntry.setPromptText("Email");
         this.credentialEntry.setVisible(true);
         this.scene.setOnKeyReleased(e -> {
@@ -138,10 +136,19 @@ public class OptionsController extends ErrorBaseController {
     private void acceptCredentials() {
         this.devMode.setOpacity(1.0);
         this.login.setOpacity(1.0);
+        this.devMode.setDisable(false);
+        this.login.setDisable(false);
         this.warningBackground.setVisible(false);
         this.credentialEntry.setVisible(false);
         this.scene.setOnKeyReleased(e -> { });
         this.hideErrorMessage();
+    }
+
+    private void disableInteraction() {
+        this.devMode.setOpacity(0.2);
+        this.login.setOpacity(0.2);
+        this.devMode.setDisable(true);
+        this.login.setDisable(true);
     }
 
     private void check2FACode() {

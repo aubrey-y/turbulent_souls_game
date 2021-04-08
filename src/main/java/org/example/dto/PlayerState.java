@@ -6,7 +6,9 @@ import org.example.enums.Direction;
 import org.example.exceptions.PlayerCreationException;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class PlayerState {
 
@@ -16,7 +18,7 @@ public class PlayerState {
 
     private Weapon activeWeapon;
 
-    private Map<String, Weapon> weaponInventory = new HashMap<>();
+    private Map<String, Item> weaponInventory = new HashMap<>();
 
     private Map<String, Item> generalInventory = new HashMap<>();
 
@@ -24,7 +26,7 @@ public class PlayerState {
 
     private int goldAmount;
 
-    private int[] spawnCoordinates;
+    private Coordinate spawnCoordinates;
 
     private Direction spawnOrientation;
 
@@ -32,10 +34,41 @@ public class PlayerState {
 
     private double healthCapacity;
 
+    private Set<String> monstersKilled = new HashSet<>();
+
+    private String email;
+
+    private String lastUpdated;
+
+    public PlayerState() {
+
+    }
+
+    public PlayerState(PlayerState playerState) {
+        this.username = playerState.username;
+        this.archetype = playerState.archetype;
+        this.activeWeapon = playerState.activeWeapon;
+        for (String key : playerState.weaponInventory.keySet()) {
+            this.weaponInventory.put(key, playerState.weaponInventory.get(key));
+        }
+        for (String key : playerState.generalInventory.keySet()) {
+            this.generalInventory.put(key, playerState.generalInventory.get(key));
+        }
+        this.difficulty = playerState.difficulty;
+        this.goldAmount = playerState.goldAmount;
+        this.spawnCoordinates = playerState.spawnCoordinates;
+        this.spawnOrientation = playerState.spawnOrientation;
+        this.health = playerState.health;
+        this.healthCapacity = playerState.healthCapacity;
+        this.monstersKilled = playerState.monstersKilled;
+        this.email = playerState.email;
+        this.lastUpdated = playerState.lastUpdated;
+    }
+
     public PlayerState(String username,
                        Archetype archetype,
                        Difficulty difficulty,
-                       int[] spawnCoordinates) throws PlayerCreationException {
+                       Coordinate spawnCoordinates) throws PlayerCreationException {
         this.username = username;
         this.archetype = archetype;
         this.difficulty = difficulty;
@@ -117,12 +150,21 @@ public class PlayerState {
         return this;
     }
 
-    public Map<String, Weapon> getWeaponInventory() {
+    public Map<String, Item> getWeaponInventory() {
         return weaponInventory;
     }
 
-    public PlayerState setWeaponInventory(Map<String, Weapon> weaponInventory) {
+    public PlayerState setWeaponInventory(Map<String, Item> weaponInventory) {
         this.weaponInventory = weaponInventory;
+        return this;
+    }
+
+    public Map<String, Item> getGeneralInventory() {
+        return generalInventory;
+    }
+
+    public PlayerState setGeneralInventory(Map<String, Item> generalInventory) {
+        this.generalInventory = generalInventory;
         return this;
     }
 
@@ -135,11 +177,11 @@ public class PlayerState {
         return this;
     }
 
-    public int[] getSpawnCoordinates() {
+    public Coordinate getSpawnCoordinates() {
         return spawnCoordinates;
     }
 
-    public PlayerState setSpawnCoordinates(int[] spawnCoordinates) {
+    public PlayerState setSpawnCoordinates(Coordinate spawnCoordinates) {
         this.spawnCoordinates = spawnCoordinates;
         return this;
     }
@@ -168,6 +210,33 @@ public class PlayerState {
 
     public PlayerState setHealthCapacity(double healthCapacity) {
         this.healthCapacity = healthCapacity;
+        return this;
+    }
+
+    public Set<String> getMonstersKilled() {
+        return monstersKilled;
+    }
+
+    public PlayerState setMonstersKilled(Set<String> monstersKilled) {
+        this.monstersKilled = monstersKilled;
+        return this;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public PlayerState setEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public String getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public PlayerState setLastUpdated(String lastUpdated) {
+        this.lastUpdated = lastUpdated;
         return this;
     }
 }

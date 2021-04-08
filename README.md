@@ -133,3 +133,54 @@ Dungeon crawler group project for CS 2340, Georgia Institute of Technology
     Email sending should be functional at this point.
     
     Also, this was not explicitly mentioned anywhere, but the environment variable `GOOGLE_EMAIL` is also needed.
+
+19. Create a MongoDB account at https://cloud.mongodb.com/
+
+    Provision a **Shared Tier Cluster**. The name doesn't matter - our database was named `prd` but in hindsight it
+    should reflect the type of database, like `Products` for example. instead of a development environment.
+    
+    You should also set a cluster username/password as a part of this process.
+    Our project uses `admin` as the username. Remember the password for later.
+    
+    Additional details:
+
+    ```
+    Cluster Tier: M0 Sandbox
+    Region: AWS/N Virginia
+    Type: Replica Set - 3 nodes
+    ```
+    
+    ![](docs/clusters.PNG)
+
+    Press the `Connect` button highlighted above (in your cluster management screen).
+
+    ![](docs/clusterconnect.PNG)
+
+    Press `Connect using MongoDB Compass`.
+
+    ![](docs/connectionstring.PNG)
+
+    Copy the connection string. Set that as the `MONGO_URI` environment variable.
+
+    Note that the password field is not filled so you must replace `<password>` with your cluster password from earlier.
+    
+20. Download MongoDB Atlas at https://www.mongodb.com/products/compass
+
+    ![](docs/compassconnect.PNG)
+
+    Paste the full connection string with the password filled in and press `Connect`.
+
+    You should be logged into your cluster.
+
+    At this point we are also introducing a new environment variable `ENV`. This allows us to interact with separate
+    databases for development and production (so if we mess something up in the database, it only breaks our development
+    database and not the production database for real users).
+    
+    `ENV` for development = `dev`
+    
+    `ENV` for production = `prd`
+
+    (A real company would also have support for a `local` environment but we don't have that kind of time)
+
+    When you run this application and save for the first time, the databases, if they do not already exist, will be
+    automatically created for you.

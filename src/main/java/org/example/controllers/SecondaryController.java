@@ -1,15 +1,25 @@
 package org.example.controllers;
 
+import com.mongodb.ConnectionString;
+import com.mongodb.MongoClientSettings;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import org.bson.codecs.configuration.CodecRegistry;
+import org.bson.codecs.pojo.PojoCodecProvider;
 import org.example.App;
 import org.example.controllers.rooms.Forest1Controller;
+import org.example.dto.Coordinate;
+import org.example.dto.Item;
 import org.example.dto.PlayerState;
 import org.example.dto.Room;
+import org.example.dto.Weapon;
 import org.example.enums.Archetype;
 import org.example.enums.Difficulty;
+import org.example.enums.Direction;
 import org.example.exceptions.InvalidArchetypeException;
 import org.example.exceptions.InvalidDifficultyException;
 import org.example.exceptions.InvalidNameException;
@@ -19,7 +29,10 @@ import org.example.services.DirectionService;
 import org.example.services.HealthService;
 import org.example.services.PlayerService;
 import org.example.services.RoomDirectionService;
+import org.example.services.SaveService;
 
+import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
+import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 import static org.example.enums.RoomType.FOREST1;
 import static org.example.exceptions.ExceptionMessages.INVALID_ARCHETYPE_EXCEPTION_MESSAGE;
 import static org.example.exceptions.ExceptionMessages.INVALID_DIFFICULTY_EXCEPTION_MESSAGE;
@@ -27,6 +40,8 @@ import static org.example.exceptions.ExceptionMessages.INVALID_NAME_EXCEPTION_ME
 import static org.example.exceptions.ExceptionMessages.UNKNOWN_EXCEPTION_MESSAGE;
 
 public class SecondaryController extends ErrorBaseController {
+
+    private SaveService saveService;
 
     private Scene scene;
 
@@ -36,7 +51,11 @@ public class SecondaryController extends ErrorBaseController {
 
     private Archetype archetype;
 
-    public SecondaryController(Scene scene) {
+    public static final Coordinate SPAWN_COORDINATES = new Coordinate().setX(400).setY(540);
+
+    public SecondaryController(SaveService saveService,
+                               Scene scene) {
+        this.saveService = saveService;
         this.scene = scene;
     }
 
@@ -67,18 +86,26 @@ public class SecondaryController extends ErrorBaseController {
                             this.username,
                             this.archetype,
                             this.difficulty,
-                            new int[]{400, 540}));
+                            SPAWN_COORDINATES)
+                            .setEmail(this.appService.getPlayerState().getEmail()));
             this.appService.setActiveRoom(STARTING_ROOM);
             FXMLLoader loader = new FXMLLoader(App.class.getResource("gameScreen.fxml"));
             DirectionService directionService = new DirectionService();
             RoomDirectionService roomDirectionService = new RoomDirectionService(directionService);
             HealthService healthService = new HealthService(this.appService);
+
+
             loader.setControllerFactory(GameScreenController -> new Forest1Controller(
                     this.appService,
-                    new PlayerService(this.appService, roomDirectionService, healthService),
+                    new PlayerService(
+                            this.appService,
+                            roomDirectionService,
+                            healthService,
+                            this.saveService),
                     directionService,
                     roomDirectionService,
                     healthService,
+                    this.saveService,
                     this.scene));
             this.appService.setRoot(loader);
         } catch (InvalidNameException e) {

@@ -8,7 +8,10 @@ import org.example.App;
 import org.example.dto.PlayerState;
 import org.example.dto.Room;
 
+import java.time.LocalDateTime;
 import java.util.Set;
+
+import static org.example.util.DateTimeFormatUtility.DATE_TIME_FORMATTER;
 
 /**
  * All interactions with App.java should route through this wrapper class.
@@ -38,11 +41,11 @@ public class AppService {
     }
 
     public boolean getLoggedIn() {
-        return App.getLoggedInEmail() != null;
+        return App.getPlayerState().getEmail() != null;
     }
 
     public void setLoggedInEmail(String loggedInEmail) {
-        App.setLoggedInEmail(loggedInEmail);
+        App.setPlayerState(App.getPlayerState().setEmail(loggedInEmail));
     }
 
     public void setRoot(FXMLLoader loader) {
@@ -51,6 +54,12 @@ public class AppService {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void updatePlayerStateLastSaved() {
+        PlayerState playerState = App.getPlayerState();
+        playerState.setLastUpdated(DATE_TIME_FORMATTER.format(LocalDateTime.now()));
+        App.setPlayerState(playerState);
     }
 
     public PlayerState getPlayerState() {
@@ -74,14 +83,14 @@ public class AppService {
     }
 
     public Set<String> getMonstersKilled() {
-        return App.getMonstersKilled();
+        return App.getPlayerState().getMonstersKilled();
     }
 
     public void setMonstersKilled(Set<String> monstersKilled) {
-        App.setMonstersKilled(monstersKilled);
+        App.setPlayerState(App.getPlayerState().setMonstersKilled(monstersKilled));
     }
 
     public void addMonsterKilled(String id) {
-        App.getMonstersKilled().add(id);
+        App.getPlayerState().getMonstersKilled().add(id);
     }
 }
