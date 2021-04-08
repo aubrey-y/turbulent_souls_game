@@ -116,7 +116,8 @@ public class LoadGameController implements Initializable {
                                 SELECTED_PLAYER_STATE.getEmail(),
                                 SELECTED_PLAYER_STATE.getUsername());
                         if (success) {
-                            this.savesVBox.getChildren().remove(SELECTED_SAVE_INDEX);
+                            this.savesVBox.getChildren().clear();
+                            this.initialize(url, resourceBundle);
                         }
                     }
                 }
