@@ -1,8 +1,8 @@
 .toggle-button {
-    -fx-background-color: transparent
+    -fx-background-color: transparent;
 }
 
 .toggle-button: selected {
-    -fx-background-color:  rgba(0, 0, 0, .5)
+    -fx-background-color:  rgba(0, 0, 0, .5);
 }
 
