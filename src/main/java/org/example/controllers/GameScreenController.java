@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.example.dto.PlayerState;
 import org.example.services.AppService;
+import org.example.services.ConsumableService;
 import org.example.services.DirectionService;
 import org.example.services.HealthService;
 import org.example.services.InventoryService;
@@ -40,6 +41,8 @@ public class GameScreenController extends InventoryController {
     protected MonsterService monsterService;
 
     protected InventoryService inventoryService;
+
+    protected ConsumableService consumableService;
 
     private Scene scene;
 
@@ -85,6 +88,7 @@ public class GameScreenController extends InventoryController {
         this.initializePlayerImageView(playerState);
         this.inventoryService = new InventoryService(this.appService);
         this.initializeInventoryService(this.inventoryService);
+        this.consumableService = new ConsumableService(this.healthService, this.playerService, this.appService);
         this.scene.setOnKeyPressed(e -> {
             switch (e.getCode()) {
             case W:
@@ -119,7 +123,7 @@ public class GameScreenController extends InventoryController {
                 }
                 break;
             case E:
-                this.inventoryService.useItem();
+                this.inventoryService.useItem(this.consumableService);
                 break;
             default:
                 break;

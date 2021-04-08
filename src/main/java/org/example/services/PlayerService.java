@@ -35,6 +35,8 @@ public class PlayerService {
 
     private Direction lastExitDirection;
 
+    private double moveSize = 30;
+
     public static final double MOVE_SIZE = 30;
 
     public PlayerService(AppService appService,
@@ -48,25 +50,25 @@ public class PlayerService {
 
     public void moveUp(boolean shift) {
         this.imageView.setTranslateY(
-                this.imageView.getTranslateY() - (!shift ? MOVE_SIZE : MOVE_SIZE * 2));
+                this.imageView.getTranslateY() - (!shift ? moveSize : moveSize * 2));
         this.checkForExit();
     }
 
     public void moveDown(boolean shift) {
         this.imageView.setTranslateY(
-                this.imageView.getTranslateY() + (!shift ? MOVE_SIZE : MOVE_SIZE * 2));
+                this.imageView.getTranslateY() + (!shift ? moveSize : moveSize * 2));
         this.checkForExit();
     }
 
     public void moveRight(boolean shift) {
         this.imageView.setTranslateX(
-                this.imageView.getTranslateX() + (!shift ? MOVE_SIZE : MOVE_SIZE * 2));
+                this.imageView.getTranslateX() + (!shift ? moveSize : moveSize * 2));
         this.checkForExit();
     }
 
     public void moveLeft(boolean shift) {
         this.imageView.setTranslateX(
-                this.imageView.getTranslateX() - (!shift ? MOVE_SIZE : MOVE_SIZE * 2));
+                this.imageView.getTranslateX() - (!shift ? moveSize : moveSize * 2));
         this.checkForExit();
     }
 
@@ -275,5 +277,13 @@ public class PlayerService {
     public PlayerService setMonsterService(MonsterService monsterService) {
         this.monsterService = monsterService;
         return this;
+    }
+
+    public void setMoveSize(double moveSize) {
+        this.moveSize = moveSize;
+    }
+
+    public double getMoveSize() {
+        return this.moveSize;
     }
 }

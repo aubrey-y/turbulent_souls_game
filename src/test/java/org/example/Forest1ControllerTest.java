@@ -30,7 +30,6 @@ import static org.example.ConstantUtil.ONE_SECOND;
 import static org.example.controllers.SecondaryController.STARTING_ROOM;
 import static org.example.enums.Archetype.WARRIOR;
 import static org.example.enums.Difficulty.EASY;
-import static org.example.services.PlayerService.MOVE_SIZE;
 import static org.hamcrest.CoreMatchers.anyOf;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -114,7 +113,7 @@ public class Forest1ControllerTest {
         Forest2Controller forest2Controller = App.getActiveLoader().getController();
         //Then
         assertThat(forest2Controller.getPlayer().getTranslateX(),
-                is(not(startX - MOVE_SIZE * times)));
+                is(not(startX - playerService.getMoveSize() * times)));
         assertThat(forest2Controller.getPlayer().getTranslateY(),
                 is(startY));
     }
@@ -136,7 +135,7 @@ public class Forest1ControllerTest {
         Forest2Controller forest2Controller = App.getActiveLoader().getController();
         //Then
         assertThat(forest2Controller.getPlayer().getTranslateX(),
-                is(not(startX - MOVE_SIZE * times)));
+                is(not(startX - playerService.getMoveSize() * times)));
         assertThat(forest2Controller.getPlayer().getTranslateY(),
                 is(startY));
     }
@@ -158,7 +157,7 @@ public class Forest1ControllerTest {
         Forest2Controller forest2Controller = App.getActiveLoader().getController();
         //Then
         assertThat(forest2Controller.getPlayer().getTranslateY(),
-                is(not(startY - MOVE_SIZE * times)));
+                is(not(startY - playerService.getMoveSize() * times)));
         assertThat(forest2Controller.getPlayer().getTranslateX(),
                 is(startX));
     }
@@ -180,7 +179,7 @@ public class Forest1ControllerTest {
         ForestTraderController forestTraderController = App.getActiveLoader().getController();
         //Then
         assertThat(forestTraderController.getPlayer().getTranslateY(),
-                is(not(startY - MOVE_SIZE * times)));
+                is(not(startY - playerService.getMoveSize() * times)));
         assertThat(forestTraderController.getPlayer().getTranslateX(),
                 is(startX));
     }
@@ -198,7 +197,7 @@ public class Forest1ControllerTest {
         assertThat(this.controller.getPlayer().getTranslateX(),
                 is((double) this.spawnCoordinates[0]));
         assertThat(this.controller.getPlayer().getTranslateY(),
-                is(this.spawnCoordinates[1] + MOVE_SIZE * times));
+                is(this.spawnCoordinates[1] + playerService.getMoveSize() * times));
     }
 
     @Test
@@ -214,7 +213,7 @@ public class Forest1ControllerTest {
         assertThat(this.controller.getPlayer().getTranslateX(),
                 is((double) this.spawnCoordinates[0]));
         assertThat(this.controller.getPlayer().getTranslateY(),
-                is(this.spawnCoordinates[1] - MOVE_SIZE * times));
+                is(this.spawnCoordinates[1] - playerService.getMoveSize() * times));
     }
 
     @Test
@@ -228,7 +227,7 @@ public class Forest1ControllerTest {
         }
         //Then
         assertThat(this.controller.getPlayer().getTranslateX(),
-                is(this.spawnCoordinates[0] + MOVE_SIZE * times));
+                is(this.spawnCoordinates[0] + playerService.getMoveSize() * times));
         assertThat(this.controller.getPlayer().getTranslateY(),
                 is((double) this.spawnCoordinates[1]));
     }
@@ -246,9 +245,9 @@ public class Forest1ControllerTest {
         }
         //Then
         assertThat(this.controller.getPlayer().getTranslateX(),
-                is(this.spawnCoordinates[0] + MOVE_SIZE * times));
+                is(this.spawnCoordinates[0] + playerService.getMoveSize() * times));
         assertThat(this.controller.getPlayer().getTranslateY(),
-                is(this.spawnCoordinates[1] - MOVE_SIZE * times));
+                is(this.spawnCoordinates[1] - playerService.getMoveSize() * times));
     }
 
     @Test
@@ -264,9 +263,9 @@ public class Forest1ControllerTest {
         }
         //Then
         assertThat(this.controller.getPlayer().getTranslateX(),
-                is(this.spawnCoordinates[0] - MOVE_SIZE * times));
+                is(this.spawnCoordinates[0] - playerService.getMoveSize() * times));
         assertThat(this.controller.getPlayer().getTranslateY(),
-                is(this.spawnCoordinates[1] + MOVE_SIZE * times));
+                is(this.spawnCoordinates[1] + playerService.getMoveSize() * times));
     }
 
     @Test
@@ -280,7 +279,7 @@ public class Forest1ControllerTest {
         }
         //Then
         assertThat(this.controller.getPlayer().getTranslateX(),
-                is(this.spawnCoordinates[0] - MOVE_SIZE * times));
+                is(this.spawnCoordinates[0] - playerService.getMoveSize() * times));
         assertThat(this.controller.getPlayer().getTranslateY(),
                 is((double) this.spawnCoordinates[1]));
     }
@@ -351,7 +350,7 @@ public class Forest1ControllerTest {
         }
         //Then
         assertThat(this.controller.getPlayer().getTranslateX(),
-                is(startX - MOVE_SIZE * times));
+                is(startX - playerService.getMoveSize() * times));
         assertThat(this.controller.getPlayer().getTranslateY(),
                 is(startY));
     }
@@ -371,7 +370,7 @@ public class Forest1ControllerTest {
         }
         //Then
         assertThat(this.controller.getPlayer().getTranslateX(),
-                is(startX + MOVE_SIZE * times));
+                is(startX + playerService.getMoveSize() * times));
         assertThat(this.controller.getPlayer().getTranslateY(),
                 is(startY));
     }
@@ -391,7 +390,7 @@ public class Forest1ControllerTest {
         }
         //Then
         assertThat(this.controller.getPlayer().getTranslateY(),
-                is(startY - MOVE_SIZE * times));
+                is(startY - playerService.getMoveSize() * times));
         assertThat(this.controller.getPlayer().getTranslateX(),
                 is(startX));
     }
@@ -411,7 +410,7 @@ public class Forest1ControllerTest {
         }
         //Then
         assertThat(this.controller.getPlayer().getTranslateY(),
-                is(startY + MOVE_SIZE * times));
+                is(startY + playerService.getMoveSize() * times));
         assertThat(this.controller.getPlayer().getTranslateX(),
                 is(startX));
     }

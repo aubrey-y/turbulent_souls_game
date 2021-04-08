@@ -8,6 +8,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Rectangle;
 import org.example.dto.BasicHealthPotion;
+import org.example.dto.BasicMagic;
+import org.example.dto.BasicStaff;
 import org.example.dto.BasicSword;
 import org.example.dto.Item;
 import org.example.dto.Potion;
@@ -36,6 +38,7 @@ public class InventoryService {
     private boolean inventoryOpen;
 
     private AppService appService;
+
 
     private ToggleGroup inventoryToggleGroup = new ToggleGroup();
 
@@ -125,20 +128,28 @@ public class InventoryService {
 
     }
 
-    public void useItem() {
+    public void useItem(ConsumableService consumableService) {
         Map<String, Weapon> weaponInventory = this.appService.getPlayerState()
                 .getWeaponInventory();
         Map<String, Item> generalInventory = this.appService.getPlayerState()
                 .getGeneralInventory();
         Weapon weapon = weaponInventory.get(recentlySelected);
-
         if (weapon != null) {
-            //Switch weapons here
+            this.appService.getPlayerState().setActiveWeapon(weapon);
         } else {
             Item item = generalInventory.get(recentlySelected);
             if (item != null) {
-                if (item instanceof BasicHealthPotion) {
-                    //on call heal
+                if (item instanceof Potion) {
+                    Potion potion = (Potion) item;
+                    consumableService.consumePotion(potion);
+                }
+                Integer newQuantity = item.getQuantity();
+                if (newQuantity > 0) {
+                    newQuantity -= 1;
+                }
+                item.setQuantity(newQuantity);
+                if (item.getQuantity() == 0) {
+                    //Logic here to remove icon from inventory
                 }
             }
         }
