@@ -123,7 +123,9 @@ public class GameScreenController extends InventoryController {
                 }
                 break;
             case E:
-                this.inventoryService.useItem(this.consumableService);
+                if (this.inventoryService.getInventoryOpen()) {
+                    this.inventoryService.consumeItem(this.consumableService);
+                }
                 break;
             default:
                 break;
@@ -163,22 +165,6 @@ public class GameScreenController extends InventoryController {
         });
     }
 
-    private void initializePlayerImageView(PlayerState playerState) {
-        this.displayCorrectPlayerOrientation(playerState);
-        this.playerService.setImageView(this.player);
-        this.playerService.moveX(playerState.getSpawnCoordinates()[0]);
-        this.playerService.moveY(playerState.getSpawnCoordinates()[1]);
-        this.playerService.setVisible(true);
-    }
-
-    private void initializePlayerHealth(PlayerState playerState) {
-        this.healthBar.setProgress(playerState.getHealth() / playerState.getHealthCapacity());
-        this.healthText.setText(
-                (int) playerState.getHealth() + "/" + (int) playerState.getHealthCapacity());
-        this.healthService.setHealthBar(this.healthBar).setHealthText(this.healthText);
-        this.healthService.applyHealthModifier(0.0);
-    }
-
     private void initializeInventoryService(InventoryService inventoryService) {
         this.inventoryPreviewBackground.setLayoutX(1400);
         this.inventoryPreviewBackground.setLayoutY(100);
@@ -205,6 +191,24 @@ public class GameScreenController extends InventoryController {
                 .setInventoryRow4(this.inventoryRow4)
                 .setInventoryRow5(this.inventoryRow5);
     }
+
+    private void initializePlayerImageView(PlayerState playerState) {
+        this.displayCorrectPlayerOrientation(playerState);
+        this.playerService.setImageView(this.player);
+        this.playerService.moveX(playerState.getSpawnCoordinates()[0]);
+        this.playerService.moveY(playerState.getSpawnCoordinates()[1]);
+        this.playerService.setVisible(true);
+    }
+
+    private void initializePlayerHealth(PlayerState playerState) {
+        this.healthBar.setProgress(playerState.getHealth() / playerState.getHealthCapacity());
+        this.healthText.setText(
+                (int) playerState.getHealth() + "/" + (int) playerState.getHealthCapacity());
+        this.healthService.setHealthBar(this.healthBar).setHealthText(this.healthText);
+        this.healthService.applyHealthModifier(0.0);
+    }
+
+
 
     private void displayPlayerRightOrientation(PlayerState playerState) {
         switch (playerState.getActiveWeapon().getType()) {
