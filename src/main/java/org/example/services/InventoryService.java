@@ -11,7 +11,6 @@ import org.example.dto.Item;
 import org.example.dto.Weapon;
 
 import java.nio.file.Paths;
-import java.util.HashMap;
 import java.util.Map;
 
 import static org.example.util.ResourcePathUtility.TOGGLE_BUTTON_STYLE_PATH;
@@ -42,10 +41,10 @@ public class InventoryService {
 
     public void toggleInventoryOpen() {
         if(!this.inventoryOpen) {
-            Map<String, Weapon> weaponInventory = this.appService.getPlayerState()
+            Map<String, Item> weaponInventory = this.appService.getPlayerState()
                     .getWeaponInventory();
             boolean selected = false;
-            for(Weapon weapon : weaponInventory.values()) {
+            for(Item weapon : weaponInventory.values()) {
                 ToggleButton toggleButton = new ToggleButton();
                 toggleButton.setToggleGroup(this.inventoryToggleGroup);
                 toggleButton.getStylesheets()
@@ -79,9 +78,9 @@ public class InventoryService {
     }
 
     private void selectToggleButton(String pathId) {
-        Map<String, Weapon> weaponInventory = this.appService.getPlayerState()
+        Map<String, Item> weaponInventory = this.appService.getPlayerState()
                 .getWeaponInventory();
-        Weapon weapon = weaponInventory.get(pathId);
+        Weapon weapon = (Weapon) weaponInventory.get(pathId);
         this.inventoryPreviewTitle.setText(weapon.getName());
         this.inventoryPreviewImage.setImage(
                 new Image(Paths.get(weapon.getImagePath()).toUri().toString()));

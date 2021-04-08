@@ -16,7 +16,7 @@ public class PlayerState {
 
     private Weapon activeWeapon;
 
-    private Map<String, Weapon> weaponInventory = new HashMap<>();
+    private Map<String, Item> weaponInventory = new HashMap<>();
 
     private Map<String, Item> generalInventory = new HashMap<>();
 
@@ -24,7 +24,7 @@ public class PlayerState {
 
     private int goldAmount;
 
-    private int[] spawnCoordinates;
+    private Coordinate spawnCoordinates;
 
     private Direction spawnOrientation;
 
@@ -38,10 +38,29 @@ public class PlayerState {
 
     }
 
+    public PlayerState(PlayerState playerState) {
+        this.username = playerState.username;
+        this.archetype = playerState.archetype;
+        this.activeWeapon = playerState.activeWeapon;
+        for (String key : playerState.weaponInventory.keySet()) {
+            this.weaponInventory.put(key, playerState.weaponInventory.get(key));
+        }
+        for (String key : playerState.generalInventory.keySet()) {
+            this.generalInventory.put(key, playerState.generalInventory.get(key));
+        }
+        this.difficulty = playerState.difficulty;
+        this.goldAmount = playerState.goldAmount;
+        this.spawnCoordinates = playerState.spawnCoordinates;
+        this.spawnOrientation = playerState.spawnOrientation;
+        this.health = playerState.health;
+        this.healthCapacity = playerState.healthCapacity;
+        this.email = playerState.email;
+    }
+
     public PlayerState(String username,
                        Archetype archetype,
                        Difficulty difficulty,
-                       int[] spawnCoordinates) throws PlayerCreationException {
+                       Coordinate spawnCoordinates) throws PlayerCreationException {
         this.username = username;
         this.archetype = archetype;
         this.difficulty = difficulty;
@@ -123,11 +142,11 @@ public class PlayerState {
         return this;
     }
 
-    public Map<String, Weapon> getWeaponInventory() {
+    public Map<String, Item> getWeaponInventory() {
         return weaponInventory;
     }
 
-    public PlayerState setWeaponInventory(Map<String, Weapon> weaponInventory) {
+    public PlayerState setWeaponInventory(Map<String, Item> weaponInventory) {
         this.weaponInventory = weaponInventory;
         return this;
     }
@@ -150,11 +169,11 @@ public class PlayerState {
         return this;
     }
 
-    public int[] getSpawnCoordinates() {
+    public Coordinate getSpawnCoordinates() {
         return spawnCoordinates;
     }
 
-    public PlayerState setSpawnCoordinates(int[] spawnCoordinates) {
+    public PlayerState setSpawnCoordinates(Coordinate spawnCoordinates) {
         this.spawnCoordinates = spawnCoordinates;
         return this;
     }

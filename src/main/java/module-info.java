@@ -13,6 +13,7 @@ module org.example {
     requires mongo.java.driver;
 
     requires org.junit.jupiter.api;
+    requires com.fasterxml.jackson.databind;
 
     opens org.example to javafx.fxml;
     opens org.example.controllers to javafx.fxml;

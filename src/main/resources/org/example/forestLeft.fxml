@@ -106,5 +106,17 @@
             </Label>
          </graphic>
       </Button>
+      <Button id="clickable" fx:id="saveButton" alignment="BASELINE_CENTER" focusTraversable="false" layoutX="260.0" layoutY="960.0" mnemonicParsing="false" onAction="#saveGameAction" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE">
+         <font>
+            <Font name="Pixeboy" size="30.0" />
+         </font>
+         <graphic>
+            <Label id="clickable" stylesheets="@../../static/css/fontstyle.css" text="Save Game" textFill="WHITE">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>

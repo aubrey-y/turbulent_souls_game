@@ -12,10 +12,14 @@ import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 import org.example.App;
 import org.example.controllers.rooms.Forest1Controller;
+import org.example.dto.Coordinate;
+import org.example.dto.Item;
 import org.example.dto.PlayerState;
 import org.example.dto.Room;
+import org.example.dto.Weapon;
 import org.example.enums.Archetype;
 import org.example.enums.Difficulty;
+import org.example.enums.Direction;
 import org.example.exceptions.InvalidArchetypeException;
 import org.example.exceptions.InvalidDifficultyException;
 import org.example.exceptions.InvalidNameException;
@@ -37,6 +41,8 @@ import static org.example.exceptions.ExceptionMessages.UNKNOWN_EXCEPTION_MESSAGE
 
 public class SecondaryController extends ErrorBaseController {
 
+    private SaveService saveService;
+
     private Scene scene;
 
     private String username;
@@ -45,7 +51,11 @@ public class SecondaryController extends ErrorBaseController {
 
     private Archetype archetype;
 
-    public SecondaryController(Scene scene) {
+    public static final Coordinate SPAWN_COORDINATES = new Coordinate().setX(400).setY(540);
+
+    public SecondaryController(SaveService saveService,
+                               Scene scene) {
+        this.saveService = saveService;
         this.scene = scene;
     }
 
@@ -76,7 +86,7 @@ public class SecondaryController extends ErrorBaseController {
                             this.username,
                             this.archetype,
                             this.difficulty,
-                            new int[]{400, 540})
+                            SPAWN_COORDINATES)
                             .setEmail(this.appService.getPlayerState().getEmail()));
             this.appService.setActiveRoom(STARTING_ROOM);
             FXMLLoader loader = new FXMLLoader(App.class.getResource("gameScreen.fxml"));
@@ -84,29 +94,18 @@ public class SecondaryController extends ErrorBaseController {
             RoomDirectionService roomDirectionService = new RoomDirectionService(directionService);
             HealthService healthService = new HealthService(this.appService);
 
-            //Mongo Setup
-            ConnectionString connectionString = new ConnectionString(
-                    System.getenv("MONGO_URI"));
-            CodecRegistry pojoCodecRegistry = fromProviders(
-                    PojoCodecProvider.builder().automatic(true).build());
-            CodecRegistry codecRegistry = fromRegistries(
-                    MongoClientSettings.getDefaultCodecRegistry(), pojoCodecRegistry);
-            MongoClientSettings clientSettings = MongoClientSettings.builder()
-                    .applyConnectionString(connectionString)
-                    .codecRegistry(codecRegistry).build();
-            MongoClient mongoClient = MongoClients.create(clientSettings);
-            SaveService saveService = new SaveService(mongoClient);
+
             loader.setControllerFactory(GameScreenController -> new Forest1Controller(
                     this.appService,
                     new PlayerService(
                             this.appService,
                             roomDirectionService,
                             healthService,
-                            saveService),
+                            this.saveService),
                     directionService,
                     roomDirectionService,
                     healthService,
-                    saveService,
+                    this.saveService,
                     this.scene));
             this.appService.setRoot(loader);
         } catch (InvalidNameException e) {

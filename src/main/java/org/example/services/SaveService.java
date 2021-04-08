@@ -1,13 +1,19 @@
 package org.example.services;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
+import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.example.dto.PlayerState;
 import org.example.repository.SaveRepository;
+import org.example.util.FieldComplianceUtility;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.List;
+
+import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
 
 public class SaveService {
 
@@ -21,22 +27,34 @@ public class SaveService {
 
     private static final String USERNAME_KEY = "username";
 
+    private ObjectMapper objectMapper;
+
     public SaveService(MongoClient mongoClient) {
         this.mongoClient = mongoClient;
         this.mongoDatabase = this.mongoClient.getDatabase(System.getenv("ENV"));
         this.saveRepository = new SaveRepository(this.mongoDatabase);
+        this.objectMapper = new ObjectMapper();
+        this.objectMapper.configure(FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
-    public List<PlayerState> findPlayerStates(String email) {
-        return this.saveRepository
-                .findManyPlayerStateSaves(findByEmail(email));
-    }
+//    public List<PlayerState> findPlayerStates(String email) {
+//        List<PlayerState> playerStates = this.saveRepository
+//                .findManyPlayerStateSaves(findByEmail(email));
+//        for (int i = 0; i < playerStates.size(); i++) {
+//            playerStates.set(i, this.restorePlayerState(playerStates.get(i)));
+//        }
+//        return playerStates;
+//    }
 
     public boolean upsertPlayerStateSave(PlayerState playerState) {
+        PlayerState cleansedPlayerState = this.cleansePlayerState(new PlayerState(playerState));
+        String json = this.convertPlayerStateToJson(cleansedPlayerState);
         return this.saveRepository
                 .upsertPlayerStateSave(
-                        playerState,
-                        findByEmailAndUsername(playerState.getEmail(), playerState.getUsername()));
+                        Document.parse(json),
+                        findByEmailAndUsername(
+                                cleansedPlayerState.getEmail(),
+                                cleansedPlayerState.getUsername()));
     }
 
     public boolean removePlayerStateSave(String email, String username) {
@@ -52,6 +70,28 @@ public class SaveService {
 
     private static Bson findByEmail(String email) {
         return Filters.eq(EMAIL_KEY, email);
+    }
+
+    private PlayerState cleansePlayerState(PlayerState playerState) {
+        FieldComplianceUtility.cleanseIllegalCharacters(playerState.getWeaponInventory());
+        FieldComplianceUtility.cleanseIllegalCharacters(playerState.getGeneralInventory());
+        return playerState;
+    }
+
+    private PlayerState restorePlayerState(PlayerState playerState) {
+        FieldComplianceUtility.restoreIllegalCharacters(playerState.getWeaponInventory());
+        FieldComplianceUtility.restoreIllegalCharacters(playerState.getGeneralInventory());
+        return playerState;
+    }
+
+    private String convertPlayerStateToJson(PlayerState playerState) {
+        String json;
+        try {
+            json = this.objectMapper.writeValueAsString(playerState);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        return json;
     }
 
     public MongoClient getMongoClient() {
