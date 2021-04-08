@@ -6,7 +6,9 @@ import org.example.enums.Direction;
 import org.example.exceptions.PlayerCreationException;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class PlayerState {
 
@@ -32,6 +34,8 @@ public class PlayerState {
 
     private double healthCapacity;
 
+    private Set<String> monstersKilled = new HashSet<>();
+
     private String email;
 
     private String lastUpdated;
@@ -56,6 +60,7 @@ public class PlayerState {
         this.spawnOrientation = playerState.spawnOrientation;
         this.health = playerState.health;
         this.healthCapacity = playerState.healthCapacity;
+        this.monstersKilled = playerState.monstersKilled;
         this.email = playerState.email;
         this.lastUpdated = playerState.lastUpdated;
     }
@@ -205,6 +210,15 @@ public class PlayerState {
 
     public PlayerState setHealthCapacity(double healthCapacity) {
         this.healthCapacity = healthCapacity;
+        return this;
+    }
+
+    public Set<String> getMonstersKilled() {
+        return monstersKilled;
+    }
+
+    public PlayerState setMonstersKilled(Set<String> monstersKilled) {
+        this.monstersKilled = monstersKilled;
         return this;
     }
 

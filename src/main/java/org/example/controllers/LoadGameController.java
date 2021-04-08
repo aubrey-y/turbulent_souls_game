@@ -56,16 +56,14 @@ public class LoadGameController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if (!this.appService.getLoggedIn()) {
-            Label label = new Label("You are not logged in. "
-                    + "To load a save file, log in via Settings.");
-            label.setWrapText(true);
-            label.getStylesheets().add(Paths.get(FONT_STYLE_PATH).toUri().toString());
-            label.setFont(new Font(68.0));
-            label.setTextFill(Paint.valueOf("white"));
-            this.savesVBox.getChildren().add(label);
+            this.setMessage("You are not logged in. To load a save file, log in via Settings.");
         } else {
             List<PlayerState> playerStates = this.saveService.findPlayerStates(
                     this.appService.getPlayerState().getEmail());
+            if(playerStates.isEmpty()) {
+                this.setMessage(String.format("No save files found for %s",
+                        this.appService.getPlayerState().getEmail()));
+            }
             for (PlayerState playerState : playerStates) {
                 ToggleButton toggleButton = new ToggleButton();
                 toggleButton.setToggleGroup(this.savesToggleGroup);
@@ -85,27 +83,31 @@ public class LoadGameController implements Initializable {
                 this.savesVBox.getChildren().add(toggleButton);
             }
             this.scene.setOnKeyReleased(e -> {
-                if (e.getCode() == KeyCode.E && SELECTED_PLAYER_STATE != null) {
-                    this.appService.setPlayerState(SELECTED_PLAYER_STATE);
-                    this.appService.setActiveRoom(STARTING_ROOM);
-                    FXMLLoader loader = new FXMLLoader(App.class.getResource("gameScreen.fxml"));
-                    DirectionService directionService = new DirectionService();
-                    RoomDirectionService roomDirectionService = new RoomDirectionService(directionService);
-                    HealthService healthService = new HealthService(this.appService);
+                if (SELECTED_PLAYER_STATE != null) {
+                    if (e.getCode() == KeyCode.E) {
+                        this.appService.setPlayerState(SELECTED_PLAYER_STATE);
+                        this.appService.setActiveRoom(STARTING_ROOM);
+                        FXMLLoader loader = new FXMLLoader(
+                                App.class.getResource("gameScreen.fxml"));
+                        DirectionService directionService = new DirectionService();
+                        RoomDirectionService roomDirectionService = new RoomDirectionService(
+                                directionService);
+                        HealthService healthService = new HealthService(this.appService);
 
-                    loader.setControllerFactory(GameScreenController -> new Forest1Controller(
-                            this.appService,
-                            new PlayerService(
-                                    this.appService,
-                                    roomDirectionService,
-                                    healthService,
-                                    this.saveService),
-                            directionService,
-                            roomDirectionService,
-                            healthService,
-                            this.saveService,
-                            this.scene));
-                    this.appService.setRoot(loader);
+                        loader.setControllerFactory(GameScreenController -> new Forest1Controller(
+                                this.appService,
+                                new PlayerService(
+                                        this.appService,
+                                        roomDirectionService,
+                                        healthService,
+                                        this.saveService),
+                                directionService,
+                                roomDirectionService,
+                                healthService,
+                                this.saveService,
+                                this.scene));
+                        this.appService.setRoot(loader);
+                    }
                 }
             });
         }
@@ -120,5 +122,14 @@ public class LoadGameController implements Initializable {
 
     private void selectToggleButton(PlayerState playerState) {
         SELECTED_PLAYER_STATE = playerState;
+    }
+
+    private void setMessage(String message) {
+        Label label = new Label(message);
+        label.setWrapText(true);
+        label.getStylesheets().add(Paths.get(FONT_STYLE_PATH).toUri().toString());
+        label.setFont(new Font(68.0));
+        label.setTextFill(Paint.valueOf("white"));
+        this.savesVBox.getChildren().add(label);
     }
 }

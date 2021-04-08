@@ -41,8 +41,6 @@ public class App extends Application {
 
     private static Room activeRoom;
 
-    private static Set<String> monstersKilled;
-
     private static FXMLLoader activeLoader;
 
     @Override
@@ -54,7 +52,6 @@ public class App extends Application {
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
         mediaPlayer.play();
-        monstersKilled = new HashSet<>();
         clickSound = new AudioClip(Paths.get("src/main/resources/static/music/buttonPress.wav")
                 .toUri().toString());
         scene.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent -> clickSound.play());
@@ -127,14 +124,6 @@ public class App extends Application {
 
     public static void setActiveRoom(Room activeRoom) {
         App.activeRoom = activeRoom;
-    }
-
-    public static Set<String> getMonstersKilled() {
-        return monstersKilled;
-    }
-
-    public static void setMonstersKilled(Set<String> monstersKilled) {
-        App.monstersKilled = monstersKilled;
     }
 
     public static FXMLLoader getActiveLoader() {

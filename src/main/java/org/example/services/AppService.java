@@ -9,7 +9,6 @@ import org.example.dto.PlayerState;
 import org.example.dto.Room;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
 import static org.example.util.DateTimeFormatUtility.DATE_TIME_FORMATTER;
@@ -84,14 +83,14 @@ public class AppService {
     }
 
     public Set<String> getMonstersKilled() {
-        return App.getMonstersKilled();
+        return App.getPlayerState().getMonstersKilled();
     }
 
     public void setMonstersKilled(Set<String> monstersKilled) {
-        App.setMonstersKilled(monstersKilled);
+        App.setPlayerState(App.getPlayerState().setMonstersKilled(monstersKilled));
     }
 
     public void addMonsterKilled(String id) {
-        App.getMonstersKilled().add(id);
+        App.getPlayerState().getMonstersKilled().add(id);
     }
 }
