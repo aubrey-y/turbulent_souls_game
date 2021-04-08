@@ -35,7 +35,9 @@ public class EmailService {
                         System.getenv("GOOGLE_EMAIL"),
                         "Your Authentication Code",
                         "Here is your authentication code: " + code
-                                + "\n\nIt is valid for the next 60 seconds."
+                                + "\n\nDo not share this code with anyone. Turbulent Souls Ltd "
+                                + "will never ask you for this code."
+                                + "\n\nEnter this code in the same place you entered your email."
                                 + "\n\nIf you are not the intended recipient of this email, "
                                 + "please ignore this communication or report this incident "
                                 + "by replying to this email.")
