@@ -8,6 +8,7 @@ import org.example.exceptions.PlayerCreationException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 //This import is directly for testing purposes
@@ -122,6 +123,63 @@ public class PlayerState {
             throw new PlayerCreationException("Invalid difficulty "
           + "passed for player gold assignment");
         }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+                this.username,
+                this.archetype,
+                this.activeWeapon,
+                this.weaponInventory,
+                this.generalInventory,
+                this.difficulty,
+                this.goldAmount,
+                this.spawnCoordinates,
+                this.spawnOrientation,
+                this.health,
+                this.healthCapacity,
+                this.monstersKilled,
+                this.email,
+                this.lastUpdated
+
+        );
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof PlayerState)) {
+            return false;
+        }
+        PlayerState playerState = (PlayerState) o;
+        return ((this.username == null && playerState.username == null)
+                || this.username != null && this.username.equals(playerState.username)) &&
+                this.archetype == playerState.archetype &&
+                ((this.activeWeapon == null && playerState.activeWeapon == null)
+                        || (this.activeWeapon != null
+                        && this.activeWeapon.equals(playerState.activeWeapon))) &&
+                ((this.weaponInventory == null && playerState.weaponInventory == null)
+                        || (this.weaponInventory != null
+                        && this.weaponInventory.equals(playerState.weaponInventory))) &&
+                ((this.generalInventory == null && playerState.generalInventory == null)
+                        || (this.generalInventory != null
+                        && this.generalInventory.equals(playerState.generalInventory))) &&
+                this.difficulty == playerState.difficulty &&
+                this.goldAmount == playerState.goldAmount &&
+                ((this.spawnCoordinates == null && playerState.spawnCoordinates == null)
+                        || (this.spawnCoordinates != null
+                        && this.spawnCoordinates.equals(playerState.spawnCoordinates))) &&
+                this.spawnOrientation == playerState.spawnOrientation &&
+                this.health == playerState.health &&
+                this.healthCapacity == playerState.healthCapacity &&
+                ((this.monstersKilled == null && playerState.monstersKilled == null)
+                        || (this.monstersKilled != null
+                        && this.monstersKilled.equals(playerState.monstersKilled))) &&
+                ((this.email == null && playerState.email == null)
+                        || (this.email != null && this.email.equals(playerState.email))) &&
+                ((this.lastUpdated == null && playerState.email == null)
+                        || (this.lastUpdated != null
+                        && this.lastUpdated.equals(playerState.lastUpdated)));
     }
 
     public PlayerState setDifficulty(Difficulty difficulty) {

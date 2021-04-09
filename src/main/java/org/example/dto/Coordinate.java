@@ -1,5 +1,7 @@
 package org.example.dto;
 
+import java.util.Objects;
+
 public class Coordinate {
 
     private int x;
@@ -26,5 +28,19 @@ public class Coordinate {
     public Coordinate setY(int y) {
         this.y = y;
         return this;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.x, this.y);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Coordinate)) {
+            return false;
+        }
+        Coordinate coordinate = (Coordinate) o;
+        return this.x == coordinate.x && this.y == coordinate.y;
     }
 }
