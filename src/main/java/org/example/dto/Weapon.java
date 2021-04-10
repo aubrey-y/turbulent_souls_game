@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.example.enums.WeaponType;
 
+import java.util.Objects;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME)
 @JsonSubTypes({
@@ -49,5 +51,25 @@ public abstract class Weapon extends Item {
     public Weapon setRange(double range) {
         this.range = range;
         return this;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+                this.type,
+                this.attack,
+                this.range
+        );
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Weapon)) {
+            return false;
+        }
+        Weapon weapon = (Weapon) o;
+        return this.type == weapon.type &&
+                this.attack == weapon.attack &&
+                this.range == weapon.range;
     }
 }

@@ -31,6 +31,10 @@ public class SaveService {
 
     private ObjectMapper objectMapper;
 
+    public SaveService() {
+
+    }
+
     public SaveService(MongoClient mongoClient) {
         this.mongoClient = mongoClient;
         this.mongoDatabase = this.mongoClient.getDatabase(System.getenv("ENV"));
@@ -134,6 +138,15 @@ public class SaveService {
 
     public SaveService setSaveRepository(SaveRepository saveRepository) {
         this.saveRepository = saveRepository;
+        return this;
+    }
+
+    public ObjectMapper getObjectMapper() {
+        return objectMapper;
+    }
+
+    public SaveService setObjectMapper(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
         return this;
     }
 }

@@ -45,4 +45,31 @@ public class ConsumableService {
             break;
         }
     }
+
+    public HealthService getHealthService() {
+        return healthService;
+    }
+
+    public ConsumableService setHealthService(HealthService healthService) {
+        this.healthService = healthService;
+        return this;
+    }
+
+    public PlayerService getPlayerService() {
+        return playerService;
+    }
+
+    public ConsumableService setPlayerService(PlayerService playerService) {
+        this.playerService = playerService;
+        return this;
+    }
+
+    public AppService getAppService() {
+        return appService;
+    }
+
+    public ConsumableService setAppService(AppService appService) {
+        this.appService = appService;
+        return this;
+    }
 }

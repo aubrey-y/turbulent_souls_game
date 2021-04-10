@@ -20,8 +20,8 @@ public class RoomIdDirectionKey {
 
     @Override
     public boolean equals(Object o) {
-        if (o == this) {
-            return true;
+        if (!(o instanceof RoomIdDirectionKey)) {
+            return false;
         }
         RoomIdDirectionKey roomIdDirectionKey = (RoomIdDirectionKey) o;
         return this.id == roomIdDirectionKey.id && this.direction == roomIdDirectionKey.direction;
