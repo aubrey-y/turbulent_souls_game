@@ -4,10 +4,15 @@ import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 import org.example.controllers.GameScreenController;
+import org.example.dto.Item;
 import org.example.dto.Monster;
 import org.example.services.AppService;
 import org.example.services.DirectionService;
@@ -16,10 +21,12 @@ import org.example.services.MonsterService;
 import org.example.services.PlayerService;
 import org.example.services.RoomDirectionService;
 import org.example.services.SaveService;
+import org.example.services.TraderService;
 import org.example.util.ScheduleUtility;
 
 import java.net.URL;
 import java.nio.file.Paths;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import static org.example.enums.Direction.LEFT;
@@ -41,6 +48,31 @@ public class ForestTraderController extends GameScreenController implements Init
 
     @FXML
     private ProgressBar slime1HealthBar;
+
+    @FXML
+    private VBox traderVBox;
+
+    @FXML
+    private Label traderPreviewTitle;
+
+    @FXML
+    private Label traderPreviewStat;
+
+    @FXML
+    private Label traderPreviewDescription;
+
+    @FXML
+    private Rectangle traderPreviewBackground;
+
+    @FXML
+    private ImageView traderPreviewImage;
+
+    @FXML
+    private ImageView traderBackground;
+
+    protected TraderService traderService;
+
+    private ToggleGroup traderItems = new ToggleGroup();
 
     public ForestTraderController(AppService appService,
                                   PlayerService playerService,
@@ -79,6 +111,21 @@ public class ForestTraderController extends GameScreenController implements Init
             this.setupSlime1();
             this.playerService.registerTimeline(this.slime1AttackSchedule);
         }
+        this.traderService = new TraderService(this.appService);
+        this.traderPreviewBackground.setLayoutX(1400);
+        this.traderPreviewBackground.setLayoutY(100);
+        this.traderPreviewImage.setLayoutX(1400);
+        this.traderPreviewImage.setLayoutY(150);
+        this.traderPreviewTitle.setLayoutX(1410);
+        this.traderPreviewTitle.setLayoutY(100);
+        this.traderPreviewStat.setLayoutX(1410);
+        this.traderPreviewStat.setLayoutY(593);
+        this.traderPreviewDescription.setLayoutX(1410);
+        this.traderPreviewDescription.setLayoutY(643);
+        this.traderVBox.setLayoutX(50);
+        this.traderVBox.setLayoutY(150);
+
+
     }
 
     private void setupSlime1() {
