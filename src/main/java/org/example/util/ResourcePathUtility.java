@@ -20,6 +20,12 @@ public class ResourcePathUtility {
     public static final String DARK_KNIGHT_DEATH_RIGHT_PATH = "" 
             + "src/main/resources/static/images/monsters/dark_knight/dark_knight_death_right.gif";
 
+    public static final String WHITE_DRAGON_LEFT_PATH = ""
+            + "src/main/resources/static/images/monsters/white_dragon/white_dragon_left.gif";
+
+    public static final String WHITE_DRAGON_RIGHT_PATH = ""
+            + "src/main/resources/static/images/monsters/white_dragon/white_dragon_right.gif";
+
     public static final String WHITE_DRAGON_DEATH_LEFT_PATH = "" 
             + "src/main/resources/static/images/monsters/white_dragon/white_dragon_death_left.gif";
 
