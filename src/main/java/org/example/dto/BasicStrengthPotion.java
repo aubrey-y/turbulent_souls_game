@@ -12,5 +12,6 @@ public class BasicStrengthPotion extends Potion {
         this.quantity = 1;
         this.imagePath = BASIC_STRENGTH_PATH;
         this.description = "Steroids, but without the needles";
+        this.price = 100;
     }
 }

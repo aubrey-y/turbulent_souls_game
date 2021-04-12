@@ -7,7 +7,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 
-public abstract class InventoryController {
+public abstract class InventoryController extends TraderController {
 
     @FXML
     protected ImageView inventoryBackground;

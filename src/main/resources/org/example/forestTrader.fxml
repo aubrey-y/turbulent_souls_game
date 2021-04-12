@@ -52,6 +52,24 @@
                   <Image url="@../../static/images/swordR.png" />
                </image>
             </ImageView>
+            <Rectangle fx:id="traderPreviewBackground" arcHeight="5.0" arcWidth="5.0" fill="#c6a264" height="800.0" layoutX="10.0" layoutY="10.0" stroke="TRANSPARENT" strokeType="INSIDE" visible="false" width="450.0">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Rectangle>
+            <ImageView id="archetypeButton" fx:id="traderPreviewImage" fitHeight="450.0" fitWidth="512.0" layoutX="10.0" layoutY="10.0" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../../static/images/swordR.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="traderBackground" fitHeight="1080.0" fitWidth="1920.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../../static/images/rooms/forestRooms/forestTrader.png" />
+               </image>
+               <effect>
+                  <GaussianBlur radius="49.75" />
+               </effect>
+            </ImageView>
          </children>
       </Pane>
       <Label fx:id="goldAmountLabel" layoutX="35.0" layoutY="60.0" prefHeight="59.0" prefWidth="145.0" stylesheets="@../../static/css/fontstyle.css" text="GOLD : " textFill="WHITE">
@@ -85,6 +103,21 @@
             <Font size="43.0" />
          </font>
       </Label>
+      <Label fx:id="traderPreviewTitle" layoutX="1430.0" layoutY="120.0" prefHeight="59.0" prefWidth="431.0" stylesheets="@../../static/css/fontstyle.css" text="Placeholder" textFill="WHITE" visible="false">
+         <font>
+            <Font size="43.0" />
+         </font>
+      </Label>
+      <Label fx:id="traderPreviewStat" prefHeight="50.0" prefWidth="431.0" stylesheets="@../../static/css/fontstyle.css" text="Base ATK: " textFill="WHITE" visible="false">
+         <font>
+            <Font size="43.0" />
+         </font>
+      </Label>
+      <Label fx:id="traderPreviewDescription" alignment="TOP_LEFT" layoutX="1430.0" layoutY="663.0" prefHeight="245.0" prefWidth="431.0" stylesheets="@../../static/css/fontstyle.css" text="lorum ipsum" textFill="WHITE" visible="false" wrapText="true">
+         <font>
+            <Font size="43.0" />
+         </font>
+      </Label>
       <VBox fx:id="inventoryVBox" layoutX="60.0" layoutY="160.0" prefHeight="800.0" prefWidth="1200.0">
          <children>
             <HBox fx:id="inventoryRow1" prefHeight="150.0" prefWidth="1200.0" />
@@ -94,6 +127,7 @@
             <HBox fx:id="inventoryRow5" prefHeight="150.0" prefWidth="1200.0" />
          </children>
       </VBox>
+      <VBox fx:id="traderVBox" layoutX="70.0" layoutY="170.0" prefHeight="800.0" prefWidth="1200.0" />
       <Button id="clickable" fx:id="closeButton" alignment="BASELINE_CENTER" focusTraversable="false" layoutX="110.0" layoutY="960.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE">
          <font>
             <Font name="Pixeboy" size="30.0" />

@@ -16,7 +16,9 @@ import org.example.services.MonsterService;
 import org.example.services.PlayerService;
 import org.example.services.RoomDirectionService;
 import org.example.services.SaveService;
+import org.example.services.TraderService;
 import org.example.util.ScheduleUtility;
+import org.example.util.TraderInventoryUtility;
 
 import java.net.URL;
 import java.nio.file.Paths;
@@ -24,6 +26,7 @@ import java.util.ResourceBundle;
 
 import static org.example.enums.Direction.LEFT;
 import static org.example.enums.MonsterType.SLIME;
+import static org.example.enums.RoomType.CASTLE_TRADER;
 import static org.example.util.ResourcePathUtility.SLIME_ATTACK_LEFT_PATH;
 import static org.example.util.ResourcePathUtility.SLIME_DEATH_LEFT_PATH;
 import static org.example.util.ResourcePathUtility.SLIME_LEFT_PATH;
@@ -41,6 +44,7 @@ public class CastleTraderController extends GameScreenController implements Init
 
     @FXML
     private ProgressBar slime1HealthBar;
+
 
     public CastleTraderController(AppService appService,
                                   PlayerService playerService,
@@ -63,6 +67,8 @@ public class CastleTraderController extends GameScreenController implements Init
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.monsterService = new MonsterService();
         this.playerService.setMonsterService(this.monsterService);
+        this.traderService = new TraderService(TraderInventoryUtility.getTraderInventoryForRoomType(CASTLE_TRADER));
+        this.initializeTraderService(this.traderService, this.appService);
         this.initGameScreenController(this.monsterService);
         this.resetPlayerHueSchedule = ScheduleUtility.generatePlayerResetSchedule(0.5,
                 this.playerService);

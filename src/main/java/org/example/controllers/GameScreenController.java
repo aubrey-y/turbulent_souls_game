@@ -21,6 +21,7 @@ import org.example.services.MonsterService;
 import org.example.services.PlayerService;
 import org.example.services.RoomDirectionService;
 import org.example.services.SaveService;
+import org.example.services.TraderService;
 
 import java.nio.file.Paths;
 
@@ -45,6 +46,8 @@ public class GameScreenController extends InventoryController {
     protected InventoryService inventoryService;
 
     protected ConsumableService consumableService;
+
+    protected TraderService traderService;
 
     private Scene scene;
 
@@ -137,8 +140,14 @@ public class GameScreenController extends InventoryController {
             case E:
                 if (this.inventoryService.getInventoryOpen()) {
                     this.inventoryService.consumeItem(this.consumableService);
+                } else if (this.traderService.isTraderOpen()) {
+                    this.traderService.purchaseItem();
                 }
                 break;
+            case T:
+                if (this.playerService.playerInRangeOfTrader() && !this.inventoryService.getInventoryOpen()) {
+                    this.traderService.toggleTraderOpen();
+                }
             default:
                 break;
             }
@@ -203,6 +212,8 @@ public class GameScreenController extends InventoryController {
                 .setInventoryRow4(this.inventoryRow4)
                 .setInventoryRow5(this.inventoryRow5);
     }
+
+
 
     private void initializePlayerImageView(PlayerState playerState) {
         this.displayCorrectPlayerOrientation(playerState);
