@@ -26,8 +26,8 @@ import static org.example.enums.MonsterType.DARK_KNIGHT;
 import static org.example.util.ResourcePathUtility.DARK_KNIGHT_ATTACK_LEFT_PATH;
 import static org.example.util.ResourcePathUtility.KING_NAHTAN_DEATH_LEFT_PATH;
 import static org.example.util.ResourcePathUtility.KING_NAHTAN_DEATH_RIGHT_PATH;
-import static org.example.util.ResourcePathUtility.DARK_KNIGHT_LEFT_PATH;
-import static org.example.util.ResourcePathUtility.DARK_KNIGHT_RIGHT_PATH;
+import static org.example.util.ResourcePathUtility.KING_NAHTAN_IDLE_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.KING_NAHTAN_IDLE_RIGHT_PATH;
 
 public class BossRoomController extends GameScreenController implements Initializable {
 
@@ -101,8 +101,8 @@ public class BossRoomController extends GameScreenController implements Initiali
                 this.resetPlayerSchedule,
                 this.boss1ResetSchedule,
                 Timeline.INDEFINITE,
-                DARK_KNIGHT_LEFT_PATH,
-                DARK_KNIGHT_RIGHT_PATH
+                KING_NAHTAN_IDLE_LEFT_PATH,
+                KING_NAHTAN_IDLE_RIGHT_PATH
         );
         this.boss1AttackSchedule.play();
 
