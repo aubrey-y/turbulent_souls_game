@@ -31,7 +31,7 @@
             <ProgressBar fx:id="slime1HealthBar" focusTraversable="false" opacity="0.8" prefHeight="10.0" prefWidth="150.0" progress="1.0" style="-fx-control-inner-background: #3E5155;" styleClass="green-bar" stylesheets="@../../static/css/fontstyle.css" visible="false" />
             <ImageView fx:id="slime1" fitHeight="296.0" fitWidth="324.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
-                  <Image url="@../../static/images/monsters/gifs/slime.gif" />
+                  <Image url="@../../static/images/monsters/slime/slime.gif" />
                </image>
             </ImageView>
             <ImageView fx:id="inventoryBackground" fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true" visible="false">

@@ -30,7 +30,7 @@
             </ImageView>
             <ImageView fx:id="serpent1" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
-                  <Image url="@../../static/images/monsters/gifs/serpent_left.gif" />
+                  <Image url="@../../static/images/monsters/serpent/serpent_left.gif" />
                </image>
             </ImageView>
             <ProgressBar fx:id="serpent1HealthBar" focusTraversable="false" opacity="0.8" prefHeight="10.0" prefWidth="150.0" progress="1.0" style="-fx-control-inner-background: #3E5155;" styleClass="green-bar" stylesheets="@../../static/css/fontstyle.css" visible="false" />
