@@ -68,8 +68,8 @@ public class Castle1Controller extends GameScreenController implements Initializ
                 this.monsterService,
                 this.whitedragon1Key,
                 this.whitedragon1,
-                "src/main/resources/static/images/monsters/gifs/white_dragon_left.gif",
-                "src/main/resources/static/images/monsters/gifs/white_dragon_right.gif"
+                "src/main/resources/static/images/monsters/white_dragon/white_dragon_left.gif",
+                "src/main/resources/static/images/monsters/white_dragon/white_dragon_right.gif"
         );
         if (!this.appService.getMonstersKilled().contains(this.whitedragon1Key)) {
             this.setupWhitedragon1();
