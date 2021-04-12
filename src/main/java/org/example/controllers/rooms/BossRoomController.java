@@ -24,8 +24,8 @@ import java.util.ResourceBundle;
 import static org.example.enums.Direction.LEFT;
 import static org.example.enums.MonsterType.DARK_KNIGHT;
 import static org.example.util.ResourcePathUtility.DARK_KNIGHT_ATTACK_LEFT_PATH;
-import static org.example.util.ResourcePathUtility.DARK_KNIGHT_DEATH_LEFT_PATH;
-import static org.example.util.ResourcePathUtility.DARK_KNIGHT_DEATH_RIGHT_PATH;
+import static org.example.util.ResourcePathUtility.KING_NAHTAN_DEATH_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.KING_NAHTAN_DEATH_RIGHT_PATH;
 import static org.example.util.ResourcePathUtility.DARK_KNIGHT_LEFT_PATH;
 import static org.example.util.ResourcePathUtility.DARK_KNIGHT_RIGHT_PATH;
 
@@ -125,9 +125,9 @@ public class BossRoomController extends GameScreenController implements Initiali
                 .setHealthBar(this.boss1HealthBar)
                 .setOrientation(LEFT)
                 .setDeathAnimationLeft(
-                        new Image(Paths.get(DARK_KNIGHT_DEATH_RIGHT_PATH).toUri().toString()))
+                        new Image(Paths.get(KING_NAHTAN_DEATH_LEFT_PATH).toUri().toString()))
                 .setDeathAnimationRight(
-                        new Image(Paths.get(DARK_KNIGHT_DEATH_LEFT_PATH).toUri().toString()));
+                        new Image(Paths.get(KING_NAHTAN_DEATH_RIGHT_PATH).toUri().toString()));
 
     }
 }
