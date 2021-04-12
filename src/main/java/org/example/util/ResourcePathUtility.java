@@ -5,6 +5,9 @@ public class ResourcePathUtility {
     public static final String DARK_KNIGHT_ATTACK_LEFT_PATH = "" 
             + "src/main/resources/static/images/monsters/dark_knight/dark_knight_attack_left.gif";
 
+    public static final String DARK_KNIGHT_ATTACK_RIGHT_PATH = ""
+            + "src/main/resources/static/images/monsters/dark_knight/dark_knight_attack_right.gif";
+
     public static final String DARK_KNIGHT_LEFT_PATH = "" 
             + "src/main/resources/static/images/monsters/dark_knight/dark_knight_left.gif";
 
@@ -26,14 +29,26 @@ public class ResourcePathUtility {
     public static final String WHITE_DRAGON_ATTACK_LEFT_PATH = "" 
             + "src/main/resources/static/images/monsters/white_dragon/white_dragon_attack_left.gif";
 
+    public static final String WHITE_DRAGON_ATTACK_RIGHT_PATH = ""
+            + "src/main/resources/static/images/monsters/white_dragon/white_dragon_attack_right.gif";
+
     public static final String CASTLE_BULL_ATTACK_LEFT_PATH = "" 
-            + "src/main/resources/static/images/monsters/white_dragon/bull_attack_left.gif";
+            + "src/main/resources/static/images/monsters/bull/bull_attack_left.gif";
+
+    public static final String CASTLE_BULL_ATTACK_RIGHT_PATH = ""
+            + "src/main/resources/static/images/monsters/bull/bull_attack_right.gif";
 
     public static final String CASTLE_BULL_DEATH_LEFT_PATH = "" 
-            + "src/main/resources/static/images/monsters/white_dragon/bull_death_left.gif";
+            + "src/main/resources/static/images/monsters/bull/bull_death_left.gif";
+
+    public static final String CASTLE_BULL_DEATH_RIGHT_PATH = ""
+            + "src/main/resources/static/images/monsters/bull/bull_death_right.gif";
 
     public static final String CASTLE_BULL_IDLE_LEFT_PATH = "" 
             + "src/main/resources/static/images/monsters/bull/idle/bull_left.png";
+
+    public static final String CASTLE_BULL_IDLE_RIGHT_PATH = ""
+            + "src/main/resources/static/images/monsters/bull/idle/bull_right.png";
 
     public static final String SLIME_LEFT_PATH = "" 
             + "src/main/resources/static/images/monsters/slime/slime.gif";
@@ -59,6 +74,9 @@ public class ResourcePathUtility {
     public static final String GUINEA_PIG_ATTACK_LEFT_PATH = "" 
             + "src/main/resources/static/images/monsters/gp/guineapig_attack_left.gif";
 
+    public static final String GUINEA_PIG_ATTACK_RIGHT_PATH = ""
+            + "src/main/resources/static/images/monsters/gp/guineapig_attack_right.gif";
+
     public static final String SERPENT_LEFT_PATH = "" 
             + "src/main/resources/static/images/monsters/serpent/serpent_left.gif";
 
@@ -74,14 +92,38 @@ public class ResourcePathUtility {
     public static final String SERPENT_ATTACK_LEFT_PATH = "" 
             + "src/main/resources/static/images/monsters/serpent/serpent_attack_left.gif";
 
+    public static final String SERPENT_ATTACK_RIGHT_PATH = ""
+            + "src/main/resources/static/images/monsters/serpent/serpent_attack_right.gif";
+
     public static final String WATER_BULL_IDLE_LEFT_PATH = "" 
             + "src/main/resources/static/images/monsters/water_bull/idle/water_bull_left.png";
+
+    public static final String WATER_BULL_IDLE_RIGHT_PATH = ""
+            + "src/main/resources/static/images/monsters/water_bull/idle/water_bull_right.png";
 
     public static final String WATER_BULL_DEATH_LEFT_PATH = "" 
             + "src/main/resources/static/images/monsters/water_bull/waterbull_death_left.gif";
 
+    public static final String WATER_BULL_DEATH_RIGHT_PATH = ""
+            + "src/main/resources/static/images/monsters/water_bull/waterbull_death_right.gif";
+
     public static final String WATER_BULL_ATTACK_LEFT_PATH = "" 
             + "src/main/resources/static/images/monsters/water_bull/waterbull_attack_left.gif";
+
+    public static final String WATER_BULL_ATTACK_RIGHT_PATH = ""
+            + "src/main/resources/static/images/monsters/water_bull/waterbull_attack_right.gif";
+
+    public static final String KING_NAHTAN_IDLE_LEFT_PATH = ""
+            + "src/main/resources/static/images/monsters/king_nahtan/idle/king_base_left.gif";
+
+    public static final String KING_NAHTAN_IDLE_RIGHT_PATH = ""
+            + "src/main/resources/static/images/monsters/king_nahtan/idle/king_base_right.gif";
+
+    public static final String KING_NAHTAN_DEATH_LEFT_PATH = ""
+            + "src/main/resources/static/images/monsters/king_nahtan/king_base_death.gif";
+
+    public static final String KING_NAHTAN_DEATH_RIGHT_PATH = ""
+            + "src/main/resources/static/images/monsters/king_nahtan/king_base_death_right.gif";
 
     public static final String BASIC_SWORD_PATH = ""
             + "src/main/resources/static/images/swordR.png";
