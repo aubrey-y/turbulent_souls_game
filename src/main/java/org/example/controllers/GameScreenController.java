@@ -155,7 +155,8 @@ public class GameScreenController extends InventoryController {
                 }
                 break;
             case T:
-                if (this.playerService.playerInRangeOfTrader() && !this.inventoryService.getInventoryOpen()) {
+                if (this.traderService != null
+                        && this.playerService.playerInRangeOfTrader() && !this.inventoryService.getInventoryOpen()) {
                     this.traderService.toggleTraderOpen();
                 }
                 break;

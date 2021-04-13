@@ -85,12 +85,16 @@
             <Font size="43.0" />
          </font>
       </Label>
+      <Label fx:id="inventoryPreviewQty" layoutX="1430.0" layoutY="663.0" prefHeight="50.0" prefWidth="431.0" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE" visible="false">
+         <font>
+            <Font size="43.0" />
+         </font>
+      </Label>
       <Label fx:id="inventoryPreviewDescription" alignment="TOP_LEFT" layoutX="1420.0" layoutY="653.0" prefHeight="245.0" prefWidth="431.0" stylesheets="@../../static/css/fontstyle.css" text="lorum ipsum" textFill="WHITE" visible="false" wrapText="true">
          <font>
             <Font size="43.0" />
          </font>
       </Label>
-      <Pane fx:id="traderPane" prefHeight="1080.0" prefWidth="1920.0" />
       <VBox fx:id="inventoryVBox" layoutX="60.0" layoutY="160.0" prefHeight="800.0" prefWidth="1200.0">
          <children>
             <HBox fx:id="inventoryRow1" prefHeight="150.0" prefWidth="1200.0" />
