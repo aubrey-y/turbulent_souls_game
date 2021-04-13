@@ -13,6 +13,7 @@ import org.example.App;
 import org.example.dto.Potion;
 import org.example.dto.Weapon;
 import org.example.services.AppService;
+import org.example.services.GoldService;
 import org.example.services.HealthService;
 import org.example.services.MonsterService;
 import org.example.services.PlayerService;
@@ -107,7 +108,9 @@ public class ScheduleUtility {
     }
 
     public static Timeline generateMonsterDeathResetSchedule(double duration,
-                                                             Monster monster) {
+                                                             Monster monster,
+                                                             GoldService goldService) {
+        goldService.adjustGoldAmount(monster.getKillReward());
         Timeline timeline = new Timeline();
         Timeline finalTimeline = timeline;
         timeline = new Timeline(new KeyFrame(Duration.seconds(duration), actionEvent -> {

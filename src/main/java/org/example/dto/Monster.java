@@ -18,6 +18,8 @@ public class Monster {
 
     private double accuracy;
 
+    private int killReward;
+
     private MonsterType monsterType;
 
     private ImageView imageView;
@@ -49,9 +51,10 @@ public class Monster {
         this.range = range;
         this.attack = attack;
         this.accuracy = accuracy;
-        this.imageView = (ImageView) varargs[0];
-        this.healthBar = (ProgressBar) varargs[1];
-        this.healthText = (Label) varargs[2];
+        this.killReward = (int) varargs[0];
+        this.imageView = (ImageView) varargs[1];
+        this.healthBar = (ProgressBar) varargs[2];
+        this.healthText = (Label) varargs[3];
     }
 
     public boolean isAlive() {
@@ -100,6 +103,15 @@ public class Monster {
 
     public Monster setAccuracy(double accuracy) {
         this.accuracy = accuracy;
+        return this;
+    }
+
+    public int getKillReward() {
+        return killReward;
+    }
+
+    public Monster setKillReward(int killReward) {
+        this.killReward = killReward;
         return this;
     }
 

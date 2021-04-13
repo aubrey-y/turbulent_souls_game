@@ -25,6 +25,7 @@ public class InventoryService {
     private ImageView inventoryPreviewImage;
     private Label inventoryPreviewTitle;
     private Label inventoryPreviewStat;
+    private Label inventoryPreviewQty;
     private Label inventoryPreviewDescription;
     private VBox inventoryVBox;
     private HBox inventoryRow1;
@@ -57,6 +58,7 @@ public class InventoryService {
         this.inventoryPreviewImage.setVisible(!this.inventoryOpen);
         this.inventoryPreviewTitle.setVisible(!this.inventoryOpen);
         this.inventoryPreviewStat.setVisible(!this.inventoryOpen);
+        this.inventoryPreviewQty.setVisible(!this.inventoryOpen);
         this.inventoryPreviewDescription.setVisible(!this.inventoryOpen);
         this.inventoryOpen = !inventoryOpen;
     }
@@ -64,9 +66,7 @@ public class InventoryService {
     private void loadHBoxes() {
         this.inventoryVBox.getChildren().clear();
         this.inventoryVBox.getChildren().add(this.inventoryRow1);
-        this.inventoryRow1.setVisible(true);
         this.inventoryVBox.getChildren().add(this.inventoryRow2);
-        this.inventoryRow2.setVisible(true);
     }
 
     private void loadInventoryElements() {
@@ -128,6 +128,7 @@ public class InventoryService {
             this.inventoryPreviewImage.setImage(
                     new Image(Paths.get(weapon.getImagePath()).toUri().toString()));
             this.inventoryPreviewStat.setText("Base ATK: " + weapon.getAttack());
+            this.inventoryPreviewQty.setText("Quantity: " + weapon.getQuantity());
             this.inventoryPreviewDescription.setText(weapon.getDescription());
         } else {
             Item item = generalInventory.get(pathId);
@@ -137,6 +138,7 @@ public class InventoryService {
             if (item instanceof Potion) {
                 Potion potion = (Potion) item;
                 this.inventoryPreviewStat.setText(potion.getStatLabel() + " " + potion.getStatValue());
+                this.inventoryPreviewQty.setText("Quantity: " + potion.getQuantity());
                 this.inventoryPreviewDescription.setText(potion.getDescription());
             }
         }
@@ -226,6 +228,15 @@ public class InventoryService {
 
     public InventoryService setInventoryPreviewStat(Label inventoryPreviewStat) {
         this.inventoryPreviewStat = inventoryPreviewStat;
+        return this;
+    }
+
+    public Label getInventoryPreviewQty() {
+        return inventoryPreviewQty;
+    }
+
+    public InventoryService setInventoryPreviewQty(Label inventoryPreviewQty) {
+        this.inventoryPreviewQty = inventoryPreviewQty;
         return this;
     }
 

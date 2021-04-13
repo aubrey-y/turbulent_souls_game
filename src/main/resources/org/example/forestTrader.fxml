@@ -85,7 +85,12 @@
             <Font size="43.0" />
          </font>
       </Label>
-      <Label fx:id="inventoryPreviewDescription" alignment="TOP_LEFT" layoutX="1420.0" layoutY="653.0" prefHeight="245.0" prefWidth="431.0" stylesheets="@../../static/css/fontstyle.css" text="lorum ipsum" textFill="WHITE" visible="false" wrapText="true">
+      <Label fx:id="inventoryPreviewQty" layoutX="1420.0" layoutY="653.0" prefHeight="50.0" prefWidth="431.0" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE" visible="false">
+         <font>
+            <Font size="43.0" />
+         </font>
+      </Label>
+      <Label fx:id="inventoryPreviewDescription" alignment="TOP_LEFT" layoutX="1420.0" layoutY="703.0" prefHeight="195.0" prefWidth="431.0" stylesheets="@../../static/css/fontstyle.css" text="lorum ipsum" textFill="WHITE" visible="false" wrapText="true">
          <font>
             <Font size="43.0" />
          </font>

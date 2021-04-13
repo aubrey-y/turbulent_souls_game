@@ -11,6 +11,7 @@ import org.example.controllers.GameScreenController;
 import org.example.dto.Monster;
 import org.example.services.AppService;
 import org.example.services.DirectionService;
+import org.example.services.GoldService;
 import org.example.services.HealthService;
 import org.example.services.MonsterService;
 import org.example.services.PlayerService;
@@ -64,7 +65,8 @@ public class BossRoomController extends GameScreenController implements Initiali
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.monsterService = new MonsterService();
+        this.goldService = new GoldService(this.appService, this.getGoldAmount());
+        this.monsterService = new MonsterService(this.goldService);
         this.playerService.setMonsterService(this.monsterService);
         this.initGameScreenController(this.monsterService);
         this.resetPlayerSchedule = ScheduleUtility.generatePlayerResetSchedule(0.5,
@@ -124,6 +126,7 @@ public class BossRoomController extends GameScreenController implements Initiali
                 .setRange(5.0)
                 .setAttack(2)
                 .setAccuracy(0.5)
+                .setKillReward(6400)
                 .setMonsterType(DARK_KNIGHT)
                 .setImageView(this.boss1)
                 .setHealthBar(this.boss1HealthBar)

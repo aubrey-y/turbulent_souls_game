@@ -134,7 +134,9 @@ public class MonsterService {
             monster.getImageView().setImage(monster.getDeathAnimationRight());
         }
         ScheduleUtility.generateMonsterDeathResetSchedule(
-                DeathDurationUtility.getDurationForMonsterType(monster.getMonsterType()), monster
+                DeathDurationUtility.getDurationForMonsterType(monster.getMonsterType()),
+                monster,
+                this.goldService
         ).play();
     }
 }

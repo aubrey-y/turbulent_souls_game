@@ -72,7 +72,7 @@ public class CastleTraderController extends GameScreenController implements Init
         this.monsterService = new MonsterService(this.goldService);
         this.playerService.setMonsterService(this.monsterService);
         this.traderService = new TraderService(TraderInventoryUtility.getTraderInventoryForRoomType(CASTLE_TRADER));
-        this.initializeTraderService(this.traderService, this.trader);
+        this.initializeTraderService(this.traderService, this.goldService, this.trader);
         this.initGameScreenController(this.monsterService);
         this.resetPlayerHueSchedule = ScheduleUtility.generatePlayerResetSchedule(0.5,
                 this.playerService);
@@ -106,6 +106,7 @@ public class CastleTraderController extends GameScreenController implements Init
                         .setRange(5.0)
                         .setAttack(2)
                         .setAccuracy(0.5)
+                        .setKillReward(100)
                         .setMonsterType(SLIME)
                         .setImageView(this.slime1)
                         .setHealthBar(this.slime1HealthBar)

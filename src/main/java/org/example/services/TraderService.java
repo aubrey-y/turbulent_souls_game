@@ -23,6 +23,8 @@ public class TraderService {
 
     private AppService appService;
 
+    private GoldService goldService;
+
     private Map<String, Item> traderInventory;
 
     private ToggleGroup traderItems = new ToggleGroup();
@@ -85,12 +87,10 @@ public class TraderService {
             toggleButton.setFocusTraversable(false);
             toggleButton.getStylesheets()
                     .add(Paths.get(TOGGLE_BUTTON_STYLE_PATH).toUri().toString());
-            toggleButton.getStylesheets()
-                    .add(Paths.get(FONT_STYLE_PATH).toUri().toString());
             toggleButton.setTextFill(Paint.valueOf("white"));
             toggleButton.setPrefWidth(1780);
             toggleButton.setPrefHeight(100);
-            toggleButton.setFont(new Font(60));
+            toggleButton.setFont(new Font("Pixeboy", 60));
             int finalI = index;
             toggleButton.setOnAction(actionEvent -> this.selectToggleButton(
                     item, finalI));
@@ -102,14 +102,14 @@ public class TraderService {
     }
 
     public void purchaseItem() {
-        Item item = traderInventory.get(selectedItem);
+        Item item = traderInventory.get(selectedItem.getImagePath());
         PlayerState playerState = this.appService.getPlayerState();
         Map<String, Item> weaponInventory = playerState.getWeaponInventory();
         Map<String, Item> generalInventory = playerState.getGeneralInventory();
-        if (playerState.getGoldAmount() < item.getPrice()) {
+        if (!this.goldService.playerCanAffordAmount(item.getPrice())) {
             return;
         } else {
-            playerState.setGoldAmount(playerState.getGoldAmount() - item.getPrice());
+            playerState = this.goldService.adjustGoldAmount(-1 * item.getPrice());
         }
         if (item instanceof Weapon) {
             if (!weaponInventory.containsKey(item.getImagePath())) {
@@ -125,16 +125,34 @@ public class TraderService {
                 generalInventory.put(item.getImagePath(), (Item) CloneUtility.deepCopy(item));
             }
             Item playerItem = generalInventory.get(item.getImagePath());
-            playerItem.setQuantity(item.getQuantity() + 1);
+            playerItem.setQuantity(playerItem.getQuantity() + 1);
             generalInventory.put(item.getImagePath(), playerItem);
-            playerState.setGeneralInventory(weaponInventory);
+            playerState.setGeneralInventory(generalInventory);
         }
+        this.appService.setPlayerState(playerState);
     }
 
     private void selectToggleButton(Item item, int index) {
         selectedItem = item;
         selectedSaveIndex = index;
+    }
 
+    public AppService getAppService() {
+        return appService;
+    }
+
+    public TraderService setAppService(AppService appService) {
+        this.appService = appService;
+        return this;
+    }
+
+    public GoldService getGoldService() {
+        return goldService;
+    }
+
+    public TraderService setGoldService(GoldService goldService) {
+        this.goldService = goldService;
+        return this;
     }
 
     public boolean isTraderOpen() {
@@ -206,15 +224,6 @@ public class TraderService {
 
     public TraderService setTraderBackground(ImageView traderBackground) {
         this.traderBackground = traderBackground;
-        return this;
-    }
-
-    public AppService getAppService() {
-        return appService;
-    }
-
-    public TraderService setAppService(AppService appService) {
-        this.appService = appService;
         return this;
     }
 

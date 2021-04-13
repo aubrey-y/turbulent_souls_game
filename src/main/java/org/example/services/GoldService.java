@@ -1,6 +1,7 @@
 package org.example.services;
 
 import javafx.scene.control.Label;
+import org.example.dto.PlayerState;
 
 public class GoldService {
 
@@ -16,6 +17,18 @@ public class GoldService {
                        Label goldAmount) {
         this.appService = appService;
         this.goldAmount = goldAmount;
+    }
+
+    public boolean playerCanAffordAmount(int price) {
+        return this.appService.getPlayerState().getGoldAmount() >= price;
+    }
+
+    public PlayerState adjustGoldAmount(int amount) {
+        PlayerState playerState = this.appService.getPlayerState();
+        playerState.setGoldAmount(playerState.getGoldAmount() + amount);
+        this.appService.setPlayerState(playerState);
+        this.goldAmount.setText(String.valueOf(playerState.getGoldAmount()));
+        return playerState;
     }
 
     public AppService getAppService() {

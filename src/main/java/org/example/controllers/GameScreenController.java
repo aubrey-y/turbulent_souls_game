@@ -142,6 +142,7 @@ public class GameScreenController extends InventoryController {
                         this.appService.getPlayerState().getActiveWeapon(),
                         this.player.getTranslateX(), this.player.getTranslateY());
                 if (monsterKilled != null) {
+
                     monsterService.initiateDeathAnimation(monsterKilled);
                     this.appService.addMonsterKilled(monsterKilled);
                 }
@@ -205,8 +206,10 @@ public class GameScreenController extends InventoryController {
         this.inventoryPreviewTitle.setLayoutY(100);
         this.inventoryPreviewStat.setLayoutX(1410);
         this.inventoryPreviewStat.setLayoutY(593);
+        this.inventoryPreviewQty.setLayoutX(1410);
+        this.inventoryPreviewQty.setLayoutY(638);
         this.inventoryPreviewDescription.setLayoutX(1410);
-        this.inventoryPreviewDescription.setLayoutY(643);
+        this.inventoryPreviewDescription.setLayoutY(693);
         this.inventoryVBox.setLayoutX(50);
         this.inventoryVBox.setLayoutY(150);
         inventoryService
@@ -215,6 +218,7 @@ public class GameScreenController extends InventoryController {
                 .setInventoryPreviewImage(this.inventoryPreviewImage)
                 .setInventoryPreviewTitle(this.inventoryPreviewTitle)
                 .setInventoryPreviewStat(this.inventoryPreviewStat)
+                .setInventoryPreviewQty(this.inventoryPreviewQty)
                 .setInventoryPreviewDescription(this.inventoryPreviewDescription)
                 .setInventoryVBox(this.inventoryVBox)
                 .setInventoryRow1(this.inventoryRow1)
@@ -224,9 +228,12 @@ public class GameScreenController extends InventoryController {
                 .setInventoryRow5(this.inventoryRow5);
     }
 
-    protected void initializeTraderService(TraderService traderService, ImageView trader) {
+    protected void initializeTraderService(TraderService traderService,
+                                           GoldService goldService,
+                                           ImageView trader) {
         traderService
-                .setAppService(appService)
+                .setAppService(this.appService)
+                .setGoldService(goldService)
                 .setTraderVBox(this.inventoryVBox)
                 .setTraderPreviewTitle(this.inventoryPreviewTitle)
                 .setTraderPreviewStat(this.inventoryPreviewStat)
