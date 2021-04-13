@@ -49,18 +49,22 @@ public class PrimaryController extends BaseController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.initController();
         //Mongo Setup
-        ConnectionString connectionString = new ConnectionString(
-                System.getenv("MONGO_URI"));
-        CodecRegistry pojoCodecRegistry = fromProviders(
-                PojoCodecProvider.builder()
-                        .automatic(true)
-                        .build());
-        CodecRegistry codecRegistry = fromRegistries(
-                MongoClientSettings.getDefaultCodecRegistry(), pojoCodecRegistry);
-        MongoClientSettings clientSettings = MongoClientSettings.builder()
-                .applyConnectionString(connectionString)
-                .codecRegistry(codecRegistry).build();
-        MongoClient mongoClient = MongoClients.create(clientSettings);
+        MongoClient mongoClient = null;
+        if(System.getenv("ENV") != null) {
+            ConnectionString connectionString = new ConnectionString(
+                    System.getenv("MONGO_URI"));
+            CodecRegistry pojoCodecRegistry = fromProviders(
+                    PojoCodecProvider.builder()
+                            .automatic(true)
+                            .build());
+            CodecRegistry codecRegistry = fromRegistries(
+                    MongoClientSettings.getDefaultCodecRegistry(), pojoCodecRegistry);
+            MongoClientSettings clientSettings = MongoClientSettings.builder()
+                    .applyConnectionString(connectionString)
+                    .codecRegistry(codecRegistry).build();
+            mongoClient = MongoClients.create(clientSettings);
+        }
+
         this.saveService = new SaveService(mongoClient);
     }
 

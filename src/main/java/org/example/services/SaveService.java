@@ -37,10 +37,12 @@ public class SaveService {
 
     public SaveService(MongoClient mongoClient) {
         this.mongoClient = mongoClient;
-        this.mongoDatabase = this.mongoClient.getDatabase(System.getenv("ENV"));
-        this.saveRepository = new SaveRepository(this.mongoDatabase);
-        this.objectMapper = new ObjectMapper();
-        this.objectMapper.configure(FAIL_ON_UNKNOWN_PROPERTIES, false);
+        if (System.getenv("ENV") != null) {
+            this.mongoDatabase = this.mongoClient.getDatabase(System.getenv("ENV"));
+            this.saveRepository = new SaveRepository(this.mongoDatabase);
+            this.objectMapper = new ObjectMapper();
+            this.objectMapper.configure(FAIL_ON_UNKNOWN_PROPERTIES, false);
+        }
     }
 
     public List<PlayerState> findPlayerStates(String email) {
