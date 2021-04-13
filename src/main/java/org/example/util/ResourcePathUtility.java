@@ -164,6 +164,12 @@ public class ResourcePathUtility {
     public static final String KING_NAHTAN_IDLE_RIGHT_PATH = ""
             + "src/main/resources/static/images/monsters/king_nahtan/idle/king_base_right.gif";
 
+    public static final String KING_NAHTAN_ATTACK_LEFT_PATH = ""
+            + "src/main/resources/static/images/monsters/king_nahtan/king_attack_left.gif";
+
+    public static final String KING_NAHTAN_ATTACK_RIGHT_PATH = ""
+            + "src/main/resources/static/images/monsters/king_nahtan/king_attack_right.gif";
+
     public static final String KING_NAHTAN_DEATH_LEFT_PATH = ""
             + "src/main/resources/static/images/monsters/king_nahtan/king_base_death.gif";
 

@@ -24,13 +24,15 @@ import java.nio.file.Paths;
 import java.util.ResourceBundle;
 
 import static org.example.enums.Direction.LEFT;
-import static org.example.enums.MonsterType.DARK_KNIGHT;
+import static org.example.enums.MonsterType.KING_NAHTAN;
 import static org.example.util.ResourcePathUtility.DARK_KNIGHT_ATTACK_LEFT_PATH;
 import static org.example.util.ResourcePathUtility.DARK_KNIGHT_ATTACK_RIGHT_PATH;
 import static org.example.util.ResourcePathUtility.KING_NAHTAN_DEATH_LEFT_PATH;
 import static org.example.util.ResourcePathUtility.KING_NAHTAN_DEATH_RIGHT_PATH;
 import static org.example.util.ResourcePathUtility.KING_NAHTAN_IDLE_LEFT_PATH;
 import static org.example.util.ResourcePathUtility.KING_NAHTAN_IDLE_RIGHT_PATH;
+import static org.example.util.ResourcePathUtility.KING_NAHTAN_ATTACK_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.KING_NAHTAN_ATTACK_RIGHT_PATH;
 import static org.example.util.ResourcePathUtility.DARK_KNIGHT_LEFT_PATH;
 import static org.example.util.ResourcePathUtility.DARK_KNIGHT_RIGHT_PATH;
 import static org.example.util.ResourcePathUtility.DARK_KNIGHT_DEATH_LEFT_PATH;
@@ -82,8 +84,8 @@ public class BossRoomController extends GameScreenController implements Initiali
                 this.monsterService,
                 this.boss1Key,
                 this.boss1,
-                DARK_KNIGHT_ATTACK_LEFT_PATH,
-                DARK_KNIGHT_ATTACK_RIGHT_PATH
+                KING_NAHTAN_ATTACK_LEFT_PATH,
+                KING_NAHTAN_ATTACK_RIGHT_PATH
         );
         if (!this.appService.getMonstersKilled().contains(this.boss1Key)) {
             this.setupBoss1();
@@ -112,8 +114,8 @@ public class BossRoomController extends GameScreenController implements Initiali
                 this.resetPlayerSchedule,
                 this.boss1ResetSchedule,
                 Timeline.INDEFINITE,
-                DARK_KNIGHT_LEFT_PATH,
-                DARK_KNIGHT_RIGHT_PATH
+                KING_NAHTAN_IDLE_LEFT_PATH,
+                KING_NAHTAN_IDLE_RIGHT_PATH
         );
         this.boss1AttackSchedule.play();
 
@@ -132,14 +134,14 @@ public class BossRoomController extends GameScreenController implements Initiali
                 .setAttack(2)
                 .setAccuracy(0.5)
                 .setKillReward(6400)
-                .setMonsterType(DARK_KNIGHT)
+                .setMonsterType(KING_NAHTAN)
                 .setImageView(this.boss1)
                 .setHealthBar(this.boss1HealthBar)
                 .setOrientation(LEFT)
                 .setDeathAnimationLeft(
-                        new Image(Paths.get(DARK_KNIGHT_DEATH_LEFT_PATH).toUri().toString()))
+                        new Image(Paths.get(KING_NAHTAN_DEATH_LEFT_PATH).toUri().toString()))
                 .setDeathAnimationRight(
-                        new Image(Paths.get(DARK_KNIGHT_DEATH_RIGHT_PATH).toUri().toString()));
+                        new Image(Paths.get(KING_NAHTAN_DEATH_RIGHT_PATH).toUri().toString()));
 
     }
 }
