@@ -61,11 +61,12 @@ public class TraderService {
 
     public void toggleTraderOpen() {
         if (!this.traderOpen) {
+            this.traderVBox.getChildren().clear();
             this.loadTraderElements();
         } else {
             this.traderVBox.getChildren().clear();
         }
-        this.traderVBox.setVisible(!this.traderOpen);
+        this.traderBackground.setVisible(!this.traderOpen);
         this.traderPreviewBackground.setVisible(!this.traderOpen);
         this.traderPreviewDescription.setVisible(!this.traderOpen);
         this.traderPreviewImage.setVisible(!this.traderOpen);

@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import org.example.dto.Item;
 import org.example.dto.Potion;
 import org.example.dto.Weapon;
@@ -25,6 +26,7 @@ public class InventoryService {
     private Label inventoryPreviewTitle;
     private Label inventoryPreviewStat;
     private Label inventoryPreviewDescription;
+    private VBox inventoryVBox;
     private HBox inventoryRow1;
     private HBox inventoryRow2;
     private HBox inventoryRow3;
@@ -45,6 +47,7 @@ public class InventoryService {
 
     public void toggleInventoryOpen() {
         if (!this.inventoryOpen) {
+            this.loadHBoxes();
             this.loadInventoryElements();
         } else {
             this.clearInventoryRows();
@@ -56,6 +59,14 @@ public class InventoryService {
         this.inventoryPreviewStat.setVisible(!this.inventoryOpen);
         this.inventoryPreviewDescription.setVisible(!this.inventoryOpen);
         this.inventoryOpen = !inventoryOpen;
+    }
+
+    private void loadHBoxes() {
+        this.inventoryVBox.getChildren().clear();
+        this.inventoryVBox.getChildren().add(this.inventoryRow1);
+        this.inventoryRow1.setVisible(true);
+        this.inventoryVBox.getChildren().add(this.inventoryRow2);
+        this.inventoryRow2.setVisible(true);
     }
 
     private void loadInventoryElements() {
@@ -168,9 +179,9 @@ public class InventoryService {
     private void clearInventoryRows() {
         this.inventoryRow1.getChildren().clear();
         this.inventoryRow2.getChildren().clear();
-        this.inventoryRow3.getChildren().clear();
-        this.inventoryRow4.getChildren().clear();
-        this.inventoryRow5.getChildren().clear();
+//        this.inventoryRow3.getChildren().clear();
+//        this.inventoryRow4.getChildren().clear();
+//        this.inventoryRow5.getChildren().clear();
     }
 
     public ImageView getInventoryBackground() {
@@ -224,6 +235,15 @@ public class InventoryService {
 
     public InventoryService setInventoryPreviewDescription(Label inventoryPreviewDescription) {
         this.inventoryPreviewDescription = inventoryPreviewDescription;
+        return this;
+    }
+
+    public VBox getInventoryVBox() {
+        return inventoryVBox;
+    }
+
+    public InventoryService setInventoryVBox(VBox inventoryVBox) {
+        this.inventoryVBox = inventoryVBox;
         return this;
     }
 

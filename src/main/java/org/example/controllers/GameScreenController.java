@@ -133,7 +133,9 @@ public class GameScreenController extends InventoryController {
                 }
                 break;
             case B:
-                this.inventoryService.toggleInventoryOpen();
+                if (this.traderService == null || !this.traderService.isTraderOpen()) {
+                    this.inventoryService.toggleInventoryOpen();
+                }
                 break;
             case SPACE:
                 String monsterKilled = monsterService.attackNearestMonster(
@@ -155,6 +157,7 @@ public class GameScreenController extends InventoryController {
                 if (this.playerService.playerInRangeOfTrader() && !this.inventoryService.getInventoryOpen()) {
                     this.traderService.toggleTraderOpen();
                 }
+                break;
             default:
                 break;
             }
@@ -213,6 +216,7 @@ public class GameScreenController extends InventoryController {
                 .setInventoryPreviewTitle(this.inventoryPreviewTitle)
                 .setInventoryPreviewStat(this.inventoryPreviewStat)
                 .setInventoryPreviewDescription(this.inventoryPreviewDescription)
+                .setInventoryVBox(this.inventoryVBox)
                 .setInventoryRow1(this.inventoryRow1)
                 .setInventoryRow2(this.inventoryRow2)
                 .setInventoryRow3(this.inventoryRow3)
@@ -220,7 +224,22 @@ public class GameScreenController extends InventoryController {
                 .setInventoryRow5(this.inventoryRow5);
     }
 
-
+    protected void initializeTraderService(TraderService traderService, ImageView trader) {
+        traderService
+                .setAppService(appService)
+                .setTraderVBox(this.inventoryVBox)
+                .setTraderPreviewTitle(this.inventoryPreviewTitle)
+                .setTraderPreviewStat(this.inventoryPreviewStat)
+                .setTraderPreviewDescription(this.inventoryPreviewDescription)
+                .setTraderPreviewBackground(this.inventoryPreviewBackground)
+                .setTraderPreviewImage(this.inventoryPreviewImage)
+                .setTraderBackground(this.inventoryBackground);
+        trader.setTranslateX(913);
+        trader.setTranslateY(500);
+        trader.setVisible(true);
+//        trader.setFitHeight(160);
+//        trader.setFitWidth(160);
+    }
 
     private void initializePlayerImageView(PlayerState playerState) {
         this.displayCorrectPlayerOrientation(playerState);

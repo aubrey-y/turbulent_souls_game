@@ -8,7 +8,6 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.example.controllers.GameScreenController;
-import org.example.controllers.TraderController;
 import org.example.dto.Monster;
 import org.example.services.AppService;
 import org.example.services.DirectionService;
@@ -33,7 +32,7 @@ import static org.example.util.ResourcePathUtility.SLIME_ATTACK_LEFT_PATH;
 import static org.example.util.ResourcePathUtility.SLIME_DEATH_LEFT_PATH;
 import static org.example.util.ResourcePathUtility.SLIME_LEFT_PATH;
 
-public class ForestTraderController extends TraderController implements Initializable {
+public class ForestTraderController extends GameScreenController implements Initializable {
 
     private Timeline slime1AttackSchedule;
     private Timeline slime1ResetSchedule;
@@ -46,6 +45,9 @@ public class ForestTraderController extends TraderController implements Initiali
 
     @FXML
     private ProgressBar slime1HealthBar;
+
+    @FXML
+    private ImageView trader;
 
     public ForestTraderController(AppService appService,
                                   PlayerService playerService,
@@ -70,7 +72,7 @@ public class ForestTraderController extends TraderController implements Initiali
         this.monsterService = new MonsterService(this.goldService);
         this.playerService.setMonsterService(this.monsterService);
         this.traderService = new TraderService(TraderInventoryUtility.getTraderInventoryForRoomType(FOREST_TRADER));
-        this.initializeTraderService(this.traderService, this.appService);
+        this.initializeTraderService(this.traderService, this.trader);
         this.initGameScreenController(this.monsterService);
         this.resetPlayerHueSchedule = ScheduleUtility.generatePlayerResetSchedule(0.5,
                 this.playerService);
