@@ -190,6 +190,11 @@ public class PlayerService {
         return loader;
     }
 
+    public boolean playerInRangeOfTrader() {
+        return this.imageView.getTranslateX() >= 844 && this.imageView.getTranslateX() <= 982
+                && this.imageView.getTranslateY() >= 400 && this.imageView.getTranslateY() <= 600;
+    }
+
     private void setNewPlayerSpawnCoordinates(Direction exitDirection) {
         PlayerState playerState = this.appService.getPlayerState();
         switch (exitDirection) {

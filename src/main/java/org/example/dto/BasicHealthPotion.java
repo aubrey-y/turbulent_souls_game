@@ -13,6 +13,6 @@ public class BasicHealthPotion extends Potion {
         this.quantity = 1;
         this.imagePath = BASIC_HEALTH_PATH;
         this.description = "This is that feel good juice";
+        this.price = 100;
     }
-
 }

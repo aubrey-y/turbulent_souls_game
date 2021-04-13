@@ -20,8 +20,18 @@ public abstract class Item {
 
     protected String description;
 
+    protected int price;
+
     public Item() {
 
+    }
+
+    public int getPrice() {
+        return this.price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public String getName() {

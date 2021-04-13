@@ -23,8 +23,14 @@ public class MonsterService {
 
     private int monstersKilled;
 
+    private GoldService goldService;
+
     public MonsterService() {
 
+    }
+
+    public MonsterService(GoldService goldService) {
+        this.goldService = goldService;
     }
 
     public void addMonster(String key, Monster value) {
@@ -128,7 +134,9 @@ public class MonsterService {
             monster.getImageView().setImage(monster.getDeathAnimationRight());
         }
         ScheduleUtility.generateMonsterDeathResetSchedule(
-                DeathDurationUtility.getDurationForMonsterType(monster.getMonsterType()), monster
+                DeathDurationUtility.getDurationForMonsterType(monster.getMonsterType()),
+                monster,
+                this.goldService
         ).play();
     }
 }

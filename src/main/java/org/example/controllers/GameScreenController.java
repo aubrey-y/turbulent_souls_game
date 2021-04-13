@@ -15,12 +15,14 @@ import org.example.dto.PlayerState;
 import org.example.services.AppService;
 import org.example.services.ConsumableService;
 import org.example.services.DirectionService;
+import org.example.services.GoldService;
 import org.example.services.HealthService;
 import org.example.services.InventoryService;
 import org.example.services.MonsterService;
 import org.example.services.PlayerService;
 import org.example.services.RoomDirectionService;
 import org.example.services.SaveService;
+import org.example.services.TraderService;
 
 import java.nio.file.Paths;
 
@@ -45,6 +47,10 @@ public class GameScreenController extends InventoryController {
     protected InventoryService inventoryService;
 
     protected ConsumableService consumableService;
+
+    protected TraderService traderService;
+
+    protected GoldService goldService;
 
     private Scene scene;
 
@@ -90,6 +96,10 @@ public class GameScreenController extends InventoryController {
         this.scene = scene;
     }
 
+    public GameScreenController() {
+
+    }
+
     protected void initGameScreenController(MonsterService monsterService) {
         PlayerState playerState = this.appService.getPlayerState();
         if (playerState.getEmail() == null) {
@@ -123,13 +133,16 @@ public class GameScreenController extends InventoryController {
                 }
                 break;
             case B:
-                this.inventoryService.toggleInventoryOpen();
+                if (this.traderService == null || !this.traderService.isTraderOpen()) {
+                    this.inventoryService.toggleInventoryOpen();
+                }
                 break;
             case SPACE:
                 String monsterKilled = monsterService.attackNearestMonster(
                         this.appService.getPlayerState().getActiveWeapon(),
                         this.player.getTranslateX(), this.player.getTranslateY());
                 if (monsterKilled != null) {
+
                     monsterService.initiateDeathAnimation(monsterKilled);
                     this.appService.addMonsterKilled(monsterKilled);
                 }
@@ -137,6 +150,14 @@ public class GameScreenController extends InventoryController {
             case E:
                 if (this.inventoryService.getInventoryOpen()) {
                     this.inventoryService.consumeItem(this.consumableService);
+                } else if (this.traderService.isTraderOpen()) {
+                    this.traderService.purchaseItem();
+                }
+                break;
+            case T:
+                if (this.traderService != null
+                        && this.playerService.playerInRangeOfTrader() && !this.inventoryService.getInventoryOpen()) {
+                    this.traderService.toggleTraderOpen();
                 }
                 break;
             default:
@@ -186,8 +207,10 @@ public class GameScreenController extends InventoryController {
         this.inventoryPreviewTitle.setLayoutY(100);
         this.inventoryPreviewStat.setLayoutX(1410);
         this.inventoryPreviewStat.setLayoutY(593);
+        this.inventoryPreviewQty.setLayoutX(1410);
+        this.inventoryPreviewQty.setLayoutY(638);
         this.inventoryPreviewDescription.setLayoutX(1410);
-        this.inventoryPreviewDescription.setLayoutY(643);
+        this.inventoryPreviewDescription.setLayoutY(693);
         this.inventoryVBox.setLayoutX(50);
         this.inventoryVBox.setLayoutY(150);
         inventoryService
@@ -196,12 +219,34 @@ public class GameScreenController extends InventoryController {
                 .setInventoryPreviewImage(this.inventoryPreviewImage)
                 .setInventoryPreviewTitle(this.inventoryPreviewTitle)
                 .setInventoryPreviewStat(this.inventoryPreviewStat)
+                .setInventoryPreviewQty(this.inventoryPreviewQty)
                 .setInventoryPreviewDescription(this.inventoryPreviewDescription)
+                .setInventoryVBox(this.inventoryVBox)
                 .setInventoryRow1(this.inventoryRow1)
                 .setInventoryRow2(this.inventoryRow2)
                 .setInventoryRow3(this.inventoryRow3)
                 .setInventoryRow4(this.inventoryRow4)
                 .setInventoryRow5(this.inventoryRow5);
+    }
+
+    protected void initializeTraderService(TraderService traderService,
+                                           GoldService goldService,
+                                           ImageView trader) {
+        traderService
+                .setAppService(this.appService)
+                .setGoldService(goldService)
+                .setTraderVBox(this.inventoryVBox)
+                .setTraderPreviewTitle(this.inventoryPreviewTitle)
+                .setTraderPreviewStat(this.inventoryPreviewStat)
+                .setTraderPreviewDescription(this.inventoryPreviewDescription)
+                .setTraderPreviewBackground(this.inventoryPreviewBackground)
+                .setTraderPreviewImage(this.inventoryPreviewImage)
+                .setTraderBackground(this.inventoryBackground);
+        trader.setTranslateX(913);
+        trader.setTranslateY(500);
+        trader.setVisible(true);
+//        trader.setFitHeight(160);
+//        trader.setFitWidth(160);
     }
 
     private void initializePlayerImageView(PlayerState playerState) {
