@@ -25,8 +25,11 @@ import java.util.ResourceBundle;
 import static org.example.enums.Direction.LEFT;
 import static org.example.enums.MonsterType.WATER_BULL;
 import static org.example.util.ResourcePathUtility.WATER_BULL_ATTACK_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.WATER_BULL_ATTACK_RIGHT_PATH;
 import static org.example.util.ResourcePathUtility.WATER_BULL_DEATH_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.WATER_BULL_DEATH_RIGHT_PATH;
 import static org.example.util.ResourcePathUtility.WATER_BULL_IDLE_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.WATER_BULL_IDLE_RIGHT_PATH;
 
 public class Garden2Controller extends GameScreenController implements Initializable {
 
@@ -73,7 +76,7 @@ public class Garden2Controller extends GameScreenController implements Initializ
                 this.waterbull1Key,
                 this.waterbull1,
                 WATER_BULL_IDLE_LEFT_PATH,
-                null
+                WATER_BULL_IDLE_RIGHT_PATH
         );
         if (!this.appService.getMonstersKilled().contains(this.waterbull1Key)) {
             this.setupWaterbull1();
@@ -102,7 +105,11 @@ public class Garden2Controller extends GameScreenController implements Initializ
                         .setOrientation(LEFT)
                         .setDeathAnimationLeft(
                                 new Image(
-                                        Paths.get(WATER_BULL_DEATH_LEFT_PATH).toUri().toString())));
+                                        Paths.get(WATER_BULL_DEATH_LEFT_PATH).toUri().toString()))
+                        .setDeathAnimationRight(
+                                new Image(
+                                        Paths.get(WATER_BULL_DEATH_RIGHT_PATH).toUri().toString()))
+        );
         this.waterbull1AttackSchedule = ScheduleUtility.generateMonsterAttackSchedule(
                 1.0,
                 this.appService,
@@ -114,7 +121,7 @@ public class Garden2Controller extends GameScreenController implements Initializ
                 this.waterbull1ResetSchedule,
                 Timeline.INDEFINITE,
                 WATER_BULL_ATTACK_LEFT_PATH,
-                null
+                WATER_BULL_ATTACK_RIGHT_PATH
         );
         this.waterbull1AttackSchedule.play();
     }

@@ -25,8 +25,11 @@ import java.util.ResourceBundle;
 import static org.example.enums.Direction.LEFT;
 import static org.example.enums.MonsterType.CASTLE_BULL;
 import static org.example.util.ResourcePathUtility.CASTLE_BULL_ATTACK_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.CASTLE_BULL_ATTACK_RIGHT_PATH;
 import static org.example.util.ResourcePathUtility.CASTLE_BULL_DEATH_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.CASTLE_BULL_DEATH_RIGHT_PATH;
 import static org.example.util.ResourcePathUtility.CASTLE_BULL_IDLE_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.CASTLE_BULL_IDLE_RIGHT_PATH;
 
 public class Castle2Controller extends GameScreenController implements Initializable {
 
@@ -73,7 +76,7 @@ public class Castle2Controller extends GameScreenController implements Initializ
                 this.castlebull1Key,
                 this.castlebull1,
                 CASTLE_BULL_ATTACK_LEFT_PATH,
-                null
+                CASTLE_BULL_ATTACK_RIGHT_PATH
         );
         if (!this.appService.getMonstersKilled().contains(this.castlebull1Key)) {
             this.setupCastlebull1();
@@ -103,6 +106,9 @@ public class Castle2Controller extends GameScreenController implements Initializ
                         .setDeathAnimationLeft(
                                 new Image(
                                         Paths.get(CASTLE_BULL_DEATH_LEFT_PATH).toUri().toString()))
+                        .setDeathAnimationRight(
+                                new Image(
+                                        Paths.get(CASTLE_BULL_DEATH_RIGHT_PATH).toUri().toString()))
         );
         this.castlebull1AttackSchedule = ScheduleUtility.generateMonsterAttackSchedule(
                 1.0,
@@ -115,7 +121,7 @@ public class Castle2Controller extends GameScreenController implements Initializ
                 this.castlebull1ResetSchedule,
                 Timeline.INDEFINITE,
                 CASTLE_BULL_IDLE_LEFT_PATH,
-                null
+                CASTLE_BULL_IDLE_RIGHT_PATH
         );
         this.castlebull1AttackSchedule.play();
     }

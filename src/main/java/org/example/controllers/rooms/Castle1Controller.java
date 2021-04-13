@@ -25,8 +25,11 @@ import java.util.ResourceBundle;
 import static org.example.enums.Direction.LEFT;
 import static org.example.enums.MonsterType.WHITE_DRAGON;
 import static org.example.util.ResourcePathUtility.WHITE_DRAGON_ATTACK_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.WHITE_DRAGON_ATTACK_RIGHT_PATH;
 import static org.example.util.ResourcePathUtility.WHITE_DRAGON_DEATH_LEFT_PATH;
 import static org.example.util.ResourcePathUtility.WHITE_DRAGON_DEATH_RIGHT_PATH;
+import static org.example.util.ResourcePathUtility.WHITE_DRAGON_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.WHITE_DRAGON_RIGHT_PATH;
 
 public class Castle1Controller extends GameScreenController implements Initializable {
 
@@ -72,8 +75,8 @@ public class Castle1Controller extends GameScreenController implements Initializ
                 this.monsterService,
                 this.whitedragon1Key,
                 this.whitedragon1,
-                "src/main/resources/static/images/monsters/gifs/white_dragon_left.gif",
-                "src/main/resources/static/images/monsters/gifs/white_dragon_right.gif"
+                WHITE_DRAGON_LEFT_PATH,
+                WHITE_DRAGON_RIGHT_PATH
         );
         if (!this.appService.getMonstersKilled().contains(this.whitedragon1Key)) {
             this.setupWhitedragon1();
@@ -118,7 +121,7 @@ public class Castle1Controller extends GameScreenController implements Initializ
                 this.whiteDragon1ResetSchedule,
                 Timeline.INDEFINITE,
                 WHITE_DRAGON_ATTACK_LEFT_PATH,
-                null
+                WHITE_DRAGON_ATTACK_RIGHT_PATH
         );
         this.whiteDragon1AttackSchedule.play();
     }

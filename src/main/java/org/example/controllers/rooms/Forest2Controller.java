@@ -25,6 +25,7 @@ import java.util.ResourceBundle;
 import static org.example.enums.Direction.LEFT;
 import static org.example.enums.MonsterType.GUINEA_PIG;
 import static org.example.util.ResourcePathUtility.GUINEA_PIG_ATTACK_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.GUINEA_PIG_ATTACK_RIGHT_PATH;
 import static org.example.util.ResourcePathUtility.GUINEA_PIG_DEATH_LEFT_PATH;
 import static org.example.util.ResourcePathUtility.GUINEA_PIG_DEATH_RIGHT_PATH;
 import static org.example.util.ResourcePathUtility.GUINEA_PIG_IDLE_LEFT_PATH;
@@ -120,7 +121,7 @@ public class Forest2Controller extends GameScreenController implements Initializ
                 this.guineapig1ResetSchedule,
                 Timeline.INDEFINITE,
                 GUINEA_PIG_ATTACK_LEFT_PATH,
-                null
+                GUINEA_PIG_ATTACK_RIGHT_PATH
         );
         this.guineapig1AttackSchedule.play();
     }
