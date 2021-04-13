@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import org.example.dto.Item;
 import org.example.dto.Potion;
 import org.example.dto.Weapon;
@@ -24,7 +25,9 @@ public class InventoryService {
     private ImageView inventoryPreviewImage;
     private Label inventoryPreviewTitle;
     private Label inventoryPreviewStat;
+    private Label inventoryPreviewQty;
     private Label inventoryPreviewDescription;
+    private VBox inventoryVBox;
     private HBox inventoryRow1;
     private HBox inventoryRow2;
     private HBox inventoryRow3;
@@ -45,6 +48,7 @@ public class InventoryService {
 
     public void toggleInventoryOpen() {
         if (!this.inventoryOpen) {
+            this.loadHBoxes();
             this.loadInventoryElements();
         } else {
             this.clearInventoryRows();
@@ -54,8 +58,15 @@ public class InventoryService {
         this.inventoryPreviewImage.setVisible(!this.inventoryOpen);
         this.inventoryPreviewTitle.setVisible(!this.inventoryOpen);
         this.inventoryPreviewStat.setVisible(!this.inventoryOpen);
+        this.inventoryPreviewQty.setVisible(!this.inventoryOpen);
         this.inventoryPreviewDescription.setVisible(!this.inventoryOpen);
         this.inventoryOpen = !inventoryOpen;
+    }
+
+    private void loadHBoxes() {
+        this.inventoryVBox.getChildren().clear();
+        this.inventoryVBox.getChildren().add(this.inventoryRow1);
+        this.inventoryVBox.getChildren().add(this.inventoryRow2);
     }
 
     private void loadInventoryElements() {
@@ -117,6 +128,7 @@ public class InventoryService {
             this.inventoryPreviewImage.setImage(
                     new Image(Paths.get(weapon.getImagePath()).toUri().toString()));
             this.inventoryPreviewStat.setText("Base ATK: " + weapon.getAttack());
+            this.inventoryPreviewQty.setText("Quantity: " + weapon.getQuantity());
             this.inventoryPreviewDescription.setText(weapon.getDescription());
         } else {
             Item item = generalInventory.get(pathId);
@@ -126,6 +138,7 @@ public class InventoryService {
             if (item instanceof Potion) {
                 Potion potion = (Potion) item;
                 this.inventoryPreviewStat.setText(potion.getStatLabel() + " " + potion.getStatValue());
+                this.inventoryPreviewQty.setText("Quantity: " + potion.getQuantity());
                 this.inventoryPreviewDescription.setText(potion.getDescription());
             }
         }
@@ -168,9 +181,9 @@ public class InventoryService {
     private void clearInventoryRows() {
         this.inventoryRow1.getChildren().clear();
         this.inventoryRow2.getChildren().clear();
-        this.inventoryRow3.getChildren().clear();
-        this.inventoryRow4.getChildren().clear();
-        this.inventoryRow5.getChildren().clear();
+//        this.inventoryRow3.getChildren().clear();
+//        this.inventoryRow4.getChildren().clear();
+//        this.inventoryRow5.getChildren().clear();
     }
 
     public ImageView getInventoryBackground() {
@@ -218,12 +231,30 @@ public class InventoryService {
         return this;
     }
 
+    public Label getInventoryPreviewQty() {
+        return inventoryPreviewQty;
+    }
+
+    public InventoryService setInventoryPreviewQty(Label inventoryPreviewQty) {
+        this.inventoryPreviewQty = inventoryPreviewQty;
+        return this;
+    }
+
     public Label getInventoryPreviewDescription() {
         return inventoryPreviewDescription;
     }
 
     public InventoryService setInventoryPreviewDescription(Label inventoryPreviewDescription) {
         this.inventoryPreviewDescription = inventoryPreviewDescription;
+        return this;
+    }
+
+    public VBox getInventoryVBox() {
+        return inventoryVBox;
+    }
+
+    public InventoryService setInventoryVBox(VBox inventoryVBox) {
+        this.inventoryVBox = inventoryVBox;
         return this;
     }
 

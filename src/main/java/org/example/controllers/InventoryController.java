@@ -25,6 +25,9 @@ public abstract class InventoryController {
     protected Label inventoryPreviewStat;
 
     @FXML
+    protected Label inventoryPreviewQty;
+
+    @FXML
     protected Label inventoryPreviewDescription;
 
     @FXML

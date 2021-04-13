@@ -162,6 +162,7 @@ public class SaveServiceTest {
                 .append("description", "A handcrafted stick with magical properties...")
                 .append("type", "STAFF")
                 .append("attack", 7)
-                .append("range", 100.0);
+                .append("range", 100.0)
+                .append("price", 200);
     }
 }

@@ -23,6 +23,11 @@
       </ImageView>
       <Pane prefHeight="1080.0" prefWidth="1920.0">
          <children>
+            <ImageView fx:id="trader" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../../static/images/TradersAndItems/catLadyTrader.PNG" />
+               </image>
+            </ImageView>
             <ImageView fx:id="player" fitHeight="133.0" fitWidth="133.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../../static/images/player.png" />
@@ -76,6 +81,11 @@
          </font>
       </Label>
       <Label fx:id="inventoryPreviewStat" layoutX="1420.0" layoutY="603.0" prefHeight="50.0" prefWidth="431.0" stylesheets="@../../static/css/fontstyle.css" text="Base ATK: " textFill="WHITE" visible="false">
+         <font>
+            <Font size="43.0" />
+         </font>
+      </Label>
+      <Label fx:id="inventoryPreviewQty" layoutX="1430.0" layoutY="663.0" prefHeight="50.0" prefWidth="431.0" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE" visible="false">
          <font>
             <Font size="43.0" />
          </font>
