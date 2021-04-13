@@ -236,7 +236,7 @@ public class RoomDirectionService {
         this.roomMapping.put(new RoomIdDirectionKey(14, DOWN), new Room(GARDEN_TRADER)
                 .setUp(new Room())
                 .setId(17)
-                .setControllerClass(Garden2Controller.class)
+                .setControllerClass(GardenTraderController.class)
                 .setRoot("gardenTrader.fxml"));
 
         //This represents room 15 on the diagram
