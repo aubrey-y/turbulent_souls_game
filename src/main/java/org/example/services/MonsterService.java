@@ -17,19 +17,20 @@ import static org.example.enums.Direction.LEFT;
 
 public class MonsterService {
 
-    private AppService appService;
     private Map<String, Monster> monsterMapping = new HashMap<>();
 
     public static final double TILE_SIZE = 100.0;
 
     private int monstersKilled;
 
+    private GoldService goldService;
+
     public MonsterService() {
 
     }
 
-    public MonsterService(AppService appService) {
-        this.appService = appService;
+    public MonsterService(GoldService goldService) {
+        this.goldService = goldService;
     }
 
     public void addMonster(String key, Monster value) {
@@ -125,9 +126,6 @@ public class MonsterService {
     }
 
     public void initiateDeathAnimation(String key) {
-        this.appService.getPlayerState().setGoldAmount(
-                this.appService.getPlayerState().getGoldAmount() + 100
-        );
         Monster monster = this.monsterMapping.get(key);
         monster.getHealthBar().setVisible(false);
         if (monster.getOrientation() == LEFT) {

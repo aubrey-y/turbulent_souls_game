@@ -62,7 +62,17 @@ public class TraderService {
     public void toggleTraderOpen() {
         if (!this.traderOpen) {
             this.loadTraderElements();
+        } else {
+            this.traderVBox.getChildren().clear();
         }
+        this.traderVBox.setVisible(!this.traderOpen);
+        this.traderPreviewBackground.setVisible(!this.traderOpen);
+        this.traderPreviewDescription.setVisible(!this.traderOpen);
+        this.traderPreviewImage.setVisible(!this.traderOpen);
+        this.traderPreviewStat.setVisible(!this.traderOpen);
+        this.traderPreviewTitle.setVisible(!this.traderOpen);
+        this.traderPreviewBackground.setVisible(!this.traderOpen);
+        this.traderOpen = !this.traderOpen;
     }
 
     private void loadTraderElements() {
@@ -113,9 +123,9 @@ public class TraderService {
             if (!generalInventory.containsKey(item.getImagePath())) {
                 generalInventory.put(item.getImagePath(), (Item) CloneUtility.deepCopy(item));
             }
-            // fix this jimmy like L107
-//            item.setQuantity(item.getQuantity() + 1);
-//            generalInventory.put(item.getImagePath(), item.clone());
+            Item playerItem = generalInventory.get(item.getImagePath());
+            playerItem.setQuantity(item.getQuantity() + 1);
+            generalInventory.put(item.getImagePath(), playerItem);
             playerState.setGeneralInventory(weaponInventory);
         }
     }

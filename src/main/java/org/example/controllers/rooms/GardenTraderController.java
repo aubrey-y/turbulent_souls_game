@@ -8,9 +8,11 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.example.controllers.GameScreenController;
+import org.example.controllers.TraderController;
 import org.example.dto.Monster;
 import org.example.services.AppService;
 import org.example.services.DirectionService;
+import org.example.services.GoldService;
 import org.example.services.HealthService;
 import org.example.services.MonsterService;
 import org.example.services.PlayerService;
@@ -31,7 +33,7 @@ import static org.example.util.ResourcePathUtility.SLIME_ATTACK_LEFT_PATH;
 import static org.example.util.ResourcePathUtility.SLIME_DEATH_LEFT_PATH;
 import static org.example.util.ResourcePathUtility.SLIME_LEFT_PATH;
 
-public class GardenTraderController extends GameScreenController implements Initializable {
+public class GardenTraderController extends TraderController implements Initializable {
 
     private Timeline slime1AttackSchedule;
     private Timeline slime1ResetSchedule;
@@ -64,7 +66,8 @@ public class GardenTraderController extends GameScreenController implements Init
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.monsterService = new MonsterService();
+        this.goldService = new GoldService(this.appService, this.getGoldAmount());
+        this.monsterService = new MonsterService(this.goldService);
         this.playerService.setMonsterService(this.monsterService);
         this.traderService = new TraderService(TraderInventoryUtility.getTraderInventoryForRoomType(GARDEN_TRADER));
         this.initializeTraderService(this.traderService, this.appService);

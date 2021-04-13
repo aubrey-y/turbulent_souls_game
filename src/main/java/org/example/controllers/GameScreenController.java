@@ -15,6 +15,7 @@ import org.example.dto.PlayerState;
 import org.example.services.AppService;
 import org.example.services.ConsumableService;
 import org.example.services.DirectionService;
+import org.example.services.GoldService;
 import org.example.services.HealthService;
 import org.example.services.InventoryService;
 import org.example.services.MonsterService;
@@ -48,6 +49,8 @@ public class GameScreenController extends InventoryController {
     protected ConsumableService consumableService;
 
     protected TraderService traderService;
+
+    protected GoldService goldService;
 
     private Scene scene;
 
@@ -91,6 +94,10 @@ public class GameScreenController extends InventoryController {
         this.healthService = healthService;
         this.saveService = saveService;
         this.scene = scene;
+    }
+
+    public GameScreenController() {
+
     }
 
     protected void initGameScreenController(MonsterService monsterService) {

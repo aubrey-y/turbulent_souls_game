@@ -106,4 +106,13 @@ public class ResourcePathUtility {
 
     public static final String FONT_STYLE_PATH = ""
             + "src/main/resources/static/css/fontstyle.css";
+
+    public static final String FOREST_TRADER_PATH = ""
+            + "src/main/resources/static/images/TradersAndItems/tacoTrader.PNG";
+
+    public static final String CASTLE_TRADER_PATH = ""
+            + "src/main/resources/static/images/TradersAndItems/wizardTrader.PNG";
+
+    public static final String GARDEN_TRADER_PATH = ""
+            + "src/main/resources/static/images/TradersAndItems/catLadyTrader.PNG";
 }
