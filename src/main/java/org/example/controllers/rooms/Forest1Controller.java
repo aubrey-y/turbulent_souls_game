@@ -25,6 +25,9 @@ import java.util.ResourceBundle;
 
 import static org.example.enums.Direction.LEFT;
 import static org.example.enums.MonsterType.SLIME;
+import static org.example.util.ResourcePathUtility.SLIME_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.SLIME_ATTACK_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.SLIME_DEATH_LEFT_PATH;
 
 public class Forest1Controller extends GameScreenController implements Initializable {
 
@@ -71,7 +74,7 @@ public class Forest1Controller extends GameScreenController implements Initializ
                 this.monsterService,
                 SLIME_1_KEY,
                 this.slime1,
-                "src/main/resources/static/images/monsters/gifs/slime.gif",
+                SLIME_LEFT_PATH,
                 null
         );
         if (!this.appService.getMonstersKilled().contains(SLIME_1_KEY)) {
@@ -100,7 +103,7 @@ public class Forest1Controller extends GameScreenController implements Initializ
                 this.resetPlayerHueSchedule,
                 this.slime1ResetSchedule,
                 Timeline.INDEFINITE,
-                "src/main/resources/static/images/monsters/gifs/slime_attack.gif",
+                SLIME_ATTACK_LEFT_PATH,
                 null
         );
         this.slime1AttackSchedule.play();
@@ -119,7 +122,7 @@ public class Forest1Controller extends GameScreenController implements Initializ
                 .setHealthBar(this.slime1HealthBar)
                 .setOrientation(LEFT)
                 .setDeathAnimationLeft(new Image(Paths.get(
-                        "src/main/resources/static/images/monsters/gifs/slime_death.gif")
+                        SLIME_DEATH_LEFT_PATH)
                         .toUri().toString()));
     }
 }

@@ -26,6 +26,7 @@ import java.util.ResourceBundle;
 import static org.example.enums.Direction.LEFT;
 import static org.example.enums.MonsterType.DARK_KNIGHT;
 import static org.example.util.ResourcePathUtility.DARK_KNIGHT_ATTACK_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.DARK_KNIGHT_ATTACK_RIGHT_PATH;
 import static org.example.util.ResourcePathUtility.DARK_KNIGHT_DEATH_LEFT_PATH;
 import static org.example.util.ResourcePathUtility.DARK_KNIGHT_DEATH_RIGHT_PATH;
 import static org.example.util.ResourcePathUtility.DARK_KNIGHT_LEFT_PATH;
@@ -77,7 +78,7 @@ public class Castle3Controller extends GameScreenController implements Initializ
                 this.darkknight1Key,
                 this.darkknight1,
                 DARK_KNIGHT_ATTACK_LEFT_PATH,
-                null
+                DARK_KNIGHT_ATTACK_RIGHT_PATH
         );
         if (!this.appService.getMonstersKilled().contains(this.darkknight1Key)) {
             this.setupDarkknight1();

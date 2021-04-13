@@ -26,6 +26,7 @@ import java.util.ResourceBundle;
 import static org.example.enums.Direction.LEFT;
 import static org.example.enums.MonsterType.SERPENT;
 import static org.example.util.ResourcePathUtility.SERPENT_ATTACK_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.SERPENT_ATTACK_RIGHT_PATH;
 import static org.example.util.ResourcePathUtility.SERPENT_DEATH_LEFT_PATH;
 import static org.example.util.ResourcePathUtility.SERPENT_DEATH_RIGHT_PATH;
 import static org.example.util.ResourcePathUtility.SERPENT_LEFT_PATH;
@@ -120,7 +121,7 @@ public class Garden1Controller extends GameScreenController implements Initializ
                 this.serpent1ResetSchedule,
                 Timeline.INDEFINITE,
                 SERPENT_ATTACK_LEFT_PATH,
-                null
+                SERPENT_ATTACK_RIGHT_PATH
         );
         this.serpent1AttackSchedule.play();
     }

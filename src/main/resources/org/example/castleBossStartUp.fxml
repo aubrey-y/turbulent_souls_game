@@ -67,7 +67,7 @@
       </Label>
       <ImageView fx:id="darkknight1" fitHeight="150.0" fitWidth="200.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
-            <Image url="@../../static/images/monsters/gifs/dark_knight_right.gif" />
+            <Image url="@../../static/images/monsters/dark_knight/dark_knight_right.gif" />
          </image>
       </ImageView>
       <Label fx:id="inventoryPreviewTitle" layoutX="1420.0" layoutY="110.0" prefHeight="59.0" prefWidth="431.0" stylesheets="@../../static/css/fontstyle.css" text="Placeholder" textFill="WHITE" visible="false">

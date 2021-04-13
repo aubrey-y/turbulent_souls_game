@@ -26,10 +26,15 @@ import java.util.ResourceBundle;
 import static org.example.enums.Direction.LEFT;
 import static org.example.enums.MonsterType.DARK_KNIGHT;
 import static org.example.util.ResourcePathUtility.DARK_KNIGHT_ATTACK_LEFT_PATH;
-import static org.example.util.ResourcePathUtility.DARK_KNIGHT_DEATH_LEFT_PATH;
-import static org.example.util.ResourcePathUtility.DARK_KNIGHT_DEATH_RIGHT_PATH;
+import static org.example.util.ResourcePathUtility.DARK_KNIGHT_ATTACK_RIGHT_PATH;
+import static org.example.util.ResourcePathUtility.KING_NAHTAN_DEATH_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.KING_NAHTAN_DEATH_RIGHT_PATH;
+import static org.example.util.ResourcePathUtility.KING_NAHTAN_IDLE_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.KING_NAHTAN_IDLE_RIGHT_PATH;
 import static org.example.util.ResourcePathUtility.DARK_KNIGHT_LEFT_PATH;
 import static org.example.util.ResourcePathUtility.DARK_KNIGHT_RIGHT_PATH;
+import static org.example.util.ResourcePathUtility.DARK_KNIGHT_DEATH_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.DARK_KNIGHT_DEATH_RIGHT_PATH;
 
 public class BossRoomController extends GameScreenController implements Initializable {
 
@@ -78,7 +83,7 @@ public class BossRoomController extends GameScreenController implements Initiali
                 this.boss1Key,
                 this.boss1,
                 DARK_KNIGHT_ATTACK_LEFT_PATH,
-                null
+                DARK_KNIGHT_ATTACK_RIGHT_PATH
         );
         if (!this.appService.getMonstersKilled().contains(this.boss1Key)) {
             this.setupBoss1();
@@ -132,9 +137,9 @@ public class BossRoomController extends GameScreenController implements Initiali
                 .setHealthBar(this.boss1HealthBar)
                 .setOrientation(LEFT)
                 .setDeathAnimationLeft(
-                        new Image(Paths.get(DARK_KNIGHT_DEATH_RIGHT_PATH).toUri().toString()))
+                        new Image(Paths.get(DARK_KNIGHT_DEATH_LEFT_PATH).toUri().toString()))
                 .setDeathAnimationRight(
-                        new Image(Paths.get(DARK_KNIGHT_DEATH_LEFT_PATH).toUri().toString()));
+                        new Image(Paths.get(DARK_KNIGHT_DEATH_RIGHT_PATH).toUri().toString()));
 
     }
 }
