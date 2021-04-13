@@ -24,7 +24,7 @@ import java.nio.file.Paths;
 import java.util.ResourceBundle;
 
 import static org.example.enums.Direction.LEFT;
-import static org.example.enums.MonsterType.DARK_KNIGHT;
+import static org.example.enums.MonsterType.KING_NAHTAN;
 import static org.example.util.ResourcePathUtility.DARK_KNIGHT_ATTACK_LEFT_PATH;
 import static org.example.util.ResourcePathUtility.DARK_KNIGHT_ATTACK_RIGHT_PATH;
 import static org.example.util.ResourcePathUtility.KING_NAHTAN_DEATH_LEFT_PATH;
@@ -134,7 +134,7 @@ public class BossRoomController extends GameScreenController implements Initiali
                 .setAttack(2)
                 .setAccuracy(0.5)
                 .setKillReward(6400)
-                .setMonsterType(DARK_KNIGHT)
+                .setMonsterType(KING_NAHTAN)
                 .setImageView(this.boss1)
                 .setHealthBar(this.boss1HealthBar)
                 .setOrientation(LEFT)

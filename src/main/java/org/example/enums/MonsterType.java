@@ -7,5 +7,6 @@ public enum MonsterType {
     CASTLE_BULL,
     SERPENT,
     WATER_BULL,
-    DARK_KNIGHT
+    DARK_KNIGHT,
+    KING_NAHTAN
 }
