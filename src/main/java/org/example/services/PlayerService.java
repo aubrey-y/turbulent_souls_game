@@ -42,6 +42,10 @@ public class PlayerService {
 
     private double moveSize = DEFAULT_MOVE_SIZE;
 
+    public PlayerService() {
+
+    }
+
     public PlayerService(AppService appService,
                          RoomDirectionService roomDirectionService,
                          HealthService healthService,
