@@ -40,7 +40,7 @@ public class GoldServiceTest {
     }
 
     @Test
-    public void adjustGoldAmountTest() {
+    public void testAdjustGoldAmount() {
         //Given
         PlayerState playerState = this.getStandardPlayerState(maximumStartingHealth);
         this.withMockedAppService(playerState);
@@ -56,7 +56,7 @@ public class GoldServiceTest {
     }
 
     @Test
-    public void playerCanAffordAmountEqualTest() {
+    public void testPlayerCanAffordAmountEqual() {
         //Given
         PlayerState playerState = this.getStandardPlayerState(maximumStartingHealth);
         this.withMockedAppService(playerState);
@@ -70,7 +70,7 @@ public class GoldServiceTest {
     }
 
     @Test
-    public void playerCanAffordAmountGreaterTest() {
+    public void testPlayerCanAffordAmountGreater() {
         //Given
         PlayerState playerState = this.getStandardPlayerState(maximumStartingHealth);
         this.withMockedAppService(playerState);
@@ -84,7 +84,7 @@ public class GoldServiceTest {
     }
 
     @Test
-    public void playerCanAffordAmountLessTest() {
+    public void testPlayerCanAffordAmountLess() {
         //Given
         PlayerState playerState = this.getStandardPlayerState(maximumStartingHealth);
         this.withMockedAppService(playerState);
