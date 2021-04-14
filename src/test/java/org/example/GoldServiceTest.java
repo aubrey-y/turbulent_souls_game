@@ -40,11 +40,27 @@ public class GoldServiceTest {
     }
 
     @Test
-    public void testAdjustGoldAmount() {
+    public void testAdjustGoldAmountPositiveNumberShouldIncreasePlayerGold() {
         //Given
         PlayerState playerState = this.getStandardPlayerState(maximumStartingHealth);
         this.withMockedAppService(playerState);
         int goldChange = 100;
+        int expected = playerState.getGoldAmount() + goldChange;
+
+        //When
+        this.goldService.adjustGoldAmount(goldChange);
+        int actual = playerState.getGoldAmount();
+
+        //Then
+        assertThat(actual, is(equalTo(expected)));
+    }
+
+    @Test
+    public void testAdjustGoldAmountNegativeNumberShouldDecreasePlayerGold() {
+        //Given
+        PlayerState playerState = this.getStandardPlayerState(maximumStartingHealth);
+        this.withMockedAppService(playerState);
+        int goldChange = -100;
         int expected = playerState.getGoldAmount() + goldChange;
 
         //When
