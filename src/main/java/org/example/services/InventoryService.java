@@ -71,6 +71,11 @@ public class InventoryService {
     }
 
     private void loadInventoryElements() {
+        inventoryToggleGroup.selectedToggleProperty().addListener((obsVal, oldVal, newVal) -> {
+            if (newVal == null) {
+                oldVal.setSelected(true);
+            }
+        });
         Map<String, Item> weaponInventory = this.appService.getPlayerState()
                 .getWeaponInventory();
         Map<String, Item> generalInventory = this.appService.getPlayerState()

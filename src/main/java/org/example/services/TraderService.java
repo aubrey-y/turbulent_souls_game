@@ -84,6 +84,11 @@ public class TraderService {
     }
 
     private void loadTraderElements() {
+        traderItems.selectedToggleProperty().addListener((obsVal, oldVal, newVal) -> {
+            if (newVal == null) {
+                oldVal.setSelected(true);
+            }
+        });
         int index = 0;
         List<Item> sortedItems = new ArrayList<>(this.traderInventory.values());
         sortedItems.sort(Comparator.comparingInt(Item::getPrice));
