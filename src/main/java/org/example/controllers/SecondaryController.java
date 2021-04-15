@@ -165,49 +165,40 @@ public class SecondaryController extends ErrorBaseController {
     @FXML
     private void selectEasyDifficulty() {
         selectionDifficultyHelper();
-        if (this.difficulty != Difficulty.EASY) {
-            this.difficulty = Difficulty.EASY;
-        }
+        this.difficulty = Difficulty.EASY;
     }
 
     @FXML
     private void selectMediumDifficulty() {
         selectionDifficultyHelper();
-        if (this.difficulty != Difficulty.MEDIUM) {
-            this.difficulty = Difficulty.MEDIUM;
-        }
+        this.difficulty = Difficulty.MEDIUM;
     }
 
     @FXML
     private void selectHardDifficulty() {
         selectionDifficultyHelper();
-        if (this.difficulty != Difficulty.HARD) {
-            this.difficulty = Difficulty.HARD;
-        }
+        this.difficulty = Difficulty.HARD;
+
     }
 
     @FXML
     private void selectWizardArchetype() {
         selectionArchetypeHelper();
-        if (this.archetype != Archetype.WIZARD) {
-            this.archetype = Archetype.WIZARD;
-        }
+        this.archetype = Archetype.WIZARD;
     }
 
     @FXML
     private void selectMageArchetype() {
         selectionArchetypeHelper();
-        if (this.archetype != Archetype.MAGE) {
-            this.archetype = Archetype.MAGE;
-        }
+        this.archetype = Archetype.MAGE;
+
     }
 
     @FXML
     private void selectWarriorArchetype() {
         selectionArchetypeHelper();
-        if (this.archetype != Archetype.WARRIOR) {
-            this.archetype = Archetype.WARRIOR;
-        }
+        this.archetype = Archetype.WARRIOR;
+
     }
 
     public void selectionDifficultyHelper() {
