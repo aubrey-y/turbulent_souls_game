@@ -72,8 +72,7 @@ public class BossRoomController extends GameScreenController implements Initiali
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.goldService = new GoldService(this.appService, this.getGoldAmount());
-        this.monsterService = new MonsterService(this.goldService);
+        this.monsterService = new MonsterService();
         this.playerService.setMonsterService(this.monsterService);
         this.initGameScreenController(this.monsterService);
         this.resetPlayerSchedule = ScheduleUtility.generatePlayerResetSchedule(0.5,
@@ -141,7 +140,8 @@ public class BossRoomController extends GameScreenController implements Initiali
                 .setDeathAnimationLeft(
                         new Image(Paths.get(KING_NAHTAN_DEATH_LEFT_PATH).toUri().toString()))
                 .setDeathAnimationRight(
-                        new Image(Paths.get(KING_NAHTAN_DEATH_RIGHT_PATH).toUri().toString()));
+                        new Image(Paths.get(KING_NAHTAN_DEATH_RIGHT_PATH).toUri().toString()))
+                .setKey(this.boss1Key);
 
     }
 }

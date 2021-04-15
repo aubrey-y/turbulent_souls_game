@@ -65,8 +65,7 @@ public class Forest2Controller extends GameScreenController implements Initializ
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.goldService = new GoldService(this.appService, this.getGoldAmount());
-        this.monsterService = new MonsterService(this.goldService);
+        this.monsterService = new MonsterService();
         this.playerService.setMonsterService(this.monsterService);
         this.initGameScreenController(this.monsterService);
         this.resetPlayerSchedule = ScheduleUtility.generatePlayerResetSchedule(0.5,
@@ -112,6 +111,7 @@ public class Forest2Controller extends GameScreenController implements Initializ
                         .setDeathAnimationRight(
                                 new Image(
                                         Paths.get(GUINEA_PIG_DEATH_RIGHT_PATH).toUri().toString()))
+                        .setKey(this.guineapig1Key)
         );
         this.guineapig1AttackSchedule = ScheduleUtility.generateMonsterAttackSchedule(
                 1.0,

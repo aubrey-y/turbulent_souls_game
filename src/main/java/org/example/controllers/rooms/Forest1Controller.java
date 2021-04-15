@@ -62,8 +62,7 @@ public class Forest1Controller extends GameScreenController implements Initializ
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.goldService = new GoldService(this.appService, this.getGoldAmount());
-        this.monsterService = new MonsterService(this.goldService);
+        this.monsterService = new MonsterService();
         this.playerService.setMonsterService(this.monsterService);
         this.initGameScreenController(this.monsterService);
         this.resetPlayerHueSchedule = ScheduleUtility.generatePlayerResetSchedule(0.5,
@@ -123,6 +122,6 @@ public class Forest1Controller extends GameScreenController implements Initializ
                 .setOrientation(LEFT)
                 .setDeathAnimationLeft(new Image(Paths.get(
                         SLIME_DEATH_LEFT_PATH)
-                        .toUri().toString()));
+                        .toUri().toString())).setKey(SLIME_1_KEY);
     }
 }

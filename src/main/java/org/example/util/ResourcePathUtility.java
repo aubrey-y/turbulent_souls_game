@@ -242,6 +242,11 @@ public class ResourcePathUtility {
     public static final String GARDEN_TRADER_PATH = ""
             + "src/main/resources/static/images/TradersAndItems/catLadyTrader.PNG";
 
+<<<<<<< HEAD
 
 
+=======
+    public static final String GOLD_POUCH_PATH = ""
+            + "src/main/resources/static/images/TradersAndItems/coins.png";
+>>>>>>> 6d9d1c412925945c683a0ac5d0f90a0d1d0f0479
 }

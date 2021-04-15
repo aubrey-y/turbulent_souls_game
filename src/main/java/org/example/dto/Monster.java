@@ -34,6 +34,8 @@ public class Monster {
 
     private Image deathAnimationRight;
 
+    private String key;
+
     public Monster() {
 
     }
@@ -55,6 +57,7 @@ public class Monster {
         this.imageView = (ImageView) varargs[1];
         this.healthBar = (ProgressBar) varargs[2];
         this.healthText = (Label) varargs[3];
+        this.key = (String) varargs[4];
     }
 
     public boolean isAlive() {
@@ -175,6 +178,15 @@ public class Monster {
 
     public Monster setDeathAnimationRight(Image deathAnimationRight) {
         this.deathAnimationRight = deathAnimationRight;
+        return this;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public Monster setKey(String key) {
+        this.key = key;
         return this;
     }
 }
