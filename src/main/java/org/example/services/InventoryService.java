@@ -42,6 +42,7 @@ public class InventoryService {
     private ToggleGroup inventoryToggleGroup = new ToggleGroup();
     private String recentlySelectedItem;
     private static int selectedSaveIndex;
+    private static int rowSelected;
 
     public InventoryService(AppService appService) {
         this.appService = appService;
@@ -90,6 +91,10 @@ public class InventoryService {
                 this.selectToggleButton(weapon.getImagePath(), finalI);
             });
             this.inventoryRow1.getChildren().add(toggleButton);
+            if (rowSelected == 0 && recentlySelectedItem != null && index == selectedSaveIndex) {
+                toggleButton.setSelected(true);
+                this.selectToggleButton(weapon.getImagePath(), index);
+            }
             index++;
             if (!selected) {
                 toggleButton.setSelected(true);
@@ -111,7 +116,7 @@ public class InventoryService {
                 this.selectToggleButton(item.getImagePath(), finalI);
             });
             this.inventoryRow2.getChildren().add(toggleButton);
-            if (recentlySelectedItem != null && index == selectedSaveIndex) {
+            if (rowSelected == 1 && recentlySelectedItem != null && index == selectedSaveIndex) {
                 toggleButton.setSelected(true);
                 this.selectToggleButton(item.getImagePath(), index);
             }
@@ -129,6 +134,7 @@ public class InventoryService {
 
         Weapon weapon = (Weapon) weaponInventory.get(pathId);
         if (weapon != null) {
+            rowSelected = 0;
             this.inventoryPreviewTitle.setText(weapon.getName());
             this.inventoryPreviewImage.setImage(
                     new Image(Paths.get(weapon.getImagePath()).toUri().toString()));
@@ -136,6 +142,7 @@ public class InventoryService {
             this.inventoryPreviewQty.setText("Quantity: " + weapon.getQuantity());
             this.inventoryPreviewDescription.setText(weapon.getDescription());
         } else {
+            rowSelected = 1;
             Item item = generalInventory.get(pathId);
             this.inventoryPreviewTitle.setText(item.getName());
             this.inventoryPreviewImage.setImage(
