@@ -14,6 +14,5 @@ public class AdvancedMagic extends Weapon {
         this.imagePath = ADVANCED_MAGIC_PATH;
         this.description = "Unpredictable and powerful.";
         this.price = 300;
-        this.listingPriority = 9;
     }
 }

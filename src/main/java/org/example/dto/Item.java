@@ -72,12 +72,4 @@ public abstract class Item {
         return this;
     }
 
-    public int getListingPriority() {
-        return listingPriority;
-    }
-
-    public Item setListingPriority(int listingPriority) {
-        this.listingPriority = listingPriority;
-        return this;
-    }
 }

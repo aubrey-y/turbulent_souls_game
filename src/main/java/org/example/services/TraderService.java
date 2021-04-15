@@ -89,7 +89,7 @@ public class TraderService {
     private void loadTraderElements() {
         int index = 0;
         List<Item> sortedItems = new ArrayList<>(this.traderInventory.values());
-        sortedItems.sort(Comparator.comparingInt(Item::getListingPriority));
+        sortedItems.sort(Comparator.comparingInt(Item::getPrice));
         for (Item icon : sortedItems) {
             Item item = icon;
             ToggleButton toggleButton = new ToggleButton();
@@ -150,14 +150,15 @@ public class TraderService {
         this.traderPreviewTitle.setText(item.getName());
         this.traderPreviewImage.setImage(
                 new Image(Paths.get(item.getImagePath()).toUri().toString()));
-        if (item.getPrice() > 150) { //weapon
+        if (item instanceof Weapon) {
             Weapon weapon = (Weapon) item;
             this.traderPreviewStat.setText("Base ATK: " + ((Weapon) item).getAttack());
         } else if (item instanceof Potion) {
             Potion potion = (Potion) item;
             this.traderPreviewStat.setText(potion.getStatLabel() + " " + potion.getStatValue());
             this.traderPreviewDescription.setText(potion.getDescription());
-
+        } else {
+            throw new RuntimeException();
         }
         this.traderPreviewDescription.setText(item.getDescription());
     }

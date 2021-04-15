@@ -164,7 +164,6 @@ public class SaveServiceTest {
                 .append("attack", 7)
                 .append("range", 100.0)
                 .append("price", 200)
-                .append("listingPriority", 8)
                 ;
     }
 }

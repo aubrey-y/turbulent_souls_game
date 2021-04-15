@@ -14,6 +14,5 @@ public class MasterSword extends Weapon {
         this.imagePath = MASTER_SWORD_PATH;
         this.description = "An extremely powerful double-sided scythe that harnesses electricity.";
         this.price = 600;
-        this.listingPriority = 11;
     }
 }

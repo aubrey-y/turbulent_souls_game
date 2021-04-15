@@ -14,6 +14,5 @@ public class AdvancedStaff extends Weapon {
         this.imagePath = ADVANCED_STAFF_PATH;
         this.description = "A delicate staff that harness ice.";
         this.price = 300;
-        this.listingPriority = 9;
     }
 }
