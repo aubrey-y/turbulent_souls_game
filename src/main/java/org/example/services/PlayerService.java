@@ -3,6 +3,7 @@ package org.example.services;
 import javafx.animation.Timeline;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.example.App;
 import org.example.dto.Coordinate;
@@ -14,6 +15,7 @@ import org.example.enums.Direction;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -212,6 +214,50 @@ public class PlayerService {
                 monster.getImageView().setVisible(false);
                 monster.setRange(-1.0);
             }
+        }
+    }
+
+    public void displayPlayerRightOrientation(PlayerState playerState) {
+        switch (playerState.getActiveWeapon().getType()) {
+            case MAGIC:
+                this.imageView.setImage(new Image(
+                        Paths.get("src/main/resources/static/images/player/wizard_right.gif")
+                                .toUri().toString()));
+                break;
+            case STAFF:
+                this.imageView.setImage(new Image(
+                        Paths.get("src/main/resources/static/images/player/staff_right.gif")
+                                .toUri().toString()));
+                break;
+            case SWORD:
+                this.imageView.setImage(new Image(
+                        Paths.get("src/main/resources/static/images/player/sword_right.gif")
+                                .toUri().toString()));
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void displayPlayerLeftOrientation(PlayerState playerState) {
+        switch (playerState.getActiveWeapon().getType()) {
+            case MAGIC:
+                this.imageView.setImage(new Image(
+                        Paths.get("src/main/resources/static/images/player/wizard_left.gif")
+                                .toUri().toString()));
+                break;
+            case STAFF:
+                this.imageView.setImage(new Image(
+                        Paths.get("src/main/resources/static/images/player/staff_left.gif")
+                                .toUri().toString()));
+                break;
+            case SWORD:
+                this.imageView.setImage(new Image(
+                        Paths.get("src/main/resources/static/images/player/sword_left.gif")
+                                .toUri().toString()));
+                break;
+            default:
+                break;
         }
     }
 
