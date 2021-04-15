@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import org.example.dto.Item;
+import org.example.dto.PlayerState;
 import org.example.dto.Potion;
 import org.example.dto.Weapon;
 
@@ -74,7 +75,7 @@ public class InventoryService {
                 .getWeaponInventory();
         Map<String, Item> generalInventory = this.appService.getPlayerState()
                 .getGeneralInventory();
-        boolean selected = false;
+        boolean selected = recentlySelectedItem != null;
         int index = 0;
         for (String key : weaponInventory.keySet()) {
             Weapon weapon = (Weapon) weaponInventory.get(key);
@@ -110,6 +111,10 @@ public class InventoryService {
                 this.selectToggleButton(item.getImagePath(), finalI);
             });
             this.inventoryRow2.getChildren().add(toggleButton);
+            if (recentlySelectedItem != null && index == selectedSaveIndex) {
+                toggleButton.setSelected(true);
+                this.selectToggleButton(item.getImagePath(), index);
+            }
             index++;
         }
     }
@@ -145,10 +150,9 @@ public class InventoryService {
     }
 
     public void consumeItem(ConsumableService consumableService) {
-        Map<String, Item> weaponInventory = this.appService.getPlayerState()
-                .getWeaponInventory();
-        Map<String, Item> generalInventory = this.appService.getPlayerState()
-                .getGeneralInventory();
+        PlayerState playerState = this.appService.getPlayerState();
+        Map<String, Item> weaponInventory = playerState.getWeaponInventory();
+        Map<String, Item> generalInventory = playerState.getGeneralInventory();
         Weapon weapon = (Weapon) weaponInventory.get(recentlySelectedItem);
         if (weapon != null) {
             this.appService.getPlayerState().setActiveWeapon(weapon);
@@ -167,14 +171,18 @@ public class InventoryService {
                 if (item.getQuantity() == 0) {
                     this.inventoryRow2.getChildren().remove(selectedSaveIndex);
                     generalInventory.remove(recentlySelectedItem);
-                    this.appService.getPlayerState().setGeneralInventory(generalInventory);
-                    this.clearInventoryRows();
-                    this.loadInventoryElements();
+                    recentlySelectedItem = null;
+                } else {
+                    generalInventory.put(item.getImagePath(), item);
                 }
+                playerState.setGeneralInventory(generalInventory);
+                this.appService.setPlayerState(playerState);
             } else {
                 throw new RuntimeException("Item cannot be null");
             }
         }
+        this.clearInventoryRows();
+        this.loadInventoryElements();
     }
 
     private void clearInventoryRows() {
