@@ -74,7 +74,7 @@ public class BossRoomController extends GameScreenController implements Initiali
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.monsterService = new MonsterService();
         this.playerService.setMonsterService(this.monsterService);
-        this.initGameScreenController(this.monsterService);
+        this.initGameScreenController(this.monsterService, null);
         this.resetPlayerSchedule = ScheduleUtility.generatePlayerResetSchedule(0.5,
                 this.playerService);
         this.playerService.registerTimeline(this.resetPlayerSchedule);

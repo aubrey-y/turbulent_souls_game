@@ -90,8 +90,8 @@ public class TraderService {
         int index = 0;
         List<Item> sortedItems = new ArrayList<>(this.traderInventory.values());
         sortedItems.sort(Comparator.comparingInt(Item::getPrice));
-        for (Item icon : sortedItems) {
-            Item item = icon;
+        boolean selected = false;
+        for (Item item : sortedItems) {
             ToggleButton toggleButton = new ToggleButton();
             toggleButton.setToggleGroup(this.traderItems);
             toggleButton.setFocusTraversable(false);
@@ -108,6 +108,12 @@ public class TraderService {
                     String.format("%s | %s gold",
                             item.getName(), item.getPrice()));
             this.traderVBox.getChildren().add(toggleButton);
+            index++;
+            if (!selected) {
+                toggleButton.setSelected(true);
+                this.selectToggleButton(item, index);
+                selected = true;
+            }
         }
     }
 

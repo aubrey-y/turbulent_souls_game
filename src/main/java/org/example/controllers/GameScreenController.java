@@ -23,11 +23,13 @@ import org.example.services.PlayerService;
 import org.example.services.RoomDirectionService;
 import org.example.services.SaveService;
 import org.example.services.TraderService;
+import org.example.util.TraderInventoryUtility;
 
 import java.nio.file.Paths;
 
 import static javafx.scene.input.KeyCode.SHIFT;
 import static org.example.enums.Direction.LEFT;
+import static org.example.enums.RoomType.CASTLE_TRADER;
 
 
 public class GameScreenController extends InventoryController {
@@ -100,13 +102,16 @@ public class GameScreenController extends InventoryController {
 
     }
 
-    protected void initGameScreenController(MonsterService monsterService) {
+    protected void initGameScreenController(MonsterService monsterService, ImageView trader) {
         PlayerState playerState = this.appService.getPlayerState();
         if (playerState.getEmail() == null) {
             this.saveButton.setDisable(true);
         }
         this.goldAmount.setText(String.valueOf(this.appService.getPlayerState().getGoldAmount()));
         this.goldService = new GoldService(this.appService, this.goldAmount);
+        if (this.traderService != null) {
+            this.initializeTraderService(this.traderService, this.goldService, trader);
+        }
         this.playerService.setGoldService(this.goldService);
         this.initializePlayerHealth(playerState);
         this.initializePlayerImageView(playerState);
