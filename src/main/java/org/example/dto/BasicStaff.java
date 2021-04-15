@@ -14,5 +14,6 @@ public class BasicStaff extends Weapon {
         this.imagePath = BASIC_STAFF_PATH;
         this.description = "A handcrafted stick with magical properties...";
         this.price = 200;
+        this.listingPriority = 8;
     }
 }

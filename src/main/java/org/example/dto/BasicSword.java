@@ -14,5 +14,6 @@ public class BasicSword extends Weapon {
         this.imagePath = BASIC_SWORD_PATH;
         this.description = "Forged in the castles of Mordor... a rudimentary battle-worn sword.";
         this.price = 200;
+        this.listingPriority = 8;
     }
 }

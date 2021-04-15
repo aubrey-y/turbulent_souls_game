@@ -14,5 +14,6 @@ public class AdvancedSword extends Weapon {
         this.imagePath = ADVANCED_SWORD_PATH;
         this.description = "A powerful axe that relies on brute strength to wield."; //Change
         this.price = 300; // Basic 200
+        this.listingPriority = 9;
     }
 }

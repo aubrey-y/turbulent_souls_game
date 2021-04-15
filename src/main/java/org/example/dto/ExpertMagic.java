@@ -14,5 +14,6 @@ public class ExpertMagic extends Weapon {
         this.imagePath = EXPERT_MAGIC_PATH;
         this.description = "Channeled from within, controlled and reliable.";
         this.price = 450;
+        this.listingPriority = 10;
     }
 }

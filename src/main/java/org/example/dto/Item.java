@@ -22,6 +22,8 @@ public abstract class Item {
 
     protected int price;
 
+    protected int listingPriority;
+
     public Item() {
 
     }
@@ -67,6 +69,15 @@ public abstract class Item {
 
     public Item setDescription(String description) {
         this.description = description;
+        return this;
+    }
+
+    public int getListingPriority() {
+        return listingPriority;
+    }
+
+    public Item setListingPriority(int listingPriority) {
+        this.listingPriority = listingPriority;
         return this;
     }
 }

@@ -14,5 +14,6 @@ public class ExpertStaff extends Weapon {
         this.imagePath = EXPERT_STAFF_PATH;
         this.description = "An evolved ice staff that freezes its enemies in their tracks.";
         this.price = 450;
+        this.listingPriority = 10;
     }
 }

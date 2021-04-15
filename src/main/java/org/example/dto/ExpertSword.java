@@ -14,5 +14,6 @@ public class ExpertSword extends Weapon {
         this.imagePath = EXPERT_SWORD_PATH;
         this.description = "War-torn, this sword utilizes the strength of its defeated enemies to increase its power."; //Change
         this.price = 450;
+        this.listingPriority = 10;
     }
 }

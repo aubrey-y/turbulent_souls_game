@@ -14,5 +14,6 @@ public class MasterStaff extends Weapon {
         this.imagePath = MASTER_STAFF_PATH;
         this.description = "A dangerous weapon only master wizards can wield.";
         this.price = 600;
+        this.listingPriority = 11;
     }
 }

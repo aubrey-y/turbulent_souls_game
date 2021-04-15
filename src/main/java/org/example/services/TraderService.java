@@ -14,6 +14,11 @@ import org.example.dto.Weapon;
 import org.example.util.CloneUtility;
 
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 
 import static org.example.util.ResourcePathUtility.FONT_STYLE_PATH;
@@ -80,8 +85,10 @@ public class TraderService {
 
     private void loadTraderElements() {
         int index = 0;
-        for (String key : traderInventory.keySet()) {
-            Item item = traderInventory.get(key);
+        List<Item> sortedItems = new ArrayList<>(this.traderInventory.values());
+        sortedItems.sort(Comparator.comparingInt(Item::getListingPriority));
+        for (Item icon : sortedItems) {
+            Item item = icon;
             ToggleButton toggleButton = new ToggleButton();
             toggleButton.setToggleGroup(this.traderItems);
             toggleButton.setFocusTraversable(false);

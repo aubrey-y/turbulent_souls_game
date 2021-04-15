@@ -14,5 +14,6 @@ public class MasterMagic extends Weapon {
         this.imagePath = MASTER_MAGIC_PATH;
         this.description = "Unleashes the full extent of a mage's power.";
         this.price = 600;
+        this.listingPriority = 11;
     }
 }

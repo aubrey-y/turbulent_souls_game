@@ -14,5 +14,6 @@ public class BasicMagic extends Weapon {
         this.imagePath = BASIC_MAGIC_PATH;
         this.description = "Handed down from a veteran wizard, can cast basic spells.";
         this.price = 200;
+        this.listingPriority = 8;
     }
 }
