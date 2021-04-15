@@ -167,8 +167,6 @@ public class SecondaryController extends ErrorBaseController {
         selectionDifficultyHelper();
         if (this.difficulty != Difficulty.EASY) {
             this.difficulty = Difficulty.EASY;
-        } else {
-            this.difficulty = null;
         }
     }
 
@@ -177,8 +175,6 @@ public class SecondaryController extends ErrorBaseController {
         selectionDifficultyHelper();
         if (this.difficulty != Difficulty.MEDIUM) {
             this.difficulty = Difficulty.MEDIUM;
-        } else {
-            this.difficulty = null;
         }
     }
 
@@ -187,8 +183,6 @@ public class SecondaryController extends ErrorBaseController {
         selectionDifficultyHelper();
         if (this.difficulty != Difficulty.HARD) {
             this.difficulty = Difficulty.HARD;
-        } else {
-            this.difficulty = null;
         }
     }
 
@@ -197,8 +191,6 @@ public class SecondaryController extends ErrorBaseController {
         selectionArchetypeHelper();
         if (this.archetype != Archetype.WIZARD) {
             this.archetype = Archetype.WIZARD;
-        } else {
-            this.archetype = null;
         }
     }
 
@@ -207,8 +199,6 @@ public class SecondaryController extends ErrorBaseController {
         selectionArchetypeHelper();
         if (this.archetype != Archetype.MAGE) {
             this.archetype = Archetype.MAGE;
-        } else {
-            this.archetype = null;
         }
     }
 
@@ -217,8 +207,6 @@ public class SecondaryController extends ErrorBaseController {
         selectionArchetypeHelper();
         if (this.archetype != Archetype.WARRIOR) {
             this.archetype = Archetype.WARRIOR;
-        } else {
-            this.archetype = null;
         }
     }
 
