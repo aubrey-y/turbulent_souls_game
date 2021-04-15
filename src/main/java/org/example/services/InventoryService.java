@@ -142,7 +142,6 @@ public class InventoryService {
                 this.inventoryPreviewDescription.setText(potion.getDescription());
             }
         }
-
     }
 
     public void consumeItem(ConsumableService consumableService) {

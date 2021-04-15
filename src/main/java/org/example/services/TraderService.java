@@ -3,6 +3,7 @@ package org.example.services;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
@@ -10,6 +11,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import org.example.dto.Item;
 import org.example.dto.PlayerState;
+import org.example.dto.Potion;
 import org.example.dto.Weapon;
 import org.example.util.CloneUtility;
 
@@ -53,6 +55,7 @@ public class TraderService {
     private ImageView traderPreviewImage;
 
     private ImageView traderBackground;
+
 
     public TraderService() {
 
@@ -141,7 +144,22 @@ public class TraderService {
 
     private void selectToggleButton(Item item, int index) {
         selectedItem = item;
-        selectedSaveIndex = index;
+
+        Item icon = traderInventory.get(item);
+
+        this.traderPreviewTitle.setText(item.getName());
+        this.traderPreviewImage.setImage(
+                new Image(Paths.get(item.getImagePath()).toUri().toString()));
+        if (item.getPrice() > 150) { //weapon
+            Weapon weapon = (Weapon) item;
+            this.traderPreviewStat.setText("Base ATK: " + ((Weapon) item).getAttack());
+        } else if (item instanceof Potion) {
+            Potion potion = (Potion) item;
+            this.traderPreviewStat.setText(potion.getStatLabel() + " " + potion.getStatValue());
+            this.traderPreviewDescription.setText(potion.getDescription());
+
+        }
+        this.traderPreviewDescription.setText(item.getDescription());
     }
 
     public AppService getAppService() {
