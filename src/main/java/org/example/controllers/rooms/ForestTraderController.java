@@ -11,7 +11,6 @@ import org.example.controllers.GameScreenController;
 import org.example.dto.Monster;
 import org.example.services.AppService;
 import org.example.services.DirectionService;
-import org.example.services.GoldService;
 import org.example.services.HealthService;
 import org.example.services.MonsterService;
 import org.example.services.PlayerService;
@@ -70,7 +69,8 @@ public class ForestTraderController extends GameScreenController implements Init
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.monsterService = new MonsterService();
         this.playerService.setMonsterService(this.monsterService);
-        this.traderService = new TraderService(TraderInventoryUtility.getTraderInventoryForRoomType(FOREST_TRADER));
+        this.traderService = new TraderService(
+                TraderInventoryUtility.getTraderInventoryForRoomType(FOREST_TRADER));
         this.initGameScreenController(this.monsterService, this.trader);
         this.resetPlayerHueSchedule = ScheduleUtility.generatePlayerResetSchedule(0.5,
                 this.playerService);

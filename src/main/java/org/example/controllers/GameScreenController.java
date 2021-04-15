@@ -23,13 +23,11 @@ import org.example.services.PlayerService;
 import org.example.services.RoomDirectionService;
 import org.example.services.SaveService;
 import org.example.services.TraderService;
-import org.example.util.TraderInventoryUtility;
 
 import java.nio.file.Paths;
 
 import static javafx.scene.input.KeyCode.SHIFT;
 import static org.example.enums.Direction.LEFT;
-import static org.example.enums.RoomType.CASTLE_TRADER;
 
 
 public class GameScreenController extends InventoryController {
@@ -117,7 +115,8 @@ public class GameScreenController extends InventoryController {
         this.initializePlayerImageView(playerState);
         this.inventoryService = new InventoryService(this.appService);
         this.initializeInventoryService(this.inventoryService);
-        this.consumableService = new ConsumableService(this.healthService, this.playerService, this.appService);
+        this.consumableService = new ConsumableService(
+                this.healthService, this.playerService, this.appService);
         this.scene.setOnKeyPressed(e -> {
             switch (e.getCode()) {
             case W:
@@ -166,7 +165,8 @@ public class GameScreenController extends InventoryController {
                 break;
             case T:
                 if (this.traderService != null
-                        && this.playerService.playerInRangeOfTrader() && !this.inventoryService.getInventoryOpen()) {
+                        && this.playerService.playerInRangeOfTrader()
+                        && !this.inventoryService.getInventoryOpen()) {
                     this.traderService.toggleTraderOpen();
                 }
                 break;
@@ -255,8 +255,6 @@ public class GameScreenController extends InventoryController {
         trader.setTranslateX(913);
         trader.setTranslateY(500);
         trader.setVisible(true);
-//        trader.setFitHeight(160);
-//        trader.setFitWidth(160);
     }
 
     private void initializePlayerImageView(PlayerState playerState) {

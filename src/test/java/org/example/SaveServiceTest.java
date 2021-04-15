@@ -35,7 +35,7 @@ public class SaveServiceTest {
 
     private SaveService saveService;
 
-    private static final String userEmail = "karthik@best.ta";
+    private static final String USER_EMAIL = "karthik@best.ta";
 
     private Document finalEncodedPlayerStateDocument;
 
@@ -59,7 +59,7 @@ public class SaveServiceTest {
         List<PlayerState> expected = this.getDecodedPlayerStates();
 
         //When
-        List<PlayerState> actual = this.saveService.findPlayerStates(userEmail);
+        List<PlayerState> actual = this.saveService.findPlayerStates(USER_EMAIL);
 
         //Then
         assertThat(actual, is(equalTo(expected)));
@@ -119,7 +119,7 @@ public class SaveServiceTest {
                 .append("health", 100.0)
                 .append("healthCapacity", 100.0)
                 .append("monstersKilled", Collections.emptyList())
-                .append("email", userEmail)
+                .append("email", USER_EMAIL)
                 .append("lastUpdated", "2021/04/08 18:57:15");
     }
 
@@ -139,7 +139,7 @@ public class SaveServiceTest {
                 .setHealth(100.0)
                 .setHealthCapacity(100.0)
                 .setMonstersKilled(Collections.emptySet())
-                .setEmail(userEmail)
+                .setEmail(USER_EMAIL)
                 .setLastUpdated("2021/04/08 18:57:15");
     }
 

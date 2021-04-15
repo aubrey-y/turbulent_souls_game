@@ -70,7 +70,8 @@ public class Forest1ControllerTest {
         this.directionService = new DirectionService();
         this.roomDirectionService = new RoomDirectionService(this.directionService);
         this.playerService = new PlayerService(
-                this.appService, this.roomDirectionService, this.healthService, mock(SaveService.class));
+                this.appService, this.roomDirectionService, this.healthService,
+                mock(SaveService.class));
         withMockedAppService();
         FXMLLoader loader = new FXMLLoader(App.class.getResource("gameScreen.fxml"));
         Scene mockedScene = new Scene(

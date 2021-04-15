@@ -8,10 +8,11 @@ import org.example.enums.PotionType;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME)
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = BasicHealthPotion.class, name = "HEALTH"),
-        @JsonSubTypes.Type(value = BasicSpeedPotion.class, name = "SPEED"),
-        @JsonSubTypes.Type(value = BasicStrengthPotion.class, name = "STRENGTH")
+    @JsonSubTypes.Type(value = BasicHealthPotion.class, name = "HEALTH"),
+    @JsonSubTypes.Type(value = BasicSpeedPotion.class, name = "SPEED"),
+    @JsonSubTypes.Type(value = BasicStrengthPotion.class, name = "STRENGTH")
 })
+
 public class Potion extends Item {
 
     public Potion() { }

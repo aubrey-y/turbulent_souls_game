@@ -27,7 +27,8 @@ public class EmailService {
         this.httpTransport = httpTransport;
     }
 
-    public boolean sendEmail(String targetEmail, String code) throws MessagingException, IOException {
+    public boolean sendEmail(String targetEmail, String code)
+            throws MessagingException, IOException {
         Gmail gmail = this.getGmail();
         Message message = this.createMessageWithEmail(
                 this.createEmail(
@@ -69,7 +70,7 @@ public class EmailService {
      * @param subject subject of the email
      * @param bodyText body text of the email
      * @return the MimeMessage to be used to send email
-     * @throws MessagingException
+     * @throws MessagingException if email contains incorrect message
      */
     public MimeMessage createEmail(String to,
                                           String from,
@@ -93,8 +94,8 @@ public class EmailService {
      *
      * @param emailContent Email to be set to raw of message
      * @return a message containing a base64url encoded email
-     * @throws IOException
-     * @throws MessagingException
+     * @throws IOException if creating email encounters error
+     * @throws MessagingException if email contains incorrect message
      */
     public Message createMessageWithEmail(MimeMessage emailContent)
             throws MessagingException, IOException {
@@ -115,8 +116,8 @@ public class EmailService {
      * can be used to indicate the authenticated user.
      * @param emailContent Email to be sent.
      * @return whether or not message was sent
-     * @throws MessagingException
-     * @throws IOException
+     * @throws MessagingException if email contains incorrect message
+     * @throws IOException sending email encounters error
      */
     public boolean sendMessage(Gmail service,
                                       String userId,

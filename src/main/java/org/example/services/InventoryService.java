@@ -8,7 +8,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
 import org.example.dto.Item;
 import org.example.dto.PlayerState;
 import org.example.dto.Potion;
@@ -149,7 +148,8 @@ public class InventoryService {
                     new Image(Paths.get(item.getImagePath()).toUri().toString()));
             if (item instanceof Potion) {
                 Potion potion = (Potion) item;
-                this.inventoryPreviewStat.setText(potion.getStatLabel() + " " + potion.getStatValue());
+                this.inventoryPreviewStat.setText(potion.getStatLabel()
+                        + " " + potion.getStatValue());
                 this.inventoryPreviewQty.setText("Quantity: " + potion.getQuantity());
                 this.inventoryPreviewDescription.setText(potion.getDescription());
             }
@@ -195,9 +195,6 @@ public class InventoryService {
     private void clearInventoryRows() {
         this.inventoryRow1.getChildren().clear();
         this.inventoryRow2.getChildren().clear();
-//        this.inventoryRow3.getChildren().clear();
-//        this.inventoryRow4.getChildren().clear();
-//        this.inventoryRow5.getChildren().clear();
     }
 
     public ImageView getInventoryBackground() {
