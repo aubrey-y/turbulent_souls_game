@@ -101,11 +101,6 @@ public class PlayerState {
             + "for player weapon assignment");
         }
         this.weaponInventory.put(this.activeWeapon.getImagePath(), this.activeWeapon);
-
-        //This line is directly for testing purposes
-        this.generalInventory.put(BASIC_HEALTH_PATH, new BasicHealthPotion());
-        this.generalInventory.put(BASIC_SPEED_PATH, new BasicSpeedPotion());
-        this.generalInventory.put(BASIC_STRENGTH_PATH, new BasicStrengthPotion());
     }
 
     private void assignDefaultGoldForDifficulty() throws PlayerCreationException {
