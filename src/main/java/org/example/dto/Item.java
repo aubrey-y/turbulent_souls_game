@@ -22,6 +22,8 @@ public abstract class Item {
 
     protected int price;
 
+    protected int listingPriority;
+
     public Item() {
 
     }
@@ -69,4 +71,5 @@ public abstract class Item {
         this.description = description;
         return this;
     }
+
 }

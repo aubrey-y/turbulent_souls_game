@@ -48,7 +48,7 @@ public class BossRoomController extends GameScreenController implements Initiali
     @FXML
     private ImageView boss1;
     private final String boss1Key = "boss1";
-    private final int boss1HealthCapacity = 10;
+    private final int boss1HealthCapacity = 200;
 
     @FXML
     private ProgressBar boss1HealthBar;
@@ -129,8 +129,8 @@ public class BossRoomController extends GameScreenController implements Initiali
         return new Monster()
                 .setHealth(this.boss1HealthCapacity)
                 .setHealthCapacity(this.boss1HealthCapacity)
-                .setRange(5.0)
-                .setAttack(2)
+                .setRange(7.0)
+                .setAttack(30)
                 .setAccuracy(0.5)
                 .setKillReward(6400)
                 .setMonsterType(KING_NAHTAN)

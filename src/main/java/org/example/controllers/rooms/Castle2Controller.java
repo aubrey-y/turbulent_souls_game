@@ -41,7 +41,7 @@ public class Castle2Controller extends GameScreenController implements Initializ
     @FXML
     private ImageView castlebull1;
     private final String castlebull1Key = "castle2castlebull1";
-    private final int castlebull1HealthCapacity = 10;
+    private final int castlebull1HealthCapacity = 40;
 
     @FXML
     private ProgressBar castlebull1HealthBar;
@@ -97,10 +97,10 @@ public class Castle2Controller extends GameScreenController implements Initializ
                 new Monster()
                         .setHealth(this.castlebull1HealthCapacity)
                         .setHealthCapacity(this.castlebull1HealthCapacity)
-                        .setRange(5.0)
-                        .setAttack(2)
+                        .setRange(2.0)
+                        .setAttack(25)
                         .setAccuracy(0.5)
-                        .setKillReward(3200)
+                        .setKillReward(250)
                         .setMonsterType(CASTLE_BULL)
                         .setImageView(this.castlebull1)
                         .setHealthBar(this.castlebull1HealthBar)

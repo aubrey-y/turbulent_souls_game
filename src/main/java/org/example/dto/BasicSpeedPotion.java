@@ -12,6 +12,6 @@ public class BasicSpeedPotion extends Potion {
         this.quantity = 1;
         this.imagePath = BASIC_SPEED_PATH;
         this.description = "This will enhance your movement speed";
-        this.price = 100;
+        this.price = 150;
     }
 }

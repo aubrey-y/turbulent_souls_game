@@ -41,7 +41,7 @@ public class Garden1Controller extends GameScreenController implements Initializ
     @FXML
     private ImageView serpent1;
     private final String serpent1Key = "garden1serpent1";
-    private final int serpent1HealthCapacity = 10;
+    private final int serpent1HealthCapacity = 30;
 
     @FXML
     private ProgressBar serpent1HealthBar;
@@ -98,9 +98,9 @@ public class Garden1Controller extends GameScreenController implements Initializ
                         .setHealth(this.serpent1HealthCapacity)
                         .setHealthCapacity(this.serpent1HealthCapacity)
                         .setRange(5.0)
-                        .setAttack(2)
+                        .setAttack(10)
                         .setAccuracy(0.5)
-                        .setKillReward(400)
+                        .setKillReward(150)
                         .setMonsterType(SERPENT)
                         .setImageView(this.serpent1)
                         .setHealthBar(this.serpent1HealthBar)

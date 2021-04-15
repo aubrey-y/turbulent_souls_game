@@ -3,6 +3,7 @@ package org.example.services;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
@@ -10,10 +11,16 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import org.example.dto.Item;
 import org.example.dto.PlayerState;
+import org.example.dto.Potion;
 import org.example.dto.Weapon;
 import org.example.util.CloneUtility;
 
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 
 import static org.example.util.ResourcePathUtility.FONT_STYLE_PATH;
@@ -49,6 +56,7 @@ public class TraderService {
 
     private ImageView traderBackground;
 
+
     public TraderService() {
 
     }
@@ -80,8 +88,10 @@ public class TraderService {
 
     private void loadTraderElements() {
         int index = 0;
-        for (String key : traderInventory.keySet()) {
-            Item item = traderInventory.get(key);
+        List<Item> sortedItems = new ArrayList<>(this.traderInventory.values());
+        sortedItems.sort(Comparator.comparingInt(Item::getPrice));
+        for (Item icon : sortedItems) {
+            Item item = icon;
             ToggleButton toggleButton = new ToggleButton();
             toggleButton.setToggleGroup(this.traderItems);
             toggleButton.setFocusTraversable(false);
@@ -134,7 +144,23 @@ public class TraderService {
 
     private void selectToggleButton(Item item, int index) {
         selectedItem = item;
-        selectedSaveIndex = index;
+
+        Item icon = traderInventory.get(item);
+
+        this.traderPreviewTitle.setText(item.getName());
+        this.traderPreviewImage.setImage(
+                new Image(Paths.get(item.getImagePath()).toUri().toString()));
+        if (item instanceof Weapon) {
+            Weapon weapon = (Weapon) item;
+            this.traderPreviewStat.setText("Base ATK: " + ((Weapon) item).getAttack());
+        } else if (item instanceof Potion) {
+            Potion potion = (Potion) item;
+            this.traderPreviewStat.setText(potion.getStatLabel() + " " + potion.getStatValue());
+            this.traderPreviewDescription.setText(potion.getDescription());
+        } else {
+            throw new RuntimeException();
+        }
+        this.traderPreviewDescription.setText(item.getDescription());
     }
 
     public AppService getAppService() {

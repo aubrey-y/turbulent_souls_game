@@ -185,11 +185,38 @@ public class ResourcePathUtility {
     public static final String BASIC_SWORD_PATH = ""
             + "src/main/resources/static/images/swordR.png";
 
+    public static final String ADVANCED_SWORD_PATH = ""
+            + "src/main/resources/static/images/TradersAndItems/AdvancedSword.png";
+
+    public static final String EXPERT_SWORD_PATH = ""
+            + "src/main/resources/static/images/TradersAndItems/ExpertSword.png";
+
+    public static final String MASTER_SWORD_PATH = ""
+            + "src/main/resources/static/images/TradersAndItems/MasterSword.png";
+
     public static final String BASIC_STAFF_PATH = ""
             + "src/main/resources/static/images/staff.png";
 
+    public static final String ADVANCED_STAFF_PATH = ""
+            + "src/main/resources/static/images/TradersAndItems/AdvancedStaff.png";
+
+    public static final String EXPERT_STAFF_PATH = ""
+            + "src/main/resources/static/images/TradersAndItems/ExpertStaff.png";
+
+    public static final String MASTER_STAFF_PATH = ""
+            + "src/main/resources/static/images/TradersAndItems/MasterStaff.png";
+
     public static final String BASIC_MAGIC_PATH = ""
             + "src/main/resources/static/images/BlackMagic.png";
+
+    public static final String ADVANCED_MAGIC_PATH = ""
+            + "src/main/resources/static/images/TradersAndItems/AdvancedMagic.png";
+
+    public static final String EXPERT_MAGIC_PATH = ""
+            + "src/main/resources/static/images/TradersAndItems/ExpertMagic.png";
+
+    public static final String MASTER_MAGIC_PATH = ""
+            + "src/main/resources/static/images/TradersAndItems/MasterMagic.png";
 
     public static final String BASIC_HEALTH_PATH = ""
             + "src/main/resources/static/images/TradersAndItems/BasicHealthPotion.PNG";

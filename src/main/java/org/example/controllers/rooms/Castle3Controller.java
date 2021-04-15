@@ -41,7 +41,7 @@ public class Castle3Controller extends GameScreenController implements Initializ
     @FXML
     private ImageView darkknight1;
     private final String darkknight1Key = "castle3darkknight1";
-    private final int darkknight1HealthCapacity = 10;
+    private final int darkknight1HealthCapacity = 100;
 
     @FXML
     private ProgressBar darkknight1HealthBar;
@@ -98,9 +98,9 @@ public class Castle3Controller extends GameScreenController implements Initializ
                         .setHealth(this.darkknight1HealthCapacity)
                         .setHealthCapacity(this.darkknight1HealthCapacity)
                         .setRange(5.0)
-                        .setAttack(2)
+                        .setAttack(20)
                         .setAccuracy(0.5)
-                        .setKillReward(3200)
+                        .setKillReward(350)
                         .setMonsterType(DARK_KNIGHT)
                         .setImageView(this.darkknight1)
                         .setHealthBar(this.darkknight1HealthBar)
