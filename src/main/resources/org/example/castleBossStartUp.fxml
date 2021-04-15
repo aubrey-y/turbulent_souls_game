@@ -23,11 +23,6 @@
       </ImageView>
       <Pane prefHeight="1080.0" prefWidth="1920.0">
          <children>
-            <ImageView fx:id="player" fitHeight="133.0" fitWidth="133.0" pickOnBounds="true" preserveRatio="true" visible="false">
-               <image>
-                  <Image url="@../../static/images/player.png" />
-               </image>
-            </ImageView>
             <ProgressBar fx:id="darkknight1HealthBar" focusTraversable="false" opacity="0.8" prefHeight="10.0" prefWidth="150.0" progress="1.0" style="-fx-control-inner-background: #3E5155;" styleClass="green-bar" stylesheets="@../../static/css/fontstyle.css" visible="false" />
             <ImageView fx:id="inventoryBackground" fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
@@ -36,6 +31,11 @@
                <effect>
                   <GaussianBlur radius="49.75" />
                </effect>
+            </ImageView>
+            <ImageView fx:id="player" fitHeight="133.0" fitWidth="133.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../../static/images/player.png" />
+               </image>
             </ImageView>
             <Rectangle fx:id="inventoryPreviewBackground" arcHeight="5.0" arcWidth="5.0" fill="#c6a264" height="800.0" stroke="TRANSPARENT" strokeType="INSIDE" visible="false" width="450.0">
                <effect>

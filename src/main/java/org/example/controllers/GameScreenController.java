@@ -106,6 +106,8 @@ public class GameScreenController extends InventoryController {
             this.saveButton.setDisable(true);
         }
         this.goldAmount.setText(String.valueOf(this.appService.getPlayerState().getGoldAmount()));
+        this.goldService = new GoldService(this.appService, this.goldAmount);
+        this.playerService.setGoldService(this.goldService);
         this.initializePlayerHealth(playerState);
         this.initializePlayerImageView(playerState);
         this.inventoryService = new InventoryService(this.appService);
@@ -150,8 +152,10 @@ public class GameScreenController extends InventoryController {
             case E:
                 if (this.inventoryService.getInventoryOpen()) {
                     this.inventoryService.consumeItem(this.consumableService);
-                } else if (this.traderService.isTraderOpen()) {
+                } else if (this.traderService != null && this.traderService.isTraderOpen()) {
                     this.traderService.purchaseItem();
+                } else {
+                    this.playerService.attemptToClaimGold();
                 }
                 break;
             case T:

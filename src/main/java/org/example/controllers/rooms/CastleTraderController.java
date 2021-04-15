@@ -68,8 +68,7 @@ public class CastleTraderController extends GameScreenController implements Init
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.goldService = new GoldService(this.appService, this.getGoldAmount());
-        this.monsterService = new MonsterService(this.goldService);
+        this.monsterService = new MonsterService();
         this.playerService.setMonsterService(this.monsterService);
         this.traderService = new TraderService(TraderInventoryUtility.getTraderInventoryForRoomType(CASTLE_TRADER));
         this.initializeTraderService(this.traderService, this.goldService, this.trader);
@@ -112,7 +111,8 @@ public class CastleTraderController extends GameScreenController implements Init
                         .setHealthBar(this.slime1HealthBar)
                         .setOrientation(LEFT)
                         .setDeathAnimationLeft(
-                                new Image(Paths.get(SLIME_DEATH_LEFT_PATH).toUri().toString())));
+                                new Image(Paths.get(SLIME_DEATH_LEFT_PATH).toUri().toString()))
+                        .setKey(this.slime1Key));
         this.slime1AttackSchedule = ScheduleUtility.generateMonsterAttackSchedule(
                 1.0,
                 this.appService,
