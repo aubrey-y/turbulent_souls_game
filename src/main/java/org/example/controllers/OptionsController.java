@@ -39,9 +39,9 @@ public class OptionsController extends ErrorBaseController {
     @FXML
     private CheckBox login;
 
-    private static String TWOFA_CODE;
+    private static String twoFACode;
 
-    private static String USER_EMAIL;
+    private static String userEmail;
 
     public OptionsController(Scene scene,
                              AppService appService) {
@@ -95,9 +95,9 @@ public class OptionsController extends ErrorBaseController {
             if (e.getCode() == KeyCode.ENTER) {
                 boolean success = this.sendVerificationEmail();
                 if (success) {
-                    USER_EMAIL = this.getCredentialInput();
+                    userEmail = this.getCredentialInput();
                     this.setErrorMessage(String.format(
-                            "2FA email sent successfully to %s.", USER_EMAIL));
+                            "2FA email sent successfully to %s.", userEmail));
                     this.credentialEntry.clear();
                     this.credentialEntry.setPromptText("2FA Code");
                     this.scene.setOnKeyReleased(e2 -> {
@@ -125,8 +125,8 @@ public class OptionsController extends ErrorBaseController {
     }
 
     private String generate2FACode() {
-        TWOFA_CODE = String.format("%06d", new Random().nextInt(999999));
-        return TWOFA_CODE;
+        twoFACode = String.format("%06d", new Random().nextInt(999999));
+        return twoFACode;
     }
 
     private String getCredentialInput() {
@@ -153,8 +153,8 @@ public class OptionsController extends ErrorBaseController {
     }
 
     private void check2FACode() {
-        if (this.getCredentialInput().equals(TWOFA_CODE)) {
-            this.appService.setLoggedInEmail(USER_EMAIL);
+        if (this.getCredentialInput().equals(twoFACode)) {
+            this.appService.setLoggedInEmail(userEmail);
             this.acceptCredentials();
         } else {
             this.setErrorMessage("Invalid 2FA code, retry from main menu to resend.");

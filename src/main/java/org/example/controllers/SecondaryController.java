@@ -1,25 +1,16 @@
 package org.example.controllers;
 
-import com.mongodb.ConnectionString;
-import com.mongodb.MongoClientSettings;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import org.bson.codecs.configuration.CodecRegistry;
-import org.bson.codecs.pojo.PojoCodecProvider;
 import org.example.App;
 import org.example.controllers.rooms.Forest1Controller;
 import org.example.dto.Coordinate;
-import org.example.dto.Item;
 import org.example.dto.PlayerState;
 import org.example.dto.Room;
-import org.example.dto.Weapon;
 import org.example.enums.Archetype;
 import org.example.enums.Difficulty;
-import org.example.enums.Direction;
 import org.example.exceptions.InvalidArchetypeException;
 import org.example.exceptions.InvalidDifficultyException;
 import org.example.exceptions.InvalidNameException;
@@ -31,8 +22,6 @@ import org.example.services.PlayerService;
 import org.example.services.RoomDirectionService;
 import org.example.services.SaveService;
 
-import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
-import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 import static org.example.enums.RoomType.FOREST1;
 import static org.example.exceptions.ExceptionMessages.INVALID_ARCHETYPE_EXCEPTION_MESSAGE;
 import static org.example.exceptions.ExceptionMessages.INVALID_DIFFICULTY_EXCEPTION_MESSAGE;

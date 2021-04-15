@@ -10,9 +10,9 @@ import java.util.Objects;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME)
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = BasicSword.class, name = "SWORD"),
-        @JsonSubTypes.Type(value = BasicStaff.class, name = "STAFF"),
-        @JsonSubTypes.Type(value = BasicMagic.class, name = "MAGIC")
+    @JsonSubTypes.Type(value = BasicSword.class, name = "SWORD"),
+    @JsonSubTypes.Type(value = BasicStaff.class, name = "STAFF"),
+    @JsonSubTypes.Type(value = BasicMagic.class, name = "MAGIC")
 })
 public abstract class Weapon extends Item {
 
@@ -68,8 +68,8 @@ public abstract class Weapon extends Item {
             return false;
         }
         Weapon weapon = (Weapon) o;
-        return this.type == weapon.type &&
-                this.attack == weapon.attack &&
-                this.range == weapon.range;
+        return this.type == weapon.type
+                && this.attack == weapon.attack
+                && this.range == weapon.range;
     }
 }

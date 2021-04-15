@@ -11,7 +11,6 @@ import org.example.controllers.GameScreenController;
 import org.example.dto.Monster;
 import org.example.services.AppService;
 import org.example.services.DirectionService;
-import org.example.services.GoldService;
 import org.example.services.HealthService;
 import org.example.services.MonsterService;
 import org.example.services.PlayerService;
@@ -25,18 +24,13 @@ import java.util.ResourceBundle;
 
 import static org.example.enums.Direction.LEFT;
 import static org.example.enums.MonsterType.KING_NAHTAN;
-import static org.example.util.ResourcePathUtility.DARK_KNIGHT_ATTACK_LEFT_PATH;
-import static org.example.util.ResourcePathUtility.DARK_KNIGHT_ATTACK_RIGHT_PATH;
 import static org.example.util.ResourcePathUtility.KING_NAHTAN_DEATH_LEFT_PATH;
 import static org.example.util.ResourcePathUtility.KING_NAHTAN_DEATH_RIGHT_PATH;
 import static org.example.util.ResourcePathUtility.KING_NAHTAN_IDLE_LEFT_PATH;
 import static org.example.util.ResourcePathUtility.KING_NAHTAN_IDLE_RIGHT_PATH;
 import static org.example.util.ResourcePathUtility.KING_NAHTAN_ATTACK_LEFT_PATH;
 import static org.example.util.ResourcePathUtility.KING_NAHTAN_ATTACK_RIGHT_PATH;
-import static org.example.util.ResourcePathUtility.DARK_KNIGHT_LEFT_PATH;
-import static org.example.util.ResourcePathUtility.DARK_KNIGHT_RIGHT_PATH;
-import static org.example.util.ResourcePathUtility.DARK_KNIGHT_DEATH_LEFT_PATH;
-import static org.example.util.ResourcePathUtility.DARK_KNIGHT_DEATH_RIGHT_PATH;
+
 
 public class BossRoomController extends GameScreenController implements Initializable {
 

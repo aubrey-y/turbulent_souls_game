@@ -43,8 +43,8 @@ public class LoadGameController implements Initializable {
 
     private ToggleGroup savesToggleGroup = new ToggleGroup();
 
-    private static PlayerState SELECTED_PLAYER_STATE;
-    private static int SELECTED_SAVE_INDEX;
+    private static PlayerState selectedPlayerState;
+    private static int selectedSaveIndex;
 
     public LoadGameController(AppService appService,
                               SaveService saveService,
@@ -61,7 +61,7 @@ public class LoadGameController implements Initializable {
         } else {
             List<PlayerState> playerStates = this.saveService.findPlayerStates(
                     this.appService.getPlayerState().getEmail());
-            if(playerStates.isEmpty()) {
+            if (playerStates.isEmpty()) {
                 this.setMessage(String.format("No save files found for %s",
                         this.appService.getPlayerState().getEmail()));
             }
@@ -87,9 +87,9 @@ public class LoadGameController implements Initializable {
                 this.savesVBox.getChildren().add(toggleButton);
             }
             this.scene.setOnKeyReleased(e -> {
-                if (SELECTED_PLAYER_STATE != null) {
+                if (selectedPlayerState != null) {
                     if (e.getCode() == KeyCode.E) {
-                        this.appService.setPlayerState(SELECTED_PLAYER_STATE);
+                        this.appService.setPlayerState(selectedPlayerState);
                         this.appService.setActiveRoom(STARTING_ROOM);
                         FXMLLoader loader = new FXMLLoader(
                                 App.class.getResource("gameScreen.fxml"));
@@ -113,8 +113,8 @@ public class LoadGameController implements Initializable {
                         this.appService.setRoot(loader);
                     } else if (e.getCode() == KeyCode.BACK_SPACE) {
                         boolean success = this.saveService.removePlayerStateSave(
-                                SELECTED_PLAYER_STATE.getEmail(),
-                                SELECTED_PLAYER_STATE.getUsername());
+                                selectedPlayerState.getEmail(),
+                                selectedPlayerState.getUsername());
                         if (success) {
                             this.savesVBox.getChildren().clear();
                             this.initialize(url, resourceBundle);
@@ -133,8 +133,8 @@ public class LoadGameController implements Initializable {
     }
 
     private void selectToggleButton(PlayerState playerState, int index) {
-        SELECTED_PLAYER_STATE = playerState;
-        SELECTED_SAVE_INDEX = index;
+        selectedPlayerState = playerState;
+        selectedSaveIndex = index;
     }
 
     private void setMessage(String message) {
