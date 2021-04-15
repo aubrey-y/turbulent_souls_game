@@ -139,11 +139,12 @@ public class TraderService {
         } else {
             if (!generalInventory.containsKey(item.getImagePath())) {
                 generalInventory.put(item.getImagePath(), (Item) CloneUtility.deepCopy(item));
+            } else {
+                Item playerItem = generalInventory.get(item.getImagePath());
+                playerItem.setQuantity(playerItem.getQuantity() + 1);
+                generalInventory.put(item.getImagePath(), playerItem);
+                playerState.setGeneralInventory(generalInventory);
             }
-            Item playerItem = generalInventory.get(item.getImagePath());
-            playerItem.setQuantity(playerItem.getQuantity() + 1);
-            generalInventory.put(item.getImagePath(), playerItem);
-            playerState.setGeneralInventory(generalInventory);
         }
         this.appService.setPlayerState(playerState);
     }
