@@ -142,7 +142,8 @@ public class GameScreenController extends InventoryController {
             case SPACE:
                 String monsterKilled = monsterService.attackNearestMonster(
                         this.appService.getPlayerState().getActiveWeapon(),
-                        this.player.getTranslateX(), this.player.getTranslateY());
+                        this.player.getTranslateX(), this.player.getTranslateY(),
+                        this.appService.getDevMode());
                 if (monsterKilled != null) {
 
                     monsterService.initiateDeathAnimation(monsterKilled);

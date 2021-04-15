@@ -31,7 +31,10 @@ public class MonsterService {
         this.monsterMapping.put(key, value);
     }
 
-    public String attackNearestMonster(Weapon weapon, double playerX, double playerY) {
+    public String attackNearestMonster(Weapon weapon,
+                                       double playerX,
+                                       double playerY,
+                                       boolean devMode) {
         String monsterKeyIfDead = null;
         String nearestMonsterKey = this.getNearestLivingMonster(playerX, playerY);
         Monster nearestMonster = this.monsterMapping.get(nearestMonsterKey);
@@ -44,7 +47,11 @@ public class MonsterService {
             return null;
         }
         double currentHealth = nearestMonster.getHealth();
-        currentHealth += (-1 * weapon.getAttack());
+        if (!devMode) {
+            currentHealth += (-1 * weapon.getAttack());
+        } else {
+            currentHealth += (-1 * weapon.getAttack() * 100);
+        }
         if (currentHealth <= 0.0) {
             this.monstersKilled++;
             monsterKeyIfDead = nearestMonsterKey;
