@@ -3,7 +3,12 @@ package org.example.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import org.example.App;
 import org.example.controllers.rooms.Forest1Controller;
 import org.example.dto.Coordinate;
@@ -21,6 +26,9 @@ import org.example.services.HealthService;
 import org.example.services.PlayerService;
 import org.example.services.RoomDirectionService;
 import org.example.services.SaveService;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import static org.example.enums.RoomType.FOREST1;
 import static org.example.exceptions.ExceptionMessages.INVALID_ARCHETYPE_EXCEPTION_MESSAGE;
@@ -41,6 +49,30 @@ public class SecondaryController extends ErrorBaseController {
     private Archetype archetype;
 
     public static final Coordinate SPAWN_COORDINATES = new Coordinate().setX(400).setY(540);
+
+    @FXML
+    private ToggleGroup toggleGroup1;
+
+    @FXML
+    private ToggleGroup toggleGroup2;
+
+    @FXML
+    private ToggleButton easyButton;
+
+    @FXML
+    private ToggleButton mediumButton;
+
+    @FXML
+    private ToggleButton hardButton;
+
+    @FXML
+    private ToggleButton mageButton;
+
+    @FXML
+    private ToggleButton warriorButton;
+
+    @FXML
+    private ToggleButton wizardButton;
 
     public SecondaryController(SaveService saveService,
                                Scene scene) {
@@ -132,6 +164,7 @@ public class SecondaryController extends ErrorBaseController {
 
     @FXML
     private void selectEasyDifficulty() {
+        selectionDifficultyHelper();
         if (this.difficulty != Difficulty.EASY) {
             this.difficulty = Difficulty.EASY;
         } else {
@@ -141,6 +174,7 @@ public class SecondaryController extends ErrorBaseController {
 
     @FXML
     private void selectMediumDifficulty() {
+        selectionDifficultyHelper();
         if (this.difficulty != Difficulty.MEDIUM) {
             this.difficulty = Difficulty.MEDIUM;
         } else {
@@ -150,6 +184,7 @@ public class SecondaryController extends ErrorBaseController {
 
     @FXML
     private void selectHardDifficulty() {
+        selectionDifficultyHelper();
         if (this.difficulty != Difficulty.HARD) {
             this.difficulty = Difficulty.HARD;
         } else {
@@ -159,6 +194,7 @@ public class SecondaryController extends ErrorBaseController {
 
     @FXML
     private void selectWizardArchetype() {
+        selectionArchetypeHelper();
         if (this.archetype != Archetype.WIZARD) {
             this.archetype = Archetype.WIZARD;
         } else {
@@ -168,6 +204,7 @@ public class SecondaryController extends ErrorBaseController {
 
     @FXML
     private void selectMageArchetype() {
+        selectionArchetypeHelper();
         if (this.archetype != Archetype.MAGE) {
             this.archetype = Archetype.MAGE;
         } else {
@@ -177,11 +214,34 @@ public class SecondaryController extends ErrorBaseController {
 
     @FXML
     private void selectWarriorArchetype() {
+        selectionArchetypeHelper();
         if (this.archetype != Archetype.WARRIOR) {
             this.archetype = Archetype.WARRIOR;
         } else {
             this.archetype = null;
         }
+    }
+
+    public void selectionDifficultyHelper() {
+        toggleGroup1.selectedToggleProperty().addListener((obsVal, oldVal, newVal) -> {
+            if (newVal == null) {
+                oldVal.setSelected(true);
+            }
+        });
+        easyButton.setToggleGroup(this.toggleGroup1);
+        mediumButton.setToggleGroup(this.toggleGroup1);
+        hardButton.setToggleGroup(this.toggleGroup1);
+    }
+
+    public void selectionArchetypeHelper() {
+        toggleGroup2.selectedToggleProperty().addListener((obsVal, oldVal, newVal) -> {
+            if (newVal == null) {
+                oldVal.setSelected(true);
+            }
+        });
+        warriorButton.setToggleGroup(this.toggleGroup2);
+        wizardButton.setToggleGroup(this.toggleGroup2);
+        mageButton.setToggleGroup(this.toggleGroup2);
     }
 
     public AppService getAppService() {
