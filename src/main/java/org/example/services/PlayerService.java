@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import org.example.App;
 import org.example.dto.Coordinate;
+import org.example.dto.Monster;
 import org.example.dto.PlayerState;
 import org.example.dto.Room;
 import org.example.enums.Direction;
@@ -29,6 +30,8 @@ public class PlayerService {
     private HealthService healthService;
 
     private MonsterService monsterService;
+
+    private GoldService goldService;
 
     private SaveService saveService;
 
@@ -199,6 +202,19 @@ public class PlayerService {
                 && this.imageView.getTranslateY() >= 400 && this.imageView.getTranslateY() <= 600;
     }
 
+    public void attemptToClaimGold() {
+        for (Monster monster : this.monsterService.getMonsterMapping().values()) {
+            if (!monster.isAlive() && monster.getRange() == 1.0
+                    && this.monsterService.playerIsInRangeOfMonster(
+                            monster.getKey(), this.imageView.getTranslateX(),
+                    this.imageView.getTranslateY())) {
+                this.goldService.adjustGoldAmount(monster.getKillReward());
+                monster.getImageView().setVisible(false);
+                monster.setRange(-1.0);
+            }
+        }
+    }
+
     private void setNewPlayerSpawnCoordinates(Direction exitDirection) {
         PlayerState playerState = this.appService.getPlayerState();
         switch (exitDirection) {
@@ -292,6 +308,33 @@ public class PlayerService {
 
     public PlayerService setMonsterService(MonsterService monsterService) {
         this.monsterService = monsterService;
+        return this;
+    }
+
+    public GoldService getGoldService() {
+        return goldService;
+    }
+
+    public PlayerService setGoldService(GoldService goldService) {
+        this.goldService = goldService;
+        return this;
+    }
+
+    public SaveService getSaveService() {
+        return saveService;
+    }
+
+    public PlayerService setSaveService(SaveService saveService) {
+        this.saveService = saveService;
+        return this;
+    }
+
+    public DirectionService getDirectionService() {
+        return directionService;
+    }
+
+    public PlayerService setDirectionService(DirectionService directionService) {
+        this.directionService = directionService;
         return this;
     }
 

@@ -23,14 +23,8 @@ public class MonsterService {
 
     private int monstersKilled;
 
-    private GoldService goldService;
-
     public MonsterService() {
 
-    }
-
-    public MonsterService(GoldService goldService) {
-        this.goldService = goldService;
     }
 
     public void addMonster(String key, Monster value) {
@@ -135,8 +129,16 @@ public class MonsterService {
         }
         ScheduleUtility.generateMonsterDeathResetSchedule(
                 DeathDurationUtility.getDurationForMonsterType(monster.getMonsterType()),
-                monster,
-                this.goldService
+                monster
         ).play();
+    }
+
+    public Map<String, Monster> getMonsterMapping() {
+        return monsterMapping;
+    }
+
+    public MonsterService setMonsterMapping(Map<String, Monster> monsterMapping) {
+        this.monsterMapping = monsterMapping;
+        return this;
     }
 }

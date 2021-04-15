@@ -214,4 +214,7 @@ public class ResourcePathUtility {
 
     public static final String GARDEN_TRADER_PATH = ""
             + "src/main/resources/static/images/TradersAndItems/catLadyTrader.PNG";
+
+    public static final String GOLD_POUCH_PATH = ""
+            + "src/main/resources/static/images/TradersAndItems/coins.png";
 }

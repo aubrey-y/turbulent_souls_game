@@ -23,6 +23,7 @@ import java.util.Map;
 
 import static org.example.enums.Direction.LEFT;
 import static org.example.services.PlayerService.DEFAULT_MOVE_SIZE;
+import static org.example.util.ResourcePathUtility.GOLD_POUCH_PATH;
 
 
 public class ScheduleUtility {
@@ -108,13 +109,15 @@ public class ScheduleUtility {
     }
 
     public static Timeline generateMonsterDeathResetSchedule(double duration,
-                                                             Monster monster,
-                                                             GoldService goldService) {
-        goldService.adjustGoldAmount(monster.getKillReward());
+                                                             Monster monster) {
         Timeline timeline = new Timeline();
         Timeline finalTimeline = timeline;
         timeline = new Timeline(new KeyFrame(Duration.seconds(duration), actionEvent -> {
-            monster.getImageView().setVisible(false);
+            monster.getImageView().setImage(
+                    new Image(Paths.get(GOLD_POUCH_PATH).toUri().toString()));
+            monster.setRange(1.0);
+            monster.getImageView().setFitHeight(100.0);
+            monster.getImageView().setFitWidth(100.0);
         }));
         timeline.setCycleCount(1);
         return timeline;

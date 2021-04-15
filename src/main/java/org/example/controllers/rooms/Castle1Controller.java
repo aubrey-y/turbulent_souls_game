@@ -65,8 +65,7 @@ public class Castle1Controller extends GameScreenController implements Initializ
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.goldService = new GoldService(this.appService, this.getGoldAmount());
-        this.monsterService = new MonsterService(this.goldService);
+        this.monsterService = new MonsterService();
         this.playerService.setMonsterService(this.monsterService);
         this.initGameScreenController(this.monsterService);
         this.resetPlayerSchedule = ScheduleUtility.generatePlayerResetSchedule(0.5,
@@ -112,7 +111,8 @@ public class Castle1Controller extends GameScreenController implements Initializ
                         .setDeathAnimationRight(
                                 new Image(
                                         Paths.get(WHITE_DRAGON_DEATH_RIGHT_PATH).toUri().toString())
-                        ));
+                        )
+                        .setKey(this.whitedragon1Key));
         this.whiteDragon1AttackSchedule = ScheduleUtility.generateMonsterAttackSchedule(
                 1.0,
                 this.appService,
