@@ -163,7 +163,6 @@ public class SaveServiceTest {
                 .append("type", "STAFF")
                 .append("attack", 7)
                 .append("range", 100.0)
-                .append("price", 200)
-                ;
+                .append("price", 200);
     }
 }
