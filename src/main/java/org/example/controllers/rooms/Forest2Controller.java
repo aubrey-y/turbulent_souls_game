@@ -41,7 +41,7 @@ public class Forest2Controller extends GameScreenController implements Initializ
     @FXML
     private ImageView guineapig1;
     private final String guineapig1Key = "forest2guineapig1";
-    private final int guineapig1HealthCapacity = 10;
+    private final int guineapig1HealthCapacity = 15;
 
     @FXML
     private ProgressBar guineapig1HealthBar;
@@ -99,9 +99,9 @@ public class Forest2Controller extends GameScreenController implements Initializ
                         .setHealth(this.guineapig1HealthCapacity)
                         .setHealthCapacity(this.guineapig1HealthCapacity)
                         .setRange(5.0)
-                        .setAttack(2)
+                        .setAttack(10)
                         .setAccuracy(0.5)
-                        .setKillReward(200)
+                        .setKillReward(150)
                         .setMonsterType(GUINEA_PIG)
                         .setImageView(this.guineapig1)
                         .setHealthBar(this.guineapig1HealthBar)

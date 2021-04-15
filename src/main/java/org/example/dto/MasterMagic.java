@@ -8,11 +8,11 @@ public class MasterMagic extends Weapon {
     public MasterMagic() {
         this.name = "Master Magic";
         this.type = WeaponType.MAGIC;
-        this.attack = 14; // Expert 12
-        this.range = 10.0;
+        this.attack = 30;
+        this.range = 5.0;
         this.quantity = 1;
         this.imagePath = MASTER_MAGIC_PATH;
         this.description = "Unleashes the full extent of a mage's power.";
-        this.price = 500; // Expert 400
+        this.price = 600;
     }
 }

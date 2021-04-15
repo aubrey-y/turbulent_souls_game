@@ -8,11 +8,11 @@ public class AdvancedMagic extends Weapon {
     public AdvancedMagic() {
         this.name = "Advanced Magic";
         this.type = WeaponType.MAGIC;
-        this.attack = 10; // Basic 8
-        this.range = 10.0;
+        this.attack = 12;
+        this.range = 5.0;
         this.quantity = 1;
         this.imagePath = ADVANCED_MAGIC_PATH;
         this.description = "Unpredictable and powerful.";
-        this.price = 300; // Basic 200
+        this.price = 300;
     }
 }

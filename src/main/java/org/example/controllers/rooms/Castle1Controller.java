@@ -41,7 +41,7 @@ public class Castle1Controller extends GameScreenController implements Initializ
     @FXML
     private ImageView whitedragon1;
     private final String whitedragon1Key = "castle1whitedragon1";
-    private final int whitedragon1HealthCapacity = 10;
+    private final int whitedragon1HealthCapacity = 25;
 
     @FXML
     private ProgressBar whitedragon1HealthBar;
@@ -98,10 +98,10 @@ public class Castle1Controller extends GameScreenController implements Initializ
                 new Monster()
                         .setHealth(this.whitedragon1HealthCapacity)
                         .setHealthCapacity(this.whitedragon1HealthCapacity)
-                        .setRange(5.0)
-                        .setAttack(2)
+                        .setRange(3.0)
+                        .setAttack(15)
                         .setAccuracy(0.5)
-                        .setKillReward(1600)
+                        .setKillReward(175)
                         .setMonsterType(WHITE_DRAGON)
                         .setImageView(this.whitedragon1)
                         .setHealthBar(this.whitedragon1HealthBar)

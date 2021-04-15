@@ -41,7 +41,7 @@ public class Garden2Controller extends GameScreenController implements Initializ
     @FXML
     private ImageView waterbull1;
     private final String waterbull1Key = "garden2waterbull1";
-    private final int waterbull1HealthCapacity = 10;
+    private final int waterbull1HealthCapacity = 50;
 
     @FXML
     private ProgressBar waterbull1HealthBar;
@@ -99,9 +99,9 @@ public class Garden2Controller extends GameScreenController implements Initializ
                         .setHealth(this.waterbull1HealthCapacity)
                         .setHealthCapacity(this.waterbull1HealthCapacity)
                         .setRange(5.0)
-                        .setAttack(2)
+                        .setAttack(30)
                         .setAccuracy(0.5)
-                        .setKillReward(800)
+                        .setKillReward(275)
                         .setMonsterType(WATER_BULL)
                         .setImageView(this.waterbull1)
                         .setHealthBar(this.waterbull1HealthBar)

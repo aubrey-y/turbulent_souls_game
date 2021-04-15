@@ -8,11 +8,11 @@ public class AdvancedStaff extends Weapon {
     public AdvancedStaff() {
         this.name = "Advanced Staff";
         this.type = WeaponType.STAFF;
-        this.attack = 9; // Basic 7
-        this.range = 100.0;
+        this.attack = 10;
+        this.range = 12.0;
         this.quantity = 1;
         this.imagePath = ADVANCED_STAFF_PATH;
         this.description = "A delicate staff that harness ice.";
-        this.price = 300; // Basic 200
+        this.price = 300;
     }
 }

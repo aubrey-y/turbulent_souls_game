@@ -15,7 +15,8 @@ public class TraderRoomUtility {
     private static Map<RoomType, String> traderImageMapping = Map.of(
             GARDEN_TRADER, GARDEN_TRADER_PATH,
             FOREST_TRADER, FOREST_TRADER_PATH,
-            CASTLE_TRADER, CASTLE_TRADER_PATH);
+            CASTLE_TRADER, CASTLE_TRADER_PATH
+    );
 
     public static String correctTraderPathUtility(RoomType roomType) {
         return traderImageMapping.get(roomType);

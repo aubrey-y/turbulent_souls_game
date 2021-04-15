@@ -8,7 +8,7 @@ public class AdvancedSword extends Weapon {
     public AdvancedSword() {
         this.name = "Advanced Sword";
         this.type = WeaponType.SWORD;
-        this.attack = 12; // Basic 10
+        this.attack = 15; // Basic 10
         this.range = 2.0;
         this.quantity = 1;
         this.imagePath = ADVANCED_SWORD_PATH;

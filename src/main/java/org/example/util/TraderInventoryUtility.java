@@ -24,19 +24,24 @@ public class TraderInventoryUtility {
             BASIC_HEALTH_PATH, new BasicHealthPotion(),
             BASIC_SPEED_PATH, new BasicSpeedPotion(),
             BASIC_STRENGTH_PATH, new BasicStrengthPotion(),
-            BASIC_SWORD_PATH, new BasicSword());
+            BASIC_SWORD_PATH, new BasicSword()
+
+
+    );
 
     private static Map<String, Item> castleTraderInventory = Map.of(
             BASIC_HEALTH_PATH, new BasicHealthPotion(),
             BASIC_SPEED_PATH, new BasicSpeedPotion(),
             BASIC_STRENGTH_PATH, new BasicStrengthPotion(),
-            BASIC_STAFF_PATH, new BasicStaff());
+            BASIC_STAFF_PATH, new BasicStaff()
+    );
 
     private static Map<String, Item> gardenTraderInventory = Map.of(
             BASIC_HEALTH_PATH, new BasicHealthPotion(),
             BASIC_SPEED_PATH, new BasicSpeedPotion(),
             BASIC_STRENGTH_PATH, new BasicStrengthPotion(),
-            BASIC_MAGIC_PATH, new BasicMagic());
+            BASIC_MAGIC_PATH, new BasicMagic()
+    );
 
     public static Map<String, Item> getTraderInventoryForRoomType(RoomType roomType) {
         switch (roomType) {

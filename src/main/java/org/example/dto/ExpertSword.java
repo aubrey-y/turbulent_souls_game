@@ -8,11 +8,11 @@ public class ExpertSword extends Weapon {
     public ExpertSword() {
         this.name = "Expert Sword";
         this.type = WeaponType.SWORD;
-        this.attack = 14; // Advanced 12
+        this.attack = 23;
         this.range = 2.0;
         this.quantity = 1;
         this.imagePath = EXPERT_SWORD_PATH;
         this.description = "War-torn, this sword utilizes the strength of its defeated enemies to increase its power."; //Change
-        this.price = 400; // Advanced 300
+        this.price = 450;
     }
 }
