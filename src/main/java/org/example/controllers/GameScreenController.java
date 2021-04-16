@@ -119,6 +119,13 @@ public class GameScreenController extends InventoryController {
                 this.healthService, this.playerService, this.appService);
         this.scene.setOnKeyPressed(e -> {
             switch (e.getCode()) {
+            case ESCAPE:
+                if (this.inventoryService.getInventoryOpen()) {
+                    this.inventoryService.toggleInventoryOpen();
+                } else if (this.traderService != null && this.traderService.isTraderOpen()) {
+                    this.traderService.toggleTraderOpen();
+                }
+                break;
             case W:
                 this.wPressed.set(true);
                 break;
@@ -159,15 +166,13 @@ public class GameScreenController extends InventoryController {
                     this.inventoryService.consumeItem(this.consumableService);
                 } else if (this.traderService != null && this.traderService.isTraderOpen()) {
                     this.traderService.purchaseItem();
+                } else if (this.traderService != null
+                        && this.playerService.playerInRangeOfTrader()
+                        && !this.inventoryService.getInventoryOpen()
+                        && !this.traderService.isTraderOpen()) {
+                    this.traderService.toggleTraderOpen();
                 } else {
                     this.playerService.attemptToClaimGold();
-                }
-                break;
-            case T:
-                if (this.traderService != null
-                        && this.playerService.playerInRangeOfTrader()
-                        && !this.inventoryService.getInventoryOpen()) {
-                    this.traderService.toggleTraderOpen();
                 }
                 break;
             default:
