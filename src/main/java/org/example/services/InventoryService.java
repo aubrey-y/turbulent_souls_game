@@ -102,6 +102,7 @@ public class InventoryService {
             toggleButton.setOnAction(actionEvent -> {
                 this.selectToggleButton(weapon.getImagePath(), finalI, finalCurrentRowIndex);
             });
+            toggleButton.setFocusTraversable(false);
             switch (currentRowIndex) {
             case 0:
                 this.inventoryRow1.getChildren().add(toggleButton);
@@ -141,6 +142,7 @@ public class InventoryService {
             toggleButton.setOnAction(actionEvent -> {
                 this.selectToggleButton(item.getImagePath(), finalI, 2);
             });
+            toggleButton.setFocusTraversable(false);
             this.inventoryRow3.getChildren().add(toggleButton);
             if (rowSelected == 2 && recentlySelectedItem != null && index == selectedSaveIndex) {
                 toggleButton.setSelected(true);

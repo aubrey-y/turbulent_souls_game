@@ -116,7 +116,7 @@ public class GameScreenController extends InventoryController {
                 this.healthService, this.playerService, this.appService);
         this.scene.setOnKeyPressed(e -> {
             switch (e.getCode()) {
-            case ESCAPE:
+            case TAB:
                 if (this.inventoryService.getInventoryOpen()) {
                     this.inventoryService.toggleInventoryOpen();
                 } else if (this.traderService != null && this.traderService.isTraderOpen()) {
