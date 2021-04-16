@@ -113,7 +113,8 @@ public class InventoryService {
                 break;
             }
 
-            if ((rowSelected == 0 || rowSelected == 1) && recentlySelectedItem != null && index == selectedSaveIndex) {
+            if ((rowSelected == 0 || rowSelected == 1) && recentlySelectedItem != null
+                    && index == selectedSaveIndex) {
                 toggleButton.setSelected(true);
                 this.selectToggleButton(weapon.getImagePath(), index, finalCurrentRowIndex);
             }
