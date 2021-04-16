@@ -8,7 +8,7 @@ import static org.example.util.ResourcePathUtility.EXPERT_STAFF_PLAYER_RIGHT;
 
 public class ExpertStaff extends Weapon {
     public ExpertStaff() {
-        this.name = "Expert Staff";
+        this.name = "Arctic Spear";
         this.type = WeaponType.STAFF;
         this.attack = 18;
         this.range = 12.0;

@@ -8,7 +8,7 @@ import static org.example.util.ResourcePathUtility.MASTER_STAFF_PLAYER_RIGHT;
 
 public class MasterStaff extends Weapon {
     public MasterStaff() {
-        this.name = "Master Staff";
+        this.name = "King Karthik's Staff";
         this.type = WeaponType.STAFF;
         this.attack = 25;
         this.range = 12.0;
