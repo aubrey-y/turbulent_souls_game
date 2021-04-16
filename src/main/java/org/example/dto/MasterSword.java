@@ -6,7 +6,7 @@ import static org.example.util.ResourcePathUtility.MASTER_SWORD_PATH;
 
 public class MasterSword extends Weapon {
     public MasterSword() {
-        this.name = "Master Sword";
+        this.name = "Scythe of Raiden";
         this.type = WeaponType.SWORD;
         this.attack = 35;
         this.range = 2.0;

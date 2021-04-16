@@ -6,7 +6,7 @@ import static org.example.util.ResourcePathUtility.EXPERT_SWORD_PATH;
 
 public class ExpertSword extends Weapon {
     public ExpertSword() {
-        this.name = "Expert Sword";
+        this.name = "Elucidator";
         this.type = WeaponType.SWORD;
         this.attack = 23;
         this.range = 2.0;
