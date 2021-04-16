@@ -21,6 +21,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import static org.example.util.ResourcePathUtility.BASIC_STAFF_PLAYER_LEFT;
+import static org.example.util.ResourcePathUtility.BASIC_STAFF_PLAYER_RIGHT;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
@@ -155,7 +157,7 @@ public class SaveServiceTest {
 
     private Document getEncodedWeapon() {
         return new Document()
-                .append("@type", "STAFF")
+                .append("@type", "BASICSTAFF")
                 .append("name", "Basic Staff")
                 .append("quantity", 1)
                 .append("imagePath", "src/main/resources/static/images/staff.png")
@@ -163,6 +165,8 @@ public class SaveServiceTest {
                 .append("type", "STAFF")
                 .append("attack", 7)
                 .append("range", 100.0)
-                .append("price", 200);
+                .append("price", 200)
+                .append("animationLeft", BASIC_STAFF_PLAYER_LEFT)
+                .append("animationRight", BASIC_STAFF_PLAYER_RIGHT);
     }
 }
