@@ -202,7 +202,7 @@ public class InventoryService {
                 }
                 item.setQuantity(newQuantity);
                 if (item.getQuantity() == 0) {
-                    this.inventoryRow2.getChildren().remove(selectedSaveIndex);
+                    this.inventoryRow3.getChildren().remove(selectedSaveIndex);
                     generalInventory.remove(recentlySelectedItem);
                     recentlySelectedItem = null;
                 } else {
