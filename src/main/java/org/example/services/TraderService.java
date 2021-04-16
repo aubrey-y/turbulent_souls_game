@@ -104,8 +104,6 @@ public class TraderService {
             toggleButton.setPrefHeight(100);
             toggleButton.setFont(new Font("Pixeboy", 60));
             int finalI = index;
-            toggleButton.setOnAction(actionEvent -> this.selectToggleButton(
-                    item, finalI));
             toggleButton.setText(
                     String.format("%s | %s gold",
                             item.getName(), item.getPrice()));
@@ -119,6 +117,9 @@ public class TraderService {
             if (item instanceof Weapon && this.appService.getPlayerState()
                     .getWeaponInventory().containsKey(item.getImagePath())) {
                 toggleButton.setDisable(true);
+            } else {
+                toggleButton.setOnAction(actionEvent -> this.selectToggleButton(
+                        item, finalI));
             }
         }
     }
