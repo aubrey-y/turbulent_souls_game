@@ -43,6 +43,8 @@ public class InventoryService {
     private static int selectedSaveIndex;
     private static int rowSelected;
 
+    private static final int MAXIMUM_ITEMS_PER_ROW = 7;
+
     public InventoryService(AppService appService) {
         this.appService = appService;
     }
@@ -68,6 +70,7 @@ public class InventoryService {
         this.inventoryVBox.getChildren().clear();
         this.inventoryVBox.getChildren().add(this.inventoryRow1);
         this.inventoryVBox.getChildren().add(this.inventoryRow2);
+        this.inventoryVBox.getChildren().add(this.inventoryRow3);
     }
 
     private void loadInventoryElements() {
@@ -82,6 +85,7 @@ public class InventoryService {
                 .getGeneralInventory();
         boolean selected = recentlySelectedItem != null;
         int index = 0;
+        int currentRowIndex = 0;
         for (String key : weaponInventory.keySet()) {
             Weapon weapon = (Weapon) weaponInventory.get(key);
             ToggleButton toggleButton = new ToggleButton();
@@ -94,18 +98,32 @@ public class InventoryService {
             imageView.setFitHeight(160.0);
             toggleButton.setGraphic(imageView);
             int finalI = index;
+            int finalCurrentRowIndex = currentRowIndex;
             toggleButton.setOnAction(actionEvent -> {
-                this.selectToggleButton(weapon.getImagePath(), finalI);
+                this.selectToggleButton(weapon.getImagePath(), finalI, finalCurrentRowIndex);
             });
-            this.inventoryRow1.getChildren().add(toggleButton);
-            if (rowSelected == 0 && recentlySelectedItem != null && index == selectedSaveIndex) {
+            switch (currentRowIndex) {
+            case 0:
+                this.inventoryRow1.getChildren().add(toggleButton);
+                break;
+            case 1:
+                this.inventoryRow2.getChildren().add(toggleButton);
+                break;
+            default:
+                break;
+            }
+
+            if ((rowSelected == 0 || rowSelected == 1) && recentlySelectedItem != null && index == selectedSaveIndex) {
                 toggleButton.setSelected(true);
-                this.selectToggleButton(weapon.getImagePath(), index);
+                this.selectToggleButton(weapon.getImagePath(), index, finalCurrentRowIndex);
+            }
+            if (index == MAXIMUM_ITEMS_PER_ROW - 1) {
+                currentRowIndex++;
             }
             index++;
             if (!selected) {
                 toggleButton.setSelected(true);
-                this.selectToggleButton(weapon.getImagePath(), finalI);
+                this.selectToggleButton(weapon.getImagePath(), finalI, finalCurrentRowIndex);
                 selected = true;
             }
         }
@@ -120,28 +138,28 @@ public class InventoryService {
                     new ImageView(Paths.get(item.getImagePath()).toUri().toString()));
             int finalI = index;
             toggleButton.setOnAction(actionEvent -> {
-                this.selectToggleButton(item.getImagePath(), finalI);
+                this.selectToggleButton(item.getImagePath(), finalI, 2);
             });
-            this.inventoryRow2.getChildren().add(toggleButton);
-            if (rowSelected == 1 && recentlySelectedItem != null && index == selectedSaveIndex) {
+            this.inventoryRow3.getChildren().add(toggleButton);
+            if (rowSelected == 2 && recentlySelectedItem != null && index == selectedSaveIndex) {
                 toggleButton.setSelected(true);
-                this.selectToggleButton(item.getImagePath(), index);
+                this.selectToggleButton(item.getImagePath(), index, 2);
             }
             index++;
         }
     }
 
-    private void selectToggleButton(String pathId, int index) {
+    private void selectToggleButton(String pathId, int index, int row) {
         selectedSaveIndex = index;
         Map<String, Item> weaponInventory = this.appService.getPlayerState()
                 .getWeaponInventory();
         Map<String, Item> generalInventory = this.appService.getPlayerState()
                 .getGeneralInventory();
         recentlySelectedItem = pathId;
+        rowSelected = row;
 
         Weapon weapon = (Weapon) weaponInventory.get(pathId);
         if (weapon != null) {
-            rowSelected = 0;
             this.inventoryPreviewTitle.setText(weapon.getName());
             this.inventoryPreviewImage.setImage(
                     new Image(Paths.get(weapon.getImagePath()).toUri().toString()));
@@ -149,7 +167,6 @@ public class InventoryService {
             this.inventoryPreviewQty.setText("Quantity: " + weapon.getQuantity());
             this.inventoryPreviewDescription.setText(weapon.getDescription());
         } else {
-            rowSelected = 1;
             Item item = generalInventory.get(pathId);
             this.inventoryPreviewTitle.setText(item.getName());
             this.inventoryPreviewImage.setImage(
@@ -203,6 +220,7 @@ public class InventoryService {
     private void clearInventoryRows() {
         this.inventoryRow1.getChildren().clear();
         this.inventoryRow2.getChildren().clear();
+        this.inventoryRow3.getChildren().clear();
     }
 
     public ImageView getInventoryBackground() {
