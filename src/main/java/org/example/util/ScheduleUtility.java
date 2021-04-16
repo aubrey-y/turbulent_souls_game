@@ -101,8 +101,10 @@ public class ScheduleUtility {
             } else {
                 imagePath = playerState.getActiveWeapon().getAnimationRight();
             }
-            playerService.getImageView()
-                    .setImage(new Image(Paths.get(imagePath).toUri().toString()));
+            ImageView playerView = playerService.getImageView();
+            playerService.resetCurrPos();
+            playerService.resetOgImgSize();
+            playerView.setImage(new Image(Paths.get(imagePath).toUri().toString()));
         }));
         timeline.setCycleCount(1);
         return timeline;

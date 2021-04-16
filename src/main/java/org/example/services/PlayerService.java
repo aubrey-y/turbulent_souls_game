@@ -27,6 +27,14 @@ public class PlayerService {
 
     private ImageView imageView;
 
+    private double imgOgWidth;
+
+    private double imgOgHeight;
+
+    private double xCurrPos;
+
+    private double yCurrPos;
+
     private AppService appService;
 
     private RoomDirectionService roomDirectionService;
@@ -242,6 +250,13 @@ public class PlayerService {
                     Paths.get(playerState.getActiveWeapon()
                             .getAttackAnimationRight()).toUri().toString()));
         }
+        // Animation sizes of running size and attack are different.
+        // Hence, only during attacks, position and size are adjusted
+        saveCurrPos();
+        this.imageView.setFitWidth(225);
+        this.imageView.setFitHeight(180);
+        this.imageView.setTranslateY(this.imageView.getTranslateY() - 50);
+        this.imageView.setTranslateX(this.imageView.getTranslateX() - 50);
         ScheduleUtility.generatePlayerAttackResetSchedule(
                 AnimationDurationUtility.getPlayerAttackDurationForWeaponType(
                         playerState.getActiveWeapon().getType()),
@@ -310,6 +325,8 @@ public class PlayerService {
 
     public PlayerService setImageView(ImageView imageView) {
         this.imageView = imageView;
+        this.imgOgWidth = imageView.getFitWidth();
+        this.imgOgHeight = imageView.getFitHeight();
         return this;
     }
 
@@ -382,5 +399,20 @@ public class PlayerService {
 
     public double getMoveSize() {
         return this.moveSize;
+    }
+
+    public void resetOgImgSize() {
+        this.imageView.setFitWidth(imgOgWidth);
+        this.imageView.setFitHeight(imgOgHeight);
+    }
+
+    public void resetCurrPos() {
+        this.imageView.setTranslateX(this.xCurrPos);
+        this.imageView.setTranslateY(this.yCurrPos);
+    }
+
+    public void saveCurrPos() {
+        this.xCurrPos = this.imageView.getTranslateX();
+        this.yCurrPos = this.imageView.getTranslateY();
     }
 }
