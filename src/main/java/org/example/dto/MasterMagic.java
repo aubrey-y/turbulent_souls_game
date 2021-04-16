@@ -10,7 +10,7 @@ import static org.example.util.ResourcePathUtility.MASTER_MAGIC_PLAYER_ATTACK_RI
 
 public class MasterMagic extends Weapon {
     public MasterMagic() {
-        this.name = "Master Magic";
+        this.name = "Musaev's Master Flame";
         this.type = WeaponType.MAGIC;
         this.attack = 30;
         this.range = 5.0;

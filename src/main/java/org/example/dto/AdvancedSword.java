@@ -10,7 +10,7 @@ import static org.example.util.ResourcePathUtility.ADVANCED_SWORD_PLAYER_RIGHT;
 
 public class AdvancedSword extends Weapon {
     public AdvancedSword() {
-        this.name = "Advanced Sword";
+        this.name = "Agil's Axe";
         this.type = WeaponType.SWORD;
         this.attack = 15; // Basic 10
         this.range = 2.0;

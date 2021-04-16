@@ -10,7 +10,7 @@ import static org.example.util.ResourcePathUtility.ADVANCED_STAFF_PLAYER_RIGHT;
 
 public class AdvancedStaff extends Weapon {
     public AdvancedStaff() {
-        this.name = "Advanced Staff";
+        this.name = "Icicle Staff of Genshin";
         this.type = WeaponType.STAFF;
         this.attack = 10;
         this.range = 12.0;
