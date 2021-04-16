@@ -64,14 +64,16 @@ public class ConsumableServiceTest {
                 .setHealthBar(this.healthBar)
                 .setHealthText(this.healthText);
         this.inventoryService = new InventoryService(this.appService);
-        this.consumableService = new ConsumableService(this.healthService, this.playerService, this.appService);
+        this.consumableService = new ConsumableService(this.healthService,
+                this.playerService, this.appService);
     }
 
     @Test
     public void testApplyHealthPotion() {
         //Given
         double healthDiff = -10.0;
-        PlayerState playerState = this.getStandardPlayerState(this.maximumStartingHealth + healthDiff);
+        PlayerState playerState = this.getStandardPlayerState(
+                this.maximumStartingHealth + healthDiff);
         this.withMockedAppService(playerState);
         Potion healthPotion = new BasicHealthPotion();
 
@@ -110,7 +112,8 @@ public class ConsumableServiceTest {
 
         //Then
         assertThat(this.playerService.getMoveSize(),
-                is(equalTo(DEFAULT_MOVE_SIZE + DEFAULT_MOVE_SIZE * speedPotion.getStatValue() / 100)));
+                is(equalTo(DEFAULT_MOVE_SIZE + DEFAULT_MOVE_SIZE
+                        * speedPotion.getStatValue() / 100)));
 
     }
 

@@ -13,12 +13,9 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.example.dto.PlayerState;
 import org.example.dto.Room;
-import org.example.exceptions.PlayerCreationException;
 
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * JavaFX App

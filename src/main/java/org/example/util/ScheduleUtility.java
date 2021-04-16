@@ -13,7 +13,6 @@ import org.example.App;
 import org.example.dto.Potion;
 import org.example.dto.Weapon;
 import org.example.services.AppService;
-import org.example.services.GoldService;
 import org.example.services.HealthService;
 import org.example.services.MonsterService;
 import org.example.services.PlayerService;
@@ -158,7 +157,8 @@ public class ScheduleUtility {
                 weapon.setAttack(weapon.getAttack() - potion.getStatValue());
                 weaponInventory.put(key, weapon);
             }
-            appService.setPlayerState(appService.getPlayerState().setWeaponInventory(weaponInventory));
+            appService.setPlayerState(appService.getPlayerState()
+                    .setWeaponInventory(weaponInventory));
         }));
         timeline.setCycleCount(1);
         return timeline;

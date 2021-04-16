@@ -71,6 +71,11 @@ public class InventoryService {
     }
 
     private void loadInventoryElements() {
+        inventoryToggleGroup.selectedToggleProperty().addListener((obsVal, oldVal, newVal) -> {
+            if (newVal == null) {
+                oldVal.setSelected(true);
+            }
+        });
         Map<String, Item> weaponInventory = this.appService.getPlayerState()
                 .getWeaponInventory();
         Map<String, Item> generalInventory = this.appService.getPlayerState()
@@ -150,7 +155,8 @@ public class InventoryService {
                     new Image(Paths.get(item.getImagePath()).toUri().toString()));
             if (item instanceof Potion) {
                 Potion potion = (Potion) item;
-                this.inventoryPreviewStat.setText(potion.getStatLabel() + " " + potion.getStatValue());
+                this.inventoryPreviewStat.setText(potion.getStatLabel()
+                        + " " + potion.getStatValue());
                 this.inventoryPreviewQty.setText("Quantity: " + potion.getQuantity());
                 this.inventoryPreviewDescription.setText(potion.getDescription());
             }
@@ -196,9 +202,6 @@ public class InventoryService {
     private void clearInventoryRows() {
         this.inventoryRow1.getChildren().clear();
         this.inventoryRow2.getChildren().clear();
-//        this.inventoryRow3.getChildren().clear();
-//        this.inventoryRow4.getChildren().clear();
-//        this.inventoryRow5.getChildren().clear();
     }
 
     public ImageView getInventoryBackground() {

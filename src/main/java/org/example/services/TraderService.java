@@ -17,13 +17,10 @@ import org.example.util.CloneUtility;
 
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
-import static org.example.util.ResourcePathUtility.FONT_STYLE_PATH;
 import static org.example.util.ResourcePathUtility.TOGGLE_BUTTON_STYLE_PATH;
 
 public class TraderService {
@@ -87,6 +84,11 @@ public class TraderService {
     }
 
     private void loadTraderElements() {
+        traderItems.selectedToggleProperty().addListener((obsVal, oldVal, newVal) -> {
+            if (newVal == null) {
+                oldVal.setSelected(true);
+            }
+        });
         int index = 0;
         List<Item> sortedItems = new ArrayList<>(this.traderInventory.values());
         sortedItems.sort(Comparator.comparingInt(Item::getPrice));
