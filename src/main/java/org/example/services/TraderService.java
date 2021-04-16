@@ -116,6 +116,10 @@ public class TraderService {
                 this.selectToggleButton(item, index);
                 selected = true;
             }
+            if (item instanceof Weapon && this.appService.getPlayerState()
+                    .getWeaponInventory().containsKey(item.getImagePath())) {
+                toggleButton.setDisable(true);
+            }
         }
     }
 
@@ -149,6 +153,10 @@ public class TraderService {
             }
         }
         this.appService.setPlayerState(playerState);
+        if (item instanceof Weapon) {
+            this.traderVBox.getChildren().clear();
+            this.loadTraderElements();
+        }
     }
 
     private void selectToggleButton(Item item, int index) {
