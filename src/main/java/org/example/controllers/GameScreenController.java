@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.example.dto.PlayerState;
@@ -23,8 +22,6 @@ import org.example.services.PlayerService;
 import org.example.services.RoomDirectionService;
 import org.example.services.SaveService;
 import org.example.services.TraderService;
-
-import java.nio.file.Paths;
 
 import static javafx.scene.input.KeyCode.SHIFT;
 import static org.example.enums.Direction.LEFT;
