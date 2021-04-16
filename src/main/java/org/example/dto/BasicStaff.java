@@ -3,6 +3,8 @@ package org.example.dto;
 import org.example.enums.WeaponType;
 
 import static org.example.util.ResourcePathUtility.BASIC_STAFF_PATH;
+import static org.example.util.ResourcePathUtility.BASIC_STAFF_PLAYER_LEFT;
+import static org.example.util.ResourcePathUtility.BASIC_STAFF_PLAYER_RIGHT;
 
 public class BasicStaff extends Weapon {
     public BasicStaff() {
@@ -14,5 +16,7 @@ public class BasicStaff extends Weapon {
         this.imagePath = BASIC_STAFF_PATH;
         this.description = "A handcrafted stick with magical properties...";
         this.price = 200;
+        this.animationLeft = BASIC_STAFF_PLAYER_LEFT;
+        this.animationRight = BASIC_STAFF_PLAYER_RIGHT;
     }
 }

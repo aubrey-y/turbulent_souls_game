@@ -3,6 +3,7 @@ package org.example.services;
 import javafx.animation.Timeline;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.example.App;
 import org.example.dto.Coordinate;
@@ -14,6 +15,7 @@ import org.example.enums.Direction;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -213,6 +215,18 @@ public class PlayerService {
                 monster.setRange(-1.0);
             }
         }
+    }
+
+    public void displayPlayerRightOrientation(PlayerState playerState) {
+        this.imageView.setImage(new Image(
+                Paths.get(playerState.getActiveWeapon().getAnimationRight())
+                        .toUri().toString()));
+    }
+
+    public void displayPlayerLeftOrientation(PlayerState playerState) {
+        this.imageView.setImage(new Image(
+                Paths.get(playerState.getActiveWeapon().getAnimationLeft())
+                        .toUri().toString()));
     }
 
     private void setNewPlayerSpawnCoordinates(Direction exitDirection) {

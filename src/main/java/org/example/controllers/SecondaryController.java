@@ -102,13 +102,16 @@ public class SecondaryController extends ErrorBaseController {
             validatePlayerName();
             validateDifficulty();
             validateArchetype();
-            this.appService.setPlayerState(
-                    new PlayerState(
-                            this.username,
-                            this.archetype,
-                            this.difficulty,
-                            SPAWN_COORDINATES)
-                            .setEmail(this.appService.getPlayerState().getEmail()));
+            PlayerState playerState = new PlayerState(
+                    this.username,
+                    this.archetype,
+                    this.difficulty,
+                    SPAWN_COORDINATES)
+                    .setEmail(this.appService.getPlayerState().getEmail());
+            if (this.appService.getDevMode()) {
+                playerState.setGoldAmount(1000000);
+            }
+            this.appService.setPlayerState(playerState);
             this.appService.setActiveRoom(STARTING_ROOM);
             FXMLLoader loader = new FXMLLoader(App.class.getResource("gameScreen.fxml"));
             DirectionService directionService = new DirectionService();

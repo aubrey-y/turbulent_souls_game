@@ -220,6 +220,60 @@ public class ResourcePathUtility {
     public static final String MASTER_MAGIC_PATH = ""
             + "src/main/resources/static/images/TradersAndItems/MasterMagic.png";
 
+    public static final String ALL_MAGIC_PLAYER_LEFT = ""
+            + "src/main/resources/static/images/player/wizard_left.gif";
+
+    public static final String ALL_MAGIC_PLAYER_RIGHT = ""
+            + "src/main/resources/static/images/player/wizard_right.gif";
+
+    public static final String BASIC_STAFF_PLAYER_LEFT = ""
+            + "src/main/resources/static/images/player/staff_left.gif";
+
+    public static final String BASIC_STAFF_PLAYER_RIGHT = ""
+            + "src/main/resources/static/images/player/staff_right.gif";
+
+    public static final String ADVANCED_STAFF_PLAYER_LEFT = ""
+            + "src/main/resources/static/images/player/mage_class/running_staff2_L.gif";
+
+    public static final String ADVANCED_STAFF_PLAYER_RIGHT = ""
+            + "src/main/resources/static/images/player/mage_class/running_staff2.gif";
+
+    public static final String EXPERT_STAFF_PLAYER_LEFT = ""
+            + "src/main/resources/static/images/player/mage_class/running_staff3_L.gif";
+
+    public static final String EXPERT_STAFF_PLAYER_RIGHT = ""
+            + "src/main/resources/static/images/player/mage_class/running_staff3.gif";
+
+    public static final String MASTER_STAFF_PLAYER_LEFT = ""
+            + "src/main/resources/static/images/player/mage_class/running_staff4_L.gif";
+
+    public static final String MASTER_STAFF_PLAYER_RIGHT = ""
+            + "src/main/resources/static/images/player/mage_class/running_staff4.gif";
+
+    public static final String BASIC_SWORD_PLAYER_LEFT = ""
+            + "src/main/resources/static/images/player/sword_left.gif";
+
+    public static final String BASIC_SWORD_PLAYER_RIGHT = ""
+            + "src/main/resources/static/images/player/sword_right.gif";
+
+    public static final String ADVANCED_SWORD_PLAYER_LEFT = ""
+            + "src/main/resources/static/images/player/warrior_class/running_sword2_L.gif";
+
+    public static final String ADVANCED_SWORD_PLAYER_RIGHT = ""
+            + "src/main/resources/static/images/player/warrior_class/running_sword2.gif";
+
+    public static final String EXPERT_SWORD_PLAYER_LEFT = ""
+            + "src/main/resources/static/images/player/warrior_class/running_sword3_L.gif";
+
+    public static final String EXPERT_SWORD_PLAYER_RIGHT = ""
+            + "src/main/resources/static/images/player/warrior_class/running_sword3.gif";
+
+    public static final String MASTER_SWORD_PLAYER_LEFT = ""
+            + "src/main/resources/static/images/player/warrior_class/running_sword4_L.gif";
+
+    public static final String MASTER_SWORD_PLAYER_RIGHT = ""
+            + "src/main/resources/static/images/player/warrior_class/running_sword4.gif";
+
     public static final String BASIC_HEALTH_PATH = ""
             + "src/main/resources/static/images/TradersAndItems/BasicHealthPotion.PNG";
 

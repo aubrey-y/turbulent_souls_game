@@ -88,8 +88,10 @@ public class InventoryService {
             toggleButton.setToggleGroup(this.inventoryToggleGroup);
             toggleButton.getStylesheets()
                     .add(Paths.get(TOGGLE_BUTTON_STYLE_PATH).toUri().toString());
-            toggleButton.setGraphic(
-                    new ImageView(Paths.get(weapon.getImagePath()).toUri().toString()));
+            ImageView imageView = new ImageView(Paths.get(weapon.getImagePath()).toUri().toString());
+            imageView.setFitWidth(160.0);
+            imageView.setFitHeight(160.0);
+            toggleButton.setGraphic(imageView);
             int finalI = index;
             toggleButton.setOnAction(actionEvent -> {
                 this.selectToggleButton(weapon.getImagePath(), finalI);

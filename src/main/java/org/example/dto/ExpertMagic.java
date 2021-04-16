@@ -2,6 +2,8 @@ package org.example.dto;
 
 import org.example.enums.WeaponType;
 
+import static org.example.util.ResourcePathUtility.ALL_MAGIC_PLAYER_LEFT;
+import static org.example.util.ResourcePathUtility.ALL_MAGIC_PLAYER_RIGHT;
 import static org.example.util.ResourcePathUtility.EXPERT_MAGIC_PATH;
 
 public class ExpertMagic extends Weapon {
@@ -14,5 +16,7 @@ public class ExpertMagic extends Weapon {
         this.imagePath = EXPERT_MAGIC_PATH;
         this.description = "Channeled from within, controlled and reliable.";
         this.price = 450;
+        this.animationLeft = ALL_MAGIC_PLAYER_LEFT;
+        this.animationRight = ALL_MAGIC_PLAYER_RIGHT;
     }
 }

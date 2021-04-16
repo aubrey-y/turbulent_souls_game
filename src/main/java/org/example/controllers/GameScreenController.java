@@ -124,14 +124,14 @@ public class GameScreenController extends InventoryController {
                 break;
             case A:
                 this.aPressed.set(true);
-                this.displayPlayerLeftOrientation(this.appService.getPlayerState());
+                this.playerService.displayPlayerLeftOrientation(this.appService.getPlayerState());
                 break;
             case S:
                 this.sPressed.set(true);
                 break;
             case D:
                 this.dPressed.set(true);
-                this.displayPlayerRightOrientation(this.appService.getPlayerState());
+                this.playerService.displayPlayerRightOrientation(this.appService.getPlayerState());
                 break;
             case P:
                 if (this.appService.getDevMode()) {
@@ -258,8 +258,8 @@ public class GameScreenController extends InventoryController {
     }
 
     private void initializePlayerImageView(PlayerState playerState) {
-        this.displayCorrectPlayerOrientation(playerState);
         this.playerService.setImageView(this.player);
+        this.displayCorrectPlayerOrientation(playerState);
         this.playerService.moveX(playerState.getSpawnCoordinates().getX());
         this.playerService.moveY(playerState.getSpawnCoordinates().getY());
         this.playerService.setVisible(true);
@@ -273,57 +273,11 @@ public class GameScreenController extends InventoryController {
         this.healthService.applyHealthModifier(0.0);
     }
 
-
-
-    private void displayPlayerRightOrientation(PlayerState playerState) {
-        switch (playerState.getActiveWeapon().getType()) {
-        case MAGIC:
-            this.player.setImage(new Image(
-                    Paths.get("src/main/resources/static/images/player/wizard_right.gif")
-                            .toUri().toString()));
-            break;
-        case STAFF:
-            this.player.setImage(new Image(
-                    Paths.get("src/main/resources/static/images/player/staff_right.gif")
-                            .toUri().toString()));
-            break;
-        case SWORD:
-            this.player.setImage(new Image(
-                    Paths.get("src/main/resources/static/images/player/sword_right.gif")
-                            .toUri().toString()));
-            break;
-        default:
-            break;
-        }
-    }
-
-    private void displayPlayerLeftOrientation(PlayerState playerState) {
-        switch (playerState.getActiveWeapon().getType()) {
-        case MAGIC:
-            this.player.setImage(new Image(
-                    Paths.get("src/main/resources/static/images/player/wizard_left.gif")
-                            .toUri().toString()));
-            break;
-        case STAFF:
-            this.player.setImage(new Image(
-                    Paths.get("src/main/resources/static/images/player/staff_left.gif")
-                            .toUri().toString()));
-            break;
-        case SWORD:
-            this.player.setImage(new Image(
-                    Paths.get("src/main/resources/static/images/player/sword_left.gif")
-                            .toUri().toString()));
-            break;
-        default:
-            break;
-        }
-    }
-
     protected void displayCorrectPlayerOrientation(PlayerState playerState) {
         if (playerState.getSpawnOrientation() == LEFT) {
-            this.displayPlayerLeftOrientation(playerState);
+            this.playerService.displayPlayerLeftOrientation(playerState);
         } else {
-            this.displayPlayerRightOrientation(playerState);
+            this.playerService.displayPlayerRightOrientation(playerState);
         }
     }
     

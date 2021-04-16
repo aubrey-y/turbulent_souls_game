@@ -3,6 +3,8 @@ package org.example.dto;
 import org.example.enums.WeaponType;
 
 import static org.example.util.ResourcePathUtility.EXPERT_SWORD_PATH;
+import static org.example.util.ResourcePathUtility.EXPERT_SWORD_PLAYER_LEFT;
+import static org.example.util.ResourcePathUtility.EXPERT_SWORD_PLAYER_RIGHT;
 
 public class ExpertSword extends Weapon {
     public ExpertSword() {
@@ -15,5 +17,7 @@ public class ExpertSword extends Weapon {
         this.description = "War-torn, "
             + "this sword utilizes the strength of its defeated enemies to increase its power.";
         this.price = 450;
+        this.animationLeft = EXPERT_SWORD_PLAYER_LEFT;
+        this.animationRight = EXPERT_SWORD_PLAYER_RIGHT;
     }
 }
