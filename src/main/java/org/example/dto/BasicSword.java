@@ -3,6 +3,8 @@ package org.example.dto;
 import org.example.enums.WeaponType;
 
 import static org.example.util.ResourcePathUtility.BASIC_SWORD_PATH;
+import static org.example.util.ResourcePathUtility.BASIC_SWORD_PLAYER_LEFT;
+import static org.example.util.ResourcePathUtility.BASIC_SWORD_PLAYER_RIGHT;
 
 public class BasicSword extends Weapon {
     public BasicSword() {
@@ -14,5 +16,7 @@ public class BasicSword extends Weapon {
         this.imagePath = BASIC_SWORD_PATH;
         this.description = "Forged in the castles of Mordor... a rudimentary battle-worn sword.";
         this.price = 200;
+        this.animationLeft = BASIC_SWORD_PLAYER_LEFT;
+        this.animationRight = BASIC_SWORD_PLAYER_RIGHT;
     }
 }

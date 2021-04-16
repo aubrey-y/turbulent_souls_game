@@ -8,7 +8,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
 import org.example.dto.Item;
 import org.example.dto.PlayerState;
 import org.example.dto.Potion;
@@ -84,8 +83,10 @@ public class InventoryService {
             toggleButton.setToggleGroup(this.inventoryToggleGroup);
             toggleButton.getStylesheets()
                     .add(Paths.get(TOGGLE_BUTTON_STYLE_PATH).toUri().toString());
-            toggleButton.setGraphic(
-                    new ImageView(Paths.get(weapon.getImagePath()).toUri().toString()));
+            ImageView imageView = new ImageView(Paths.get(weapon.getImagePath()).toUri().toString());
+            imageView.setFitWidth(160.0);
+            imageView.setFitHeight(160.0);
+            toggleButton.setGraphic(imageView);
             int finalI = index;
             toggleButton.setOnAction(actionEvent -> {
                 this.selectToggleButton(weapon.getImagePath(), finalI);

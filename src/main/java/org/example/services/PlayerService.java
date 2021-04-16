@@ -218,47 +218,15 @@ public class PlayerService {
     }
 
     public void displayPlayerRightOrientation(PlayerState playerState) {
-        switch (playerState.getActiveWeapon().getType()) {
-            case MAGIC:
-                this.imageView.setImage(new Image(
-                        Paths.get("src/main/resources/static/images/player/wizard_right.gif")
-                                .toUri().toString()));
-                break;
-            case STAFF:
-                this.imageView.setImage(new Image(
-                        Paths.get("src/main/resources/static/images/player/staff_right.gif")
-                                .toUri().toString()));
-                break;
-            case SWORD:
-                this.imageView.setImage(new Image(
-                        Paths.get("src/main/resources/static/images/player/sword_right.gif")
-                                .toUri().toString()));
-                break;
-            default:
-                break;
-        }
+        this.imageView.setImage(new Image(
+                Paths.get(playerState.getActiveWeapon().getAnimationRight())
+                        .toUri().toString()));
     }
 
     public void displayPlayerLeftOrientation(PlayerState playerState) {
-        switch (playerState.getActiveWeapon().getType()) {
-            case MAGIC:
-                this.imageView.setImage(new Image(
-                        Paths.get("src/main/resources/static/images/player/wizard_left.gif")
-                                .toUri().toString()));
-                break;
-            case STAFF:
-                this.imageView.setImage(new Image(
-                        Paths.get("src/main/resources/static/images/player/staff_left.gif")
-                                .toUri().toString()));
-                break;
-            case SWORD:
-                this.imageView.setImage(new Image(
-                        Paths.get("src/main/resources/static/images/player/sword_left.gif")
-                                .toUri().toString()));
-                break;
-            default:
-                break;
-        }
+        this.imageView.setImage(new Image(
+                Paths.get(playerState.getActiveWeapon().getAnimationLeft())
+                        .toUri().toString()));
     }
 
     private void setNewPlayerSpawnCoordinates(Direction exitDirection) {
