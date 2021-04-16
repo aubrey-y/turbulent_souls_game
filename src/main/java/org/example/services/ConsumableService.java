@@ -15,7 +15,8 @@ public class ConsumableService {
     private PlayerService playerService;
     private AppService appService;
 
-    public ConsumableService(HealthService healthService, PlayerService playerService, AppService appService) {
+    public ConsumableService(HealthService healthService, PlayerService playerService,
+                             AppService appService) {
         this.healthService = healthService;
         this.playerService = playerService;
         this.appService = appService;
@@ -27,7 +28,8 @@ public class ConsumableService {
             this.healthService.applyHealthModifier(potion.getStatValue());
             break;
         case STRENGTH:
-            Map<String, Item> weaponInventory = this.appService.getPlayerState().getWeaponInventory();
+            Map<String, Item> weaponInventory =
+                    this.appService.getPlayerState().getWeaponInventory();
             for (String key : weaponInventory.keySet()) {
                 Weapon weapon = (Weapon) weaponInventory.get(key);
                 weapon.setAttack(weapon.getAttack() + potion.getStatValue());

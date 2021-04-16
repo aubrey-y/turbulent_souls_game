@@ -20,7 +20,8 @@ public class FieldComplianceUtility {
         while (iterator.hasNext()) {
             Map.Entry<String, Item> entry = iterator.next();
             if (entry.getKey().contains(PERIOD)) {
-                cleanEntries.put(entry.getKey().replaceAll(PERIOD_REGEX, LEGAL_PERIOD), entry.getValue());
+                cleanEntries.put(entry.getKey()
+                        .replaceAll(PERIOD_REGEX, LEGAL_PERIOD), entry.getValue());
                 iterator.remove();
             }
         }

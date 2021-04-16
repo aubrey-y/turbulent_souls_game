@@ -42,13 +42,15 @@ public class ResourcePathUtility {
             + "src/main/resources/static/images/monsters/white_dragon/white_dragon_attack_left.gif";
 
     public static final String WHITE_DRAGON_ATTACK_RIGHT_PATH = ""
-            + "src/main/resources/static/images/monsters/white_dragon/white_dragon_attack_right.gif";
+            + "src/main/resources/static/images/monsters/white_dragon/"
+            + "white_dragon_attack_right.gif";
 
     public static final String WHITE_DRAGON_DAMAGE_LEFT_PATH = ""
             + "src/main/resources/static/images/monsters/white_dragon/white_dragon_damage_left.gif";
 
     public static final String WHITE_DRAGON_DAMAGE_RIGHT_PATH = ""
-            + "src/main/resources/static/images/monsters/white_dragon/white_dragon_damage_right.gif";
+            + "src/main/resources/static/images/monsters/white_dragon/"
+            + "white_dragon_damage_right.gif";
 
     public static final String CASTLE_BULL_ATTACK_LEFT_PATH = "" 
             + "src/main/resources/static/images/monsters/bull/bull_attack_left.gif";

@@ -16,13 +16,6 @@ import javafx.stage.Stage;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 import org.example.App;
-import org.example.dto.Coordinate;
-import org.example.dto.Item;
-import org.example.dto.PlayerState;
-import org.example.dto.Weapon;
-import org.example.enums.Archetype;
-import org.example.enums.Difficulty;
-import org.example.enums.Direction;
 import org.example.services.AppService;
 import org.example.services.SaveService;
 
@@ -50,7 +43,7 @@ public class PrimaryController extends BaseController implements Initializable {
         this.initController();
         //Mongo Setup
         MongoClient mongoClient = null;
-        if(System.getenv("ENV") != null) {
+        if (System.getenv("ENV") != null) {
             ConnectionString connectionString = new ConnectionString(
                     System.getenv("MONGO_URI"));
             CodecRegistry pojoCodecRegistry = fromProviders(

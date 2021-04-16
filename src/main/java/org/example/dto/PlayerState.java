@@ -11,10 +11,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-//This import is directly for testing purposes
-import static org.example.util.ResourcePathUtility.BASIC_HEALTH_PATH;
-import static org.example.util.ResourcePathUtility.BASIC_SPEED_PATH;
-import static org.example.util.ResourcePathUtility.BASIC_STRENGTH_PATH;
 
 public class PlayerState {
 
@@ -148,31 +144,31 @@ public class PlayerState {
         }
         PlayerState playerState = (PlayerState) o;
         return ((this.username == null && playerState.username == null)
-                || this.username != null && this.username.equals(playerState.username)) &&
-                this.archetype == playerState.archetype &&
-                ((this.activeWeapon == null && playerState.activeWeapon == null)
+                || this.username != null && this.username.equals(playerState.username))
+                && this.archetype == playerState.archetype
+                && ((this.activeWeapon == null && playerState.activeWeapon == null)
                         || (this.activeWeapon != null
-                        && this.activeWeapon.equals(playerState.activeWeapon))) &&
-                ((this.weaponInventory == null && playerState.weaponInventory == null)
+                        && this.activeWeapon.equals(playerState.activeWeapon)))
+                && ((this.weaponInventory == null && playerState.weaponInventory == null)
                         || (this.weaponInventory != null
-                        && this.weaponInventory.equals(playerState.weaponInventory))) &&
-                ((this.generalInventory == null && playerState.generalInventory == null)
+                        && this.weaponInventory.equals(playerState.weaponInventory)))
+                && ((this.generalInventory == null && playerState.generalInventory == null)
                         || (this.generalInventory != null
-                        && this.generalInventory.equals(playerState.generalInventory))) &&
-                this.difficulty == playerState.difficulty &&
-                this.goldAmount == playerState.goldAmount &&
-                ((this.spawnCoordinates == null && playerState.spawnCoordinates == null)
+                        && this.generalInventory.equals(playerState.generalInventory)))
+                && this.difficulty == playerState.difficulty
+                && this.goldAmount == playerState.goldAmount
+                && ((this.spawnCoordinates == null && playerState.spawnCoordinates == null)
                         || (this.spawnCoordinates != null
-                        && this.spawnCoordinates.equals(playerState.spawnCoordinates))) &&
-                this.spawnOrientation == playerState.spawnOrientation &&
-                this.health == playerState.health &&
-                this.healthCapacity == playerState.healthCapacity &&
-                ((this.monstersKilled == null && playerState.monstersKilled == null)
+                        && this.spawnCoordinates.equals(playerState.spawnCoordinates)))
+                && this.spawnOrientation == playerState.spawnOrientation
+                && this.health == playerState.health
+                && this.healthCapacity == playerState.healthCapacity
+                && ((this.monstersKilled == null && playerState.monstersKilled == null)
                         || (this.monstersKilled != null
-                        && this.monstersKilled.equals(playerState.monstersKilled))) &&
-                ((this.email == null && playerState.email == null)
-                        || (this.email != null && this.email.equals(playerState.email))) &&
-                ((this.lastUpdated == null && playerState.email == null)
+                        && this.monstersKilled.equals(playerState.monstersKilled)))
+                && ((this.email == null && playerState.email == null)
+                        || (this.email != null && this.email.equals(playerState.email)))
+                && ((this.lastUpdated == null && playerState.email == null)
                         || (this.lastUpdated != null
                         && this.lastUpdated.equals(playerState.lastUpdated)));
     }

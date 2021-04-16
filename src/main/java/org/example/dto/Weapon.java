@@ -10,18 +10,18 @@ import java.util.Objects;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME)
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = BasicSword.class, name = "BASICSWORD"),
-        @JsonSubTypes.Type(value = BasicStaff.class, name = "BASICSTAFF"),
-        @JsonSubTypes.Type(value = BasicMagic.class, name = "BASICMAGIC"),
-        @JsonSubTypes.Type(value = AdvancedSword.class, name = "ADVANCEDSWORD"),
-        @JsonSubTypes.Type(value = AdvancedStaff.class, name = "ADVANCEDSTAFF"),
-        @JsonSubTypes.Type(value = AdvancedMagic.class, name = "ADVANCEDMAGIC"),
-        @JsonSubTypes.Type(value = ExpertSword.class, name = "EXPERTSWORD"),
-        @JsonSubTypes.Type(value = ExpertStaff.class, name = "EXPERTSTAFF"),
-        @JsonSubTypes.Type(value = ExpertMagic.class, name = "EXPERTMAGIC"),
-        @JsonSubTypes.Type(value = MasterSword.class, name = "MASTERSWORD"),
-        @JsonSubTypes.Type(value = MasterStaff.class, name = "MASTERSTAFF"),
-        @JsonSubTypes.Type(value = MasterMagic.class, name = "MASTERMAGIC")
+    @JsonSubTypes.Type(value = BasicSword.class, name = "BASICSWORD"),
+    @JsonSubTypes.Type(value = BasicStaff.class, name = "BASICSTAFF"),
+    @JsonSubTypes.Type(value = BasicMagic.class, name = "BASICMAGIC"),
+    @JsonSubTypes.Type(value = AdvancedSword.class, name = "ADVANCEDSWORD"),
+    @JsonSubTypes.Type(value = AdvancedStaff.class, name = "ADVANCEDSTAFF"),
+    @JsonSubTypes.Type(value = AdvancedMagic.class, name = "ADVANCEDMAGIC"),
+    @JsonSubTypes.Type(value = ExpertSword.class, name = "EXPERTSWORD"),
+    @JsonSubTypes.Type(value = ExpertStaff.class, name = "EXPERTSTAFF"),
+    @JsonSubTypes.Type(value = ExpertMagic.class, name = "EXPERTMAGIC"),
+    @JsonSubTypes.Type(value = MasterSword.class, name = "MASTERSWORD"),
+    @JsonSubTypes.Type(value = MasterStaff.class, name = "MASTERSTAFF"),
+    @JsonSubTypes.Type(value = MasterMagic.class, name = "MASTERMAGIC")
 })
 public abstract class Weapon extends Item {
 

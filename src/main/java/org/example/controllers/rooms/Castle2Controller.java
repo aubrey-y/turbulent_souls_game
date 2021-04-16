@@ -11,7 +11,6 @@ import org.example.controllers.GameScreenController;
 import org.example.dto.Monster;
 import org.example.services.AppService;
 import org.example.services.DirectionService;
-import org.example.services.GoldService;
 import org.example.services.HealthService;
 import org.example.services.MonsterService;
 import org.example.services.PlayerService;

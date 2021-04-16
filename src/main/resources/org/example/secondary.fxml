@@ -76,7 +76,7 @@
                         </Label>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <ToggleButton id="levelButton" mnemonicParsing="false" onAction="#selectEasyDifficulty" prefHeight="66.0" prefWidth="193.0" stylesheets="@../../static/css/button.css" text="Easy" textFill="WHITE">
+                              <ToggleButton id="levelButton" fx:id="easyButton" mnemonicParsing="false" onAction="#selectEasyDifficulty" prefHeight="66.0" prefWidth="193.0" stylesheets="@../../static/css/button.css" text="Easy" textFill="WHITE">
                                  <font>
                                     <Font name="Pixeboy" size="39.0" />
                                  </font>
@@ -84,12 +84,12 @@
                                     <ToggleGroup fx:id="toggleGroup1" />
                                  </toggleGroup>
                               </ToggleButton>
-                              <ToggleButton id="levelButton" mnemonicParsing="false" onAction="#selectMediumDifficulty" prefHeight="66.0" prefWidth="194.0" stylesheets="@../../static/css/button.css" text="Medium" textFill="WHITE" toggleGroup="$toggleGroup1">
+                              <ToggleButton id="levelButton" fx:id="mediumButton" mnemonicParsing="false" onAction="#selectMediumDifficulty" prefHeight="66.0" prefWidth="194.0" stylesheets="@../../static/css/button.css" text="Medium" textFill="WHITE" toggleGroup="$toggleGroup1">
                                  <font>
                                     <Font name="Pixeboy" size="39.0" />
                                  </font>
                               </ToggleButton>
-                              <ToggleButton id="levelButton" mnemonicParsing="false" onAction="#selectHardDifficulty" prefHeight="66.0" prefWidth="194.0" stylesheets="@../../static/css/button.css" text="Hard" textFill="WHITE" toggleGroup="$toggleGroup1">
+                              <ToggleButton id="levelButton" fx:id="hardButton" mnemonicParsing="false" onAction="#selectHardDifficulty" prefHeight="66.0" prefWidth="194.0" stylesheets="@../../static/css/button.css" text="Hard" textFill="WHITE" toggleGroup="$toggleGroup1">
                                  <font>
                                     <Font name="Pixeboy" size="39.0" />
                                  </font>
@@ -106,7 +106,7 @@
                         </Label>
                         <HBox alignment="CENTER" layoutX="10.0" layoutY="625.0" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <ToggleButton mnemonicParsing="false" onAction="#selectWizardArchetype" prefHeight="66.0" prefWidth="193.0" stylesheets="@../../static/css/button.css" textFill="WHITE">
+                              <ToggleButton fx:id="wizardButton" mnemonicParsing="false" onAction="#selectWizardArchetype" prefHeight="66.0" prefWidth="193.0" stylesheets="@../../static/css/button.css" textFill="WHITE">
                                  <font>
                                     <Font name="Pixeboy" size="39.0" />
                                  </font>
@@ -121,7 +121,7 @@
                                     <ToggleGroup fx:id="toggleGroup2" />
                                  </toggleGroup>
                               </ToggleButton>
-                              <ToggleButton mnemonicParsing="false" onAction="#selectMageArchetype" prefHeight="66.0" prefWidth="193.0" stylesheets="@../../static/css/button.css" textFill="WHITE" toggleGroup="$toggleGroup2">
+                              <ToggleButton fx:id="mageButton" mnemonicParsing="false" onAction="#selectMageArchetype" prefHeight="66.0" prefWidth="193.0" stylesheets="@../../static/css/button.css" textFill="WHITE" toggleGroup="$toggleGroup2">
                                  <font>
                                     <Font name="Pixeboy" size="39.0" />
                                  </font>
@@ -133,7 +133,7 @@
                                     </ImageView>
                                  </graphic>
                               </ToggleButton>
-                              <ToggleButton mnemonicParsing="false" onAction="#selectWarriorArchetype" prefHeight="66.0" prefWidth="193.0" stylesheets="@../../static/css/button.css" textFill="WHITE" toggleGroup="$toggleGroup2">
+                              <ToggleButton fx:id="warriorButton" mnemonicParsing="false" onAction="#selectWarriorArchetype" prefHeight="66.0" prefWidth="193.0" stylesheets="@../../static/css/button.css" textFill="WHITE" toggleGroup="$toggleGroup2">
                                  <font>
                                     <Font name="Pixeboy" size="39.0" />
                                  </font>

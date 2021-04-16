@@ -7,7 +7,6 @@ import static org.example.util.ResourcePathUtility.ADVANCED_STAFF_PLAYER_ATTACK_
 import static org.example.util.ResourcePathUtility.ADVANCED_STAFF_PLAYER_ATTACK_RIGHT;
 import static org.example.util.ResourcePathUtility.ADVANCED_STAFF_PLAYER_LEFT;
 import static org.example.util.ResourcePathUtility.ADVANCED_STAFF_PLAYER_RIGHT;
-import static org.example.util.ResourcePathUtility.BASIC_STAFF_PLAYER_LEFT;
 
 public class AdvancedStaff extends Weapon {
     public AdvancedStaff() {
