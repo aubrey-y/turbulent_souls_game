@@ -15,6 +15,7 @@ import org.example.services.HealthService;
 import org.example.services.MonsterService;
 import org.example.services.PlayerService;
 import org.example.services.RoomDirectionService;
+import org.example.services.SaveService;
 import org.example.util.ScheduleUtility;
 
 import java.net.URL;
@@ -24,8 +25,11 @@ import java.util.ResourceBundle;
 import static org.example.enums.Direction.LEFT;
 import static org.example.enums.MonsterType.CASTLE_BULL;
 import static org.example.util.ResourcePathUtility.CASTLE_BULL_ATTACK_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.CASTLE_BULL_ATTACK_RIGHT_PATH;
 import static org.example.util.ResourcePathUtility.CASTLE_BULL_DEATH_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.CASTLE_BULL_DEATH_RIGHT_PATH;
 import static org.example.util.ResourcePathUtility.CASTLE_BULL_IDLE_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.CASTLE_BULL_IDLE_RIGHT_PATH;
 
 public class Castle2Controller extends GameScreenController implements Initializable {
 
@@ -36,7 +40,7 @@ public class Castle2Controller extends GameScreenController implements Initializ
     @FXML
     private ImageView castlebull1;
     private final String castlebull1Key = "castle2castlebull1";
-    private final int castlebull1HealthCapacity = 10;
+    private final int castlebull1HealthCapacity = 40;
 
     @FXML
     private ProgressBar castlebull1HealthBar;
@@ -45,13 +49,16 @@ public class Castle2Controller extends GameScreenController implements Initializ
                              PlayerService playerService,
                              DirectionService directionService,
                              RoomDirectionService roomDirectionService,
-                             HealthService healthService, Scene scene) {
+                             HealthService healthService,
+                             SaveService saveService, Scene scene) {
         super(
                 appService,
                 playerService,
                 directionService,
                 roomDirectionService,
-                healthService, scene
+                healthService,
+                saveService,
+                scene
         );
     }
 
@@ -59,7 +66,7 @@ public class Castle2Controller extends GameScreenController implements Initializ
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.monsterService = new MonsterService();
         this.playerService.setMonsterService(this.monsterService);
-        this.initGameScreenController(this.monsterService);
+        this.initGameScreenController(this.monsterService, null);
         this.resetPlayerSchedule = ScheduleUtility.generatePlayerResetSchedule(0.5,
                 this.playerService);
         this.playerService.registerTimeline(this.resetPlayerSchedule);
@@ -69,7 +76,7 @@ public class Castle2Controller extends GameScreenController implements Initializ
                 this.castlebull1Key,
                 this.castlebull1,
                 CASTLE_BULL_ATTACK_LEFT_PATH,
-                null
+                CASTLE_BULL_ATTACK_RIGHT_PATH
         );
         if (!this.appService.getMonstersKilled().contains(this.castlebull1Key)) {
             this.setupCastlebull1();
@@ -81,17 +88,18 @@ public class Castle2Controller extends GameScreenController implements Initializ
         this.castlebull1.setTranslateX(1000);
         this.castlebull1.setTranslateY(400);
         this.castlebull1.setVisible(true);
-        this.castlebull1HealthBar.setTranslateX(965);
-        this.castlebull1HealthBar.setTranslateY(360);
+        this.castlebull1HealthBar.setTranslateX(995);
+        this.castlebull1HealthBar.setTranslateY(390);
         this.castlebull1HealthBar.setVisible(true);
         this.monsterService.addMonster(
                 this.castlebull1Key,
                 new Monster()
                         .setHealth(this.castlebull1HealthCapacity)
                         .setHealthCapacity(this.castlebull1HealthCapacity)
-                        .setRange(5.0)
-                        .setAttack(2)
+                        .setRange(2.0)
+                        .setAttack(25)
                         .setAccuracy(0.5)
+                        .setKillReward(250)
                         .setMonsterType(CASTLE_BULL)
                         .setImageView(this.castlebull1)
                         .setHealthBar(this.castlebull1HealthBar)
@@ -99,6 +107,10 @@ public class Castle2Controller extends GameScreenController implements Initializ
                         .setDeathAnimationLeft(
                                 new Image(
                                         Paths.get(CASTLE_BULL_DEATH_LEFT_PATH).toUri().toString()))
+                        .setDeathAnimationRight(
+                                new Image(
+                                        Paths.get(CASTLE_BULL_DEATH_RIGHT_PATH).toUri().toString()))
+                        .setKey(this.castlebull1Key)
         );
         this.castlebull1AttackSchedule = ScheduleUtility.generateMonsterAttackSchedule(
                 1.0,
@@ -111,7 +123,7 @@ public class Castle2Controller extends GameScreenController implements Initializ
                 this.castlebull1ResetSchedule,
                 Timeline.INDEFINITE,
                 CASTLE_BULL_IDLE_LEFT_PATH,
-                null
+                CASTLE_BULL_IDLE_RIGHT_PATH
         );
         this.castlebull1AttackSchedule.play();
     }

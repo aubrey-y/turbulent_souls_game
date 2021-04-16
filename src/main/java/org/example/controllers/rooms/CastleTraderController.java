@@ -15,7 +15,10 @@ import org.example.services.HealthService;
 import org.example.services.MonsterService;
 import org.example.services.PlayerService;
 import org.example.services.RoomDirectionService;
+import org.example.services.SaveService;
+import org.example.services.TraderService;
 import org.example.util.ScheduleUtility;
+import org.example.util.TraderInventoryUtility;
 
 import java.net.URL;
 import java.nio.file.Paths;
@@ -23,6 +26,7 @@ import java.util.ResourceBundle;
 
 import static org.example.enums.Direction.LEFT;
 import static org.example.enums.MonsterType.SLIME;
+import static org.example.enums.RoomType.CASTLE_TRADER;
 import static org.example.util.ResourcePathUtility.SLIME_ATTACK_LEFT_PATH;
 import static org.example.util.ResourcePathUtility.SLIME_DEATH_LEFT_PATH;
 import static org.example.util.ResourcePathUtility.SLIME_LEFT_PATH;
@@ -41,17 +45,22 @@ public class CastleTraderController extends GameScreenController implements Init
     @FXML
     private ProgressBar slime1HealthBar;
 
+    @FXML
+    private ImageView trader;
+
     public CastleTraderController(AppService appService,
                                   PlayerService playerService,
                                   DirectionService directionService,
                                   RoomDirectionService roomDirectionService,
-                                  HealthService healthService, Scene scene) {
+                                  HealthService healthService,
+                                  SaveService saveService, Scene scene) {
         super(
                 appService,
                 playerService,
                 directionService,
                 roomDirectionService,
                 healthService,
+                saveService,
                 scene
         );
     }
@@ -60,7 +69,9 @@ public class CastleTraderController extends GameScreenController implements Init
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.monsterService = new MonsterService();
         this.playerService.setMonsterService(this.monsterService);
-        this.initGameScreenController(this.monsterService);
+        this.traderService = new TraderService(TraderInventoryUtility
+                .getTraderInventoryForRoomType(CASTLE_TRADER));
+        this.initGameScreenController(this.monsterService, this.trader);
         this.resetPlayerHueSchedule = ScheduleUtility.generatePlayerResetSchedule(0.5,
                 this.playerService);
         this.playerService.registerTimeline(this.resetPlayerHueSchedule);
@@ -90,15 +101,17 @@ public class CastleTraderController extends GameScreenController implements Init
                 new Monster()
                         .setHealth(this.slime1HealthCapacity)
                         .setHealthCapacity(this.slime1HealthCapacity)
-                        .setRange(5.0)
-                        .setAttack(2)
+                        .setRange(3.0)
+                        .setAttack(5)
                         .setAccuracy(0.5)
+                        .setKillReward(100)
                         .setMonsterType(SLIME)
                         .setImageView(this.slime1)
                         .setHealthBar(this.slime1HealthBar)
                         .setOrientation(LEFT)
                         .setDeathAnimationLeft(
-                                new Image(Paths.get(SLIME_DEATH_LEFT_PATH).toUri().toString())));
+                                new Image(Paths.get(SLIME_DEATH_LEFT_PATH).toUri().toString()))
+                        .setKey(this.slime1Key));
         this.slime1AttackSchedule = ScheduleUtility.generateMonsterAttackSchedule(
                 1.0,
                 this.appService,

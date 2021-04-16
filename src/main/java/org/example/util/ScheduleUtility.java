@@ -7,16 +7,22 @@ import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
+import org.example.dto.Item;
 import org.example.dto.Monster;
 import org.example.App;
+import org.example.dto.Potion;
+import org.example.dto.Weapon;
 import org.example.services.AppService;
 import org.example.services.HealthService;
 import org.example.services.MonsterService;
 import org.example.services.PlayerService;
 
 import java.nio.file.Paths;
+import java.util.Map;
 
 import static org.example.enums.Direction.LEFT;
+import static org.example.services.PlayerService.DEFAULT_MOVE_SIZE;
+import static org.example.util.ResourcePathUtility.GOLD_POUCH_PATH;
 
 
 public class ScheduleUtility {
@@ -106,7 +112,11 @@ public class ScheduleUtility {
         Timeline timeline = new Timeline();
         Timeline finalTimeline = timeline;
         timeline = new Timeline(new KeyFrame(Duration.seconds(duration), actionEvent -> {
-            monster.getImageView().setVisible(false);
+            monster.getImageView().setImage(
+                    new Image(Paths.get(GOLD_POUCH_PATH).toUri().toString()));
+            monster.setRange(1.0);
+            monster.getImageView().setFitHeight(100.0);
+            monster.getImageView().setFitWidth(100.0);
         }));
         timeline.setCycleCount(1);
         return timeline;
@@ -123,6 +133,34 @@ public class ScheduleUtility {
             }
         }));
         timeline.setCycleCount(Timeline.INDEFINITE);
+        return timeline;
+    }
+
+    public static Timeline generateSpeedPotionSchedule(AppService appService,
+                                                       PlayerService playerService) {
+        Timeline timeline = new Timeline();
+        Timeline finalTimeLine = timeline;
+        timeline = new Timeline(new KeyFrame(Duration.seconds(30), actionEvent -> {
+            playerService.setMoveSize(DEFAULT_MOVE_SIZE);
+        }));
+        timeline.setCycleCount(1);
+        return timeline;
+    }
+
+    public static Timeline generateStrengthPotionSchedule(AppService appService, Potion potion) {
+        Timeline timeline = new Timeline();
+        Timeline finalTimeLine = timeline;
+        timeline = new Timeline(new KeyFrame(Duration.seconds(30), actionEvent -> {
+            Map<String, Item> weaponInventory = appService.getPlayerState().getWeaponInventory();
+            for (String key : weaponInventory.keySet()) {
+                Weapon weapon = (Weapon) weaponInventory.get(key);
+                weapon.setAttack(weapon.getAttack() - potion.getStatValue());
+                weaponInventory.put(key, weapon);
+            }
+            appService.setPlayerState(appService.getPlayerState()
+                    .setWeaponInventory(weaponInventory));
+        }));
+        timeline.setCycleCount(1);
         return timeline;
     }
 }

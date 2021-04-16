@@ -15,6 +15,7 @@ import org.example.services.HealthService;
 import org.example.services.MonsterService;
 import org.example.services.PlayerService;
 import org.example.services.RoomDirectionService;
+import org.example.services.SaveService;
 import org.example.util.ScheduleUtility;
 
 import java.net.URL;
@@ -24,8 +25,11 @@ import java.util.ResourceBundle;
 import static org.example.enums.Direction.LEFT;
 import static org.example.enums.MonsterType.WATER_BULL;
 import static org.example.util.ResourcePathUtility.WATER_BULL_ATTACK_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.WATER_BULL_ATTACK_RIGHT_PATH;
 import static org.example.util.ResourcePathUtility.WATER_BULL_DEATH_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.WATER_BULL_DEATH_RIGHT_PATH;
 import static org.example.util.ResourcePathUtility.WATER_BULL_IDLE_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.WATER_BULL_IDLE_RIGHT_PATH;
 
 public class Garden2Controller extends GameScreenController implements Initializable {
 
@@ -36,7 +40,7 @@ public class Garden2Controller extends GameScreenController implements Initializ
     @FXML
     private ImageView waterbull1;
     private final String waterbull1Key = "garden2waterbull1";
-    private final int waterbull1HealthCapacity = 10;
+    private final int waterbull1HealthCapacity = 50;
 
     @FXML
     private ProgressBar waterbull1HealthBar;
@@ -45,13 +49,16 @@ public class Garden2Controller extends GameScreenController implements Initializ
                              PlayerService playerService,
                              DirectionService directionService,
                              RoomDirectionService roomDirectionService,
-                             HealthService healthService, Scene scene) {
+                             HealthService healthService,
+                             SaveService saveService, Scene scene) {
         super(
                 appService,
                 playerService,
                 directionService,
                 roomDirectionService,
-                healthService, scene
+                healthService,
+                saveService,
+                scene
         );
     }
 
@@ -59,7 +66,7 @@ public class Garden2Controller extends GameScreenController implements Initializ
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.monsterService = new MonsterService();
         this.playerService.setMonsterService(this.monsterService);
-        this.initGameScreenController(this.monsterService);
+        this.initGameScreenController(this.monsterService, null);
         this.resetPlayerSchedule = ScheduleUtility.generatePlayerResetSchedule(0.5,
                 this.playerService);
         this.playerService.registerTimeline(this.resetPlayerSchedule);
@@ -69,7 +76,7 @@ public class Garden2Controller extends GameScreenController implements Initializ
                 this.waterbull1Key,
                 this.waterbull1,
                 WATER_BULL_IDLE_LEFT_PATH,
-                null
+                WATER_BULL_IDLE_RIGHT_PATH
         );
         if (!this.appService.getMonstersKilled().contains(this.waterbull1Key)) {
             this.setupWaterbull1();
@@ -81,8 +88,8 @@ public class Garden2Controller extends GameScreenController implements Initializ
         this.waterbull1.setTranslateX(1000);
         this.waterbull1.setTranslateY(400);
         this.waterbull1.setVisible(true);
-        this.waterbull1HealthBar.setTranslateX(945);
-        this.waterbull1HealthBar.setTranslateY(360);
+        this.waterbull1HealthBar.setTranslateX(975);
+        this.waterbull1HealthBar.setTranslateY(390);
         this.waterbull1HealthBar.setVisible(true);
         this.monsterService.addMonster(
                 this.waterbull1Key,
@@ -90,15 +97,21 @@ public class Garden2Controller extends GameScreenController implements Initializ
                         .setHealth(this.waterbull1HealthCapacity)
                         .setHealthCapacity(this.waterbull1HealthCapacity)
                         .setRange(5.0)
-                        .setAttack(2)
+                        .setAttack(30)
                         .setAccuracy(0.5)
+                        .setKillReward(275)
                         .setMonsterType(WATER_BULL)
                         .setImageView(this.waterbull1)
                         .setHealthBar(this.waterbull1HealthBar)
                         .setOrientation(LEFT)
                         .setDeathAnimationLeft(
                                 new Image(
-                                        Paths.get(WATER_BULL_DEATH_LEFT_PATH).toUri().toString())));
+                                        Paths.get(WATER_BULL_DEATH_LEFT_PATH).toUri().toString()))
+                        .setDeathAnimationRight(
+                                new Image(
+                                        Paths.get(WATER_BULL_DEATH_RIGHT_PATH).toUri().toString()))
+                        .setKey(this.waterbull1Key)
+        );
         this.waterbull1AttackSchedule = ScheduleUtility.generateMonsterAttackSchedule(
                 1.0,
                 this.appService,
@@ -110,7 +123,7 @@ public class Garden2Controller extends GameScreenController implements Initializ
                 this.waterbull1ResetSchedule,
                 Timeline.INDEFINITE,
                 WATER_BULL_ATTACK_LEFT_PATH,
-                null
+                WATER_BULL_ATTACK_RIGHT_PATH
         );
         this.waterbull1AttackSchedule.play();
     }

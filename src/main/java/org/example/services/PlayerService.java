@@ -3,8 +3,11 @@ package org.example.services;
 import javafx.animation.Timeline;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.example.App;
+import org.example.dto.Coordinate;
+import org.example.dto.Monster;
 import org.example.dto.PlayerState;
 import org.example.dto.Room;
 import org.example.enums.Direction;
@@ -12,6 +15,7 @@ import org.example.enums.Direction;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,44 +33,56 @@ public class PlayerService {
 
     private MonsterService monsterService;
 
+    private GoldService goldService;
+
+    private SaveService saveService;
+
     private DirectionService directionService = new DirectionService();
 
     private Set<Timeline> controllerTimelines;
 
     private Direction lastExitDirection;
 
-    public static final double MOVE_SIZE = 6;
+    public static final double DEFAULT_MOVE_SIZE = 30;
+
+    private double moveSize = DEFAULT_MOVE_SIZE;
+
+    public PlayerService() {
+
+    }
 
     public PlayerService(AppService appService,
                          RoomDirectionService roomDirectionService,
-                         HealthService healthService) {
+                         HealthService healthService,
+                         SaveService saveService) {
         this.appService = appService;
         this.roomDirectionService = roomDirectionService;
         this.healthService = healthService;
+        this.saveService = saveService;
         this.controllerTimelines = new HashSet<>();
     }
 
     public void moveUp(boolean shift) {
         this.imageView.setTranslateY(
-                this.imageView.getTranslateY() - (!shift ? MOVE_SIZE : MOVE_SIZE * 10));
+                this.imageView.getTranslateY() - (!shift ? this.moveSize : this.moveSize * 2));
         this.checkForExit();
     }
 
     public void moveDown(boolean shift) {
         this.imageView.setTranslateY(
-                this.imageView.getTranslateY() + (!shift ? MOVE_SIZE : MOVE_SIZE * 10));
+                this.imageView.getTranslateY() + (!shift ? this.moveSize : this.moveSize * 2));
         this.checkForExit();
     }
 
     public void moveRight(boolean shift) {
         this.imageView.setTranslateX(
-                this.imageView.getTranslateX() + (!shift ? MOVE_SIZE : MOVE_SIZE * 10));
+                this.imageView.getTranslateX() + (!shift ? this.moveSize : this.moveSize * 2));
         this.checkForExit();
     }
 
     public void moveLeft(boolean shift) {
         this.imageView.setTranslateX(
-                this.imageView.getTranslateX() - (!shift ? MOVE_SIZE : MOVE_SIZE * 10));
+                this.imageView.getTranslateX() - (!shift ? this.moveSize : this.moveSize * 2));
         this.checkForExit();
     }
 
@@ -159,6 +175,7 @@ public class PlayerService {
                     DirectionService.class,
                     RoomDirectionService.class,
                     HealthService.class,
+                    SaveService.class,
                     Scene.class);
             loader.setControllerFactory(GameScreenController -> {
                 try {
@@ -167,6 +184,7 @@ public class PlayerService {
                             this.roomDirectionService.getDirectionService(),
                             this.roomDirectionService,
                             this.healthService,
+                            this.saveService,
                             this.appService.getScene());
                 } catch (InstantiationException | InvocationTargetException
                         | IllegalAccessException e) {
@@ -181,25 +199,55 @@ public class PlayerService {
         return loader;
     }
 
+    public boolean playerInRangeOfTrader() {
+        return this.imageView.getTranslateX() >= 844 && this.imageView.getTranslateX() <= 982
+                && this.imageView.getTranslateY() >= 400 && this.imageView.getTranslateY() <= 600;
+    }
+
+    public void attemptToClaimGold() {
+        for (Monster monster : this.monsterService.getMonsterMapping().values()) {
+            if (!monster.isAlive() && monster.getRange() == 1.0
+                    && this.monsterService.playerIsInRangeOfMonster(
+                            monster.getKey(), this.imageView.getTranslateX(),
+                    this.imageView.getTranslateY())) {
+                this.goldService.adjustGoldAmount(monster.getKillReward());
+                monster.getImageView().setVisible(false);
+                monster.setRange(-1.0);
+            }
+        }
+    }
+
+    public void displayPlayerRightOrientation(PlayerState playerState) {
+        this.imageView.setImage(new Image(
+                Paths.get(playerState.getActiveWeapon().getAnimationRight())
+                        .toUri().toString()));
+    }
+
+    public void displayPlayerLeftOrientation(PlayerState playerState) {
+        this.imageView.setImage(new Image(
+                Paths.get(playerState.getActiveWeapon().getAnimationLeft())
+                        .toUri().toString()));
+    }
+
     private void setNewPlayerSpawnCoordinates(Direction exitDirection) {
         PlayerState playerState = this.appService.getPlayerState();
         switch (exitDirection) {
         case UP:
             playerState.setSpawnCoordinates(
-                    new int[]{(int) this.imageView.getTranslateX(), 910});
+                    new Coordinate().setX((int) this.imageView.getTranslateX()).setY(910));
             break;
         case DOWN:
             playerState.setSpawnCoordinates(
-                    new int[]{(int) this.imageView.getTranslateX(), 30});
+                    new Coordinate().setX((int) this.imageView.getTranslateX()).setY(30));
             break;
         case LEFT:
             playerState.setSpawnCoordinates(
-                    new int[]{1770, (int) this.imageView.getTranslateY()});
+                    new Coordinate().setX(1770).setY((int) this.imageView.getTranslateY()));
             playerState.setSpawnOrientation(LEFT);
             break;
         case RIGHT:
             playerState.setSpawnCoordinates(
-                    new int[]{22, (int) this.imageView.getTranslateY()});
+                    new Coordinate().setX(22).setY((int) this.imageView.getTranslateY()));
             playerState.setSpawnOrientation(RIGHT);
             break;
         default:
@@ -275,5 +323,40 @@ public class PlayerService {
     public PlayerService setMonsterService(MonsterService monsterService) {
         this.monsterService = monsterService;
         return this;
+    }
+
+    public GoldService getGoldService() {
+        return goldService;
+    }
+
+    public PlayerService setGoldService(GoldService goldService) {
+        this.goldService = goldService;
+        return this;
+    }
+
+    public SaveService getSaveService() {
+        return saveService;
+    }
+
+    public PlayerService setSaveService(SaveService saveService) {
+        this.saveService = saveService;
+        return this;
+    }
+
+    public DirectionService getDirectionService() {
+        return directionService;
+    }
+
+    public PlayerService setDirectionService(DirectionService directionService) {
+        this.directionService = directionService;
+        return this;
+    }
+
+    public void setMoveSize(double moveSize) {
+        this.moveSize = moveSize;
+    }
+
+    public double getMoveSize() {
+        return this.moveSize;
     }
 }

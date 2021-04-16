@@ -8,6 +8,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class DirectionServiceTest {
+
     @Test
     public void directionUp() {
         DirectionService direction = new DirectionService();

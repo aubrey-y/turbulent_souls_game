@@ -15,6 +15,7 @@ import org.example.services.HealthService;
 import org.example.services.MonsterService;
 import org.example.services.PlayerService;
 import org.example.services.RoomDirectionService;
+import org.example.services.SaveService;
 import org.example.util.ScheduleUtility;
 
 import java.net.URL;
@@ -24,8 +25,11 @@ import java.util.ResourceBundle;
 import static org.example.enums.Direction.LEFT;
 import static org.example.enums.MonsterType.WHITE_DRAGON;
 import static org.example.util.ResourcePathUtility.WHITE_DRAGON_ATTACK_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.WHITE_DRAGON_ATTACK_RIGHT_PATH;
 import static org.example.util.ResourcePathUtility.WHITE_DRAGON_DEATH_LEFT_PATH;
 import static org.example.util.ResourcePathUtility.WHITE_DRAGON_DEATH_RIGHT_PATH;
+import static org.example.util.ResourcePathUtility.WHITE_DRAGON_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.WHITE_DRAGON_RIGHT_PATH;
 
 public class Castle1Controller extends GameScreenController implements Initializable {
 
@@ -36,7 +40,7 @@ public class Castle1Controller extends GameScreenController implements Initializ
     @FXML
     private ImageView whitedragon1;
     private final String whitedragon1Key = "castle1whitedragon1";
-    private final int whitedragon1HealthCapacity = 10;
+    private final int whitedragon1HealthCapacity = 25;
 
     @FXML
     private ProgressBar whitedragon1HealthBar;
@@ -45,13 +49,16 @@ public class Castle1Controller extends GameScreenController implements Initializ
                              PlayerService playerService,
                              DirectionService directionService,
                              RoomDirectionService roomDirectionService,
-                             HealthService healthService, Scene scene) {
+                             HealthService healthService,
+                             SaveService saveService, Scene scene) {
         super(
                 appService,
                 playerService,
                 directionService,
                 roomDirectionService,
-                healthService, scene
+                healthService,
+                saveService,
+                scene
         );
     }
 
@@ -59,7 +66,7 @@ public class Castle1Controller extends GameScreenController implements Initializ
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.monsterService = new MonsterService();
         this.playerService.setMonsterService(this.monsterService);
-        this.initGameScreenController(this.monsterService);
+        this.initGameScreenController(this.monsterService, null);
         this.resetPlayerSchedule = ScheduleUtility.generatePlayerResetSchedule(0.5,
                 this.playerService);
         this.playerService.registerTimeline(this.resetPlayerSchedule);
@@ -68,8 +75,8 @@ public class Castle1Controller extends GameScreenController implements Initializ
                 this.monsterService,
                 this.whitedragon1Key,
                 this.whitedragon1,
-                "src/main/resources/static/images/monsters/gifs/white_dragon_left.gif",
-                "src/main/resources/static/images/monsters/gifs/white_dragon_right.gif"
+                WHITE_DRAGON_LEFT_PATH,
+                WHITE_DRAGON_RIGHT_PATH
         );
         if (!this.appService.getMonstersKilled().contains(this.whitedragon1Key)) {
             this.setupWhitedragon1();
@@ -81,7 +88,7 @@ public class Castle1Controller extends GameScreenController implements Initializ
         this.whitedragon1.setTranslateX(1000);
         this.whitedragon1.setTranslateY(400);
         this.whitedragon1.setVisible(true);
-        this.whitedragon1HealthBar.setTranslateX(970);
+        this.whitedragon1HealthBar.setTranslateX(980);
         this.whitedragon1HealthBar.setTranslateY(360);
         this.whitedragon1HealthBar.setVisible(true);
         this.monsterService.addMonster(
@@ -89,9 +96,10 @@ public class Castle1Controller extends GameScreenController implements Initializ
                 new Monster()
                         .setHealth(this.whitedragon1HealthCapacity)
                         .setHealthCapacity(this.whitedragon1HealthCapacity)
-                        .setRange(5.0)
-                        .setAttack(2)
+                        .setRange(3.0)
+                        .setAttack(15)
                         .setAccuracy(0.5)
+                        .setKillReward(175)
                         .setMonsterType(WHITE_DRAGON)
                         .setImageView(this.whitedragon1)
                         .setHealthBar(this.whitedragon1HealthBar)
@@ -102,7 +110,8 @@ public class Castle1Controller extends GameScreenController implements Initializ
                         .setDeathAnimationRight(
                                 new Image(
                                         Paths.get(WHITE_DRAGON_DEATH_RIGHT_PATH).toUri().toString())
-                        ));
+                        )
+                        .setKey(this.whitedragon1Key));
         this.whiteDragon1AttackSchedule = ScheduleUtility.generateMonsterAttackSchedule(
                 1.0,
                 this.appService,
@@ -114,7 +123,7 @@ public class Castle1Controller extends GameScreenController implements Initializ
                 this.whiteDragon1ResetSchedule,
                 Timeline.INDEFINITE,
                 WHITE_DRAGON_ATTACK_LEFT_PATH,
-                null
+                WHITE_DRAGON_ATTACK_RIGHT_PATH
         );
         this.whiteDragon1AttackSchedule.play();
     }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.LoadGameController">
+   <children>
+      <ImageView pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../static/images/background.gif" />
+         </image>
+      </ImageView>
+      <Rectangle fx:id="warningBackground" arcHeight="5.0" arcWidth="5.0" fill="#ff1f66" height="1080.0" opacity="0.7" stroke="TRANSPARENT" strokeType="INSIDE" visible="false" width="1920.0" />
+      <TextField fx:id="credentialEntry" layoutX="600.0" layoutY="400.0" prefWidth="720.0" promptText="Password" stylesheets="@../../static/css/fontstyle.css" visible="false">
+         <font>
+            <Font name="Pixeboy" size="68.0" />
+         </font>
+      </TextField>
+      <VBox fx:id="savesVBox" layoutX="100.0" layoutY="50.0" prefHeight="900.0" prefWidth="1720.0" />
+      <Button id="backButton" alignment="BASELINE_CENTER" focusTraversable="false" layoutX="210.0" layoutY="950.0" mnemonicParsing="false" onAction="#switchToPrimary" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE">
+         <font>
+            <Font name="Pixeboy" size="30.0" />
+         </font>
+         <graphic>
+            <Label id="clickable" stylesheets="@../../static/css/fontstyle.css" text="Back" textFill="WHITE">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>

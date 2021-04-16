@@ -15,6 +15,7 @@ import org.example.services.HealthService;
 import org.example.services.MonsterService;
 import org.example.services.PlayerService;
 import org.example.services.RoomDirectionService;
+import org.example.services.SaveService;
 import org.example.util.ScheduleUtility;
 
 import java.net.URL;
@@ -24,6 +25,7 @@ import java.util.ResourceBundle;
 import static org.example.enums.Direction.LEFT;
 import static org.example.enums.MonsterType.DARK_KNIGHT;
 import static org.example.util.ResourcePathUtility.DARK_KNIGHT_ATTACK_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.DARK_KNIGHT_ATTACK_RIGHT_PATH;
 import static org.example.util.ResourcePathUtility.DARK_KNIGHT_DEATH_LEFT_PATH;
 import static org.example.util.ResourcePathUtility.DARK_KNIGHT_DEATH_RIGHT_PATH;
 import static org.example.util.ResourcePathUtility.DARK_KNIGHT_LEFT_PATH;
@@ -38,7 +40,7 @@ public class Castle3Controller extends GameScreenController implements Initializ
     @FXML
     private ImageView darkknight1;
     private final String darkknight1Key = "castle3darkknight1";
-    private final int darkknight1HealthCapacity = 10;
+    private final int darkknight1HealthCapacity = 100;
 
     @FXML
     private ProgressBar darkknight1HealthBar;
@@ -47,13 +49,16 @@ public class Castle3Controller extends GameScreenController implements Initializ
                              PlayerService playerService,
                              DirectionService directionService,
                              RoomDirectionService roomDirectionService,
-                             HealthService healthService, Scene scene) {
+                             HealthService healthService,
+                             SaveService saveService, Scene scene) {
         super(
                 appService,
                 playerService,
                 directionService,
                 roomDirectionService,
-                healthService, scene
+                healthService,
+                saveService,
+                scene
         );
     }
 
@@ -61,7 +66,7 @@ public class Castle3Controller extends GameScreenController implements Initializ
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.monsterService = new MonsterService();
         this.playerService.setMonsterService(this.monsterService);
-        this.initGameScreenController(this.monsterService);
+        this.initGameScreenController(this.monsterService, null);
         this.resetPlayerSchedule = ScheduleUtility.generatePlayerResetSchedule(0.5,
                 this.playerService);
         this.playerService.registerTimeline(this.resetPlayerSchedule);
@@ -71,7 +76,7 @@ public class Castle3Controller extends GameScreenController implements Initializ
                 this.darkknight1Key,
                 this.darkknight1,
                 DARK_KNIGHT_ATTACK_LEFT_PATH,
-                null
+                DARK_KNIGHT_ATTACK_RIGHT_PATH
         );
         if (!this.appService.getMonstersKilled().contains(this.darkknight1Key)) {
             this.setupDarkknight1();
@@ -83,8 +88,8 @@ public class Castle3Controller extends GameScreenController implements Initializ
         this.darkknight1.setTranslateX(1000);
         this.darkknight1.setTranslateY(400);
         this.darkknight1.setVisible(true);
-        this.darkknight1HealthBar.setTranslateX(895);
-        this.darkknight1HealthBar.setTranslateY(300);
+        this.darkknight1HealthBar.setTranslateX(995);
+        this.darkknight1HealthBar.setTranslateY(350);
         this.darkknight1HealthBar.setVisible(true);
         this.monsterService.addMonster(
                 this.darkknight1Key,
@@ -92,8 +97,9 @@ public class Castle3Controller extends GameScreenController implements Initializ
                         .setHealth(this.darkknight1HealthCapacity)
                         .setHealthCapacity(this.darkknight1HealthCapacity)
                         .setRange(5.0)
-                        .setAttack(2)
+                        .setAttack(20)
                         .setAccuracy(0.5)
+                        .setKillReward(350)
                         .setMonsterType(DARK_KNIGHT)
                         .setImageView(this.darkknight1)
                         .setHealthBar(this.darkknight1HealthBar)
@@ -104,6 +110,7 @@ public class Castle3Controller extends GameScreenController implements Initializ
                         .setDeathAnimationRight(
                                 new Image(
                                         Paths.get(DARK_KNIGHT_DEATH_RIGHT_PATH).toUri().toString()))
+                        .setKey(this.darkknight1Key)
         );
         this.darkknight1AttackSchedule = ScheduleUtility.generateMonsterAttackSchedule(
                 1.0,

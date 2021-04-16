@@ -5,26 +5,29 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.example.dto.PlayerState;
 import org.example.services.AppService;
+import org.example.services.ConsumableService;
 import org.example.services.DirectionService;
+import org.example.services.GoldService;
 import org.example.services.HealthService;
+import org.example.services.InventoryService;
 import org.example.services.MonsterService;
 import org.example.services.PlayerService;
 import org.example.services.RoomDirectionService;
-
-import java.nio.file.Paths;
+import org.example.services.SaveService;
+import org.example.services.TraderService;
 
 import static javafx.scene.input.KeyCode.SHIFT;
 import static org.example.enums.Direction.LEFT;
 
 
-public class GameScreenController {
+public class GameScreenController extends InventoryController {
 
     protected AppService appService;
 
@@ -38,10 +41,23 @@ public class GameScreenController {
 
     protected MonsterService monsterService;
 
+    protected InventoryService inventoryService;
+
+    protected ConsumableService consumableService;
+
+    protected TraderService traderService;
+
+    protected GoldService goldService;
+
     private Scene scene;
 
+    protected SaveService saveService;
+
     @FXML
-    private javafx.scene.control.Button closeButton;
+    private Button closeButton;
+
+    @FXML
+    private Button saveButton;
 
     @FXML
     private Label goldAmount;
@@ -66,48 +82,94 @@ public class GameScreenController {
                                 DirectionService directionService,
                                 RoomDirectionService roomDirectionService,
                                 HealthService healthService,
+                                SaveService saveService,
                                 Scene scene) {
         this.appService = appService;
         this.playerService = playerService;
         this.directionService = directionService;
         this.roomDirectionService = roomDirectionService;
         this.healthService = healthService;
+        this.saveService = saveService;
         this.scene = scene;
     }
 
-    protected void initGameScreenController(MonsterService monsterService) {
+    public GameScreenController() {
+
+    }
+
+    protected void initGameScreenController(MonsterService monsterService, ImageView trader) {
         PlayerState playerState = this.appService.getPlayerState();
+        if (playerState.getEmail() == null) {
+            this.saveButton.setDisable(true);
+        }
         this.goldAmount.setText(String.valueOf(this.appService.getPlayerState().getGoldAmount()));
+        this.goldService = new GoldService(this.appService, this.goldAmount);
+        if (this.traderService != null) {
+            this.initializeTraderService(this.traderService, this.goldService, trader);
+        }
+        this.playerService.setGoldService(this.goldService);
         this.initializePlayerHealth(playerState);
         this.initializePlayerImageView(playerState);
+        this.inventoryService = new InventoryService(this.appService);
+        this.initializeInventoryService(this.inventoryService);
+        this.consumableService = new ConsumableService(
+                this.healthService, this.playerService, this.appService);
         this.scene.setOnKeyPressed(e -> {
             switch (e.getCode()) {
+            case ESCAPE:
+                if (this.inventoryService.getInventoryOpen()) {
+                    this.inventoryService.toggleInventoryOpen();
+                } else if (this.traderService != null && this.traderService.isTraderOpen()) {
+                    this.traderService.toggleTraderOpen();
+                }
+                break;
             case W:
                 this.wPressed.set(true);
                 break;
             case A:
                 this.aPressed.set(true);
-                this.displayPlayerLeftOrientation(this.appService.getPlayerState());
+                this.playerService.displayPlayerLeftOrientation(this.appService.getPlayerState());
                 break;
             case S:
                 this.sPressed.set(true);
                 break;
             case D:
                 this.dPressed.set(true);
-                this.displayPlayerRightOrientation(this.appService.getPlayerState());
+                this.playerService.displayPlayerRightOrientation(this.appService.getPlayerState());
                 break;
             case P:
                 if (this.appService.getDevMode()) {
                     this.healthService.applyHealthModifier(-10);
                 }
                 break;
+            case B:
+                if (this.traderService == null || !this.traderService.isTraderOpen()) {
+                    this.inventoryService.toggleInventoryOpen();
+                }
+                break;
             case SPACE:
                 String monsterKilled = monsterService.attackNearestMonster(
                         this.appService.getPlayerState().getActiveWeapon(),
-                        this.player.getTranslateX(), this.player.getTranslateY());
+                        this.player.getTranslateX(), this.player.getTranslateY(),
+                        this.appService.getDevMode());
                 if (monsterKilled != null) {
+
                     monsterService.initiateDeathAnimation(monsterKilled);
                     this.appService.addMonsterKilled(monsterKilled);
+                }
+                break;
+            case E:
+                if (this.inventoryService.getInventoryOpen()) {
+                    this.inventoryService.consumeItem(this.consumableService);
+                } else if (this.traderService != null && this.traderService.isTraderOpen()) {
+                    this.traderService.purchaseItem();
+                } else if (this.traderService != null
+                        && this.playerService.playerInRangeOfTrader()
+                        && !this.inventoryService.getInventoryOpen()
+                        && !this.traderService.isTraderOpen()) {
+                    this.traderService.toggleTraderOpen();
+                } else {
+                    this.playerService.attemptToClaimGold();
                 }
                 break;
             default:
@@ -148,11 +210,60 @@ public class GameScreenController {
         });
     }
 
+    private void initializeInventoryService(InventoryService inventoryService) {
+        this.inventoryPreviewBackground.setLayoutX(1400);
+        this.inventoryPreviewBackground.setLayoutY(100);
+        this.inventoryPreviewImage.setLayoutX(1400);
+        this.inventoryPreviewImage.setLayoutY(150);
+        this.inventoryPreviewTitle.setLayoutX(1410);
+        this.inventoryPreviewTitle.setLayoutY(100);
+        this.inventoryPreviewStat.setLayoutX(1410);
+        this.inventoryPreviewStat.setLayoutY(593);
+        this.inventoryPreviewQty.setLayoutX(1410);
+        this.inventoryPreviewQty.setLayoutY(638);
+        this.inventoryPreviewDescription.setLayoutX(1410);
+        this.inventoryPreviewDescription.setLayoutY(693);
+        this.inventoryVBox.setLayoutX(50);
+        this.inventoryVBox.setLayoutY(150);
+        inventoryService
+                .setInventoryBackground(this.inventoryBackground)
+                .setInventoryPreviewBackground(this.inventoryPreviewBackground)
+                .setInventoryPreviewImage(this.inventoryPreviewImage)
+                .setInventoryPreviewTitle(this.inventoryPreviewTitle)
+                .setInventoryPreviewStat(this.inventoryPreviewStat)
+                .setInventoryPreviewQty(this.inventoryPreviewQty)
+                .setInventoryPreviewDescription(this.inventoryPreviewDescription)
+                .setInventoryVBox(this.inventoryVBox)
+                .setInventoryRow1(this.inventoryRow1)
+                .setInventoryRow2(this.inventoryRow2)
+                .setInventoryRow3(this.inventoryRow3)
+                .setInventoryRow4(this.inventoryRow4)
+                .setInventoryRow5(this.inventoryRow5);
+    }
+
+    protected void initializeTraderService(TraderService traderService,
+                                           GoldService goldService,
+                                           ImageView trader) {
+        traderService
+                .setAppService(this.appService)
+                .setGoldService(goldService)
+                .setTraderVBox(this.inventoryVBox)
+                .setTraderPreviewTitle(this.inventoryPreviewTitle)
+                .setTraderPreviewStat(this.inventoryPreviewStat)
+                .setTraderPreviewDescription(this.inventoryPreviewDescription)
+                .setTraderPreviewBackground(this.inventoryPreviewBackground)
+                .setTraderPreviewImage(this.inventoryPreviewImage)
+                .setTraderBackground(this.inventoryBackground);
+        trader.setTranslateX(913);
+        trader.setTranslateY(500);
+        trader.setVisible(true);
+    }
+
     private void initializePlayerImageView(PlayerState playerState) {
-        this.displayCorrectPlayerOrientation(playerState);
         this.playerService.setImageView(this.player);
-        this.playerService.moveX(playerState.getSpawnCoordinates()[0]);
-        this.playerService.moveY(playerState.getSpawnCoordinates()[1]);
+        this.displayCorrectPlayerOrientation(playerState);
+        this.playerService.moveX(playerState.getSpawnCoordinates().getX());
+        this.playerService.moveY(playerState.getSpawnCoordinates().getY());
         this.playerService.setVisible(true);
     }
 
@@ -164,55 +275,11 @@ public class GameScreenController {
         this.healthService.applyHealthModifier(0.0);
     }
 
-    private void displayPlayerRightOrientation(PlayerState playerState) {
-        switch (playerState.getActiveWeapon().getType()) {
-        case MAGIC:
-            this.player.setImage(new Image(
-                    Paths.get("src/main/resources/static/images/player/wizard_right.gif")
-                            .toUri().toString()));
-            break;
-        case STAFF:
-            this.player.setImage(new Image(
-                    Paths.get("src/main/resources/static/images/player/staff_right.gif")
-                            .toUri().toString()));
-            break;
-        case SWORD:
-            this.player.setImage(new Image(
-                    Paths.get("src/main/resources/static/images/player/sword_right.gif")
-                            .toUri().toString()));
-            break;
-        default:
-            break;
-        }
-    }
-
-    private void displayPlayerLeftOrientation(PlayerState playerState) {
-        switch (playerState.getActiveWeapon().getType()) {
-        case MAGIC:
-            this.player.setImage(new Image(
-                    Paths.get("src/main/resources/static/images/player/wizard_left.gif")
-                            .toUri().toString()));
-            break;
-        case STAFF:
-            this.player.setImage(new Image(
-                    Paths.get("src/main/resources/static/images/player/staff_left.gif")
-                            .toUri().toString()));
-            break;
-        case SWORD:
-            this.player.setImage(new Image(
-                    Paths.get("src/main/resources/static/images/player/sword_left.gif")
-                            .toUri().toString()));
-            break;
-        default:
-            break;
-        }
-    }
-
     protected void displayCorrectPlayerOrientation(PlayerState playerState) {
         if (playerState.getSpawnOrientation() == LEFT) {
-            this.displayPlayerLeftOrientation(playerState);
+            this.playerService.displayPlayerLeftOrientation(playerState);
         } else {
-            this.displayPlayerRightOrientation(playerState);
+            this.playerService.displayPlayerRightOrientation(playerState);
         }
     }
     
@@ -220,6 +287,12 @@ public class GameScreenController {
     private void closeButtonAction() {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
+    }
+
+    @FXML
+    private void saveGameAction() {
+        this.appService.updatePlayerStateLastSaved();
+        this.saveService.upsertPlayerStateSave(this.appService.getPlayerState());
     }
 
     public AppService getAppService() {
@@ -285,12 +358,30 @@ public class GameScreenController {
         return this;
     }
 
+    public HealthService getHealthService() {
+        return healthService;
+    }
+
+    public GameScreenController setHealthService(HealthService healthService) {
+        this.healthService = healthService;
+        return this;
+    }
+
     public MonsterService getMonsterService() {
         return monsterService;
     }
 
     public GameScreenController setMonsterService(MonsterService monsterService) {
         this.monsterService = monsterService;
+        return this;
+    }
+
+    public InventoryService getInventoryService() {
+        return inventoryService;
+    }
+
+    public GameScreenController setInventoryService(InventoryService inventoryService) {
+        this.inventoryService = inventoryService;
         return this;
     }
 }

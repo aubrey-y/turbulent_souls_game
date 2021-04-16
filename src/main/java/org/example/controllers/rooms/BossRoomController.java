@@ -15,6 +15,7 @@ import org.example.services.HealthService;
 import org.example.services.MonsterService;
 import org.example.services.PlayerService;
 import org.example.services.RoomDirectionService;
+import org.example.services.SaveService;
 import org.example.util.ScheduleUtility;
 
 import java.net.URL;
@@ -22,12 +23,14 @@ import java.nio.file.Paths;
 import java.util.ResourceBundle;
 
 import static org.example.enums.Direction.LEFT;
-import static org.example.enums.MonsterType.DARK_KNIGHT;
-import static org.example.util.ResourcePathUtility.DARK_KNIGHT_ATTACK_LEFT_PATH;
-import static org.example.util.ResourcePathUtility.DARK_KNIGHT_DEATH_LEFT_PATH;
-import static org.example.util.ResourcePathUtility.DARK_KNIGHT_DEATH_RIGHT_PATH;
-import static org.example.util.ResourcePathUtility.DARK_KNIGHT_LEFT_PATH;
-import static org.example.util.ResourcePathUtility.DARK_KNIGHT_RIGHT_PATH;
+import static org.example.enums.MonsterType.KING_NAHTAN;
+import static org.example.util.ResourcePathUtility.KING_NAHTAN_DEATH_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.KING_NAHTAN_DEATH_RIGHT_PATH;
+import static org.example.util.ResourcePathUtility.KING_NAHTAN_IDLE_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.KING_NAHTAN_IDLE_RIGHT_PATH;
+import static org.example.util.ResourcePathUtility.KING_NAHTAN_ATTACK_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.KING_NAHTAN_ATTACK_RIGHT_PATH;
+
 
 public class BossRoomController extends GameScreenController implements Initializable {
 
@@ -39,7 +42,7 @@ public class BossRoomController extends GameScreenController implements Initiali
     @FXML
     private ImageView boss1;
     private final String boss1Key = "boss1";
-    private final int boss1HealthCapacity = 10;
+    private final int boss1HealthCapacity = 200;
 
     @FXML
     private ProgressBar boss1HealthBar;
@@ -48,13 +51,16 @@ public class BossRoomController extends GameScreenController implements Initiali
                               PlayerService playerService,
                               DirectionService directionService,
                               RoomDirectionService roomDirectionService,
-                              HealthService healthService, Scene scene) {
+                              HealthService healthService,
+                              SaveService saveService, Scene scene) {
         super(
                 appService,
                 playerService,
                 directionService,
                 roomDirectionService,
-                healthService, scene
+                healthService,
+                saveService,
+                scene
         );
     }
 
@@ -62,7 +68,7 @@ public class BossRoomController extends GameScreenController implements Initiali
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.monsterService = new MonsterService();
         this.playerService.setMonsterService(this.monsterService);
-        this.initGameScreenController(this.monsterService);
+        this.initGameScreenController(this.monsterService, null);
         this.resetPlayerSchedule = ScheduleUtility.generatePlayerResetSchedule(0.5,
                 this.playerService);
         this.playerService.registerTimeline(this.resetPlayerSchedule);
@@ -71,8 +77,8 @@ public class BossRoomController extends GameScreenController implements Initiali
                 this.monsterService,
                 this.boss1Key,
                 this.boss1,
-                DARK_KNIGHT_ATTACK_LEFT_PATH,
-                null
+                KING_NAHTAN_ATTACK_LEFT_PATH,
+                KING_NAHTAN_ATTACK_RIGHT_PATH
         );
         if (!this.appService.getMonstersKilled().contains(this.boss1Key)) {
             this.setupBoss1();
@@ -85,8 +91,8 @@ public class BossRoomController extends GameScreenController implements Initiali
         this.boss1.setTranslateX(1000);
         this.boss1.setTranslateY(400);
         this.boss1.setVisible(true);
-        this.boss1HealthBar.setTranslateX(875);
-        this.boss1HealthBar.setTranslateY(300);
+        this.boss1HealthBar.setTranslateX(975);
+        this.boss1HealthBar.setTranslateY(350);
         this.boss1HealthBar.setVisible(true);
         this.monsterService.addMonster(
                 this.boss1Key,
@@ -101,8 +107,8 @@ public class BossRoomController extends GameScreenController implements Initiali
                 this.resetPlayerSchedule,
                 this.boss1ResetSchedule,
                 Timeline.INDEFINITE,
-                DARK_KNIGHT_LEFT_PATH,
-                DARK_KNIGHT_RIGHT_PATH
+                KING_NAHTAN_IDLE_LEFT_PATH,
+                KING_NAHTAN_IDLE_RIGHT_PATH
         );
         this.boss1AttackSchedule.play();
 
@@ -117,17 +123,19 @@ public class BossRoomController extends GameScreenController implements Initiali
         return new Monster()
                 .setHealth(this.boss1HealthCapacity)
                 .setHealthCapacity(this.boss1HealthCapacity)
-                .setRange(5.0)
-                .setAttack(2)
+                .setRange(7.0)
+                .setAttack(30)
                 .setAccuracy(0.5)
-                .setMonsterType(DARK_KNIGHT)
+                .setKillReward(6400)
+                .setMonsterType(KING_NAHTAN)
                 .setImageView(this.boss1)
                 .setHealthBar(this.boss1HealthBar)
                 .setOrientation(LEFT)
                 .setDeathAnimationLeft(
-                        new Image(Paths.get(DARK_KNIGHT_DEATH_RIGHT_PATH).toUri().toString()))
+                        new Image(Paths.get(KING_NAHTAN_DEATH_LEFT_PATH).toUri().toString()))
                 .setDeathAnimationRight(
-                        new Image(Paths.get(DARK_KNIGHT_DEATH_LEFT_PATH).toUri().toString()));
+                        new Image(Paths.get(KING_NAHTAN_DEATH_RIGHT_PATH).toUri().toString()))
+                .setKey(this.boss1Key);
 
     }
 }

@@ -15,6 +15,7 @@ import org.example.services.HealthService;
 import org.example.services.MonsterService;
 import org.example.services.PlayerService;
 import org.example.services.RoomDirectionService;
+import org.example.services.SaveService;
 import org.example.util.ScheduleUtility;
 
 import java.net.URL;
@@ -24,6 +25,7 @@ import java.util.ResourceBundle;
 import static org.example.enums.Direction.LEFT;
 import static org.example.enums.MonsterType.GUINEA_PIG;
 import static org.example.util.ResourcePathUtility.GUINEA_PIG_ATTACK_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.GUINEA_PIG_ATTACK_RIGHT_PATH;
 import static org.example.util.ResourcePathUtility.GUINEA_PIG_DEATH_LEFT_PATH;
 import static org.example.util.ResourcePathUtility.GUINEA_PIG_DEATH_RIGHT_PATH;
 import static org.example.util.ResourcePathUtility.GUINEA_PIG_IDLE_LEFT_PATH;
@@ -38,7 +40,7 @@ public class Forest2Controller extends GameScreenController implements Initializ
     @FXML
     private ImageView guineapig1;
     private final String guineapig1Key = "forest2guineapig1";
-    private final int guineapig1HealthCapacity = 10;
+    private final int guineapig1HealthCapacity = 15;
 
     @FXML
     private ProgressBar guineapig1HealthBar;
@@ -47,13 +49,16 @@ public class Forest2Controller extends GameScreenController implements Initializ
                              PlayerService playerService,
                              DirectionService directionService,
                              RoomDirectionService roomDirectionService,
-                             HealthService healthService, Scene scene) {
+                             HealthService healthService,
+                             SaveService saveService, Scene scene) {
         super(
                 appService,
                 playerService,
                 directionService,
                 roomDirectionService,
-                healthService, scene
+                healthService,
+                saveService,
+                scene
         );
     }
 
@@ -61,7 +66,7 @@ public class Forest2Controller extends GameScreenController implements Initializ
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.monsterService = new MonsterService();
         this.playerService.setMonsterService(this.monsterService);
-        this.initGameScreenController(this.monsterService);
+        this.initGameScreenController(this.monsterService, null);
         this.resetPlayerSchedule = ScheduleUtility.generatePlayerResetSchedule(0.5,
                 this.playerService);
         this.playerService.registerTimeline(this.resetPlayerSchedule);
@@ -92,8 +97,9 @@ public class Forest2Controller extends GameScreenController implements Initializ
                         .setHealth(this.guineapig1HealthCapacity)
                         .setHealthCapacity(this.guineapig1HealthCapacity)
                         .setRange(5.0)
-                        .setAttack(2)
+                        .setAttack(10)
                         .setAccuracy(0.5)
+                        .setKillReward(150)
                         .setMonsterType(GUINEA_PIG)
                         .setImageView(this.guineapig1)
                         .setHealthBar(this.guineapig1HealthBar)
@@ -104,6 +110,7 @@ public class Forest2Controller extends GameScreenController implements Initializ
                         .setDeathAnimationRight(
                                 new Image(
                                         Paths.get(GUINEA_PIG_DEATH_RIGHT_PATH).toUri().toString()))
+                        .setKey(this.guineapig1Key)
         );
         this.guineapig1AttackSchedule = ScheduleUtility.generateMonsterAttackSchedule(
                 1.0,
@@ -116,7 +123,7 @@ public class Forest2Controller extends GameScreenController implements Initializ
                 this.guineapig1ResetSchedule,
                 Timeline.INDEFINITE,
                 GUINEA_PIG_ATTACK_LEFT_PATH,
-                null
+                GUINEA_PIG_ATTACK_RIGHT_PATH
         );
         this.guineapig1AttackSchedule.play();
     }

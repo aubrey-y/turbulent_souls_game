@@ -1,10 +1,29 @@
 package org.example.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.example.enums.WeaponType;
 
-public abstract class Weapon {
+import java.util.Objects;
 
-    protected String name;
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME)
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = BasicSword.class, name = "BASICSWORD"),
+    @JsonSubTypes.Type(value = BasicStaff.class, name = "BASICSTAFF"),
+    @JsonSubTypes.Type(value = BasicMagic.class, name = "BASICMAGIC"),
+    @JsonSubTypes.Type(value = AdvancedSword.class, name = "ADVANCEDSWORD"),
+    @JsonSubTypes.Type(value = AdvancedStaff.class, name = "ADVANCEDSTAFF"),
+    @JsonSubTypes.Type(value = AdvancedMagic.class, name = "ADVANCEDMAGIC"),
+    @JsonSubTypes.Type(value = ExpertSword.class, name = "EXPERTSWORD"),
+    @JsonSubTypes.Type(value = ExpertStaff.class, name = "EXPERTSTAFF"),
+    @JsonSubTypes.Type(value = ExpertMagic.class, name = "EXPERTMAGIC"),
+    @JsonSubTypes.Type(value = MasterSword.class, name = "MASTERSWORD"),
+    @JsonSubTypes.Type(value = MasterStaff.class, name = "MASTERSTAFF"),
+    @JsonSubTypes.Type(value = MasterMagic.class, name = "MASTERMAGIC")
+})
+public abstract class Weapon extends Item {
 
     protected WeaponType type;
 
@@ -12,13 +31,12 @@ public abstract class Weapon {
 
     protected double range;
 
-    public String getName() {
-        return name;
-    }
+    protected String animationLeft;
 
-    public Weapon setName(String name) {
-        this.name = name;
-        return this;
+    protected String animationRight;
+
+    public Weapon() {
+
     }
 
     public WeaponType getType() {
@@ -46,5 +64,51 @@ public abstract class Weapon {
     public Weapon setRange(double range) {
         this.range = range;
         return this;
+    }
+
+    public String getAnimationLeft() {
+        return animationLeft;
+    }
+
+    public Weapon setAnimationLeft(String animationLeft) {
+        this.animationLeft = animationLeft;
+        return this;
+    }
+
+    public String getAnimationRight() {
+        return animationRight;
+    }
+
+    public Weapon setAnimationRight(String animationRight) {
+        this.animationRight = animationRight;
+        return this;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+                this.type,
+                this.attack,
+                this.range,
+                this.animationLeft,
+                this.animationRight
+        );
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Weapon)) {
+            return false;
+        }
+        Weapon weapon = (Weapon) o;
+        return this.type == weapon.type
+                && this.attack == weapon.attack
+                && this.range == weapon.range
+                && ((this.animationLeft == null && weapon.animationLeft == null)
+                    || (this.animationLeft != null
+                    && this.animationLeft.equals(weapon.animationLeft)))
+                && ((this.animationRight == null && weapon.animationRight == null)
+                    || (this.animationRight != null
+                && this.animationRight.equals(weapon.animationRight)));
     }
 }

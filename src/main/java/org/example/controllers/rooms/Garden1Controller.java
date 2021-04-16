@@ -15,6 +15,7 @@ import org.example.services.HealthService;
 import org.example.services.MonsterService;
 import org.example.services.PlayerService;
 import org.example.services.RoomDirectionService;
+import org.example.services.SaveService;
 import org.example.util.ScheduleUtility;
 
 import java.net.URL;
@@ -24,6 +25,7 @@ import java.util.ResourceBundle;
 import static org.example.enums.Direction.LEFT;
 import static org.example.enums.MonsterType.SERPENT;
 import static org.example.util.ResourcePathUtility.SERPENT_ATTACK_LEFT_PATH;
+import static org.example.util.ResourcePathUtility.SERPENT_ATTACK_RIGHT_PATH;
 import static org.example.util.ResourcePathUtility.SERPENT_DEATH_LEFT_PATH;
 import static org.example.util.ResourcePathUtility.SERPENT_DEATH_RIGHT_PATH;
 import static org.example.util.ResourcePathUtility.SERPENT_LEFT_PATH;
@@ -38,7 +40,7 @@ public class Garden1Controller extends GameScreenController implements Initializ
     @FXML
     private ImageView serpent1;
     private final String serpent1Key = "garden1serpent1";
-    private final int serpent1HealthCapacity = 10;
+    private final int serpent1HealthCapacity = 30;
 
     @FXML
     private ProgressBar serpent1HealthBar;
@@ -47,13 +49,16 @@ public class Garden1Controller extends GameScreenController implements Initializ
                              PlayerService playerService,
                              DirectionService directionService,
                              RoomDirectionService roomDirectionService,
-                             HealthService healthService, Scene scene) {
+                             HealthService healthService,
+                             SaveService saveService, Scene scene) {
         super(
                 appService,
                 playerService,
                 directionService,
                 roomDirectionService,
-                healthService, scene
+                healthService,
+                saveService,
+                scene
         );
     }
 
@@ -61,7 +66,7 @@ public class Garden1Controller extends GameScreenController implements Initializ
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.monsterService = new MonsterService();
         this.playerService.setMonsterService(this.monsterService);
-        this.initGameScreenController(this.monsterService);
+        this.initGameScreenController(this.monsterService, null);
         this.resetPlayerSchedule = ScheduleUtility.generatePlayerResetSchedule(0.5,
                 this.playerService);
         this.playerService.registerTimeline(this.resetPlayerSchedule);
@@ -83,7 +88,7 @@ public class Garden1Controller extends GameScreenController implements Initializ
         this.serpent1.setTranslateX(1000);
         this.serpent1.setTranslateY(400);
         this.serpent1.setVisible(true);
-        this.serpent1HealthBar.setTranslateX(975);
+        this.serpent1HealthBar.setTranslateX(1010);
         this.serpent1HealthBar.setTranslateY(360);
         this.serpent1HealthBar.setVisible(true);
         this.monsterService.addMonster(
@@ -92,8 +97,9 @@ public class Garden1Controller extends GameScreenController implements Initializ
                         .setHealth(this.serpent1HealthCapacity)
                         .setHealthCapacity(this.serpent1HealthCapacity)
                         .setRange(5.0)
-                        .setAttack(2)
+                        .setAttack(10)
                         .setAccuracy(0.5)
+                        .setKillReward(150)
                         .setMonsterType(SERPENT)
                         .setImageView(this.serpent1)
                         .setHealthBar(this.serpent1HealthBar)
@@ -101,7 +107,8 @@ public class Garden1Controller extends GameScreenController implements Initializ
                         .setDeathAnimationLeft(
                                 new Image(Paths.get(SERPENT_DEATH_LEFT_PATH).toUri().toString()))
                         .setDeathAnimationRight(
-                                new Image(Paths.get(SERPENT_DEATH_RIGHT_PATH).toUri().toString())));
+                                new Image(Paths.get(SERPENT_DEATH_RIGHT_PATH).toUri().toString()))
+                        .setKey(this.serpent1Key));
         this.serpent1AttackSchedule = ScheduleUtility.generateMonsterAttackSchedule(
                 1.0,
                 this.appService,
@@ -113,7 +120,7 @@ public class Garden1Controller extends GameScreenController implements Initializ
                 this.serpent1ResetSchedule,
                 Timeline.INDEFINITE,
                 SERPENT_ATTACK_LEFT_PATH,
-                null
+                SERPENT_ATTACK_RIGHT_PATH
         );
         this.serpent1AttackSchedule.play();
     }

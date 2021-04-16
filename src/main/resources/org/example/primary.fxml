@@ -53,7 +53,7 @@
                   </VBox>
                   <VBox alignment="BOTTOM_CENTER" layoutX="845.0" layoutY="10.0" prefHeight="1030.0" prefWidth="250.0">
                      <children>
-                        <Button alignment="BASELINE_CENTER" mnemonicParsing="false" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE">
+                        <Button alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#switchToLoadGame" prefHeight="59.0" prefWidth="164.0" style="-fx-background-color: 00; -fx-border-radius: 5em; -fx-background-radius: 5em;" styleClass="Pixeboy" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE">
                            <font>
                               <Font name="Pixeboy" size="30.0" />
                            </font>
@@ -90,7 +90,7 @@
                               <Font name="Pixeboy" size="30.0" />
                            </font>
                            <graphic>
-                              <Label id="clickable" stylesheets="@../../static/css/fontstyle.css" text="Exit" textFill="WHITE">
+                              <Label id="clickable" stylesheets="@../../static/css/fontstyle.css" text="Exit Game" textFill="WHITE">
                                  <font>
                                     <Font size="36.0" />
                                  </font>
