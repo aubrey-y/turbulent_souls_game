@@ -5,6 +5,8 @@ import org.example.enums.WeaponType;
 import static org.example.util.ResourcePathUtility.ALL_MAGIC_PLAYER_LEFT;
 import static org.example.util.ResourcePathUtility.ALL_MAGIC_PLAYER_RIGHT;
 import static org.example.util.ResourcePathUtility.MASTER_MAGIC_PATH;
+import static org.example.util.ResourcePathUtility.MASTER_MAGIC_PLAYER_ATTACK_LEFT;
+import static org.example.util.ResourcePathUtility.MASTER_MAGIC_PLAYER_ATTACK_RIGHT;
 
 public class MasterMagic extends Weapon {
     public MasterMagic() {
@@ -18,5 +20,7 @@ public class MasterMagic extends Weapon {
         this.price = 600;
         this.animationLeft = ALL_MAGIC_PLAYER_LEFT;
         this.animationRight = ALL_MAGIC_PLAYER_RIGHT;
+        this.attackAnimationLeft = MASTER_MAGIC_PLAYER_ATTACK_LEFT;
+        this.attackAnimationRight = MASTER_MAGIC_PLAYER_ATTACK_RIGHT;
     }
 }

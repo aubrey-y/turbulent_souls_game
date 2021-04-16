@@ -29,6 +29,7 @@ import java.nio.file.Paths;
 
 import static javafx.scene.input.KeyCode.SHIFT;
 import static org.example.enums.Direction.LEFT;
+import static org.example.enums.Direction.RIGHT;
 import static org.example.enums.RoomType.CASTLE_TRADER;
 
 
@@ -125,6 +126,7 @@ public class GameScreenController extends InventoryController {
                 break;
             case A:
                 this.aPressed.set(true);
+                this.playerService.setPlayerSpawnOrientation(LEFT);
                 this.playerService.displayPlayerLeftOrientation(this.appService.getPlayerState());
                 break;
             case S:
@@ -132,6 +134,7 @@ public class GameScreenController extends InventoryController {
                 break;
             case D:
                 this.dPressed.set(true);
+                this.playerService.setPlayerSpawnOrientation(RIGHT);
                 this.playerService.displayPlayerRightOrientation(this.appService.getPlayerState());
                 break;
             case P:
@@ -145,6 +148,7 @@ public class GameScreenController extends InventoryController {
                 }
                 break;
             case SPACE:
+                this.playerService.playAttackAnimation();
                 String monsterKilled = monsterService.attackNearestMonster(
                         this.appService.getPlayerState().getActiveWeapon(),
                         this.player.getTranslateX(), this.player.getTranslateY(),

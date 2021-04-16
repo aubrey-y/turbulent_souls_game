@@ -3,7 +3,7 @@ package org.example.services;
 import org.example.dto.Monster;
 import org.example.dto.Weapon;
 import org.example.enums.Direction;
-import org.example.util.DeathDurationUtility;
+import org.example.util.AnimationDurationUtility;
 import org.example.util.ScheduleUtility;
 
 import java.util.HashMap;
@@ -135,7 +135,7 @@ public class MonsterService {
             monster.getImageView().setImage(monster.getDeathAnimationRight());
         }
         ScheduleUtility.generateMonsterDeathResetSchedule(
-                DeathDurationUtility.getDurationForMonsterType(monster.getMonsterType()),
+                AnimationDurationUtility.getDeathDurationForMonsterType(monster.getMonsterType()),
                 monster
         ).play();
     }

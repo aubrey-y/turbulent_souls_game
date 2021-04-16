@@ -11,6 +11,8 @@ import org.example.dto.Monster;
 import org.example.dto.PlayerState;
 import org.example.dto.Room;
 import org.example.enums.Direction;
+import org.example.util.AnimationDurationUtility;
+import org.example.util.ScheduleUtility;
 
 
 import java.lang.reflect.Constructor;
@@ -227,6 +229,28 @@ public class PlayerService {
         this.imageView.setImage(new Image(
                 Paths.get(playerState.getActiveWeapon().getAnimationLeft())
                         .toUri().toString()));
+    }
+
+    public void playAttackAnimation() {
+        PlayerState playerState = this.appService.getPlayerState();
+        if (playerState.getSpawnOrientation() == LEFT) {
+            this.imageView.setImage(new Image(
+                    Paths.get(playerState.getActiveWeapon()
+                            .getAttackAnimationLeft()).toUri().toString()));
+        } else {
+            this.imageView.setImage(new Image(
+                    Paths.get(playerState.getActiveWeapon()
+                            .getAttackAnimationRight()).toUri().toString()));
+        }
+        ScheduleUtility.generatePlayerAttackResetSchedule(
+                AnimationDurationUtility.getPlayerAttackDurationForWeaponType(
+                        playerState.getActiveWeapon().getType()),
+                this,
+                playerState).play();
+    }
+
+    public void setPlayerSpawnOrientation(Direction direction) {
+        this.appService.getPlayerState().setSpawnOrientation(direction);
     }
 
     private void setNewPlayerSpawnCoordinates(Direction exitDirection) {

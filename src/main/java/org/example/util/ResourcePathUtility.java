@@ -298,4 +298,76 @@ public class ResourcePathUtility {
 
     public static final String GOLD_POUCH_PATH = ""
             + "src/main/resources/static/images/TradersAndItems/coins.png";
+
+    public static final String BASIC_MAGIC_PLAYER_ATTACK_LEFT = ""
+            + "src/main/resources/static/images/player/black_magic/magic_attack1_left.gif";
+
+    public static final String BASIC_MAGIC_PLAYER_ATTACK_RIGHT = ""
+            + "src/main/resources/static/images/player/black_magic/magic_attack1.gif";
+
+    public static final String ADVANCED_MAGIC_PLAYER_ATTACK_LEFT = ""
+            + "src/main/resources/static/images/player/black_magic/magic_attack2_left.gif";
+
+    public static final String ADVANCED_MAGIC_PLAYER_ATTACK_RIGHT = ""
+            + "src/main/resources/static/images/player/black_magic/magic_attack2.gif";
+
+    public static final String EXPERT_MAGIC_PLAYER_ATTACK_LEFT = ""
+            + "src/main/resources/static/images/player/black_magic/magic_attack3_left.gif";
+
+    public static final String EXPERT_MAGIC_PLAYER_ATTACK_RIGHT = ""
+            + "src/main/resources/static/images/player/black_magic/magic_attack3.gif";
+
+    public static final String MASTER_MAGIC_PLAYER_ATTACK_LEFT = ""
+            + "src/main/resources/static/images/player/black_magic/magic_attack4_left.gif";
+
+    public static final String MASTER_MAGIC_PLAYER_ATTACK_RIGHT = ""
+            + "src/main/resources/static/images/player/black_magic/magic_attack4.gif";
+
+    public static final String BASIC_STAFF_PLAYER_ATTACK_LEFT = ""
+            + "src/main/resources/static/images/player/mage_class/staff_attack1_L.gif";
+
+    public static final String BASIC_STAFF_PLAYER_ATTACK_RIGHT = ""
+            + "src/main/resources/static/images/player/mage_class/staff_attack1.gif";
+
+    public static final String ADVANCED_STAFF_PLAYER_ATTACK_LEFT = ""
+            + "src/main/resources/static/images/player/mage_class/staff_attack2_L.gif";
+
+    public static final String ADVANCED_STAFF_PLAYER_ATTACK_RIGHT = ""
+            + "src/main/resources/static/images/player/mage_class/staff_attack2.gif";
+
+    public static final String EXPERT_STAFF_PLAYER_ATTACK_LEFT = ""
+            + "src/main/resources/static/images/player/mage_class/staff_attack3_L.gif";
+
+    public static final String EXPERT_STAFF_PLAYER_ATTACK_RIGHT = ""
+            + "src/main/resources/static/images/player/mage_class/staff_attack3.gif";
+
+    public static final String MASTER_STAFF_PLAYER_ATTACK_LEFT = ""
+            + "src/main/resources/static/images/player/mage_class/staff_attack4_L.gif";
+
+    public static final String MASTER_STAFF_PLAYER_ATTACK_RIGHT = ""
+            + "src/main/resources/static/images/player/mage_class/staff_attack4.gif";
+
+    public static final String BASIC_SWORD_PLAYER_ATTACK_LEFT = ""
+            + "src/main/resources/static/images/player/warrior_class/sword_attack1_L.gif";
+
+    public static final String BASIC_SWORD_PLAYER_ATTACK_RIGHT = ""
+            + "src/main/resources/static/images/player/warrior_class/sword_attack1.gif";
+
+    public static final String ADVANCED_SWORD_PLAYER_ATTACK_LEFT = ""
+            + "src/main/resources/static/images/player/warrior_class/sword_attack2_L.gif";
+
+    public static final String ADVANCED_SWORD_PLAYER_ATTACK_RIGHT = ""
+            + "src/main/resources/static/images/player/warrior_class/sword_attack2.gif";
+
+    public static final String EXPERT_SWORD_PLAYER_ATTACK_LEFT = ""
+            + "src/main/resources/static/images/player/warrior_class/sword_attack3_L.gif";
+
+    public static final String EXPERT_SWORD_PLAYER_ATTACK_RIGHT = ""
+            + "src/main/resources/static/images/player/warrior_class/sword_attack3.gif";
+
+    public static final String MASTER_SWORD_PLAYER_ATTACK_LEFT = ""
+            + "src/main/resources/static/images/player/warrior_class/sword_attack4_L.gif";
+
+    public static final String MASTER_SWORD_PLAYER_ATTACK_RIGHT = ""
+            + "src/main/resources/static/images/player/warrior_class/sword_attack4.gif";
 }
