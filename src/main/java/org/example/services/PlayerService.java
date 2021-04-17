@@ -10,6 +10,7 @@ import org.example.dto.Coordinate;
 import org.example.dto.Monster;
 import org.example.dto.PlayerState;
 import org.example.dto.Room;
+import org.example.enums.WeaponType;
 import org.example.enums.Direction;
 import org.example.util.AnimationDurationUtility;
 import org.example.util.ScheduleUtility;
@@ -253,10 +254,31 @@ public class PlayerService {
         // Animation sizes of running size and attack are different.
         // Hence, only during attacks, position and size are adjusted
         saveCurrPos();
-        this.imageView.setFitWidth(225);
-        this.imageView.setFitHeight(180);
-        this.imageView.setTranslateY(this.imageView.getTranslateY() - 50);
-        this.imageView.setTranslateX(this.imageView.getTranslateX() - 50);
+        if (playerState.getActiveWeapon().getType() == WeaponType.MAGIC) {
+            this.imageView.setFitWidth(294);
+            this.imageView.setFitHeight(145);
+            this.imageView.setTranslateY(this.imageView.getTranslateY() - 20);
+            if (playerState.getSpawnOrientation() == RIGHT) {
+                this.imageView.setTranslateX(this.imageView.getTranslateX() + 10);
+            } else {
+                this.imageView.setTranslateX(this.imageView.getTranslateX() - 170);
+            }
+        } else if (playerState.getActiveWeapon().getType() == WeaponType.SWORD) {
+            this.imageView.setFitWidth(225);
+            this.imageView.setFitHeight(180);
+            this.imageView.setTranslateY(this.imageView.getTranslateY() - 52);
+            this.imageView.setTranslateX(this.imageView.getTranslateX() - 50);
+        } else if (playerState.getActiveWeapon().getType() == WeaponType.STAFF) {
+            this.imageView.setFitWidth(242);
+            this.imageView.setFitHeight(140);
+            this.imageView.setTranslateY(this.imageView.getTranslateY() - 15);
+            if (playerState.getSpawnOrientation() == RIGHT) {
+                this.imageView.setTranslateX(this.imageView.getTranslateX() - 38);
+            } else {
+                this.imageView.setTranslateX(this.imageView.getTranslateX() - 70);
+            }
+        }
+
         ScheduleUtility.generatePlayerAttackResetSchedule(
                 AnimationDurationUtility.getPlayerAttackDurationForWeaponType(
                         playerState.getActiveWeapon().getType()),
