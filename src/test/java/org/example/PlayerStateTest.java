@@ -1,10 +1,10 @@
 package org.example;
 
-import org.example.dto.BasicMagic;
-import org.example.dto.BasicStaff;
-import org.example.dto.BasicSword;
-import org.example.dto.PlayerState;
-import org.example.dto.Weapon;
+import org.example.dto.weapons.BasicMagic;
+import org.example.dto.weapons.BasicStaff;
+import org.example.dto.weapons.BasicSword;
+import org.example.dao.PlayerState;
+import org.example.dao.Weapon;
 import org.example.enums.Archetype;
 import org.example.enums.Difficulty;
 import org.example.exceptions.PlayerCreationException;

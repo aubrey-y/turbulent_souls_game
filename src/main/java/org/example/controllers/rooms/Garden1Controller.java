@@ -8,7 +8,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.example.controllers.GameScreenController;
-import org.example.dto.Monster;
+import org.example.dao.Monster;
 import org.example.services.AppService;
 import org.example.services.DirectionService;
 import org.example.services.HealthService;

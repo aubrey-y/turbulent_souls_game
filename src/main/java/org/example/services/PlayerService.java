@@ -6,10 +6,10 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.example.App;
-import org.example.dto.Coordinate;
-import org.example.dto.Monster;
-import org.example.dto.PlayerState;
-import org.example.dto.Room;
+import org.example.dto.util.Coordinate;
+import org.example.dao.Monster;
+import org.example.dao.PlayerState;
+import org.example.dto.util.Room;
 import org.example.enums.Direction;
 
 

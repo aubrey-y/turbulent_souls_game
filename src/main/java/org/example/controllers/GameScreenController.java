@@ -10,7 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import org.example.dto.PlayerState;
+import org.example.dao.PlayerState;
 import org.example.services.AppService;
 import org.example.services.ConsumableService;
 import org.example.services.DirectionService;

@@ -25,4 +25,8 @@ module org.example {
     exports org.example.dto;
     exports org.example.enums;
     exports org.example.exceptions;
+    exports org.example.dto.weapons;
+    exports org.example.dto.consumables;
+    exports org.example.dto.util;
+    exports org.example.dao;
 }

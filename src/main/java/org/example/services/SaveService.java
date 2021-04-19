@@ -6,7 +6,7 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import org.bson.Document;
 import org.bson.conversions.Bson;
-import org.example.dto.PlayerState;
+import org.example.dao.PlayerState;
 import org.example.repository.SaveRepository;
 import org.example.util.FieldComplianceUtility;
 import com.fasterxml.jackson.databind.ObjectMapper;

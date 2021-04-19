@@ -1,8 +1,20 @@
-package org.example.dto;
+package org.example.dao;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import org.example.dto.weapons.AdvancedMagic;
+import org.example.dto.weapons.AdvancedStaff;
+import org.example.dto.weapons.AdvancedSword;
+import org.example.dto.weapons.BasicMagic;
+import org.example.dto.weapons.BasicStaff;
+import org.example.dto.weapons.BasicSword;
+import org.example.dto.weapons.ExpertMagic;
+import org.example.dto.weapons.ExpertStaff;
+import org.example.dto.weapons.ExpertSword;
+import org.example.dto.weapons.MasterMagic;
+import org.example.dto.weapons.MasterStaff;
+import org.example.dto.weapons.MasterSword;
 import org.example.enums.WeaponType;
 
 import java.util.Objects;

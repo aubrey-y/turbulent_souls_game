@@ -1,5 +1,9 @@
-package org.example.dto;
+package org.example.dao;
 
+import org.example.dto.util.Coordinate;
+import org.example.dto.weapons.BasicMagic;
+import org.example.dto.weapons.BasicStaff;
+import org.example.dto.weapons.BasicSword;
 import org.example.enums.Archetype;
 import org.example.enums.Difficulty;
 import org.example.enums.Direction;

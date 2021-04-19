@@ -1,6 +1,6 @@
 package org.example.util;
 
-import org.example.dto.Item;
+import org.example.dao.Item;
 
 import java.util.HashMap;
 import java.util.Iterator;

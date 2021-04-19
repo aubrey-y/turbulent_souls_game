@@ -1,7 +1,7 @@
 package org.example.services;
 
 import javafx.scene.control.Label;
-import org.example.dto.PlayerState;
+import org.example.dao.PlayerState;
 
 public class GoldService {
 

@@ -11,8 +11,8 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import org.example.dto.PlayerState;
-import org.example.dto.Room;
+import org.example.dao.PlayerState;
+import org.example.dto.util.Room;
 
 import java.io.IOException;
 import java.nio.file.Paths;

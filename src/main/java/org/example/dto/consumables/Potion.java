@@ -1,8 +1,9 @@
-package org.example.dto;
+package org.example.dto.consumables;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import org.example.dao.Item;
 import org.example.enums.PotionType;
 
 @JsonIgnoreProperties(ignoreUnknown = true)

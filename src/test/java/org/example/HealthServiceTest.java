@@ -2,7 +2,7 @@ package org.example;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import org.example.dto.PlayerState;
+import org.example.dao.PlayerState;
 import org.example.exceptions.PlayerCreationException;
 import org.example.services.AppService;
 import org.example.services.HealthService;

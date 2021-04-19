@@ -1,4 +1,4 @@
-package org.example.dto;
+package org.example.dao;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;

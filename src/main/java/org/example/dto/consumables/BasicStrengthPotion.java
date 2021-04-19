@@ -1,4 +1,4 @@
-package org.example.dto;
+package org.example.dto.consumables;
 
 import static org.example.enums.PotionType.STRENGTH;
 import static org.example.util.ResourcePathUtility.BASIC_STRENGTH_PATH;

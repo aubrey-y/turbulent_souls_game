@@ -1,21 +1,21 @@
 package org.example.util;
 
-import org.example.dto.BasicHealthPotion;
-import org.example.dto.BasicSpeedPotion;
-import org.example.dto.BasicStrengthPotion;
-import org.example.dto.Item;
-import org.example.dto.BasicSword;
-import org.example.dto.BasicMagic;
-import org.example.dto.BasicStaff;
-import org.example.dto.AdvancedMagic;
-import org.example.dto.AdvancedStaff;
-import org.example.dto.AdvancedSword;
-import org.example.dto.ExpertMagic;
-import org.example.dto.ExpertStaff;
-import org.example.dto.ExpertSword;
-import org.example.dto.MasterMagic;
-import org.example.dto.MasterStaff;
-import org.example.dto.MasterSword;
+import org.example.dto.consumables.BasicHealthPotion;
+import org.example.dto.consumables.BasicSpeedPotion;
+import org.example.dto.consumables.BasicStrengthPotion;
+import org.example.dao.Item;
+import org.example.dto.weapons.BasicSword;
+import org.example.dto.weapons.BasicMagic;
+import org.example.dto.weapons.BasicStaff;
+import org.example.dto.weapons.AdvancedMagic;
+import org.example.dto.weapons.AdvancedStaff;
+import org.example.dto.weapons.AdvancedSword;
+import org.example.dto.weapons.ExpertMagic;
+import org.example.dto.weapons.ExpertStaff;
+import org.example.dto.weapons.ExpertSword;
+import org.example.dto.weapons.MasterMagic;
+import org.example.dto.weapons.MasterStaff;
+import org.example.dto.weapons.MasterSword;
 import org.example.enums.RoomType;
 
 import java.util.Map;
