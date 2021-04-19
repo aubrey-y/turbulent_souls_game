@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.example.App;
+import org.example.controllers.GameScreenController;
 import org.example.dto.Coordinate;
 import org.example.dto.Monster;
 import org.example.dto.PlayerState;
@@ -57,6 +58,8 @@ public class PlayerService {
     public static final double DEFAULT_MOVE_SIZE = 30;
 
     private double moveSize = DEFAULT_MOVE_SIZE;
+
+
 
     public PlayerService() {
 
@@ -278,7 +281,7 @@ public class PlayerService {
                 this.imageView.setTranslateX(this.imageView.getTranslateX() - 70);
             }
         }
-
+        GameScreenController.setAnimatingAttack(true);
         ScheduleUtility.generatePlayerAttackResetSchedule(
                 AnimationDurationUtility.getPlayerAttackDurationForWeaponType(
                         playerState.getActiveWeapon().getType()),

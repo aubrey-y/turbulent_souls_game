@@ -7,6 +7,7 @@ import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
+import org.example.controllers.GameScreenController;
 import org.example.dto.Item;
 import org.example.dto.Monster;
 import org.example.App;
@@ -94,6 +95,7 @@ public class ScheduleUtility {
                                                              PlayerState playerState) {
         Timeline timeline = new Timeline();
         Timeline finalTimeline = timeline;
+
         timeline = new Timeline(new KeyFrame(Duration.seconds(duration), actionEvent -> {
             String imagePath;
             if (playerState.getSpawnOrientation() == LEFT) {
@@ -104,6 +106,7 @@ public class ScheduleUtility {
             ImageView playerView = playerService.getImageView();
             playerService.resetCurrPos();
             playerService.resetOgImgSize();
+            GameScreenController.setAnimatingAttack(false);
             playerView.setImage(new Image(Paths.get(imagePath).toUri().toString()));
         }));
         timeline.setCycleCount(1);
