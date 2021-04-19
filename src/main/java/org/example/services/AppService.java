@@ -70,6 +70,14 @@ public class AppService {
         App.setPlayerState(playerState);
     }
 
+    public void setSessionStartMillis(long sessionStartMillis) {
+        App.setSessionStartMillis(sessionStartMillis);
+    }
+
+    public long getSessionStartMillis() {
+        return App.getSessionStartMillis();
+    }
+
     public boolean getSoundPlaying() {
         return App.getSoundPlaying();
     }

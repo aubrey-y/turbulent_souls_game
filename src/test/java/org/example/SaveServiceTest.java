@@ -122,7 +122,9 @@ public class SaveServiceTest {
                 .append("healthCapacity", 100.0)
                 .append("monstersKilled", Collections.emptyList())
                 .append("email", USER_EMAIL)
-                .append("lastUpdated", "2021/04/08 18:57:15");
+                .append("lastUpdated", "2021/04/08 18:57:15")
+                .append("sessionLength", 0)
+                .append("goldSpent", 0);
     }
 
     private PlayerState getDecodedPlayerState(String username) {
@@ -142,7 +144,9 @@ public class SaveServiceTest {
                 .setHealthCapacity(100.0)
                 .setMonstersKilled(Collections.emptySet())
                 .setEmail(USER_EMAIL)
-                .setLastUpdated("2021/04/08 18:57:15");
+                .setLastUpdated("2021/04/08 18:57:15")
+                .setSessionLength(0)
+                .setGoldSpent(0);
     }
 
     private Weapon getDecodedWeapon() {

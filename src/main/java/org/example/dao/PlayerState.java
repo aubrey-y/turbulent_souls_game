@@ -46,6 +46,10 @@ public class PlayerState {
 
     private String lastUpdated;
 
+    private long sessionLength;
+
+    private int goldSpent;
+
     public PlayerState() {
 
     }
@@ -136,8 +140,9 @@ public class PlayerState {
                 this.healthCapacity,
                 this.monstersKilled,
                 this.email,
-                this.lastUpdated
-
+                this.lastUpdated,
+                this.sessionLength,
+                this.goldSpent
         );
     }
 
@@ -174,7 +179,9 @@ public class PlayerState {
                         || (this.email != null && this.email.equals(playerState.email)))
                 && ((this.lastUpdated == null && playerState.email == null)
                         || (this.lastUpdated != null
-                        && this.lastUpdated.equals(playerState.lastUpdated)));
+                        && this.lastUpdated.equals(playerState.lastUpdated)))
+                && this.sessionLength == playerState.getSessionLength()
+                && this.goldSpent == playerState.getGoldSpent();
     }
 
     public PlayerState setDifficulty(Difficulty difficulty) {
@@ -300,6 +307,24 @@ public class PlayerState {
 
     public PlayerState setLastUpdated(String lastUpdated) {
         this.lastUpdated = lastUpdated;
+        return this;
+    }
+
+    public long getSessionLength() {
+        return sessionLength;
+    }
+
+    public PlayerState setSessionLength(long sessionLength) {
+        this.sessionLength = sessionLength;
+        return this;
+    }
+
+    public int getGoldSpent() {
+        return goldSpent;
+    }
+
+    public PlayerState setGoldSpent(int goldSpent) {
+        this.goldSpent = goldSpent;
         return this;
     }
 }

@@ -111,7 +111,7 @@ public class SecondaryController extends ErrorBaseController {
             DirectionService directionService = new DirectionService();
             RoomDirectionService roomDirectionService = new RoomDirectionService(directionService);
             HealthService healthService = new HealthService(this.appService);
-
+            this.appService.setSessionStartMillis(System.currentTimeMillis());
 
             loader.setControllerFactory(GameScreenController -> new Forest1Controller(
                     this.appService,

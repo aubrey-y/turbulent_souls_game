@@ -36,6 +36,8 @@ public class App extends Application {
 
     private static PlayerState playerState = new PlayerState();
 
+    private static long sessionStartMillis;
+
     private static Room activeRoom;
 
     private static FXMLLoader activeLoader;
@@ -97,6 +99,14 @@ public class App extends Application {
 
     public static void setPlayerState(PlayerState state) {
         playerState = state;
+    }
+
+    public static long getSessionStartMillis() {
+        return sessionStartMillis;
+    }
+
+    public static void setSessionStartMillis(long sessionStartMillis) {
+        App.sessionStartMillis = sessionStartMillis;
     }
 
     public static boolean getSoundPlaying() {

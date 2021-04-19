@@ -282,6 +282,13 @@ public class GameScreenController extends InventoryController {
             this.playerService.displayPlayerRightOrientation(playerState);
         }
     }
+
+    private void updatePlayerStateSessionLength() {
+        PlayerState playerState = this.appService.getPlayerState();
+        long sessionLength = System.currentTimeMillis() - this.appService.getSessionStartMillis();
+        playerState.setSessionLength(playerState.getSessionLength() + sessionLength);
+        this.appService.setPlayerState(playerState);
+    }
     
     @FXML
     private void closeButtonAction() {
@@ -292,6 +299,7 @@ public class GameScreenController extends InventoryController {
     @FXML
     private void saveGameAction() {
         this.appService.updatePlayerStateLastSaved();
+        this.updatePlayerStateSessionLength();
         this.saveService.upsertPlayerStateSave(this.appService.getPlayerState());
     }
 

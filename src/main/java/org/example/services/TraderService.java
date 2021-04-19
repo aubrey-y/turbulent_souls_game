@@ -133,6 +133,7 @@ public class TraderService {
             return;
         } else {
             playerState = this.goldService.adjustGoldAmount(-1 * item.getPrice());
+            playerState.setGoldSpent(playerState.getGoldSpent() + item.getPrice());
         }
         if (item instanceof Weapon) {
             if (!weaponInventory.containsKey(item.getImagePath())) {
