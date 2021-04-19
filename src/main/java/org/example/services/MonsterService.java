@@ -148,4 +148,9 @@ public class MonsterService {
         this.monsterMapping = monsterMapping;
         return this;
     }
+
+    public MonsterService setMonstersKilled(int monstersKilled) {
+        this.monstersKilled = monstersKilled;
+        return this;
+    }
 }

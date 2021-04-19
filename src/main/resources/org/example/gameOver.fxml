@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.rooms.LoseScreenController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.EndScreenController">
    <children>
       <ImageView fitHeight="1168.0" fitWidth="2212.0" layoutX="-292.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -22,12 +22,27 @@
          <children>
             <VBox alignment="CENTER" layoutY="100.0" prefHeight="404.0" prefWidth="1920.0">
                <children>
-                  <ImageView fitHeight="370.0" fitWidth="427.0" pickOnBounds="true" preserveRatio="true" visible="false" x="960.0">
+                  <ImageView fx:id="winImage" fitHeight="370.0" fitWidth="427.0" pickOnBounds="true" preserveRatio="true" visible="false" x="960.0">
                      <image>
                         <Image url="@../../static/images/win.gif" />
                      </image>
                   </ImageView>
-                  <Label stylesheets="@../../static/css/fontstyle.css" text="Game over! " textFill="WHITE">
+                  <Label fx:id="endLabel" stylesheets="@../../static/css/fontstyle.css" text="Game over! " textFill="WHITE">
+                     <font>
+                        <Font size="55.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="stat1" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE">
+                     <font>
+                        <Font size="55.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="stat2" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE">
+                     <font>
+                        <Font size="55.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="stat3" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE">
                      <font>
                         <Font size="55.0" />
                      </font>

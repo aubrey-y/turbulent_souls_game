@@ -288,6 +288,7 @@ public class GameScreenController extends InventoryController {
         long sessionLength = System.currentTimeMillis() - this.appService.getSessionStartMillis();
         playerState.setSessionLength(playerState.getSessionLength() + sessionLength);
         this.appService.setPlayerState(playerState);
+        this.appService.setSessionStartMillis(System.currentTimeMillis());
     }
     
     @FXML
