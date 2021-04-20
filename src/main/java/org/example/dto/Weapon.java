@@ -125,20 +125,20 @@ public abstract class Weapon extends Item {
             return false;
         }
         Weapon weapon = (Weapon) o;
-        return this.type == weapon.type &&
-                this.attack == weapon.attack &&
-                this.range == weapon.range &&
-                ((this.animationLeft == null && weapon.animationLeft == null)
-                        || (this.animationLeft != null &&
-                        this.animationLeft.equals(weapon.animationLeft))) &&
-                ((this.animationRight == null && weapon.animationRight == null)
-                || (this.animationRight != null &&
-                this.animationRight.equals(weapon.animationRight))) &&
-                ((this.attackAnimationLeft == null && weapon.attackAnimationLeft == null)
-                        || (this.attackAnimationLeft != null &&
-                        this.attackAnimationLeft.equals(weapon.attackAnimationLeft))) &&
-                ((this.attackAnimationRight == null && weapon.attackAnimationRight == null)
-                || (this.attackAnimationRight != null &&
-                this.attackAnimationRight.equals(weapon.attackAnimationRight)));
+        return this.type == weapon.type
+                && this.attack == weapon.attack
+                && this.range == weapon.range
+                && ((this.animationLeft == null && weapon.animationLeft == null)
+                        || (this.animationLeft != null
+                        && this.animationLeft.equals(weapon.animationLeft)))
+                && ((this.animationRight == null && weapon.animationRight == null)
+                        || (this.animationRight != null
+                        && this.animationRight.equals(weapon.animationRight)))
+                && ((this.attackAnimationLeft == null && weapon.attackAnimationLeft == null)
+                        || (this.attackAnimationLeft != null
+                        && this.attackAnimationLeft.equals(weapon.attackAnimationLeft)))
+                && ((this.attackAnimationRight == null && weapon.attackAnimationRight == null)
+                        || (this.attackAnimationRight != null
+                        && this.attackAnimationRight.equals(weapon.attackAnimationRight)));
     }
 }

@@ -118,76 +118,79 @@ public class GameScreenController extends InventoryController {
                 this.healthService, this.playerService, this.appService);
         this.scene.setOnKeyPressed(e -> {
             switch (e.getCode()) {
-                case ESCAPE:
-                    if (this.inventoryService.getInventoryOpen()) {
-                        this.inventoryService.toggleInventoryOpen();
-                    } else if (this.traderService != null && this.traderService.isTraderOpen()) {
-                        this.traderService.toggleTraderOpen();
-                    }
-                    break;
-                case W:
-                    if (!playerService.getAnimatingAttack()) {
-                        this.wPressed.set(true);
-                        break;
-                    }
+            case ESCAPE:
+                if (this.inventoryService.getInventoryOpen()) {
+                    this.inventoryService.toggleInventoryOpen();
+                } else if (this.traderService != null && this.traderService.isTraderOpen()) {
+                    this.traderService.toggleTraderOpen();
+                }
+                break;
+            case W:
+                if (!playerService.getAnimatingAttack()) {
+                    this.wPressed.set(true);
 
-                case A:
-                    if (!playerService.getAnimatingAttack()) {
-                        this.aPressed.set(true);
-                        this.playerService.setPlayerSpawnOrientation(LEFT);
-                        this.playerService.displayPlayerLeftOrientation(this.appService.getPlayerState());
-                        break;
-                    }
-                case S:
-                    if (!playerService.getAnimatingAttack()) {
-                        this.sPressed.set(true);
-                        break;
-                    }
-                case D:
-                    if (!playerService.getAnimatingAttack()) {
-                        this.dPressed.set(true);
-                        this.playerService.setPlayerSpawnOrientation(RIGHT);
-                        this.playerService.displayPlayerRightOrientation(this.appService.getPlayerState());
-                        break;
-                    }
-                case P:
-                    if (this.appService.getDevMode()) {
-                        this.healthService.applyHealthModifier(-10);
-                    }
-                    break;
-                case B:
-                    if (this.traderService == null || !this.traderService.isTraderOpen()) {
-                        this.inventoryService.toggleInventoryOpen();
-                    }
-                    break;
-                case SPACE:
-                    this.playerService.playAttackAnimation();
-                    String monsterKilled = monsterService.attackNearestMonster(
-                            this.appService.getPlayerState().getActiveWeapon(),
-                            this.player.getTranslateX(), this.player.getTranslateY(),
-                            this.appService.getDevMode());
-                    if (monsterKilled != null) {
+                }
+                break;
+            case A:
+                if (!playerService.getAnimatingAttack()) {
+                    this.aPressed.set(true);
+                    this.playerService.setPlayerSpawnOrientation(LEFT);
+                    this.playerService
+                            .displayPlayerLeftOrientation(this.appService.getPlayerState());
 
-                        monsterService.initiateDeathAnimation(monsterKilled);
-                        this.appService.addMonsterKilled(monsterKilled);
-                    }
-                    break;
-                case E:
-                    if (this.inventoryService.getInventoryOpen()) {
-                        this.inventoryService.consumeItem(this.consumableService);
-                    } else if (this.traderService != null && this.traderService.isTraderOpen()) {
-                        this.traderService.purchaseItem();
-                    } else if (this.traderService != null
-                            && this.playerService.playerInRangeOfTrader()
-                            && !this.inventoryService.getInventoryOpen()
-                            && !this.traderService.isTraderOpen()) {
-                        this.traderService.toggleTraderOpen();
-                    } else {
-                        this.playerService.attemptToClaimGold();
-                    }
-                    break;
-                default:
-                    break;
+                }
+                break;
+            case S:
+                if (!playerService.getAnimatingAttack()) {
+                    this.sPressed.set(true);
+                }
+                break;
+            case D:
+                if (!playerService.getAnimatingAttack()) {
+                    this.dPressed.set(true);
+                    this.playerService.setPlayerSpawnOrientation(RIGHT);
+                    this.playerService
+                            .displayPlayerRightOrientation(this.appService.getPlayerState());
+                }
+                break;
+            case P:
+                if (this.appService.getDevMode()) {
+                    this.healthService.applyHealthModifier(-10);
+                }
+                break;
+            case B:
+                if (this.traderService == null || !this.traderService.isTraderOpen()) {
+                    this.inventoryService.toggleInventoryOpen();
+                }
+                break;
+            case SPACE:
+                this.playerService.playAttackAnimation();
+                String monsterKilled = monsterService.attackNearestMonster(
+                        this.appService.getPlayerState().getActiveWeapon(),
+                        this.player.getTranslateX(), this.player.getTranslateY(),
+                        this.appService.getDevMode());
+                if (monsterKilled != null) {
+
+                    monsterService.initiateDeathAnimation(monsterKilled);
+                    this.appService.addMonsterKilled(monsterKilled);
+                }
+                break;
+            case E:
+                if (this.inventoryService.getInventoryOpen()) {
+                    this.inventoryService.consumeItem(this.consumableService);
+                } else if (this.traderService != null && this.traderService.isTraderOpen()) {
+                    this.traderService.purchaseItem();
+                } else if (this.traderService != null
+                        && this.playerService.playerInRangeOfTrader()
+                        && !this.inventoryService.getInventoryOpen()
+                        && !this.traderService.isTraderOpen()) {
+                    this.traderService.toggleTraderOpen();
+                } else {
+                    this.playerService.attemptToClaimGold();
+                }
+                break;
+
+            default: break;
             }
 
             if (this.appService.getDevMode() && e.getCode() == SHIFT) {
@@ -275,6 +278,7 @@ public class GameScreenController extends InventoryController {
 
     private void initializePlayerImageView(PlayerState playerState) {
         this.playerService.setImageView(this.player);
+        this.playerService.setImageViewDimensions(this.player);
         this.displayCorrectPlayerOrientation(playerState);
         this.playerService.moveX(playerState.getSpawnCoordinates().getX());
         this.playerService.moveY(playerState.getSpawnCoordinates().getY());

@@ -31,9 +31,9 @@ public class AnimationDurationUtility {
     );
 
     private static Map<WeaponType, Double> playerAttackDurationMap = Map.of(
-            STAFF, 1.0,
-            MAGIC, 0.8,
-            SWORD, 1.2
+            STAFF, 0.9,
+            MAGIC, 0.84,
+            SWORD, 1.3
     );
 
     public static Double getDeathDurationForMonsterType(MonsterType monsterType) {

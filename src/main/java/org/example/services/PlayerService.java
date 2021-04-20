@@ -6,7 +6,6 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.example.App;
-import org.example.controllers.GameScreenController;
 import org.example.dto.Coordinate;
 import org.example.dto.Monster;
 import org.example.dto.PlayerState;
@@ -29,9 +28,9 @@ public class PlayerService {
 
     private ImageView imageView;
 
-    private double imgOgWidth;
+    private double defaultPlayerImageViewWidth;
 
-    private double imgOgHeight;
+    private double defaultPlayerImageViewHeight;
 
     private double xCurrPos;
 
@@ -256,7 +255,7 @@ public class PlayerService {
         }
         // Animation sizes of running size and attack are different.
         // Hence, only during attacks, position and size are adjusted
-        saveCurrPos();
+        this.saveCurrentPosition();
         if (playerState.getActiveWeapon().getType() == WeaponType.MAGIC) {
             this.imageView.setFitWidth(294);
             this.imageView.setFitHeight(145);
@@ -281,7 +280,7 @@ public class PlayerService {
                 this.imageView.setTranslateX(this.imageView.getTranslateX() - 70);
             }
         }
-        setAnimatingAttack(true);
+        this.animatingAttack = true;
         ScheduleUtility.generatePlayerAttackResetSchedule(
                 AnimationDurationUtility.getPlayerAttackDurationForWeaponType(
                         playerState.getActiveWeapon().getType()),
@@ -350,9 +349,12 @@ public class PlayerService {
 
     public PlayerService setImageView(ImageView imageView) {
         this.imageView = imageView;
-        this.imgOgWidth = imageView.getFitWidth();
-        this.imgOgHeight = imageView.getFitHeight();
         return this;
+    }
+
+    public void setImageViewDimensions(ImageView imageView) {
+        this.defaultPlayerImageViewWidth = imageView.getFitWidth();
+        this.defaultPlayerImageViewHeight = imageView.getFitHeight();
     }
 
     public AppService getAppService() {
@@ -426,23 +428,22 @@ public class PlayerService {
         return this.moveSize;
     }
 
-    public void resetOgImgSize() {
-        this.imageView.setFitWidth(imgOgWidth);
-        this.imageView.setFitHeight(imgOgHeight);
+    public void resetDefaultImageViewSize() {
+        this.imageView.setFitWidth(defaultPlayerImageViewWidth);
+        this.imageView.setFitHeight(defaultPlayerImageViewHeight);
     }
 
-    public void resetCurrPos() {
+    public void resetCurrentPosition() {
         this.imageView.setTranslateX(this.xCurrPos);
         this.imageView.setTranslateY(this.yCurrPos);
     }
 
-    public void saveCurrPos() {
+    public void saveCurrentPosition() {
         this.xCurrPos = this.imageView.getTranslateX();
         this.yCurrPos = this.imageView.getTranslateY();
     }
 
     public void setAnimatingAttack(Boolean animatingAttack) {
-        System.out.println("setAnimatingAttack: This is " + animatingAttack);
         this.animatingAttack = animatingAttack;
     }
 

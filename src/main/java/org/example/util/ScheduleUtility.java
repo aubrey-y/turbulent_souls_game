@@ -7,7 +7,6 @@ import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
-import org.example.controllers.GameScreenController;
 import org.example.dto.Item;
 import org.example.dto.Monster;
 import org.example.App;
@@ -104,8 +103,8 @@ public class ScheduleUtility {
                 imagePath = playerState.getActiveWeapon().getAnimationRight();
             }
             ImageView playerView = playerService.getImageView();
-            playerService.resetCurrPos();
-            playerService.resetOgImgSize();
+            playerService.resetCurrentPosition();
+            playerService.resetDefaultImageViewSize();
             playerService.setAnimatingAttack(false);
             playerView.setImage(new Image(Paths.get(imagePath).toUri().toString()));
         }));
