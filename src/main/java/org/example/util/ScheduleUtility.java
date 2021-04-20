@@ -106,7 +106,7 @@ public class ScheduleUtility {
             ImageView playerView = playerService.getImageView();
             playerService.resetCurrPos();
             playerService.resetOgImgSize();
-            GameScreenController.setAnimatingAttack(false);
+            playerService.setAnimatingAttack(false);
             playerView.setImage(new Image(Paths.get(imagePath).toUri().toString()));
         }));
         timeline.setCycleCount(1);

@@ -59,7 +59,7 @@ public class PlayerService {
 
     private double moveSize = DEFAULT_MOVE_SIZE;
 
-
+    private Boolean animatingAttack = false;
 
     public PlayerService() {
 
@@ -281,7 +281,7 @@ public class PlayerService {
                 this.imageView.setTranslateX(this.imageView.getTranslateX() - 70);
             }
         }
-        GameScreenController.setAnimatingAttack(true);
+        setAnimatingAttack(true);
         ScheduleUtility.generatePlayerAttackResetSchedule(
                 AnimationDurationUtility.getPlayerAttackDurationForWeaponType(
                         playerState.getActiveWeapon().getType()),
@@ -439,5 +439,14 @@ public class PlayerService {
     public void saveCurrPos() {
         this.xCurrPos = this.imageView.getTranslateX();
         this.yCurrPos = this.imageView.getTranslateY();
+    }
+
+    public void setAnimatingAttack(Boolean animatingAttack) {
+        System.out.println("setAnimatingAttack: This is " + animatingAttack);
+        this.animatingAttack = animatingAttack;
+    }
+
+    public Boolean getAnimatingAttack() {
+        return animatingAttack;
     }
 }

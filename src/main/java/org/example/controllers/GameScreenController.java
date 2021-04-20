@@ -77,7 +77,7 @@ public class GameScreenController extends InventoryController {
     private final BooleanProperty dPressed = new SimpleBooleanProperty(false);
     private final BooleanProperty shiftPressed = new SimpleBooleanProperty(false);
 
-    private static Boolean animatingAttack = false;
+
 
     public GameScreenController(AppService appService,
                                 PlayerService playerService,
@@ -117,88 +117,91 @@ public class GameScreenController extends InventoryController {
         this.consumableService = new ConsumableService(
                 this.healthService, this.playerService, this.appService);
         this.scene.setOnKeyPressed(e -> {
-            System.out.println("animatingAttack is " + animatingAttack);
-            if (animatingAttack) {
-                System.out.println("ARE YOU HERE");
-                return;
-            } else {
-                switch (e.getCode()) {
-                    case ESCAPE:
-                        if (this.inventoryService.getInventoryOpen()) {
-                            this.inventoryService.toggleInventoryOpen();
-                        } else if (this.traderService != null && this.traderService.isTraderOpen()) {
-                            this.traderService.toggleTraderOpen();
-                        }
-                        break;
-                    case W:
+            switch (e.getCode()) {
+                case ESCAPE:
+                    if (this.inventoryService.getInventoryOpen()) {
+                        this.inventoryService.toggleInventoryOpen();
+                    } else if (this.traderService != null && this.traderService.isTraderOpen()) {
+                        this.traderService.toggleTraderOpen();
+                    }
+                    break;
+                case W:
+                    if (!playerService.getAnimatingAttack()) {
                         this.wPressed.set(true);
                         break;
-                    case A:
+                    }
+
+                case A:
+                    if (!playerService.getAnimatingAttack()) {
                         this.aPressed.set(true);
                         this.playerService.setPlayerSpawnOrientation(LEFT);
                         this.playerService.displayPlayerLeftOrientation(this.appService.getPlayerState());
                         break;
-                    case S:
+                    }
+                case S:
+                    if (!playerService.getAnimatingAttack()) {
                         this.sPressed.set(true);
                         break;
-                    case D:
+                    }
+                case D:
+                    if (!playerService.getAnimatingAttack()) {
                         this.dPressed.set(true);
                         this.playerService.setPlayerSpawnOrientation(RIGHT);
                         this.playerService.displayPlayerRightOrientation(this.appService.getPlayerState());
                         break;
-                    case P:
-                        if (this.appService.getDevMode()) {
-                            this.healthService.applyHealthModifier(-10);
-                        }
-                        break;
-                    case B:
-                        if (this.traderService == null || !this.traderService.isTraderOpen()) {
-                            this.inventoryService.toggleInventoryOpen();
-                        }
-                        break;
-                    case SPACE:
-                        this.playerService.playAttackAnimation();
-                        String monsterKilled = monsterService.attackNearestMonster(
-                                this.appService.getPlayerState().getActiveWeapon(),
-                                this.player.getTranslateX(), this.player.getTranslateY(),
-                                this.appService.getDevMode());
-                        if (monsterKilled != null) {
+                    }
+                case P:
+                    if (this.appService.getDevMode()) {
+                        this.healthService.applyHealthModifier(-10);
+                    }
+                    break;
+                case B:
+                    if (this.traderService == null || !this.traderService.isTraderOpen()) {
+                        this.inventoryService.toggleInventoryOpen();
+                    }
+                    break;
+                case SPACE:
+                    this.playerService.playAttackAnimation();
+                    String monsterKilled = monsterService.attackNearestMonster(
+                            this.appService.getPlayerState().getActiveWeapon(),
+                            this.player.getTranslateX(), this.player.getTranslateY(),
+                            this.appService.getDevMode());
+                    if (monsterKilled != null) {
 
-                            monsterService.initiateDeathAnimation(monsterKilled);
-                            this.appService.addMonsterKilled(monsterKilled);
-                        }
-                        break;
-                    case E:
-                        if (this.inventoryService.getInventoryOpen()) {
-                            this.inventoryService.consumeItem(this.consumableService);
-                        } else if (this.traderService != null && this.traderService.isTraderOpen()) {
-                            this.traderService.purchaseItem();
-                        } else if (this.traderService != null
-                                && this.playerService.playerInRangeOfTrader()
-                                && !this.inventoryService.getInventoryOpen()
-                                && !this.traderService.isTraderOpen()) {
-                            this.traderService.toggleTraderOpen();
-                        } else {
-                            this.playerService.attemptToClaimGold();
-                        }
-                        break;
-                    default:
-                        break;
-                }
+                        monsterService.initiateDeathAnimation(monsterKilled);
+                        this.appService.addMonsterKilled(monsterKilled);
+                    }
+                    break;
+                case E:
+                    if (this.inventoryService.getInventoryOpen()) {
+                        this.inventoryService.consumeItem(this.consumableService);
+                    } else if (this.traderService != null && this.traderService.isTraderOpen()) {
+                        this.traderService.purchaseItem();
+                    } else if (this.traderService != null
+                            && this.playerService.playerInRangeOfTrader()
+                            && !this.inventoryService.getInventoryOpen()
+                            && !this.traderService.isTraderOpen()) {
+                        this.traderService.toggleTraderOpen();
+                    } else {
+                        this.playerService.attemptToClaimGold();
+                    }
+                    break;
+                default:
+                    break;
+            }
 
-                if (this.appService.getDevMode() && e.getCode() == SHIFT) {
-                    this.shiftPressed.set(true);
-                }
+            if (this.appService.getDevMode() && e.getCode() == SHIFT) {
+                this.shiftPressed.set(true);
+            }
 
-                if (this.wPressed.get()) {
-                    this.playerService.moveUp(this.shiftPressed.get());
-                } else if (this.aPressed.get()) {
-                    this.playerService.moveLeft(this.shiftPressed.get());
-                } else if (this.sPressed.get()) {
-                    this.playerService.moveDown(this.shiftPressed.get());
-                } else if (this.dPressed.get()) {
-                    this.playerService.moveRight(this.shiftPressed.get());
-                }
+            if (this.wPressed.get()) {
+                this.playerService.moveUp(this.shiftPressed.get());
+            } else if (this.aPressed.get()) {
+                this.playerService.moveLeft(this.shiftPressed.get());
+            } else if (this.sPressed.get()) {
+                this.playerService.moveDown(this.shiftPressed.get());
+            } else if (this.dPressed.get()) {
+                this.playerService.moveRight(this.shiftPressed.get());
             }
         });
         this.scene.setOnKeyReleased(e -> {
@@ -396,14 +399,7 @@ public class GameScreenController extends InventoryController {
         return this;
     }
 
-    public static void setAnimatingAttack(Boolean animatingAttack) {
-        System.out.println("setAnimatingAttack: This is " + animatingAttack);
-        animatingAttack = animatingAttack;
-    }
 
-    public static Boolean getAnimatingAttack() {
-        return animatingAttack;
-    }
 }
 
 
