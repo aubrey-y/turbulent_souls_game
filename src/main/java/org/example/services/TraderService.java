@@ -9,10 +9,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
-import org.example.dto.Item;
-import org.example.dto.PlayerState;
-import org.example.dto.Potion;
-import org.example.dto.Weapon;
+import org.example.dao.Item;
+import org.example.dao.PlayerState;
+import org.example.dto.consumables.Potion;
+import org.example.dao.Weapon;
 import org.example.util.CloneUtility;
 
 import java.nio.file.Paths;
@@ -104,8 +104,6 @@ public class TraderService {
             toggleButton.setPrefHeight(100);
             toggleButton.setFont(new Font("Pixeboy", 60));
             int finalI = index;
-            toggleButton.setOnAction(actionEvent -> this.selectToggleButton(
-                    item, finalI));
             toggleButton.setText(
                     String.format("%s | %s gold",
                             item.getName(), item.getPrice()));
@@ -119,6 +117,9 @@ public class TraderService {
             if (item instanceof Weapon && this.appService.getPlayerState()
                     .getWeaponInventory().containsKey(item.getImagePath())) {
                 toggleButton.setDisable(true);
+            } else {
+                toggleButton.setOnAction(actionEvent -> this.selectToggleButton(
+                        item, finalI));
             }
         }
     }
@@ -132,6 +133,7 @@ public class TraderService {
             return;
         } else {
             playerState = this.goldService.adjustGoldAmount(-1 * item.getPrice());
+            playerState.setGoldSpent(playerState.getGoldSpent() + item.getPrice());
         }
         if (item instanceof Weapon) {
             if (!weaponInventory.containsKey(item.getImagePath())) {

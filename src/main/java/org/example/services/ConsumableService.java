@@ -1,11 +1,12 @@
 package org.example.services;
 
-import org.example.dto.Item;
-import org.example.dto.Potion;
-import org.example.dto.Weapon;
+import org.example.dao.Item;
+import org.example.dto.consumables.Potion;
+import org.example.dao.Weapon;
 
 import java.util.Map;
 
+import static org.example.services.PlayerService.DEFAULT_MOVE_SIZE;
 import static org.example.util.ScheduleUtility.generateSpeedPotionSchedule;
 import static org.example.util.ScheduleUtility.generateStrengthPotionSchedule;
 
@@ -39,9 +40,11 @@ public class ConsumableService {
             generateStrengthPotionSchedule(appService, potion).play();
             break;
         case SPEED:
-            this.playerService.setMoveSize(playerService.getMoveSize()
-                    + playerService.getMoveSize() * potion.getStatValue() / 100);
-            generateSpeedPotionSchedule(appService, playerService).play();
+            if (playerService.getMoveSize() == DEFAULT_MOVE_SIZE) {
+                this.playerService.setMoveSize(playerService.getMoveSize()
+                        + playerService.getMoveSize() * potion.getStatValue() / 100);
+                generateSpeedPotionSchedule(appService, playerService).play();
+            }
             break;
         default:
             break;

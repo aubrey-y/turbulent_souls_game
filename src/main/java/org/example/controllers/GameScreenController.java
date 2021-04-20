@@ -10,7 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import org.example.dto.PlayerState;
+import org.example.dao.PlayerState;
 import org.example.services.AppService;
 import org.example.services.ConsumableService;
 import org.example.services.DirectionService;
@@ -118,7 +118,7 @@ public class GameScreenController extends InventoryController {
                 this.healthService, this.playerService, this.appService);
         this.scene.setOnKeyPressed(e -> {
             switch (e.getCode()) {
-            case ESCAPE:
+            case TAB:
                 if (this.inventoryService.getInventoryOpen()) {
                     this.inventoryService.toggleInventoryOpen();
                 } else if (this.traderService != null && this.traderService.isTraderOpen()) {
@@ -299,6 +299,14 @@ public class GameScreenController extends InventoryController {
             this.playerService.displayPlayerRightOrientation(playerState);
         }
     }
+
+    private void updatePlayerStateSessionLength() {
+        PlayerState playerState = this.appService.getPlayerState();
+        long sessionLength = System.currentTimeMillis() - this.appService.getSessionStartMillis();
+        playerState.setSessionLength(playerState.getSessionLength() + sessionLength);
+        this.appService.setPlayerState(playerState);
+        this.appService.setSessionStartMillis(System.currentTimeMillis());
+    }
     
     @FXML
     private void closeButtonAction() {
@@ -309,6 +317,7 @@ public class GameScreenController extends InventoryController {
     @FXML
     private void saveGameAction() {
         this.appService.updatePlayerStateLastSaved();
+        this.updatePlayerStateSessionLength();
         this.saveService.upsertPlayerStateSave(this.appService.getPlayerState());
     }
 

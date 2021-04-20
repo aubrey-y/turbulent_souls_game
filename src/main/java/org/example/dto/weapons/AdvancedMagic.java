@@ -1,5 +1,6 @@
-package org.example.dto;
+package org.example.dto.weapons;
 
+import org.example.dao.Weapon;
 import org.example.enums.WeaponType;
 
 import static org.example.util.ResourcePathUtility.ADVANCED_MAGIC_PATH;

@@ -1,4 +1,4 @@
-package org.example.dto;
+package org.example.dto.consumables;
 
 import static org.example.enums.PotionType.SPEED;
 import static org.example.util.ResourcePathUtility.BASIC_SPEED_PATH;
@@ -11,7 +11,8 @@ public class BasicSpeedPotion extends Potion {
         this.statValue = 100;
         this.quantity = 1;
         this.imagePath = BASIC_SPEED_PATH;
-        this.description = "This will enhance your movement speed";
+        this.description = "This will enhance your movement speed. The effects may stack a "
+            + "maximum of (1) times.";
         this.price = 150;
     }
 }

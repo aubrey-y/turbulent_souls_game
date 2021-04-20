@@ -6,11 +6,18 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.example.App;
+<<<<<<< HEAD
 import org.example.dto.Coordinate;
 import org.example.dto.Monster;
 import org.example.dto.PlayerState;
 import org.example.dto.Room;
 import org.example.enums.WeaponType;
+=======
+import org.example.dto.util.Coordinate;
+import org.example.dao.Monster;
+import org.example.dao.PlayerState;
+import org.example.dto.util.Room;
+>>>>>>> 0c7d9dba16a47d25ed9c79835637bcfbd6ae7711
 import org.example.enums.Direction;
 import org.example.util.AnimationDurationUtility;
 import org.example.util.ScheduleUtility;

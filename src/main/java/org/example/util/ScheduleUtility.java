@@ -7,12 +7,17 @@ import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
-import org.example.dto.Item;
-import org.example.dto.Monster;
+import org.example.dao.Item;
+import org.example.dao.Monster;
 import org.example.App;
+<<<<<<< HEAD
 import org.example.dto.PlayerState;
 import org.example.dto.Potion;
 import org.example.dto.Weapon;
+=======
+import org.example.dto.consumables.Potion;
+import org.example.dao.Weapon;
+>>>>>>> 0c7d9dba16a47d25ed9c79835637bcfbd6ae7711
 import org.example.services.AppService;
 import org.example.services.HealthService;
 import org.example.services.MonsterService;
@@ -56,6 +61,7 @@ public class ScheduleUtility {
                     boolean playerAlive = healthService.applyHealthModifier(-1 * attack);
                     if (!playerAlive) {
                         playerService.terminateExistingTimelines();
+                        finalTimeline.stop();
                         FXMLLoader loader = new FXMLLoader(App.class.getResource("gameOver.fxml"));
                         appService.setRoot(loader);
                     }
@@ -152,7 +158,10 @@ public class ScheduleUtility {
         Timeline finalTimeline = timeline;
         timeline = new Timeline(new KeyFrame(Duration.seconds(1.0), actionEvent -> {
             if (monsterService.getMonstersRemaining() == 0) {
-                FXMLLoader loader = new FXMLLoader(App.class.getResource("winScreen.fxml"));
+                //This is bad practice (magic number) but it's just a lazy solution to a problem
+                //we don't know how to solve, which is why this timeline doesn't stop running
+                monsterService.setMonstersKilled(monsterService.getMonsterMapping().size() + 1);
+                FXMLLoader loader = new FXMLLoader(App.class.getResource("gameOver.fxml"));
                 appService.setRoot(loader);
             }
         }));

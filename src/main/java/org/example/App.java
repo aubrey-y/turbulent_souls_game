@@ -11,8 +11,8 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import org.example.dto.PlayerState;
-import org.example.dto.Room;
+import org.example.dao.PlayerState;
+import org.example.dto.util.Room;
 
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -35,6 +35,8 @@ public class App extends Application {
     private static AudioClip clickSound;
 
     private static PlayerState playerState = new PlayerState();
+
+    private static long sessionStartMillis;
 
     private static Room activeRoom;
 
@@ -97,6 +99,14 @@ public class App extends Application {
 
     public static void setPlayerState(PlayerState state) {
         playerState = state;
+    }
+
+    public static long getSessionStartMillis() {
+        return sessionStartMillis;
+    }
+
+    public static void setSessionStartMillis(long sessionStartMillis) {
+        App.sessionStartMillis = sessionStartMillis;
     }
 
     public static boolean getSoundPlaying() {

@@ -2,11 +2,11 @@ package org.example.services;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import static org.example.dto.HealthBarConstants.GREEN_HP_BAR;
-import static org.example.dto.HealthBarConstants.RED_HP_BAR;
-import static org.example.dto.HealthBarConstants.HP_BAR_THRESHOLD;
-import static org.example.dto.HealthBarConstants.BAR_CSS_CLASSES;
-import org.example.dto.PlayerState;
+import static org.example.dto.util.HealthBarConstants.GREEN_HP_BAR;
+import static org.example.dto.util.HealthBarConstants.RED_HP_BAR;
+import static org.example.dto.util.HealthBarConstants.HP_BAR_THRESHOLD;
+import static org.example.dto.util.HealthBarConstants.BAR_CSS_CLASSES;
+import org.example.dao.PlayerState;
 
 public class HealthService {
 
