@@ -128,7 +128,6 @@ public class GameScreenController extends InventoryController {
             case W:
                 if (!playerService.getAnimatingAttack()) {
                     this.wPressed.set(true);
-
                 }
                 break;
             case A:
@@ -137,7 +136,6 @@ public class GameScreenController extends InventoryController {
                     this.playerService.setPlayerSpawnOrientation(LEFT);
                     this.playerService
                             .displayPlayerLeftOrientation(this.appService.getPlayerState());
-
                 }
                 break;
             case S:
@@ -190,7 +188,8 @@ public class GameScreenController extends InventoryController {
                 }
                 break;
 
-            default: break;
+            default:
+                break;
             }
 
             if (this.appService.getDevMode() && e.getCode() == SHIFT) {
@@ -402,11 +401,6 @@ public class GameScreenController extends InventoryController {
         this.inventoryService = inventoryService;
         return this;
     }
-
-
 }
-
-
-
 
 
