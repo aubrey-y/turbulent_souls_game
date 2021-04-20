@@ -17,7 +17,7 @@ public class AdvancedSword extends Weapon {
         this.range = 2.0;
         this.quantity = 1;
         this.imagePath = ADVANCED_SWORD_PATH;
-        this.description = "Advanced Warrior: \nA powerful axe that relies on brute strength to wield"; //Change
+        this.description = "Warrior: \nA powerful axe that relies on brute strength to wield"; //Change
         this.price = 300; // Basic 200
         this.animationLeft = ADVANCED_SWORD_PLAYER_LEFT;
         this.animationRight = ADVANCED_SWORD_PLAYER_RIGHT;

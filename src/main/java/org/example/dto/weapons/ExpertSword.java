@@ -17,7 +17,7 @@ public class ExpertSword extends Weapon {
         this.range = 2.0;
         this.quantity = 1;
         this.imagePath = EXPERT_SWORD_PATH;
-        this.description = "Expert Warrior: \nChannels the strength of its defeated enemies";
+        this.description = "Warrior: \nChannels the strength of its defeated enemies";
         this.price = 450;
         this.animationLeft = EXPERT_SWORD_PLAYER_LEFT;
         this.animationRight = EXPERT_SWORD_PLAYER_RIGHT;
