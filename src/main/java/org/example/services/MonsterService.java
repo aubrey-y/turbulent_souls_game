@@ -1,17 +1,17 @@
 package org.example.services;
 
-import org.example.dto.Monster;
-import org.example.dto.Weapon;
+import org.example.dao.Monster;
+import org.example.dao.Weapon;
 import org.example.enums.Direction;
 import org.example.util.DeathDurationUtility;
 import org.example.util.ScheduleUtility;
 
 import java.util.HashMap;
 import java.util.Map;
-import static org.example.dto.HealthBarConstants.GREEN_HP_BAR;
-import static org.example.dto.HealthBarConstants.RED_HP_BAR;
-import static org.example.dto.HealthBarConstants.HP_BAR_THRESHOLD;
-import static org.example.dto.HealthBarConstants.BAR_CSS_CLASSES;
+import static org.example.dto.util.HealthBarConstants.GREEN_HP_BAR;
+import static org.example.dto.util.HealthBarConstants.RED_HP_BAR;
+import static org.example.dto.util.HealthBarConstants.HP_BAR_THRESHOLD;
+import static org.example.dto.util.HealthBarConstants.BAR_CSS_CLASSES;
 import static org.example.enums.Direction.LEFT;
 
 
@@ -146,6 +146,11 @@ public class MonsterService {
 
     public MonsterService setMonsterMapping(Map<String, Monster> monsterMapping) {
         this.monsterMapping = monsterMapping;
+        return this;
+    }
+
+    public MonsterService setMonstersKilled(int monstersKilled) {
+        this.monstersKilled = monstersKilled;
         return this;
     }
 }

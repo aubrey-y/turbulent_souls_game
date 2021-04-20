@@ -5,8 +5,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import org.example.App;
-import org.example.dto.PlayerState;
-import org.example.dto.Room;
+import org.example.dao.PlayerState;
+import org.example.dto.util.Room;
 
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -68,6 +68,14 @@ public class AppService {
 
     public void setPlayerState(PlayerState playerState) {
         App.setPlayerState(playerState);
+    }
+
+    public void setSessionStartMillis(long sessionStartMillis) {
+        App.setSessionStartMillis(sessionStartMillis);
+    }
+
+    public long getSessionStartMillis() {
+        return App.getSessionStartMillis();
     }
 
     public boolean getSoundPlaying() {

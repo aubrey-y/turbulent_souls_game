@@ -1,6 +1,6 @@
 package org.example.util;
 
-import org.example.dto.PlayerState;
+import org.example.dao.PlayerState;
 
 import java.time.LocalDateTime;
 import java.util.Comparator;

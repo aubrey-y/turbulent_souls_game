@@ -1,4 +1,4 @@
-package org.example.dto;
+package org.example.dto.util;
 
 public class HealthBarConstants {
     public static final double HP_BAR_THRESHOLD = 0.5;

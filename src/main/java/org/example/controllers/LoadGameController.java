@@ -13,7 +13,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import org.example.App;
 import org.example.controllers.rooms.Forest1Controller;
-import org.example.dto.PlayerState;
+import org.example.dao.PlayerState;
 import org.example.services.AppService;
 import org.example.services.DirectionService;
 import org.example.services.HealthService;
@@ -97,6 +97,7 @@ public class LoadGameController implements Initializable {
                         RoomDirectionService roomDirectionService = new RoomDirectionService(
                                 directionService);
                         HealthService healthService = new HealthService(this.appService);
+                        this.appService.setSessionStartMillis(System.currentTimeMillis());
 
                         loader.setControllerFactory(GameScreenController -> new Forest1Controller(
                                 this.appService,

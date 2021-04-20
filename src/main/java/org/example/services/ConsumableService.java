@@ -1,8 +1,8 @@
 package org.example.services;
 
-import org.example.dto.Item;
-import org.example.dto.Potion;
-import org.example.dto.Weapon;
+import org.example.dao.Item;
+import org.example.dto.consumables.Potion;
+import org.example.dao.Weapon;
 
 import java.util.Map;
 

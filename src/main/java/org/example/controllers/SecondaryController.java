@@ -8,9 +8,9 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import org.example.App;
 import org.example.controllers.rooms.Forest1Controller;
-import org.example.dto.Coordinate;
-import org.example.dto.PlayerState;
-import org.example.dto.Room;
+import org.example.dto.util.Coordinate;
+import org.example.dao.PlayerState;
+import org.example.dto.util.Room;
 import org.example.enums.Archetype;
 import org.example.enums.Difficulty;
 import org.example.exceptions.InvalidArchetypeException;
@@ -111,7 +111,7 @@ public class SecondaryController extends ErrorBaseController {
             DirectionService directionService = new DirectionService();
             RoomDirectionService roomDirectionService = new RoomDirectionService(directionService);
             HealthService healthService = new HealthService(this.appService);
-
+            this.appService.setSessionStartMillis(System.currentTimeMillis());
 
             loader.setControllerFactory(GameScreenController -> new Forest1Controller(
                     this.appService,
