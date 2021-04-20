@@ -162,15 +162,17 @@ public class GameScreenController extends InventoryController {
                 }
                 break;
             case SPACE:
-                this.playerService.playAttackAnimation();
-                String monsterKilled = monsterService.attackNearestMonster(
-                        this.appService.getPlayerState().getActiveWeapon(),
-                        this.player.getTranslateX(), this.player.getTranslateY(),
-                        this.appService.getDevMode());
-                if (monsterKilled != null) {
+                if (!playerService.getAnimatingAttack()) {
+                    this.playerService.playAttackAnimation();
+                    String monsterKilled = monsterService.attackNearestMonster(
+                            this.appService.getPlayerState().getActiveWeapon(),
+                            this.player.getTranslateX(), this.player.getTranslateY(),
+                            this.appService.getDevMode());
+                    if (monsterKilled != null) {
 
-                    monsterService.initiateDeathAnimation(monsterKilled);
-                    this.appService.addMonsterKilled(monsterKilled);
+                        monsterService.initiateDeathAnimation(monsterKilled);
+                        this.appService.addMonsterKilled(monsterKilled);
+                    }
                 }
                 break;
             case E:

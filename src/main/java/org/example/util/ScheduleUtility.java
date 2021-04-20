@@ -10,14 +10,11 @@ import javafx.util.Duration;
 import org.example.dao.Item;
 import org.example.dao.Monster;
 import org.example.App;
-<<<<<<< HEAD
-import org.example.dto.PlayerState;
-import org.example.dto.Potion;
-import org.example.dto.Weapon;
-=======
+
+import org.example.dao.PlayerState;
 import org.example.dto.consumables.Potion;
 import org.example.dao.Weapon;
->>>>>>> 0c7d9dba16a47d25ed9c79835637bcfbd6ae7711
+
 import org.example.services.AppService;
 import org.example.services.HealthService;
 import org.example.services.MonsterService;
