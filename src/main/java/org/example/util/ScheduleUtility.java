@@ -10,8 +10,11 @@ import javafx.util.Duration;
 import org.example.dao.Item;
 import org.example.dao.Monster;
 import org.example.App;
+
+import org.example.dao.PlayerState;
 import org.example.dto.consumables.Potion;
 import org.example.dao.Weapon;
+
 import org.example.services.AppService;
 import org.example.services.HealthService;
 import org.example.services.MonsterService;
@@ -84,6 +87,29 @@ public class ScheduleUtility {
         timeline = new Timeline(new KeyFrame(Duration.seconds(duration), actionEvent -> {
             playerService.getImageView().setEffect(
                     new ColorAdjust(0.0, 0.0, 0.0, 0.0));
+        }));
+        timeline.setCycleCount(1);
+        return timeline;
+    }
+
+    public static Timeline generatePlayerAttackResetSchedule(double duration,
+                                                             PlayerService playerService,
+                                                             PlayerState playerState) {
+        Timeline timeline = new Timeline();
+        Timeline finalTimeline = timeline;
+
+        timeline = new Timeline(new KeyFrame(Duration.seconds(duration), actionEvent -> {
+            String imagePath;
+            if (playerState.getSpawnOrientation() == LEFT) {
+                imagePath = playerState.getActiveWeapon().getAnimationLeft();
+            } else {
+                imagePath = playerState.getActiveWeapon().getAnimationRight();
+            }
+            ImageView playerView = playerService.getImageView();
+            playerService.resetCurrentPosition();
+            playerService.resetDefaultImageViewSize();
+            playerService.setAnimatingAttack(false);
+            playerView.setImage(new Image(Paths.get(imagePath).toUri().toString()));
         }));
         timeline.setCycleCount(1);
         return timeline;

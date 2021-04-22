@@ -21,6 +21,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import static org.example.util.ResourcePathUtility.BASIC_STAFF_PLAYER_ATTACK_LEFT;
+import static org.example.util.ResourcePathUtility.BASIC_STAFF_PLAYER_ATTACK_RIGHT;
 import static org.example.util.ResourcePathUtility.BASIC_STAFF_PLAYER_LEFT;
 import static org.example.util.ResourcePathUtility.BASIC_STAFF_PLAYER_RIGHT;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -171,6 +173,8 @@ public class SaveServiceTest {
                 .append("range", 100.0)
                 .append("price", 200)
                 .append("animationLeft", BASIC_STAFF_PLAYER_LEFT)
-                .append("animationRight", BASIC_STAFF_PLAYER_RIGHT);
+                .append("animationRight", BASIC_STAFF_PLAYER_RIGHT)
+                .append("attackAnimationLeft", BASIC_STAFF_PLAYER_ATTACK_LEFT)
+                .append("attackAnimationRight", BASIC_STAFF_PLAYER_ATTACK_RIGHT);
     }
 }

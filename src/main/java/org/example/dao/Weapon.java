@@ -47,6 +47,10 @@ public abstract class Weapon extends Item {
 
     protected String animationRight;
 
+    protected String attackAnimationLeft;
+
+    protected String attackAnimationRight;
+
     public Weapon() {
 
     }
@@ -96,6 +100,24 @@ public abstract class Weapon extends Item {
         return this;
     }
 
+    public String getAttackAnimationLeft() {
+        return attackAnimationLeft;
+    }
+
+    public Weapon setAttackAnimationLeft(String attackAnimationLeft) {
+        this.attackAnimationLeft = attackAnimationLeft;
+        return this;
+    }
+
+    public String getAttackAnimationRight() {
+        return attackAnimationRight;
+    }
+
+    public Weapon setAttackAnimationRight(String attackAnimationRight) {
+        this.attackAnimationRight = attackAnimationRight;
+        return this;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(
@@ -103,7 +125,9 @@ public abstract class Weapon extends Item {
                 this.attack,
                 this.range,
                 this.animationLeft,
-                this.animationRight
+                this.animationRight,
+                this.attackAnimationLeft,
+                this.attackAnimationRight
         );
     }
 
@@ -117,10 +141,16 @@ public abstract class Weapon extends Item {
                 && this.attack == weapon.attack
                 && this.range == weapon.range
                 && ((this.animationLeft == null && weapon.animationLeft == null)
-                    || (this.animationLeft != null
-                    && this.animationLeft.equals(weapon.animationLeft)))
+                        || (this.animationLeft != null
+                        && this.animationLeft.equals(weapon.animationLeft)))
                 && ((this.animationRight == null && weapon.animationRight == null)
-                    || (this.animationRight != null
-                && this.animationRight.equals(weapon.animationRight)));
+                        || (this.animationRight != null
+                        && this.animationRight.equals(weapon.animationRight)))
+                && ((this.attackAnimationLeft == null && weapon.attackAnimationLeft == null)
+                        || (this.attackAnimationLeft != null
+                        && this.attackAnimationLeft.equals(weapon.attackAnimationLeft)))
+                && ((this.attackAnimationRight == null && weapon.attackAnimationRight == null)
+                        || (this.attackAnimationRight != null
+                        && this.attackAnimationRight.equals(weapon.attackAnimationRight)));
     }
 }

@@ -6,11 +6,14 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.example.App;
+import org.example.enums.WeaponType;
 import org.example.dto.util.Coordinate;
 import org.example.dao.Monster;
 import org.example.dao.PlayerState;
 import org.example.dto.util.Room;
 import org.example.enums.Direction;
+import org.example.util.AnimationDurationUtility;
+import org.example.util.ScheduleUtility;
 
 
 import java.lang.reflect.Constructor;
@@ -24,6 +27,14 @@ import static org.example.enums.Direction.*;
 public class PlayerService {
 
     private ImageView imageView;
+
+    private double defaultPlayerImageViewWidth;
+
+    private double defaultPlayerImageViewHeight;
+
+    private double xCurrPos;
+
+    private double yCurrPos;
 
     private AppService appService;
 
@@ -46,6 +57,8 @@ public class PlayerService {
     public static final double DEFAULT_MOVE_SIZE = 30;
 
     private double moveSize = DEFAULT_MOVE_SIZE;
+
+    private Boolean animatingAttack = false;
 
     public PlayerService() {
 
@@ -229,6 +242,56 @@ public class PlayerService {
                         .toUri().toString()));
     }
 
+    public void playAttackAnimation() {
+        PlayerState playerState = this.appService.getPlayerState();
+        if (playerState.getSpawnOrientation() == LEFT) {
+            this.imageView.setImage(new Image(
+                    Paths.get(playerState.getActiveWeapon()
+                            .getAttackAnimationLeft()).toUri().toString()));
+        } else {
+            this.imageView.setImage(new Image(
+                    Paths.get(playerState.getActiveWeapon()
+                            .getAttackAnimationRight()).toUri().toString()));
+        }
+        // Animation sizes of running size and attack are different.
+        // Hence, only during attacks, position and size are adjusted
+        this.saveCurrentPosition();
+        if (playerState.getActiveWeapon().getType() == WeaponType.MAGIC) {
+            this.imageView.setFitWidth(294);
+            this.imageView.setFitHeight(145);
+            this.imageView.setTranslateY(this.imageView.getTranslateY() - 20);
+            if (playerState.getSpawnOrientation() == RIGHT) {
+                this.imageView.setTranslateX(this.imageView.getTranslateX() + 10);
+            } else {
+                this.imageView.setTranslateX(this.imageView.getTranslateX() - 170);
+            }
+        } else if (playerState.getActiveWeapon().getType() == WeaponType.SWORD) {
+            this.imageView.setFitWidth(225);
+            this.imageView.setFitHeight(180);
+            this.imageView.setTranslateY(this.imageView.getTranslateY() - 52);
+            this.imageView.setTranslateX(this.imageView.getTranslateX() - 50);
+        } else if (playerState.getActiveWeapon().getType() == WeaponType.STAFF) {
+            this.imageView.setFitWidth(242);
+            this.imageView.setFitHeight(140);
+            this.imageView.setTranslateY(this.imageView.getTranslateY() - 15);
+            if (playerState.getSpawnOrientation() == RIGHT) {
+                this.imageView.setTranslateX(this.imageView.getTranslateX() - 38);
+            } else {
+                this.imageView.setTranslateX(this.imageView.getTranslateX() - 70);
+            }
+        }
+        this.animatingAttack = true;
+        ScheduleUtility.generatePlayerAttackResetSchedule(
+                AnimationDurationUtility.getPlayerAttackDurationForWeaponType(
+                        playerState.getActiveWeapon().getType()),
+                this,
+                playerState).play();
+    }
+
+    public void setPlayerSpawnOrientation(Direction direction) {
+        this.appService.getPlayerState().setSpawnOrientation(direction);
+    }
+
     private void setNewPlayerSpawnCoordinates(Direction exitDirection) {
         PlayerState playerState = this.appService.getPlayerState();
         switch (exitDirection) {
@@ -287,6 +350,11 @@ public class PlayerService {
     public PlayerService setImageView(ImageView imageView) {
         this.imageView = imageView;
         return this;
+    }
+
+    public void setImageViewDimensions(ImageView imageView) {
+        this.defaultPlayerImageViewWidth = imageView.getFitWidth();
+        this.defaultPlayerImageViewHeight = imageView.getFitHeight();
     }
 
     public AppService getAppService() {
@@ -358,5 +426,28 @@ public class PlayerService {
 
     public double getMoveSize() {
         return this.moveSize;
+    }
+
+    public void resetDefaultImageViewSize() {
+        this.imageView.setFitWidth(defaultPlayerImageViewWidth);
+        this.imageView.setFitHeight(defaultPlayerImageViewHeight);
+    }
+
+    public void resetCurrentPosition() {
+        this.imageView.setTranslateX(this.xCurrPos);
+        this.imageView.setTranslateY(this.yCurrPos);
+    }
+
+    public void saveCurrentPosition() {
+        this.xCurrPos = this.imageView.getTranslateX();
+        this.yCurrPos = this.imageView.getTranslateY();
+    }
+
+    public void setAnimatingAttack(Boolean animatingAttack) {
+        this.animatingAttack = animatingAttack;
+    }
+
+    public Boolean getAnimatingAttack() {
+        return animatingAttack;
     }
 }

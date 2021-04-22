@@ -22,9 +22,9 @@ import org.example.services.PlayerService;
 import org.example.services.RoomDirectionService;
 import org.example.services.SaveService;
 import org.example.services.TraderService;
-
 import static javafx.scene.input.KeyCode.SHIFT;
 import static org.example.enums.Direction.LEFT;
+import static org.example.enums.Direction.RIGHT;
 
 
 public class GameScreenController extends InventoryController {
@@ -77,6 +77,8 @@ public class GameScreenController extends InventoryController {
     private final BooleanProperty dPressed = new SimpleBooleanProperty(false);
     private final BooleanProperty shiftPressed = new SimpleBooleanProperty(false);
 
+
+
     public GameScreenController(AppService appService,
                                 PlayerService playerService,
                                 DirectionService directionService,
@@ -124,18 +126,30 @@ public class GameScreenController extends InventoryController {
                 }
                 break;
             case W:
-                this.wPressed.set(true);
+                if (!playerService.getAnimatingAttack()) {
+                    this.wPressed.set(true);
+                }
                 break;
             case A:
-                this.aPressed.set(true);
-                this.playerService.displayPlayerLeftOrientation(this.appService.getPlayerState());
+                if (!playerService.getAnimatingAttack()) {
+                    this.aPressed.set(true);
+                    this.playerService.setPlayerSpawnOrientation(LEFT);
+                    this.playerService
+                            .displayPlayerLeftOrientation(this.appService.getPlayerState());
+                }
                 break;
             case S:
-                this.sPressed.set(true);
+                if (!playerService.getAnimatingAttack()) {
+                    this.sPressed.set(true);
+                }
                 break;
             case D:
-                this.dPressed.set(true);
-                this.playerService.displayPlayerRightOrientation(this.appService.getPlayerState());
+                if (!playerService.getAnimatingAttack()) {
+                    this.dPressed.set(true);
+                    this.playerService.setPlayerSpawnOrientation(RIGHT);
+                    this.playerService
+                            .displayPlayerRightOrientation(this.appService.getPlayerState());
+                }
                 break;
             case P:
                 if (this.appService.getDevMode()) {
@@ -148,14 +162,17 @@ public class GameScreenController extends InventoryController {
                 }
                 break;
             case SPACE:
-                String monsterKilled = monsterService.attackNearestMonster(
-                        this.appService.getPlayerState().getActiveWeapon(),
-                        this.player.getTranslateX(), this.player.getTranslateY(),
-                        this.appService.getDevMode());
-                if (monsterKilled != null) {
+                if (!playerService.getAnimatingAttack()) {
+                    this.playerService.playAttackAnimation();
+                    String monsterKilled = monsterService.attackNearestMonster(
+                            this.appService.getPlayerState().getActiveWeapon(),
+                            this.player.getTranslateX(), this.player.getTranslateY(),
+                            this.appService.getDevMode());
+                    if (monsterKilled != null) {
 
-                    monsterService.initiateDeathAnimation(monsterKilled);
-                    this.appService.addMonsterKilled(monsterKilled);
+                        monsterService.initiateDeathAnimation(monsterKilled);
+                        this.appService.addMonsterKilled(monsterKilled);
+                    }
                 }
                 break;
             case E:
@@ -172,6 +189,7 @@ public class GameScreenController extends InventoryController {
                     this.playerService.attemptToClaimGold();
                 }
                 break;
+
             default:
                 break;
             }
@@ -261,6 +279,7 @@ public class GameScreenController extends InventoryController {
 
     private void initializePlayerImageView(PlayerState playerState) {
         this.playerService.setImageView(this.player);
+        this.playerService.setImageViewDimensions(this.player);
         this.displayCorrectPlayerOrientation(playerState);
         this.playerService.moveX(playerState.getSpawnCoordinates().getX());
         this.playerService.moveY(playerState.getSpawnCoordinates().getY());
@@ -394,8 +413,5 @@ public class GameScreenController extends InventoryController {
         return this;
     }
 }
-
-
-
 
 
