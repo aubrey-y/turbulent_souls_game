@@ -5,7 +5,10 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
@@ -22,6 +25,9 @@ import org.example.services.PlayerService;
 import org.example.services.RoomDirectionService;
 import org.example.services.SaveService;
 import org.example.services.TraderService;
+
+import java.util.Optional;
+
 import static javafx.scene.input.KeyCode.SHIFT;
 import static org.example.enums.Direction.LEFT;
 import static org.example.enums.Direction.RIGHT;
@@ -309,7 +315,31 @@ public class GameScreenController extends InventoryController {
         this.appService.setPlayerState(playerState);
         this.appService.setSessionStartMillis(System.currentTimeMillis());
     }
-    
+
+    protected void initializeChallengeRoom() {
+        PlayerState playerState = this.appService.getPlayerState();
+        boolean[] challengeRoomsComplete = playerState.getChallengeRoomsComplete();
+        Optional<ButtonType> result = null;
+        ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
+        ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        if (!challengeRoomsComplete[0]) {
+            Alert alert = new Alert(Alert.AlertType.WARNING,
+                    "This room can be increased in difficulty for more rewards, do you accept this challenge?",
+                    yes,
+                    no);
+            alert.setTitle("Challenge Room");
+            alert.initOwner(this.appService.getStage());
+            result = alert.showAndWait();
+            challengeRoomsComplete[0] = true;
+            playerState.setChallengeRoomsComplete(challengeRoomsComplete);
+            this.appService.setPlayerState(playerState);
+        }
+        if (result != null && result.orElse(no) == yes) {
+            System.out.println("Execute challenge room logic");
+        }
+    }
+
     @FXML
     private void closeButtonAction() {
         Stage stage = (Stage) closeButton.getScene().getWindow();

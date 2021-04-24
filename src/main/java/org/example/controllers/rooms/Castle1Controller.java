@@ -4,11 +4,15 @@ import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.example.controllers.GameScreenController;
 import org.example.dao.Monster;
+import org.example.dao.PlayerState;
 import org.example.services.AppService;
 import org.example.services.DirectionService;
 import org.example.services.HealthService;
@@ -20,6 +24,7 @@ import org.example.util.ScheduleUtility;
 
 import java.net.URL;
 import java.nio.file.Paths;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static org.example.enums.Direction.LEFT;
@@ -82,7 +87,10 @@ public class Castle1Controller extends GameScreenController implements Initializ
             this.setupWhitedragon1();
             this.playerService.registerTimeline(this.whiteDragon1AttackSchedule);
         }
+        this.initializeChallengeRoom();
     }
+
+
 
     private void setupWhitedragon1() {
         this.whitedragon1.setTranslateX(1000);

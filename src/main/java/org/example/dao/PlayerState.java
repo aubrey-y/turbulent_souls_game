@@ -42,6 +42,15 @@ public class PlayerState {
 
     private Set<String> monstersKilled = new HashSet<>();
 
+    public boolean[] getChallengeRoomsComplete() {
+        return challengeRoomsComplete;
+    }
+
+    public PlayerState setChallengeRoomsComplete(boolean[] challengeRoomsComplete) {
+        this.challengeRoomsComplete = challengeRoomsComplete;
+        return this;
+    }
+
     private String email;
 
     private String lastUpdated;
@@ -49,6 +58,8 @@ public class PlayerState {
     private long sessionLength;
 
     private int goldSpent;
+
+    private boolean[] challengeRoomsComplete = new boolean[2];
 
     public PlayerState() {
 
@@ -73,6 +84,7 @@ public class PlayerState {
         this.monstersKilled = playerState.monstersKilled;
         this.email = playerState.email;
         this.lastUpdated = playerState.lastUpdated;
+        this.challengeRoomsComplete = playerState.challengeRoomsComplete;
     }
 
     public PlayerState(String username,

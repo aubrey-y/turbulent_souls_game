@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
+import javafx.stage.Window;
 import org.example.App;
 import org.example.dao.PlayerState;
 import org.example.dto.util.Room;
@@ -100,5 +101,9 @@ public class AppService {
 
     public void addMonsterKilled(String id) {
         App.getPlayerState().getMonstersKilled().add(id);
+    }
+
+    public Window getStage() {
+        return App.getPrimaryStage();
     }
 }
