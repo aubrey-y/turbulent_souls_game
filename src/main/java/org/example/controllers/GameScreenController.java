@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import org.example.dao.Monster;
 import org.example.dao.PlayerState;
 import org.example.services.AppService;
 import org.example.services.ConsumableService;
@@ -26,6 +27,7 @@ import org.example.services.RoomDirectionService;
 import org.example.services.SaveService;
 import org.example.services.TraderService;
 
+import java.util.Map;
 import java.util.Optional;
 
 import static javafx.scene.input.KeyCode.SHIFT;
@@ -316,7 +318,7 @@ public class GameScreenController extends InventoryController {
         this.appService.setSessionStartMillis(System.currentTimeMillis());
     }
 
-    protected void initializeChallengeRoom(int index) {
+    protected boolean initializeChallengeRoom(int index) {
         PlayerState playerState = this.appService.getPlayerState();
         boolean[] challengeRoomsComplete = playerState.getChallengeRoomsComplete();
         Optional<ButtonType> result = null;
@@ -336,8 +338,9 @@ public class GameScreenController extends InventoryController {
             this.appService.setPlayerState(playerState);
         }
         if (result != null && result.orElse(no) == yes) {
-            System.out.println("Execute challenge room logic");
+            return true;
         }
+        return false;
     }
 
     @FXML

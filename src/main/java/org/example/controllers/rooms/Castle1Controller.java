@@ -24,6 +24,9 @@ import org.example.util.ScheduleUtility;
 
 import java.net.URL;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -40,7 +43,12 @@ public class Castle1Controller extends GameScreenController implements Initializ
 
     private Timeline whiteDragon1AttackSchedule;
     private Timeline whiteDragon1ResetSchedule;
+    private Timeline whiteDragon2AttackSchedule;
+    private Timeline whiteDragon2ResetSchedule;
+    private Timeline whiteDragon3AttackSchedule;
+    private Timeline whiteDragon3ResetSchedule;
     private Timeline resetPlayerSchedule;
+    private boolean challengeRoomCheck;
 
     @FXML
     private ImageView whitedragon1;
@@ -49,6 +57,23 @@ public class Castle1Controller extends GameScreenController implements Initializ
 
     @FXML
     private ProgressBar whitedragon1HealthBar;
+
+    @FXML
+    private ImageView whitedragon2;
+    private final String whitedragon2Key = "castle2whitedragon2";
+    private final int whitedragon2HealthCapacity = 25;
+
+    @FXML
+    private ProgressBar whitedragon2HealthBar;
+
+    @FXML
+    private ImageView whitedragon3;
+    private final String whitedragon3Key = "castle3whitedragon3";
+    private final int whitedragon3HealthCapacity = 25;
+
+    @FXML
+    private ProgressBar whitedragon3HealthBar;
+
 
     public Castle1Controller(AppService appService,
                              PlayerService playerService,
@@ -83,14 +108,18 @@ public class Castle1Controller extends GameScreenController implements Initializ
                 WHITE_DRAGON_LEFT_PATH,
                 WHITE_DRAGON_RIGHT_PATH
         );
-        if (!this.appService.getMonstersKilled().contains(this.whitedragon1Key)) {
+        challengeRoomCheck = this.initializeChallengeRoom(0);
+        if (!this.appService.getMonstersKilled().contains(this.whitedragon1Key)
+                && !this.appService.getMonstersKilled().contains(this.whitedragon2Key)) {
+            if (challengeRoomCheck) {
+                this.monsterService.setChallengeRoomLockOn(true);
+                setUpChallengeRoom();
+                this.playerService.registerTimeline(this.whiteDragon2AttackSchedule);
+            }
             this.setupWhitedragon1();
             this.playerService.registerTimeline(this.whiteDragon1AttackSchedule);
         }
-        this.initializeChallengeRoom(0);
     }
-
-
 
     private void setupWhitedragon1() {
         this.whitedragon1.setTranslateX(1000);
@@ -134,5 +163,107 @@ public class Castle1Controller extends GameScreenController implements Initializ
                 WHITE_DRAGON_ATTACK_RIGHT_PATH
         );
         this.whiteDragon1AttackSchedule.play();
+    }
+
+    private void setUpChallengeRoom() {
+        this.whiteDragon2ResetSchedule = ScheduleUtility.generateMonsterResetSchedule(
+                0.5,
+                this.monsterService,
+                this.whitedragon2Key,
+                this.whitedragon2,
+                WHITE_DRAGON_LEFT_PATH,
+                WHITE_DRAGON_RIGHT_PATH
+        );
+        this.whitedragon2.setTranslateX(500);
+        this.whitedragon2.setTranslateY(400);
+        this.whitedragon2.setVisible(true);
+        this.whitedragon2HealthBar.setTranslateX(480);
+        this.whitedragon2HealthBar.setTranslateY(360);
+        this.whitedragon2HealthBar.setVisible(true);
+        this.monsterService.addMonster(
+                this.whitedragon2Key,
+                new Monster()
+                        .setHealth(this.whitedragon2HealthCapacity)
+                        .setHealthCapacity(this.whitedragon2HealthCapacity)
+                        .setRange(3.0)
+                        .setAttack(25)
+                        .setAccuracy(0.5)
+                        .setKillReward(500)
+                        .setMonsterType(WHITE_DRAGON)
+                        .setImageView(this.whitedragon2)
+                        .setHealthBar(this.whitedragon2HealthBar)
+                        .setOrientation(LEFT)
+                        .setDeathAnimationLeft(
+                                new Image(
+                                        Paths.get(WHITE_DRAGON_DEATH_LEFT_PATH).toUri().toString()))
+                        .setDeathAnimationRight(
+                                new Image(
+                                        Paths.get(WHITE_DRAGON_DEATH_RIGHT_PATH).toUri().toString())
+                        )
+                        .setKey(this.whitedragon2Key));
+        this.whiteDragon2AttackSchedule = ScheduleUtility.generateMonsterAttackSchedule(
+                1.0,
+                this.appService,
+                this.whitedragon2Key,
+                this.playerService,
+                this.monsterService,
+                this.healthService,
+                this.resetPlayerSchedule,
+                this.whiteDragon2ResetSchedule,
+                Timeline.INDEFINITE,
+                WHITE_DRAGON_ATTACK_LEFT_PATH,
+                WHITE_DRAGON_ATTACK_RIGHT_PATH
+        );
+        this.whiteDragon2AttackSchedule.play();
+
+        this.whiteDragon3ResetSchedule = ScheduleUtility.generateMonsterResetSchedule(
+                0.5,
+                this.monsterService,
+                this.whitedragon3Key,
+                this.whitedragon3,
+                WHITE_DRAGON_LEFT_PATH,
+                WHITE_DRAGON_RIGHT_PATH
+        );
+        this.whitedragon3.setTranslateX(500);
+        this.whitedragon3.setTranslateY(600);
+        this.whitedragon3.setVisible(true);
+        this.whitedragon3HealthBar.setTranslateX(480);
+        this.whitedragon3HealthBar.setTranslateY(560);
+        this.whitedragon3HealthBar.setVisible(true);
+        this.monsterService.addMonster(
+                this.whitedragon3Key,
+                new Monster()
+                        .setHealth(this.whitedragon3HealthCapacity)
+                        .setHealthCapacity(this.whitedragon3HealthCapacity)
+                        .setRange(3.0)
+                        .setAttack(25)
+                        .setAccuracy(0.5)
+                        .setKillReward(500)
+                        .setMonsterType(WHITE_DRAGON)
+                        .setImageView(this.whitedragon3)
+                        .setHealthBar(this.whitedragon3HealthBar)
+                        .setOrientation(LEFT)
+                        .setDeathAnimationLeft(
+                                new Image(
+                                        Paths.get(WHITE_DRAGON_DEATH_LEFT_PATH).toUri().toString()))
+                        .setDeathAnimationRight(
+                                new Image(
+                                        Paths.get(WHITE_DRAGON_DEATH_RIGHT_PATH).toUri().toString())
+                        )
+                        .setKey(this.whitedragon3Key));
+        this.whiteDragon3AttackSchedule = ScheduleUtility.generateMonsterAttackSchedule(
+                1.0,
+                this.appService,
+                this.whitedragon3Key,
+                this.playerService,
+                this.monsterService,
+                this.healthService,
+                this.resetPlayerSchedule,
+                this.whiteDragon3ResetSchedule,
+                Timeline.INDEFINITE,
+                WHITE_DRAGON_ATTACK_LEFT_PATH,
+                WHITE_DRAGON_ATTACK_RIGHT_PATH
+        );
+        this.whiteDragon3AttackSchedule.play();
     }
 }
