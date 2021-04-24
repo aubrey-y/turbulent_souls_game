@@ -87,7 +87,7 @@ public class Castle1Controller extends GameScreenController implements Initializ
             this.setupWhitedragon1();
             this.playerService.registerTimeline(this.whiteDragon1AttackSchedule);
         }
-        this.initializeChallengeRoom();
+        this.initializeChallengeRoom(0);
     }
 
 

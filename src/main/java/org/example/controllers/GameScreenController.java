@@ -316,14 +316,14 @@ public class GameScreenController extends InventoryController {
         this.appService.setSessionStartMillis(System.currentTimeMillis());
     }
 
-    protected void initializeChallengeRoom() {
+    protected void initializeChallengeRoom(int index) {
         PlayerState playerState = this.appService.getPlayerState();
         boolean[] challengeRoomsComplete = playerState.getChallengeRoomsComplete();
         Optional<ButtonType> result = null;
         ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
         ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
 
-        if (!challengeRoomsComplete[0]) {
+        if (!challengeRoomsComplete[index]) {
             Alert alert = new Alert(Alert.AlertType.WARNING,
                     "This room can be increased in difficulty for more rewards, do you accept this challenge?",
                     yes,
@@ -331,7 +331,7 @@ public class GameScreenController extends InventoryController {
             alert.setTitle("Challenge Room");
             alert.initOwner(this.appService.getStage());
             result = alert.showAndWait();
-            challengeRoomsComplete[0] = true;
+            challengeRoomsComplete[index] = true;
             playerState.setChallengeRoomsComplete(challengeRoomsComplete);
             this.appService.setPlayerState(playerState);
         }
