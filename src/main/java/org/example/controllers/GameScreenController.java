@@ -5,12 +5,15 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import org.example.dto.PlayerState;
+import org.example.dao.PlayerState;
 import org.example.services.AppService;
 import org.example.services.ConsumableService;
 import org.example.services.DirectionService;
@@ -23,8 +26,11 @@ import org.example.services.RoomDirectionService;
 import org.example.services.SaveService;
 import org.example.services.TraderService;
 
+import java.util.Optional;
+
 import static javafx.scene.input.KeyCode.SHIFT;
 import static org.example.enums.Direction.LEFT;
+import static org.example.enums.Direction.RIGHT;
 
 
 public class GameScreenController extends InventoryController {
@@ -60,6 +66,9 @@ public class GameScreenController extends InventoryController {
     private Button saveButton;
 
     @FXML
+    private Label goldAmountLabel;
+
+    @FXML
     private Label goldAmount;
 
     @FXML
@@ -71,11 +80,16 @@ public class GameScreenController extends InventoryController {
     @FXML
     private Label healthText;
 
+    @FXML
+    private Label username;
+
     private final BooleanProperty wPressed = new SimpleBooleanProperty(false);
     private final BooleanProperty aPressed = new SimpleBooleanProperty(false);
     private final BooleanProperty sPressed = new SimpleBooleanProperty(false);
     private final BooleanProperty dPressed = new SimpleBooleanProperty(false);
     private final BooleanProperty shiftPressed = new SimpleBooleanProperty(false);
+
+
 
     public GameScreenController(AppService appService,
                                 PlayerService playerService,
@@ -99,6 +113,7 @@ public class GameScreenController extends InventoryController {
 
     protected void initGameScreenController(MonsterService monsterService, ImageView trader) {
         PlayerState playerState = this.appService.getPlayerState();
+        this.initializeUIElements(playerState);
         if (playerState.getEmail() == null) {
             this.saveButton.setDisable(true);
         }
@@ -124,18 +139,30 @@ public class GameScreenController extends InventoryController {
                 }
                 break;
             case W:
-                this.wPressed.set(true);
+                if (!playerService.getAnimatingAttack()) {
+                    this.wPressed.set(true);
+                }
                 break;
             case A:
-                this.aPressed.set(true);
-                this.playerService.displayPlayerLeftOrientation(this.appService.getPlayerState());
+                if (!playerService.getAnimatingAttack()) {
+                    this.aPressed.set(true);
+                    this.playerService.setPlayerSpawnOrientation(LEFT);
+                    this.playerService
+                            .displayPlayerLeftOrientation(this.appService.getPlayerState());
+                }
                 break;
             case S:
-                this.sPressed.set(true);
+                if (!playerService.getAnimatingAttack()) {
+                    this.sPressed.set(true);
+                }
                 break;
             case D:
-                this.dPressed.set(true);
-                this.playerService.displayPlayerRightOrientation(this.appService.getPlayerState());
+                if (!playerService.getAnimatingAttack()) {
+                    this.dPressed.set(true);
+                    this.playerService.setPlayerSpawnOrientation(RIGHT);
+                    this.playerService
+                            .displayPlayerRightOrientation(this.appService.getPlayerState());
+                }
                 break;
             case P:
                 if (this.appService.getDevMode()) {
@@ -148,14 +175,19 @@ public class GameScreenController extends InventoryController {
                 }
                 break;
             case SPACE:
-                String monsterKilled = monsterService.attackNearestMonster(
-                        this.appService.getPlayerState().getActiveWeapon(),
-                        this.player.getTranslateX(), this.player.getTranslateY(),
-                        this.appService.getDevMode());
-                if (monsterKilled != null) {
-
-                    monsterService.initiateDeathAnimation(monsterKilled);
-                    this.appService.addMonsterKilled(monsterKilled);
+                if (!playerService.getAnimatingAttack()) {
+                    this.playerService.playAttackAnimation();
+                    String monsterKilled = monsterService.attackNearestMonster(
+                            this.appService.getPlayerState().getActiveWeapon(),
+                            this.player.getTranslateX(), this.player.getTranslateY(),
+                            this.appService.getDevMode());
+                    if (monsterKilled != null) {
+                        if (monsterService.getMonstersRemaining() < 1) {
+                            this.playerService.setChallengeRoomLockOn(false);
+                        }
+                        monsterService.initiateDeathAnimation(monsterKilled);
+                        this.appService.addMonsterKilled(monsterKilled);
+                    }
                 }
                 break;
             case E:
@@ -172,6 +204,7 @@ public class GameScreenController extends InventoryController {
                     this.playerService.attemptToClaimGold();
                 }
                 break;
+
             default:
                 break;
             }
@@ -208,6 +241,20 @@ public class GameScreenController extends InventoryController {
                 break;
             }
         });
+    }
+
+    private void initializeUIElements(PlayerState playerState) {
+        this.username.setText(playerState.getUsername());
+        this.username.setLayoutX(35);
+        this.username.setLayoutY(2);
+        this.goldAmountLabel.setLayoutX(35);
+        this.goldAmountLabel.setLayoutY(83);
+        this.goldAmount.setLayoutX(135);
+        this.goldAmount.setLayoutY(83);
+        this.healthBar.setLayoutX(35);
+        this.healthBar.setLayoutY(53);
+        this.healthText.setLayoutX(140);
+        this.healthText.setLayoutY(58);
     }
 
     private void initializeInventoryService(InventoryService inventoryService) {
@@ -261,6 +308,7 @@ public class GameScreenController extends InventoryController {
 
     private void initializePlayerImageView(PlayerState playerState) {
         this.playerService.setImageView(this.player);
+        this.playerService.setImageViewDimensions(this.player);
         this.displayCorrectPlayerOrientation(playerState);
         this.playerService.moveX(playerState.getSpawnCoordinates().getX());
         this.playerService.moveY(playerState.getSpawnCoordinates().getY());
@@ -282,7 +330,33 @@ public class GameScreenController extends InventoryController {
             this.playerService.displayPlayerRightOrientation(playerState);
         }
     }
-    
+
+    private void updatePlayerStateSessionLength() {
+        PlayerState playerState = this.appService.getPlayerState();
+        long sessionLength = System.currentTimeMillis() - this.appService.getSessionStartMillis();
+        playerState.setSessionLength(playerState.getSessionLength() + sessionLength);
+        this.appService.setPlayerState(playerState);
+        this.appService.setSessionStartMillis(System.currentTimeMillis());
+    }
+
+    protected boolean initializeChallengeRoom() {
+        PlayerState playerState = this.appService.getPlayerState();
+        Optional<ButtonType> result;
+        ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
+        ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+        Alert alert = new Alert(Alert.AlertType.WARNING,
+                "The next room can be increased in difficulty for more rewards, "
+                        + "do you accept this challenge?",
+                yes,
+                no);
+        alert.setTitle("Challenge Room");
+        alert.initOwner(this.appService.getStage());
+        result = alert.showAndWait();
+        this.appService.setPlayerState(playerState);
+
+        return result.isPresent() && result.orElse(no) == yes;
+    }
+
     @FXML
     private void closeButtonAction() {
         Stage stage = (Stage) closeButton.getScene().getWindow();
@@ -292,6 +366,7 @@ public class GameScreenController extends InventoryController {
     @FXML
     private void saveGameAction() {
         this.appService.updatePlayerStateLastSaved();
+        this.updatePlayerStateSessionLength();
         this.saveService.upsertPlayerStateSave(this.appService.getPlayerState());
     }
 
@@ -385,8 +460,5 @@ public class GameScreenController extends InventoryController {
         return this;
     }
 }
-
-
-
 
 

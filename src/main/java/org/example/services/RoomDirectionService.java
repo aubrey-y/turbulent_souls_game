@@ -10,9 +10,9 @@ import org.example.controllers.rooms.ForestTraderController;
 import org.example.controllers.rooms.Garden1Controller;
 import org.example.controllers.rooms.Garden2Controller;
 import org.example.controllers.rooms.GardenTraderController;
-import org.example.dto.RandomRoom;
-import org.example.dto.Room;
-import org.example.dto.RoomIdDirectionKey;
+import org.example.dto.util.RandomRoom;
+import org.example.dto.util.Room;
+import org.example.dto.util.RoomIdDirectionKey;
 import org.example.enums.Direction;
 
 import java.util.HashMap;

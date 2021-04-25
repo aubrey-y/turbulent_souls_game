@@ -8,10 +8,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
-import org.example.dto.Item;
-import org.example.dto.PlayerState;
-import org.example.dto.Potion;
-import org.example.dto.Weapon;
+import org.example.dao.Item;
+import org.example.dao.PlayerState;
+import org.example.dto.consumables.Potion;
+import org.example.dao.Weapon;
 
 import java.nio.file.Paths;
 import java.util.Map;

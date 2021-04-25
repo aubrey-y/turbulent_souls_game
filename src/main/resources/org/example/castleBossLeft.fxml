@@ -29,7 +29,7 @@
                </image>
             </ImageView>
             <ProgressBar fx:id="boss1HealthBar" focusTraversable="false" opacity="0.8" prefHeight="10.0" prefWidth="150.0" progress="1.0" style="-fx-control-inner-background: #3E5155;" styleClass="green-bar" stylesheets="@../../static/css/fontstyle.css" visible="false" />
-            <ImageView fx:id="player" fitHeight="133.0" fitWidth="133.0" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView fx:id="player" fitHeight="133.0" fitWidth="133.0" pickOnBounds="true" visible="false">
                <image>
                   <Image url="@../../static/images/player.png" />
                </image>
@@ -54,20 +54,25 @@
             </ImageView>
          </children>
       </Pane>
-      <Label fx:id="goldAmountLabel" layoutX="35.0" layoutY="60.0" prefHeight="59.0" prefWidth="145.0" stylesheets="@../../static/css/fontstyle.css" text="GOLD : " textFill="WHITE">
+      <Label fx:id="goldAmountLabel" layoutX="35.0" layoutY="93.0" prefHeight="59.0" prefWidth="145.0" stylesheets="@../../static/css/fontstyle.css" text="GOLD : " textFill="WHITE">
          <font>
             <Font size="43.0" />
          </font>
       </Label>
-      <Label fx:id="goldAmount" layoutX="135.0" layoutY="60.0" prefHeight="59.0" prefWidth="385.0" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE">
+      <Label fx:id="goldAmount" layoutX="135.0" layoutY="93.0" prefHeight="59.0" prefWidth="385.0" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE">
          <font>
             <Font size="43.0" />
          </font>
       </Label>
-      <ProgressBar fx:id="healthBar" focusTraversable="false" layoutX="35.0" layoutY="30.0" opacity="0.8" prefHeight="40.0" prefWidth="591.0" progress="1.0" style="-fx-control-inner-background: #3E5155;" styleClass="green-bar" stylesheets="@../../static/css/fontstyle.css" />
-      <Label fx:id="healthText" alignment="CENTER" layoutX="140.0" layoutY="35.0" prefHeight="30.0" prefWidth="385.0" stylesheets="@../../static/css/fontstyle.css" text="100/100" textAlignment="CENTER" textFill="WHITE">
+      <ProgressBar fx:id="healthBar" focusTraversable="false" layoutX="35.0" layoutY="63.0" opacity="0.8" prefHeight="40.0" prefWidth="591.0" progress="1.0" style="-fx-control-inner-background: #3E5155;" styleClass="green-bar" stylesheets="@../../static/css/fontstyle.css" />
+      <Label fx:id="healthText" alignment="CENTER" layoutX="140.0" layoutY="68.0" prefHeight="30.0" prefWidth="385.0" stylesheets="@../../static/css/fontstyle.css" text="100/100" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="37.0" />
+         </font>
+      </Label>
+      <Label fx:id="username" layoutX="35.0" layoutY="12.0" prefHeight="59.0" prefWidth="591.0" stylesheets="@../../static/css/fontstyle.css" textFill="WHITE">
+         <font>
+            <Font size="43.0" />
          </font>
       </Label>
       <Label fx:id="inventoryPreviewTitle" layoutX="1420.0" layoutY="110.0" prefHeight="59.0" prefWidth="431.0" stylesheets="@../../static/css/fontstyle.css" text="Placeholder" textFill="WHITE" visible="false">

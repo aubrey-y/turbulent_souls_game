@@ -1,8 +1,20 @@
-package org.example.dto;
+package org.example.dao;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import org.example.dto.weapons.AdvancedMagic;
+import org.example.dto.weapons.AdvancedStaff;
+import org.example.dto.weapons.AdvancedSword;
+import org.example.dto.weapons.BasicMagic;
+import org.example.dto.weapons.BasicStaff;
+import org.example.dto.weapons.BasicSword;
+import org.example.dto.weapons.ExpertMagic;
+import org.example.dto.weapons.ExpertStaff;
+import org.example.dto.weapons.ExpertSword;
+import org.example.dto.weapons.MasterMagic;
+import org.example.dto.weapons.MasterStaff;
+import org.example.dto.weapons.MasterSword;
 import org.example.enums.WeaponType;
 
 import java.util.Objects;
@@ -34,6 +46,10 @@ public abstract class Weapon extends Item {
     protected String animationLeft;
 
     protected String animationRight;
+
+    protected String attackAnimationLeft;
+
+    protected String attackAnimationRight;
 
     public Weapon() {
 
@@ -84,6 +100,24 @@ public abstract class Weapon extends Item {
         return this;
     }
 
+    public String getAttackAnimationLeft() {
+        return attackAnimationLeft;
+    }
+
+    public Weapon setAttackAnimationLeft(String attackAnimationLeft) {
+        this.attackAnimationLeft = attackAnimationLeft;
+        return this;
+    }
+
+    public String getAttackAnimationRight() {
+        return attackAnimationRight;
+    }
+
+    public Weapon setAttackAnimationRight(String attackAnimationRight) {
+        this.attackAnimationRight = attackAnimationRight;
+        return this;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(
@@ -91,7 +125,9 @@ public abstract class Weapon extends Item {
                 this.attack,
                 this.range,
                 this.animationLeft,
-                this.animationRight
+                this.animationRight,
+                this.attackAnimationLeft,
+                this.attackAnimationRight
         );
     }
 
@@ -105,10 +141,16 @@ public abstract class Weapon extends Item {
                 && this.attack == weapon.attack
                 && this.range == weapon.range
                 && ((this.animationLeft == null && weapon.animationLeft == null)
-                    || (this.animationLeft != null
-                    && this.animationLeft.equals(weapon.animationLeft)))
+                        || (this.animationLeft != null
+                        && this.animationLeft.equals(weapon.animationLeft)))
                 && ((this.animationRight == null && weapon.animationRight == null)
-                    || (this.animationRight != null
-                && this.animationRight.equals(weapon.animationRight)));
+                        || (this.animationRight != null
+                        && this.animationRight.equals(weapon.animationRight)))
+                && ((this.attackAnimationLeft == null && weapon.attackAnimationLeft == null)
+                        || (this.attackAnimationLeft != null
+                        && this.attackAnimationLeft.equals(weapon.attackAnimationLeft)))
+                && ((this.attackAnimationRight == null && weapon.attackAnimationRight == null)
+                        || (this.attackAnimationRight != null
+                        && this.attackAnimationRight.equals(weapon.attackAnimationRight)));
     }
 }

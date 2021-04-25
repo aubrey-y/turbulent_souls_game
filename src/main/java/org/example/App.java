@@ -11,8 +11,8 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import org.example.dto.PlayerState;
-import org.example.dto.Room;
+import org.example.dao.PlayerState;
+import org.example.dto.util.Room;
 
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -36,12 +36,17 @@ public class App extends Application {
 
     private static PlayerState playerState = new PlayerState();
 
+    private static long sessionStartMillis;
+
     private static Room activeRoom;
 
     private static FXMLLoader activeLoader;
 
+    private static Stage primaryStage;
+
     @Override
     public void start(Stage stage) throws IOException {
+        primaryStage = stage;
         root = FXMLLoader.load(getClass().getResource("primary.fxml"));
         scene = new Scene(root, 1920, 1080);
         Media media = new Media(Paths.get("src/main/resources/static/music/bardsadventure.mp3")
@@ -56,6 +61,14 @@ public class App extends Application {
         stage.setMaximized(true);
         stage.setFullScreen(true);
         stage.show();
+    }
+
+    public static Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
+    public static void setPrimaryStage(Stage primaryStage) {
+        App.primaryStage = primaryStage;
     }
 
     public static void toggleSound(ImageView muteDisabled, ImageView muteEnabled) {
@@ -97,6 +110,14 @@ public class App extends Application {
 
     public static void setPlayerState(PlayerState state) {
         playerState = state;
+    }
+
+    public static long getSessionStartMillis() {
+        return sessionStartMillis;
+    }
+
+    public static void setSessionStartMillis(long sessionStartMillis) {
+        App.sessionStartMillis = sessionStartMillis;
     }
 
     public static boolean getSoundPlaying() {

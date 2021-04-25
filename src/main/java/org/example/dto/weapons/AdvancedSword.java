@@ -1,8 +1,11 @@
-package org.example.dto;
+package org.example.dto.weapons;
 
+import org.example.dao.Weapon;
 import org.example.enums.WeaponType;
 
 import static org.example.util.ResourcePathUtility.ADVANCED_SWORD_PATH;
+import static org.example.util.ResourcePathUtility.ADVANCED_SWORD_PLAYER_ATTACK_LEFT;
+import static org.example.util.ResourcePathUtility.ADVANCED_SWORD_PLAYER_ATTACK_RIGHT;
 import static org.example.util.ResourcePathUtility.ADVANCED_SWORD_PLAYER_LEFT;
 import static org.example.util.ResourcePathUtility.ADVANCED_SWORD_PLAYER_RIGHT;
 
@@ -14,9 +17,11 @@ public class AdvancedSword extends Weapon {
         this.range = 2.0;
         this.quantity = 1;
         this.imagePath = ADVANCED_SWORD_PATH;
-        this.description = "A powerful axe that relies on brute strength to wield."; //Change
+        this.description = this.type + ": A powerful axe that relies on brute strength to wield";
         this.price = 300; // Basic 200
         this.animationLeft = ADVANCED_SWORD_PLAYER_LEFT;
         this.animationRight = ADVANCED_SWORD_PLAYER_RIGHT;
+        this.attackAnimationLeft = ADVANCED_SWORD_PLAYER_ATTACK_LEFT;
+        this.attackAnimationRight = ADVANCED_SWORD_PLAYER_ATTACK_RIGHT;
     }
 }

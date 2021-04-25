@@ -1,6 +1,6 @@
 package org.example;
 
-import org.example.dto.PlayerState;
+import org.example.dao.PlayerState;
 import org.example.exceptions.PlayerCreationException;
 import org.example.services.AppService;
 import org.example.services.GoldService;

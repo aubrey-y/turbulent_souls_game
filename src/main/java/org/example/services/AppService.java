@@ -4,9 +4,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
+import javafx.stage.Window;
 import org.example.App;
-import org.example.dto.PlayerState;
-import org.example.dto.Room;
+import org.example.dao.PlayerState;
+import org.example.dto.util.Room;
 
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -70,6 +71,14 @@ public class AppService {
         App.setPlayerState(playerState);
     }
 
+    public void setSessionStartMillis(long sessionStartMillis) {
+        App.setSessionStartMillis(sessionStartMillis);
+    }
+
+    public long getSessionStartMillis() {
+        return App.getSessionStartMillis();
+    }
+
     public boolean getSoundPlaying() {
         return App.getSoundPlaying();
     }
@@ -92,5 +101,9 @@ public class AppService {
 
     public void addMonsterKilled(String id) {
         App.getPlayerState().getMonstersKilled().add(id);
+    }
+
+    public Window getStage() {
+        return App.getPrimaryStage();
     }
 }

@@ -4,10 +4,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.assertj.core.util.Lists;
 import org.bson.Document;
 import org.bson.conversions.Bson;
-import org.example.dto.BasicStaff;
-import org.example.dto.Coordinate;
-import org.example.dto.PlayerState;
-import org.example.dto.Weapon;
+import org.example.dto.weapons.BasicStaff;
+import org.example.dto.util.Coordinate;
+import org.example.dao.PlayerState;
+import org.example.dao.Weapon;
 import org.example.enums.Archetype;
 import org.example.enums.Difficulty;
 import org.example.enums.WeaponType;
@@ -17,10 +17,13 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import static org.example.util.ResourcePathUtility.BASIC_STAFF_PLAYER_ATTACK_LEFT;
+import static org.example.util.ResourcePathUtility.BASIC_STAFF_PLAYER_ATTACK_RIGHT;
 import static org.example.util.ResourcePathUtility.BASIC_STAFF_PLAYER_LEFT;
 import static org.example.util.ResourcePathUtility.BASIC_STAFF_PLAYER_RIGHT;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -122,7 +125,10 @@ public class SaveServiceTest {
                 .append("healthCapacity", 100.0)
                 .append("monstersKilled", Collections.emptyList())
                 .append("email", USER_EMAIL)
-                .append("lastUpdated", "2021/04/08 18:57:15");
+                .append("lastUpdated", "2021/04/08 18:57:15")
+                .append("sessionLength", 0)
+                .append("goldSpent", 0)
+                .append("challengeRoomsComplete", Arrays.asList(false, false));
     }
 
     private PlayerState getDecodedPlayerState(String username) {
@@ -141,8 +147,11 @@ public class SaveServiceTest {
                 .setHealth(100.0)
                 .setHealthCapacity(100.0)
                 .setMonstersKilled(Collections.emptySet())
+                .setChallengeRoomsComplete(new boolean[2])
                 .setEmail(USER_EMAIL)
-                .setLastUpdated("2021/04/08 18:57:15");
+                .setLastUpdated("2021/04/08 18:57:15")
+                .setSessionLength(0)
+                .setGoldSpent(0);
     }
 
     private Weapon getDecodedWeapon() {
@@ -167,6 +176,8 @@ public class SaveServiceTest {
                 .append("range", 100.0)
                 .append("price", 200)
                 .append("animationLeft", BASIC_STAFF_PLAYER_LEFT)
-                .append("animationRight", BASIC_STAFF_PLAYER_RIGHT);
+                .append("animationRight", BASIC_STAFF_PLAYER_RIGHT)
+                .append("attackAnimationLeft", BASIC_STAFF_PLAYER_ATTACK_LEFT)
+                .append("attackAnimationRight", BASIC_STAFF_PLAYER_ATTACK_RIGHT);
     }
 }
