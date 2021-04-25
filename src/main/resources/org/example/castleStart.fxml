@@ -29,18 +29,6 @@
                </image>
             </ImageView>
             <ProgressBar fx:id="whitedragon1HealthBar" focusTraversable="false" opacity="0.8" prefHeight="10.0" prefWidth="150.0" progress="1.0" style="-fx-control-inner-background: #3E5155;" styleClass="green-bar" stylesheets="@../../static/css/fontstyle.css" visible="false" />
-            <ImageView fx:id="whitedragon2" fitHeight="150.0" fitWidth="200.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" visible="false">
-               <image>
-                  <Image url="@../../static/images/monsters/white_dragon/white_dragon_left.gif" />
-               </image>
-            </ImageView>
-            <ProgressBar fx:id="whitedragon2HealthBar" focusTraversable="false" layoutX="10.0" layoutY="10.0" opacity="0.8" prefHeight="10.0" prefWidth="150.0" progress="1.0" style="-fx-control-inner-background: #3E5155;" styleClass="green-bar" stylesheets="@../../static/css/fontstyle.css" visible="false" />
-            <ImageView fx:id="whitedragon3" fitHeight="150.0" fitWidth="200.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" visible="false">
-               <image>
-                  <Image url="@../../static/images/monsters/white_dragon/white_dragon_left.gif" />
-               </image>
-            </ImageView>
-            <ProgressBar fx:id="whitedragon3HealthBar" focusTraversable="false" layoutX="20.0" layoutY="20.0" opacity="0.8" prefHeight="10.0" prefWidth="150.0" progress="1.0" style="-fx-control-inner-background: #3E5155;" styleClass="green-bar" stylesheets="@../../static/css/fontstyle.css" visible="false" />
             <ImageView fx:id="player" fitHeight="133.0" fitWidth="133.0" pickOnBounds="true" visible="false">
                <image>
                   <Image url="@../../static/images/player.png" />
