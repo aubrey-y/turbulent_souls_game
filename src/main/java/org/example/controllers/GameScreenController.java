@@ -12,6 +12,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 import org.example.dao.PlayerState;
 import org.example.services.AppService;
@@ -25,7 +26,9 @@ import org.example.services.PlayerService;
 import org.example.services.RoomDirectionService;
 import org.example.services.SaveService;
 import org.example.services.TraderService;
+import org.example.util.SFXUtility;
 
+import java.util.Objects;
 import java.util.Optional;
 
 import static javafx.scene.input.KeyCode.SHIFT;
@@ -142,6 +145,7 @@ public class GameScreenController extends InventoryController {
                 if (!playerService.getAnimatingAttack()) {
                     this.wPressed.set(true);
                 }
+                Objects.requireNonNull(SFXUtility.getRandomMovementSound(this.appService.getActiveRoom().getRoomType())).play();
                 break;
             case A:
                 if (!playerService.getAnimatingAttack()) {
@@ -150,11 +154,13 @@ public class GameScreenController extends InventoryController {
                     this.playerService
                             .displayPlayerLeftOrientation(this.appService.getPlayerState());
                 }
+                Objects.requireNonNull(SFXUtility.getRandomMovementSound(this.appService.getActiveRoom().getRoomType())).play();
                 break;
             case S:
                 if (!playerService.getAnimatingAttack()) {
                     this.sPressed.set(true);
                 }
+                Objects.requireNonNull(SFXUtility.getRandomMovementSound(this.appService.getActiveRoom().getRoomType())).play();
                 break;
             case D:
                 if (!playerService.getAnimatingAttack()) {
@@ -163,6 +169,7 @@ public class GameScreenController extends InventoryController {
                     this.playerService
                             .displayPlayerRightOrientation(this.appService.getPlayerState());
                 }
+                Objects.requireNonNull(SFXUtility.getRandomMovementSound(this.appService.getActiveRoom().getRoomType())).play();
                 break;
             case P:
                 if (this.appService.getDevMode()) {
@@ -201,7 +208,9 @@ public class GameScreenController extends InventoryController {
                         && !this.traderService.isTraderOpen()) {
                     this.traderService.toggleTraderOpen();
                 } else {
-                    this.playerService.attemptToClaimGold();
+                    if (this.playerService.attemptToClaimGold()) {
+                        SFXUtility.collectGold.play();
+                    }
                 }
                 break;
 
@@ -340,6 +349,9 @@ public class GameScreenController extends InventoryController {
     }
 
     protected boolean initializeChallengeRoom() {
+        AudioClip challengeSound = SFXUtility.challengeSound;
+        challengeSound.setVolume(0.5);
+        challengeSound.play();
         PlayerState playerState = this.appService.getPlayerState();
         Optional<ButtonType> result;
         ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);

@@ -28,4 +28,6 @@ module org.example {
     exports org.example.dto.consumables;
     exports org.example.dto.util;
     exports org.example.dao;
+    exports org.example.util;
+    opens org.example.util to javafx.fxml;
 }

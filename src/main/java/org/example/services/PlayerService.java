@@ -220,7 +220,7 @@ public class PlayerService {
                 && this.imageView.getTranslateY() >= 400 && this.imageView.getTranslateY() <= 600;
     }
 
-    public void attemptToClaimGold() {
+    public boolean attemptToClaimGold() {
         for (Monster monster : this.monsterService.getMonsterMapping().values()) {
             if (!monster.isAlive() && monster.getRange() == 1.0
                     && this.monsterService.playerIsInRangeOfMonster(
@@ -229,8 +229,10 @@ public class PlayerService {
                 this.goldService.adjustGoldAmount(monster.getKillReward());
                 monster.getImageView().setVisible(false);
                 monster.setRange(-1.0);
+                return true;
             }
         }
+        return false;
     }
 
     public void displayPlayerRightOrientation(PlayerState playerState) {

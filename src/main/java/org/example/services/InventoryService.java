@@ -12,6 +12,7 @@ import org.example.dao.Item;
 import org.example.dao.PlayerState;
 import org.example.dto.consumables.Potion;
 import org.example.dao.Weapon;
+import org.example.util.SFXUtility;
 
 import java.nio.file.Paths;
 import java.util.Map;
@@ -51,9 +52,11 @@ public class InventoryService {
 
     public void toggleInventoryOpen() {
         if (!this.inventoryOpen) {
+            SFXUtility.openInventory.play();
             this.loadHBoxes();
             this.loadInventoryElements();
         } else {
+            SFXUtility.closeInventory.play();
             this.clearInventoryRows();
         }
         this.inventoryBackground.setVisible(!this.inventoryOpen);
