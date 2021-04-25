@@ -128,7 +128,7 @@ public class SaveServiceTest {
                 .append("lastUpdated", "2021/04/08 18:57:15")
                 .append("sessionLength", 0)
                 .append("goldSpent", 0)
-                .append("challengeRoomsComplete", Arrays.asList(false,false));
+                .append("challengeRoomsComplete", Arrays.asList(false, false));
     }
 
     private PlayerState getDecodedPlayerState(String username) {

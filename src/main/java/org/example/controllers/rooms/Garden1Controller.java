@@ -29,7 +29,6 @@ import java.util.ResourceBundle;
 import static org.example.dto.util.HealthBarConstants.GREEN_HP_BAR;
 import static org.example.enums.Direction.LEFT;
 import static org.example.enums.MonsterType.SERPENT;
-import static org.example.enums.MonsterType.WHITE_DRAGON;
 import static org.example.util.ResourcePathUtility.FONT_STYLE_PATH;
 import static org.example.util.ResourcePathUtility.SERPENT_ATTACK_LEFT_PATH;
 import static org.example.util.ResourcePathUtility.SERPENT_ATTACK_RIGHT_PATH;
@@ -37,12 +36,6 @@ import static org.example.util.ResourcePathUtility.SERPENT_DEATH_LEFT_PATH;
 import static org.example.util.ResourcePathUtility.SERPENT_DEATH_RIGHT_PATH;
 import static org.example.util.ResourcePathUtility.SERPENT_LEFT_PATH;
 import static org.example.util.ResourcePathUtility.SERPENT_RIGHT_PATH;
-import static org.example.util.ResourcePathUtility.WHITE_DRAGON_ATTACK_LEFT_PATH;
-import static org.example.util.ResourcePathUtility.WHITE_DRAGON_ATTACK_RIGHT_PATH;
-import static org.example.util.ResourcePathUtility.WHITE_DRAGON_DEATH_LEFT_PATH;
-import static org.example.util.ResourcePathUtility.WHITE_DRAGON_DEATH_RIGHT_PATH;
-import static org.example.util.ResourcePathUtility.WHITE_DRAGON_LEFT_PATH;
-import static org.example.util.ResourcePathUtility.WHITE_DRAGON_RIGHT_PATH;
 
 public class Garden1Controller extends GameScreenController implements Initializable {
 

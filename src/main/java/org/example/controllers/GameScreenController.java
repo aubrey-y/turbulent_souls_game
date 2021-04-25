@@ -345,8 +345,8 @@ public class GameScreenController extends InventoryController {
         ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
         ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
         Alert alert = new Alert(Alert.AlertType.WARNING,
-                "The next room can be increased in difficulty for more rewards, " +
-                        "do you accept this challenge?",
+                "The next room can be increased in difficulty for more rewards, "
+                        + "do you accept this challenge?",
                 yes,
                 no);
         alert.setTitle("Challenge Room");
