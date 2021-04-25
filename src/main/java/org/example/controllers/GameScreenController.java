@@ -180,7 +180,9 @@ public class GameScreenController extends InventoryController {
                             this.player.getTranslateX(), this.player.getTranslateY(),
                             this.appService.getDevMode());
                     if (monsterKilled != null) {
-                        this.playerService.setChallengeRoomLockOn(false);
+                        if (monsterService.getMonstersRemaining() < 1) {
+                            this.playerService.setChallengeRoomLockOn(false);
+                        }
                         monsterService.initiateDeathAnimation(monsterKilled);
                         this.appService.addMonsterKilled(monsterKilled);
                     }
