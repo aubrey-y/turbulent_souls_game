@@ -82,6 +82,9 @@ public class GameScreenController extends InventoryController {
     @FXML
     private Label healthText;
 
+    @FXML
+    private Label username;
+
     private final BooleanProperty wPressed = new SimpleBooleanProperty(false);
     private final BooleanProperty aPressed = new SimpleBooleanProperty(false);
     private final BooleanProperty sPressed = new SimpleBooleanProperty(false);
@@ -112,6 +115,7 @@ public class GameScreenController extends InventoryController {
 
     protected void initGameScreenController(MonsterService monsterService, ImageView trader) {
         PlayerState playerState = this.appService.getPlayerState();
+        this.username.setText(playerState.getUsername());
         if (playerState.getEmail() == null) {
             this.saveButton.setDisable(true);
         }
