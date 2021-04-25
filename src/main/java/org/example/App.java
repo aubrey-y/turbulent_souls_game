@@ -42,8 +42,11 @@ public class App extends Application {
 
     private static FXMLLoader activeLoader;
 
+    private static Stage primaryStage;
+
     @Override
     public void start(Stage stage) throws IOException {
+        primaryStage = stage;
         root = FXMLLoader.load(getClass().getResource("primary.fxml"));
         scene = new Scene(root, 1920, 1080);
         Media media = new Media(Paths.get("src/main/resources/static/music/bardsadventure.mp3")
@@ -58,6 +61,14 @@ public class App extends Application {
         stage.setMaximized(true);
         stage.setFullScreen(true);
         stage.show();
+    }
+
+    public static Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
+    public static void setPrimaryStage(Stage primaryStage) {
+        App.primaryStage = primaryStage;
     }
 
     public static void toggleSound(ImageView muteDisabled, ImageView muteEnabled) {

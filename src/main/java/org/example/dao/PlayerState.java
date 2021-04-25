@@ -50,6 +50,8 @@ public class PlayerState {
 
     private int goldSpent;
 
+    private boolean[] challengeRoomsComplete = new boolean[2];
+
     public PlayerState() {
 
     }
@@ -73,6 +75,7 @@ public class PlayerState {
         this.monstersKilled = playerState.monstersKilled;
         this.email = playerState.email;
         this.lastUpdated = playerState.lastUpdated;
+        this.challengeRoomsComplete = playerState.challengeRoomsComplete;
     }
 
     public PlayerState(String username,
@@ -142,7 +145,8 @@ public class PlayerState {
                 this.email,
                 this.lastUpdated,
                 this.sessionLength,
-                this.goldSpent
+                this.goldSpent,
+                this.challengeRoomsComplete
         );
     }
 
@@ -181,7 +185,8 @@ public class PlayerState {
                         || (this.lastUpdated != null
                         && this.lastUpdated.equals(playerState.lastUpdated)))
                 && this.sessionLength == playerState.getSessionLength()
-                && this.goldSpent == playerState.getGoldSpent();
+                && this.goldSpent == playerState.getGoldSpent()
+                && this.challengeRoomsComplete == challengeRoomsComplete;
     }
 
     public PlayerState setDifficulty(Difficulty difficulty) {
@@ -325,6 +330,15 @@ public class PlayerState {
 
     public PlayerState setGoldSpent(int goldSpent) {
         this.goldSpent = goldSpent;
+        return this;
+    }
+
+    public boolean[] getChallengeRoomsComplete() {
+        return challengeRoomsComplete;
+    }
+
+    public PlayerState setChallengeRoomsComplete(boolean[] challengeRoomsComplete) {
+        this.challengeRoomsComplete = challengeRoomsComplete;
         return this;
     }
 }

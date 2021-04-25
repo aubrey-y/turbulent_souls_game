@@ -17,6 +17,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -126,7 +127,8 @@ public class SaveServiceTest {
                 .append("email", USER_EMAIL)
                 .append("lastUpdated", "2021/04/08 18:57:15")
                 .append("sessionLength", 0)
-                .append("goldSpent", 0);
+                .append("goldSpent", 0)
+                .append("challengeRoomsComplete", Arrays.asList(false,false));
     }
 
     private PlayerState getDecodedPlayerState(String username) {
@@ -145,6 +147,7 @@ public class SaveServiceTest {
                 .setHealth(100.0)
                 .setHealthCapacity(100.0)
                 .setMonstersKilled(Collections.emptySet())
+                .setChallengeRoomsComplete(new boolean[2])
                 .setEmail(USER_EMAIL)
                 .setLastUpdated("2021/04/08 18:57:15")
                 .setSessionLength(0)

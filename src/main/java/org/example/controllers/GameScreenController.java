@@ -5,12 +5,18 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import org.example.dao.Monster;
 import org.example.dao.PlayerState;
+import org.example.dto.util.Coordinate;
 import org.example.services.AppService;
 import org.example.services.ConsumableService;
 import org.example.services.DirectionService;
@@ -22,6 +28,11 @@ import org.example.services.PlayerService;
 import org.example.services.RoomDirectionService;
 import org.example.services.SaveService;
 import org.example.services.TraderService;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
 import static javafx.scene.input.KeyCode.SHIFT;
 import static org.example.enums.Direction.LEFT;
 import static org.example.enums.Direction.RIGHT;
@@ -169,7 +180,9 @@ public class GameScreenController extends InventoryController {
                             this.player.getTranslateX(), this.player.getTranslateY(),
                             this.appService.getDevMode());
                     if (monsterKilled != null) {
-
+                        if (monsterService.getMonstersRemaining() < 1) {
+                            this.playerService.setChallengeRoomLockOn(false);
+                        }
                         monsterService.initiateDeathAnimation(monsterKilled);
                         this.appService.addMonsterKilled(monsterKilled);
                     }
@@ -309,7 +322,25 @@ public class GameScreenController extends InventoryController {
         this.appService.setPlayerState(playerState);
         this.appService.setSessionStartMillis(System.currentTimeMillis());
     }
-    
+
+    protected boolean initializeChallengeRoom() {
+        PlayerState playerState = this.appService.getPlayerState();
+        Optional<ButtonType> result;
+        ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
+        ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+        Alert alert = new Alert(Alert.AlertType.WARNING,
+                "The next room can be increased in difficulty for more rewards, " +
+                        "do you accept this challenge?",
+                yes,
+                no);
+        alert.setTitle("Challenge Room");
+        alert.initOwner(this.appService.getStage());
+        result = alert.showAndWait();
+        this.appService.setPlayerState(playerState);
+
+        return result.isPresent() && result.orElse(no) == yes;
+    }
+
     @FXML
     private void closeButtonAction() {
         Stage stage = (Stage) closeButton.getScene().getWindow();
