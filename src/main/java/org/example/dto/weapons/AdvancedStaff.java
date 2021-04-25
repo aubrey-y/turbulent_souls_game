@@ -17,7 +17,7 @@ public class AdvancedStaff extends Weapon {
         this.range = 12.0;
         this.quantity = 1;
         this.imagePath = ADVANCED_STAFF_PATH;
-        this.description = "Mage: \nDelicate, icy, mysterious";
+        this.description = this.type + ": Delicate, icy, mysterious";
         this.price = 300;
         this.animationLeft = ADVANCED_STAFF_PLAYER_LEFT;
         this.animationRight = ADVANCED_STAFF_PLAYER_RIGHT;

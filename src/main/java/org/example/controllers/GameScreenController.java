@@ -12,11 +12,8 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import org.example.dao.Monster;
 import org.example.dao.PlayerState;
-import org.example.dto.util.Coordinate;
 import org.example.services.AppService;
 import org.example.services.ConsumableService;
 import org.example.services.DirectionService;
@@ -29,8 +26,6 @@ import org.example.services.RoomDirectionService;
 import org.example.services.SaveService;
 import org.example.services.TraderService;
 
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import static javafx.scene.input.KeyCode.SHIFT;
@@ -71,6 +66,9 @@ public class GameScreenController extends InventoryController {
     private Button saveButton;
 
     @FXML
+    private Label goldAmountLabel;
+
+    @FXML
     private Label goldAmount;
 
     @FXML
@@ -81,6 +79,9 @@ public class GameScreenController extends InventoryController {
 
     @FXML
     private Label healthText;
+
+    @FXML
+    private Label username;
 
     private final BooleanProperty wPressed = new SimpleBooleanProperty(false);
     private final BooleanProperty aPressed = new SimpleBooleanProperty(false);
@@ -112,6 +113,7 @@ public class GameScreenController extends InventoryController {
 
     protected void initGameScreenController(MonsterService monsterService, ImageView trader) {
         PlayerState playerState = this.appService.getPlayerState();
+        this.initializeUIElements(playerState);
         if (playerState.getEmail() == null) {
             this.saveButton.setDisable(true);
         }
@@ -239,6 +241,20 @@ public class GameScreenController extends InventoryController {
                 break;
             }
         });
+    }
+
+    private void initializeUIElements(PlayerState playerState) {
+        this.username.setText(playerState.getUsername());
+        this.username.setLayoutX(35);
+        this.username.setLayoutY(2);
+        this.goldAmountLabel.setLayoutX(35);
+        this.goldAmountLabel.setLayoutY(83);
+        this.goldAmount.setLayoutX(135);
+        this.goldAmount.setLayoutY(83);
+        this.healthBar.setLayoutX(35);
+        this.healthBar.setLayoutY(53);
+        this.healthText.setLayoutX(140);
+        this.healthText.setLayoutY(58);
     }
 
     private void initializeInventoryService(InventoryService inventoryService) {

@@ -17,7 +17,7 @@ public class BasicMagic extends Weapon {
         this.range = 5.0;
         this.quantity = 1;
         this.imagePath = BASIC_MAGIC_PATH;
-        this.description = "Wizard: \nHanded down from a veteran wizard...";
+        this.description = this.type + ": Handed down from a veteran wizard...";
         this.price = 200;
         this.animationLeft = ALL_MAGIC_PLAYER_LEFT;
         this.animationRight = ALL_MAGIC_PLAYER_RIGHT;
