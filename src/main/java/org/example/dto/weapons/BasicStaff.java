@@ -17,7 +17,7 @@ public class BasicStaff extends Weapon {
         this.range = 12.0;
         this.quantity = 1;
         this.imagePath = BASIC_STAFF_PATH;
-        this.description = "Mage: A handcrafted stick...";
+        this.description = this.type + ": A handcrafted stick...";
         this.price = 200;
         this.animationLeft = BASIC_STAFF_PLAYER_LEFT;
         this.animationRight = BASIC_STAFF_PLAYER_RIGHT;

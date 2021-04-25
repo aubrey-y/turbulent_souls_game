@@ -17,7 +17,7 @@ public class MasterStaff extends Weapon {
         this.range = 12.0;
         this.quantity = 1;
         this.imagePath = MASTER_STAFF_PATH;
-        this.description = "Mage: The most dangerous weapon only master mages can wield";
+        this.description = this.type + ": The most dangerous weapon only master mages can wield";
         this.price = 600;
         this.animationLeft = MASTER_STAFF_PLAYER_LEFT;
         this.animationRight = MASTER_STAFF_PLAYER_RIGHT;

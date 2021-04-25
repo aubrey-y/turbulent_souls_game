@@ -17,7 +17,7 @@ public class MasterSword extends Weapon {
         this.range = 2.0;
         this.quantity = 1;
         this.imagePath = MASTER_SWORD_PATH;
-        this.description = "Warrior: The powerful double-sided scythe of pure destruction";
+        this.description = this.type + ": The powerful double-sided scythe of pure destruction";
         this.price = 600;
         this.animationLeft = MASTER_SWORD_PLAYER_LEFT;
         this.animationRight = MASTER_SWORD_PLAYER_RIGHT;

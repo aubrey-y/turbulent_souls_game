@@ -17,7 +17,7 @@ public class ExpertMagic extends Weapon {
         this.range = 5.0;
         this.quantity = 1;
         this.imagePath = EXPERT_MAGIC_PATH;
-        this.description = "Wizard: Unpredictable and powerful";
+        this.description = this.type + ": Unpredictable and powerful";
         this.price = 450;
         this.animationLeft = ALL_MAGIC_PLAYER_LEFT;
         this.animationRight = ALL_MAGIC_PLAYER_RIGHT;

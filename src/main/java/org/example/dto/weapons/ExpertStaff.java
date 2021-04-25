@@ -17,7 +17,7 @@ public class ExpertStaff extends Weapon {
         this.range = 12.0;
         this.quantity = 1;
         this.imagePath = EXPERT_STAFF_PATH;
-        this.description = "Mage: Leaves enemies as frozen as their souls";
+        this.description = this.type + ": Leaves enemies as frozen as their souls";
         this.price = 450;
         this.animationLeft = EXPERT_STAFF_PLAYER_LEFT;
         this.animationRight = EXPERT_STAFF_PLAYER_RIGHT;
