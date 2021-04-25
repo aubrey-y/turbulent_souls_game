@@ -4,15 +4,13 @@ import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import org.example.controllers.GameScreenController;
 import org.example.dao.Monster;
-import org.example.dao.PlayerState;
+import org.example.dto.util.Coordinate;
 import org.example.services.AppService;
 import org.example.services.DirectionService;
 import org.example.services.HealthService;
@@ -24,14 +22,14 @@ import org.example.util.ScheduleUtility;
 
 import java.net.URL;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import static org.example.dto.util.HealthBarConstants.GREEN_HP_BAR;
 import static org.example.enums.Direction.LEFT;
 import static org.example.enums.MonsterType.WHITE_DRAGON;
+import static org.example.util.ResourcePathUtility.FONT_STYLE_PATH;
 import static org.example.util.ResourcePathUtility.WHITE_DRAGON_ATTACK_LEFT_PATH;
 import static org.example.util.ResourcePathUtility.WHITE_DRAGON_ATTACK_RIGHT_PATH;
 import static org.example.util.ResourcePathUtility.WHITE_DRAGON_DEATH_LEFT_PATH;
@@ -43,7 +41,6 @@ public class Castle1Controller extends GameScreenController implements Initializ
 
     private Timeline whiteDragon1AttackSchedule;
     private Timeline whiteDragon1ResetSchedule;
-    private Timeline whiteDragon2AttackSchedule;
     private Timeline resetPlayerSchedule;
 
     @FXML
@@ -53,6 +50,11 @@ public class Castle1Controller extends GameScreenController implements Initializ
 
     @FXML
     private ProgressBar whitedragon1HealthBar;
+
+    @FXML
+    private Pane parentPane;
+
+    private static final int CHALLENGE_ROOM_INDEX = 0;
 
 
     public Castle1Controller(AppService appService,
@@ -88,17 +90,86 @@ public class Castle1Controller extends GameScreenController implements Initializ
                 WHITE_DRAGON_LEFT_PATH,
                 WHITE_DRAGON_RIGHT_PATH
         );
-//        challengeRoomCheck = this.initializeChallengeRoom(0);
-//        if (!this.appService.getMonstersKilled().contains(this.whitedragon1Key)
-//                && !this.appService.getMonstersKilled().contains(this.whitedragon2Key)) {
-//            if (challengeRoomCheck) {
-//                this.monsterService.setChallengeRoomLockOn(true);
-//                setUpChallengeRoom();
-//                this.playerService.registerTimeline(this.whiteDragon2AttackSchedule);
-//            }
-//            this.setupWhitedragon1();
-//            this.playerService.registerTimeline(this.whiteDragon1AttackSchedule);
-//        }
+        if (!this.appService.getPlayerState().getChallengeRoomsComplete()[CHALLENGE_ROOM_INDEX]
+                && this.initializeChallengeRoom()) {
+            this.playerService.setChallengeRoomLockOn(true);
+            this.generateMonstersForRoom(this.parentPane,
+                    Arrays.asList(new Coordinate().setX(200).setY(200),
+                            new Coordinate().setX(500).setY(500)),
+                    Arrays.asList("castle1whitedragon2", "castle1whitedragon3")
+            );
+            this.appService.addMonsterKilled(this.whitedragon1Key);
+        } else {
+            this.setupWhitedragon1();
+            this.playerService.registerTimeline(this.whiteDragon1AttackSchedule);
+        }
+        boolean[] challengeRoomsComplete = this.appService
+                .getPlayerState().getChallengeRoomsComplete();
+        challengeRoomsComplete[CHALLENGE_ROOM_INDEX] = true;
+        this.appService.setPlayerState(this.appService
+                .getPlayerState().setChallengeRoomsComplete(challengeRoomsComplete));
+    }
+
+    private void generateMonstersForRoom(Pane pane,
+                                           List<Coordinate> monsterCoordinates,
+                                           List<String> monsterKeys) {
+        for (int i = 0; i < monsterKeys.size(); i++) {
+            ImageView imageView = new ImageView(
+                    new Image(Paths.get(WHITE_DRAGON_LEFT_PATH).toUri().toString()));
+            imageView.setTranslateX(monsterCoordinates.get(i).getX());
+            imageView.setTranslateY(monsterCoordinates.get(i).getY());
+            imageView.setFitHeight(150);
+            imageView.setFitWidth(150);
+
+            ProgressBar healthBar = new ProgressBar();
+            healthBar.setOpacity(0.8);
+            healthBar.setProgress(1.0);
+            healthBar.setPrefWidth(150);
+            healthBar.setPrefHeight(10);
+            healthBar.getStylesheets().add(FONT_STYLE_PATH);
+            healthBar.getStyleClass().add(GREEN_HP_BAR);
+            healthBar.setLayoutX(monsterCoordinates.get(i).getX());
+            healthBar.setLayoutY(monsterCoordinates.get(i).getY());
+
+            this.monsterService.addMonster(monsterKeys.get(i), new Monster()
+                    .setHealth(this.whitedragon1HealthCapacity)
+                    .setHealthCapacity(this.whitedragon1HealthCapacity)
+                    .setRange(6.0)
+                    .setAttack(20)
+                    .setAccuracy(0.5)
+                    .setKillReward(1000)
+                    .setMonsterType(WHITE_DRAGON)
+                    .setImageView(imageView)
+                    .setHealthBar(healthBar)
+                    .setOrientation(LEFT)
+                    .setDeathAnimationLeft(
+                            new Image(
+                                    Paths.get(WHITE_DRAGON_DEATH_LEFT_PATH).toUri().toString()))
+                    .setDeathAnimationRight(
+                            new Image(
+                                    Paths.get(WHITE_DRAGON_DEATH_RIGHT_PATH).toUri().toString()))
+                    .setKey(monsterKeys.get(i)));
+
+            ScheduleUtility.generateMonsterAttackSchedule(1.0,
+                    this.appService,
+                    monsterKeys.get(i),
+                    this.playerService,
+                    this.monsterService,
+                    this.healthService,
+                    this.resetPlayerSchedule,
+                    ScheduleUtility.generateMonsterResetSchedule(0.5,
+                            this.monsterService,
+                            monsterKeys.get(i),
+                            imageView,
+                            WHITE_DRAGON_LEFT_PATH,
+                            WHITE_DRAGON_RIGHT_PATH),
+                    Timeline.INDEFINITE,
+                    WHITE_DRAGON_ATTACK_LEFT_PATH,
+                    WHITE_DRAGON_ATTACK_RIGHT_PATH).play();
+
+            pane.getChildren().add(0, imageView);
+            pane.getChildren().add(0, healthBar);
+        }
     }
 
     private void setupWhitedragon1() {

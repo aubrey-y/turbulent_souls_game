@@ -58,7 +58,9 @@ public class PlayerService {
 
     private double moveSize = DEFAULT_MOVE_SIZE;
 
-    private Boolean animatingAttack = false;
+    private boolean animatingAttack;
+
+    private boolean challengeRoomLockOn;
 
     public PlayerService() {
 
@@ -114,8 +116,9 @@ public class PlayerService {
     private void checkForExit() {
         Direction exitDirection = this.exitDirection();
         if (exitDirection == null || (this.monsterService.getMonstersRemaining() > 0
-                        && this.directionService.getOppositeDirection(
-                                this.lastExitDirection) != exitDirection)) {
+                && this.directionService
+                .getOppositeDirection(this.lastExitDirection) != exitDirection)
+                || this.challengeRoomLockOn) {
             return;
         }
         this.lastExitDirection = exitDirection;
@@ -443,11 +446,20 @@ public class PlayerService {
         this.yCurrPos = this.imageView.getTranslateY();
     }
 
-    public void setAnimatingAttack(Boolean animatingAttack) {
+    public void setAnimatingAttack(boolean animatingAttack) {
         this.animatingAttack = animatingAttack;
     }
 
-    public Boolean getAnimatingAttack() {
+    public boolean getAnimatingAttack() {
         return animatingAttack;
+    }
+
+    public boolean isChallengeRoomLockOn() {
+        return challengeRoomLockOn;
+    }
+
+    public PlayerService setChallengeRoomLockOn(boolean challengeRoomLockOn) {
+        this.challengeRoomLockOn = challengeRoomLockOn;
+        return this;
     }
 }

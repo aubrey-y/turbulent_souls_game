@@ -23,8 +23,6 @@ public class MonsterService {
 
     private int monstersKilled;
 
-    private boolean challengeRoomLockOn;
-
     public MonsterService() {
 
     }
@@ -154,13 +152,5 @@ public class MonsterService {
     public MonsterService setMonstersKilled(int monstersKilled) {
         this.monstersKilled = monstersKilled;
         return this;
-    }
-
-    public boolean getChallengeRoomLockOn() {
-        return challengeRoomLockOn;
-    }
-
-    public void setChallengeRoomLockOn(Boolean challengeRoomLockOn) {
-        this.challengeRoomLockOn = challengeRoomLockOn;
     }
 }

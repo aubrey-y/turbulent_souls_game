@@ -12,9 +12,11 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.example.dao.Monster;
 import org.example.dao.PlayerState;
+import org.example.dto.util.Coordinate;
 import org.example.services.AppService;
 import org.example.services.ConsumableService;
 import org.example.services.DirectionService;
@@ -27,6 +29,7 @@ import org.example.services.RoomDirectionService;
 import org.example.services.SaveService;
 import org.example.services.TraderService;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -177,7 +180,7 @@ public class GameScreenController extends InventoryController {
                             this.player.getTranslateX(), this.player.getTranslateY(),
                             this.appService.getDevMode());
                     if (monsterKilled != null) {
-
+                        this.playerService.setChallengeRoomLockOn(false);
                         monsterService.initiateDeathAnimation(monsterKilled);
                         this.appService.addMonsterKilled(monsterKilled);
                     }
@@ -318,29 +321,22 @@ public class GameScreenController extends InventoryController {
         this.appService.setSessionStartMillis(System.currentTimeMillis());
     }
 
-    protected boolean initializeChallengeRoom(int index) {
+    protected boolean initializeChallengeRoom() {
         PlayerState playerState = this.appService.getPlayerState();
-        boolean[] challengeRoomsComplete = playerState.getChallengeRoomsComplete();
-        Optional<ButtonType> result = null;
+        Optional<ButtonType> result;
         ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
         ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+        Alert alert = new Alert(Alert.AlertType.WARNING,
+                "The next room can be increased in difficulty for more rewards, " +
+                        "do you accept this challenge?",
+                yes,
+                no);
+        alert.setTitle("Challenge Room");
+        alert.initOwner(this.appService.getStage());
+        result = alert.showAndWait();
+        this.appService.setPlayerState(playerState);
 
-        if (!challengeRoomsComplete[index]) {
-            Alert alert = new Alert(Alert.AlertType.WARNING,
-                    "This room can be increased in difficulty for more rewards, do you accept this challenge?",
-                    yes,
-                    no);
-            alert.setTitle("Challenge Room");
-            alert.initOwner(this.appService.getStage());
-            result = alert.showAndWait();
-            challengeRoomsComplete[index] = true;
-            playerState.setChallengeRoomsComplete(challengeRoomsComplete);
-            this.appService.setPlayerState(playerState);
-        }
-        if (result != null && result.orElse(no) == yes) {
-            return true;
-        }
-        return false;
+        return result.isPresent() && result.orElse(no) == yes;
     }
 
     @FXML

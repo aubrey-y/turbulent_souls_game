@@ -15,9 +15,15 @@
     -fx-rotate: 10;
 }
 
+.base-bar {
+    -fx-control-inner-background: #3E5155;
+}
+
 .green-bar {
+    -fx-control-inner-background: #3E5155;
     -fx-accent: #94D521;
 }
 .red-bar {
+    -fx-control-inner-background: #3E5155;
     -fx-accent: #EE475B;
 }
