@@ -150,7 +150,7 @@ public class Castle1Controller extends GameScreenController implements Initializ
                                     Paths.get(WHITE_DRAGON_DEATH_RIGHT_PATH).toUri().toString()))
                     .setKey(monsterKeys.get(i)));
 
-            ScheduleUtility.generateMonsterAttackSchedule(1.0,
+            Timeline monsterSchedule = ScheduleUtility.generateMonsterAttackSchedule(1.0,
                     this.appService,
                     monsterKeys.get(i),
                     this.playerService,
@@ -165,7 +165,9 @@ public class Castle1Controller extends GameScreenController implements Initializ
                             WHITE_DRAGON_RIGHT_PATH),
                     Timeline.INDEFINITE,
                     WHITE_DRAGON_ATTACK_LEFT_PATH,
-                    WHITE_DRAGON_ATTACK_RIGHT_PATH).play();
+                    WHITE_DRAGON_ATTACK_RIGHT_PATH);
+            this.playerService.registerTimeline(monsterSchedule);
+            monsterSchedule.play();
 
             pane.getChildren().add(0, imageView);
             pane.getChildren().add(0, healthBar);
