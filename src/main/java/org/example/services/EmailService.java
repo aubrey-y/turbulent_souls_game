@@ -72,7 +72,7 @@ public class EmailService {
      * @return the MimeMessage to be used to send email
      * @throws MessagingException if email contains incorrect message
      */
-    public MimeMessage createEmail(String to,
+    private MimeMessage createEmail(String to,
                                           String from,
                                           String subject,
                                           String bodyText)
@@ -97,7 +97,7 @@ public class EmailService {
      * @throws IOException if creating email encounters error
      * @throws MessagingException if email contains incorrect message
      */
-    public Message createMessageWithEmail(MimeMessage emailContent)
+    private Message createMessageWithEmail(MimeMessage emailContent)
             throws MessagingException, IOException {
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         emailContent.writeTo(buffer);
@@ -119,7 +119,7 @@ public class EmailService {
      * @throws MessagingException if email contains incorrect message
      * @throws IOException sending email encounters error
      */
-    public boolean sendMessage(Gmail service,
+    private boolean sendMessage(Gmail service,
                                       String userId,
                                       Message emailContent) throws IOException {
         Message message = service.users().messages().send(userId, emailContent).execute();
