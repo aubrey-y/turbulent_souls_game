@@ -95,8 +95,11 @@ public class Castle1Controller extends GameScreenController implements Initializ
             this.playerService.setChallengeRoomLockOn(true);
             this.generateMonstersForRoom(this.parentPane,
                     Arrays.asList(new Coordinate().setX(200).setY(200),
-                            new Coordinate().setX(500).setY(500)),
-                    Arrays.asList("castle1whitedragon2", "castle1whitedragon3")
+                            new Coordinate().setX(500).setY(500),
+                            new Coordinate().setX(1400).setY(500),
+                            new Coordinate().setX(1600).setY(200)),
+                    Arrays.asList("castle1whitedragon2", "castle1whitedragon3",
+                            "castle1whitedragon4", "castle1whitedragon5")
             );
             this.appService.addMonsterKilled(this.whitedragon1Key);
         } else if (!this.appService
@@ -135,10 +138,10 @@ public class Castle1Controller extends GameScreenController implements Initializ
             this.monsterService.addMonster(monsterKeys.get(i), new Monster()
                     .setHealth(this.whitedragon1HealthCapacity)
                     .setHealthCapacity(this.whitedragon1HealthCapacity)
-                    .setRange(6.0)
+                    .setRange(4.0)
                     .setAttack(20)
                     .setAccuracy(0.5)
-                    .setKillReward(1000)
+                    .setKillReward(500)
                     .setMonsterType(WHITE_DRAGON)
                     .setImageView(imageView)
                     .setHealthBar(healthBar)
