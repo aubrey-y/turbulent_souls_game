@@ -17,7 +17,7 @@ public class MasterMagic extends Weapon {
         this.range = 5.0;
         this.quantity = 1;
         this.imagePath = MASTER_MAGIC_PATH;
-        this.description = "Wizard: \nUnleashes the full extent of a wizard's power";
+        this.description = "Wizard: Unleashes the full extent of a wizard's power";
         this.price = 600;
         this.animationLeft = ALL_MAGIC_PLAYER_LEFT;
         this.animationRight = ALL_MAGIC_PLAYER_RIGHT;

@@ -17,7 +17,7 @@ public class AdvancedMagic extends Weapon {
         this.range = 5.0;
         this.quantity = 1;
         this.imagePath = ADVANCED_MAGIC_PATH;
-        this.description = "Wizard: \nChanneled from within, controlled and reliable";
+        this.description = "Wizard: Channeled from within, controlled and reliable";
         this.price = 300;
         this.animationLeft = ALL_MAGIC_PLAYER_LEFT;
         this.animationRight = ALL_MAGIC_PLAYER_RIGHT;
