@@ -99,7 +99,8 @@ public class Castle1Controller extends GameScreenController implements Initializ
                     Arrays.asList("castle1whitedragon2", "castle1whitedragon3")
             );
             this.appService.addMonsterKilled(this.whitedragon1Key);
-        } else {
+        } else if (!this.appService
+                .getPlayerState().getMonstersKilled().contains(this.whitedragon1Key)) {
             this.setupWhitedragon1();
             this.playerService.registerTimeline(this.whiteDragon1AttackSchedule);
         }
