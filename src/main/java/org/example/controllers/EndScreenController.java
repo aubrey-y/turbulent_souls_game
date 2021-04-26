@@ -54,12 +54,14 @@ public class EndScreenController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        App.getMediaPlayer().stop();
-        MediaPlayer mediaPlayer = new MediaPlayer(SFXUtility.MAIN_MENU_MEDIA);
-        mediaPlayer.setVolume(0.6);
-        mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
-        mediaPlayer.play();
-        App.setMediaPlayer(mediaPlayer);
+        if (App.getMediaPlayer().getVolume() > 0) {
+            App.getMediaPlayer().stop();
+            MediaPlayer mediaPlayer = new MediaPlayer(SFXUtility.MAIN_MENU_MEDIA);
+            mediaPlayer.setVolume(0.6);
+            mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
+            mediaPlayer.play();
+            App.setMediaPlayer(mediaPlayer);
+        }
         PlayerState playerState = App.getPlayerState();
         if (playerState.getHealth() > 0) {
             this.winImage.setVisible(true);

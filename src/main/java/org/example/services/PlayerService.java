@@ -184,7 +184,7 @@ public class PlayerService {
 
     private void replaceMediaPlayerIfNeeded(Room current, Room target) {
         if (!RoomDirectionService.isSameRoomClassification(current.getRoomType(),
-                target.getRoomType())) {
+                target.getRoomType()) && this.appService.getMediaPlayer().getVolume() > 0) {
             this.appService.getMediaPlayer().stop();
             Media media = SFXUtility.getMusicForRoomType(target.getRoomType());
             if (media == null) {

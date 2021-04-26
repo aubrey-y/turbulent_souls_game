@@ -116,12 +116,14 @@ public class SecondaryController extends ErrorBaseController {
             HealthService healthService = new HealthService(this.appService);
             this.appService.setSessionStartMillis(System.currentTimeMillis());
 
-            this.appService.getMediaPlayer().stop();
-            MediaPlayer mediaPlayer = new MediaPlayer(SFXUtility.FOREST_MEDIA);
-            mediaPlayer.setVolume(0.6);
-            mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
-            mediaPlayer.play();
-            this.appService.setMediaPlayer(mediaPlayer);
+            if (this.appService.getMediaPlayer().getVolume() > 0) {
+                this.appService.getMediaPlayer().stop();
+                MediaPlayer mediaPlayer = new MediaPlayer(SFXUtility.FOREST_MEDIA);
+                mediaPlayer.setVolume(0.6);
+                mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
+                mediaPlayer.play();
+                this.appService.setMediaPlayer(mediaPlayer);
+            }
 
             loader.setControllerFactory(GameScreenController -> new Forest1Controller(
                     this.appService,
