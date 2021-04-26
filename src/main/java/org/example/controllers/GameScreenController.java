@@ -357,7 +357,7 @@ public class GameScreenController extends InventoryController {
 
     protected boolean initializeChallengeRoom() {
         AudioClip challengeSound = SFXUtility.challengeSound;
-        challengeSound.setVolume(0.5);
+        challengeSound.setVolume(0.2);
         challengeSound.play();
         PlayerState playerState = this.appService.getPlayerState();
         Optional<ButtonType> result;
