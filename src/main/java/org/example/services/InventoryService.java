@@ -52,11 +52,11 @@ public class InventoryService {
 
     public void toggleInventoryOpen() {
         if (!this.inventoryOpen) {
-            SFXUtility.openInventory.play();
+            SFXUtility.OPEN_DIALOG.play();
             this.loadHBoxes();
             this.loadInventoryElements();
         } else {
-            SFXUtility.closeInventory.play();
+            SFXUtility.CLOSE_DIALOG.play();
             this.clearInventoryRows();
         }
         this.inventoryBackground.setVisible(!this.inventoryOpen);
@@ -193,6 +193,7 @@ public class InventoryService {
         Map<String, Item> generalInventory = playerState.getGeneralInventory();
         Weapon weapon = (Weapon) weaponInventory.get(recentlySelectedItem);
         if (weapon != null) {
+            SFXUtility.EQUIP_1.play();
             this.appService.getPlayerState().setActiveWeapon(weapon);
         } else {
             Item item = generalInventory.get(recentlySelectedItem);

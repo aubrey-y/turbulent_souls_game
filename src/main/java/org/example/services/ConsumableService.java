@@ -50,7 +50,7 @@ public class ConsumableService {
         default:
             break;
         }
-        SFXUtility.useConsumable.play();
+        SFXUtility.USE_CONSUMABLE.play();
     }
 
     public HealthService getHealthService() {

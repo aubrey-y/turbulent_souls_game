@@ -14,6 +14,7 @@ import org.example.dao.PlayerState;
 import org.example.dto.consumables.Potion;
 import org.example.dao.Weapon;
 import org.example.util.CloneUtility;
+import org.example.util.SFXUtility;
 
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -68,9 +69,11 @@ public class TraderService {
 
     public void toggleTraderOpen() {
         if (!this.traderOpen) {
+            SFXUtility.OPEN_DIALOG.play();
             this.traderVBox.getChildren().clear();
             this.loadTraderElements();
         } else {
+            SFXUtility.CLOSE_DIALOG.play();
             this.traderVBox.getChildren().clear();
         }
         this.traderBackground.setVisible(!this.traderOpen);
@@ -132,6 +135,7 @@ public class TraderService {
         if (!this.goldService.playerCanAffordAmount(item.getPrice())) {
             return;
         } else {
+            SFXUtility.PURCHASE_1.play();
             playerState = this.goldService.adjustGoldAmount(-1 * item.getPrice());
             playerState.setGoldSpent(playerState.getGoldSpent() + item.getPrice());
         }

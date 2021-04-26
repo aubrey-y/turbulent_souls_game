@@ -136,6 +136,10 @@ public class GameScreenController extends InventoryController {
         this.initializeInventoryService(this.inventoryService);
         this.consumableService = new ConsumableService(
                 this.healthService, this.playerService, this.appService);
+        this.setupKeyInteraction();
+    }
+
+    private void setupKeyInteraction() {
         this.scene.setOnKeyPressed(e -> {
             switch (e.getCode()) {
             case TAB:
@@ -170,7 +174,6 @@ public class GameScreenController extends InventoryController {
                     this.playerService
                             .displayPlayerRightOrientation(this.appService.getPlayerState());
                 }
-
                 break;
             case P:
                 if (this.appService.getDevMode()) {
@@ -185,6 +188,23 @@ public class GameScreenController extends InventoryController {
             case SPACE:
                 if (!playerService.getAnimatingAttack()) {
                     this.playerService.playAttackAnimation();
+                    switch (this.appService.getPlayerState().getActiveWeapon().getType()) {
+                    case MAGIC:
+                        AudioClip magicSound = SFXUtility.getRandomMagicSound();
+                        magicSound.setVolume(0.5);
+                        magicSound.play();
+                        break;
+                    case STAFF:
+                        SFXUtility.getRandomStaffSound().play();
+                        break;
+                    case SWORD:
+                        SFXUtility.getRandomSwordSound().play();
+                        ScheduleUtility.generateAdditionalAudioSchedule(
+                            SFXUtility.getRandomSwordSound(), 0.5).play();
+                        break;
+                    default:
+                        break;
+                    }
                     String monsterKilled = monsterService.attackNearestMonster(
                             this.appService.getPlayerState().getActiveWeapon(),
                             this.player.getTranslateX(), this.player.getTranslateY(),
@@ -210,23 +230,24 @@ public class GameScreenController extends InventoryController {
                     this.traderService.toggleTraderOpen();
                 } else {
                     if (this.playerService.attemptToClaimGold()) {
-                        SFXUtility.collectGold.play();
+                        SFXUtility.COLLECT_GOLD.play();
                     }
                 }
                 break;
-
             default:
                 break;
             }
-
             if (this.appService.getDevMode() && e.getCode() == SHIFT) {
                 this.shiftPressed.set(true);
             }
-
-            if (this.wPressed.get() || this.aPressed.get() || this.sPressed.get() || this.dPressed.get()) {
+            if (this.wPressed.get() || this.aPressed.get()
+                    || this.sPressed.get() || this.dPressed.get()) {
                 if (this.movementMutex.acquireLock()) {
-                    Objects.requireNonNull(SFXUtility.getRandomMovementSound(this.appService.getActiveRoom().getRoomType())).play();
-                    ScheduleUtility.generateMovementMutexReleaseSchedule(this.movementMutex, 0.5).play();
+                    Objects.requireNonNull(
+                            SFXUtility.getRandomMovementSound(
+                                    this.appService.getActiveRoom().getRoomType())).play();
+                    ScheduleUtility.generateMovementMutexReleaseSchedule(
+                            this.movementMutex, 0.5).play();
                 }
             }
             if (this.wPressed.get()) {
@@ -356,7 +377,7 @@ public class GameScreenController extends InventoryController {
     }
 
     protected boolean initializeChallengeRoom() {
-        AudioClip challengeSound = SFXUtility.challengeSound;
+        AudioClip challengeSound = SFXUtility.CHALLENGE_SOUND;
         challengeSound.setVolume(0.2);
         challengeSound.play();
         PlayerState playerState = this.appService.getPlayerState();

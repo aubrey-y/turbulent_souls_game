@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.AudioClip;
 import javafx.util.Duration;
 import org.example.dao.Item;
 import org.example.dao.Monster;
@@ -198,6 +199,14 @@ public class ScheduleUtility {
     public static Timeline generateMovementMutexReleaseSchedule(Mutex mutex, double duration) {
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(duration), actionEvent -> {
             mutex.releaseLock();
+        }));
+        timeline.setCycleCount(1);
+        return timeline;
+    }
+
+    public static Timeline generateAdditionalAudioSchedule(AudioClip audioClip, double timeToWait) {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(timeToWait), actionEvent -> {
+            audioClip.play();
         }));
         timeline.setCycleCount(1);
         return timeline;
