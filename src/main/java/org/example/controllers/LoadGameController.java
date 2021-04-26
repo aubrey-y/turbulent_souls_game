@@ -9,8 +9,10 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
+import javafx.util.Duration;
 import org.example.App;
 import org.example.controllers.rooms.Forest1Controller;
 import org.example.dao.PlayerState;
@@ -20,6 +22,7 @@ import org.example.services.HealthService;
 import org.example.services.PlayerService;
 import org.example.services.RoomDirectionService;
 import org.example.services.SaveService;
+import org.example.util.SFXUtility;
 
 import java.net.URL;
 import java.nio.file.Paths;
@@ -98,6 +101,15 @@ public class LoadGameController implements Initializable {
                                 directionService);
                         HealthService healthService = new HealthService(this.appService);
                         this.appService.setSessionStartMillis(System.currentTimeMillis());
+
+                        if (this.appService.getMediaPlayer().getVolume() > 0) {
+                            this.appService.getMediaPlayer().stop();
+                            MediaPlayer mediaPlayer = new MediaPlayer(SFXUtility.FOREST_MEDIA);
+                            mediaPlayer.setVolume(0.6);
+                            mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
+                            mediaPlayer.play();
+                            this.appService.setMediaPlayer(mediaPlayer);
+                        }
 
                         loader.setControllerFactory(GameScreenController -> new Forest1Controller(
                                 this.appService,
