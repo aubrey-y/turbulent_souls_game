@@ -15,6 +15,7 @@ import org.example.dao.PlayerState;
 import org.example.dto.consumables.Potion;
 import org.example.dao.Weapon;
 
+import org.example.dto.util.Mutex;
 import org.example.services.AppService;
 import org.example.services.HealthService;
 import org.example.services.MonsterService;
@@ -189,6 +190,14 @@ public class ScheduleUtility {
             }
             appService.setPlayerState(appService.getPlayerState()
                     .setWeaponInventory(weaponInventory));
+        }));
+        timeline.setCycleCount(1);
+        return timeline;
+    }
+
+    public static Timeline generateMovementMutexReleaseSchedule(Mutex mutex, double duration) {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(duration), actionEvent -> {
+            mutex.releaseLock();
         }));
         timeline.setCycleCount(1);
         return timeline;

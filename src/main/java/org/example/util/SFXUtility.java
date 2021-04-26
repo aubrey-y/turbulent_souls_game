@@ -91,35 +91,35 @@ public class SFXUtility {
                     .toUri().toString());
 
     public static final AudioClip stone1 = new AudioClip(
-            Paths.get("src/main/resources/static/soundeffects/movement/stepdirt_1.wav")
+            Paths.get("src/main/resources/static/soundeffects/movement/stepstone_1.wav")
                     .toUri().toString());
 
     public static final AudioClip stone2 = new AudioClip(
-            Paths.get("src/main/resources/static/soundeffects/movement/stepdirt_2.wav")
+            Paths.get("src/main/resources/static/soundeffects/movement/stepstone_2.wav")
                     .toUri().toString());
 
     public static final AudioClip stone3 = new AudioClip(
-            Paths.get("src/main/resources/static/soundeffects/movement/stepdirt_3.wav")
+            Paths.get("src/main/resources/static/soundeffects/movement/stepstone_3.wav")
                     .toUri().toString());
 
     public static final AudioClip stone4 = new AudioClip(
-            Paths.get("src/main/resources/static/soundeffects/movement/stepdirt_4.wav")
+            Paths.get("src/main/resources/static/soundeffects/movement/stepstone_4.wav")
                     .toUri().toString());
 
     public static final AudioClip stone5 = new AudioClip(
-            Paths.get("src/main/resources/static/soundeffects/movement/stepdirt_5.wav")
+            Paths.get("src/main/resources/static/soundeffects/movement/stepstone_5.wav")
                     .toUri().toString());
 
     public static final AudioClip stone6 = new AudioClip(
-            Paths.get("src/main/resources/static/soundeffects/movement/stepdirt_6.wav")
+            Paths.get("src/main/resources/static/soundeffects/movement/stepstone_6.wav")
                     .toUri().toString());
 
     public static final AudioClip stone7 = new AudioClip(
-            Paths.get("src/main/resources/static/soundeffects/movement/stepdirt_7.wav")
+            Paths.get("src/main/resources/static/soundeffects/movement/stepstone_7.wav")
                     .toUri().toString());
 
     public static final AudioClip stone8 = new AudioClip(
-            Paths.get("src/main/resources/static/soundeffects/movement/stepdirt_8.wav")
+            Paths.get("src/main/resources/static/soundeffects/movement/stepstone_8.wav")
                     .toUri().toString());
 
     public static final AudioClip water1 = new AudioClip(

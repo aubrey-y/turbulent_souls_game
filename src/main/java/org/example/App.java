@@ -52,6 +52,7 @@ public class App extends Application {
         Media media = new Media(Paths.get("src/main/resources/static/music/bardsadventure.mp3")
                 .toUri().toString());
         mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setVolume(0.6);
         mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
         mediaPlayer.play();
         clickSound = new AudioClip(Paths.get("src/main/resources/static/music/buttonPress.wav")

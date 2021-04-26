@@ -15,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 import org.example.dao.PlayerState;
+import org.example.dto.util.Mutex;
 import org.example.services.AppService;
 import org.example.services.ConsumableService;
 import org.example.services.DirectionService;
@@ -27,6 +28,7 @@ import org.example.services.RoomDirectionService;
 import org.example.services.SaveService;
 import org.example.services.TraderService;
 import org.example.util.SFXUtility;
+import org.example.util.ScheduleUtility;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -61,6 +63,8 @@ public class GameScreenController extends InventoryController {
     private Scene scene;
 
     protected SaveService saveService;
+
+    private Mutex movementMutex = new Mutex();
 
     @FXML
     private Button closeButton;
@@ -145,7 +149,6 @@ public class GameScreenController extends InventoryController {
                 if (!playerService.getAnimatingAttack()) {
                     this.wPressed.set(true);
                 }
-                Objects.requireNonNull(SFXUtility.getRandomMovementSound(this.appService.getActiveRoom().getRoomType())).play();
                 break;
             case A:
                 if (!playerService.getAnimatingAttack()) {
@@ -154,13 +157,11 @@ public class GameScreenController extends InventoryController {
                     this.playerService
                             .displayPlayerLeftOrientation(this.appService.getPlayerState());
                 }
-                Objects.requireNonNull(SFXUtility.getRandomMovementSound(this.appService.getActiveRoom().getRoomType())).play();
                 break;
             case S:
                 if (!playerService.getAnimatingAttack()) {
                     this.sPressed.set(true);
                 }
-                Objects.requireNonNull(SFXUtility.getRandomMovementSound(this.appService.getActiveRoom().getRoomType())).play();
                 break;
             case D:
                 if (!playerService.getAnimatingAttack()) {
@@ -169,7 +170,7 @@ public class GameScreenController extends InventoryController {
                     this.playerService
                             .displayPlayerRightOrientation(this.appService.getPlayerState());
                 }
-                Objects.requireNonNull(SFXUtility.getRandomMovementSound(this.appService.getActiveRoom().getRoomType())).play();
+
                 break;
             case P:
                 if (this.appService.getDevMode()) {
@@ -222,6 +223,12 @@ public class GameScreenController extends InventoryController {
                 this.shiftPressed.set(true);
             }
 
+            if (this.wPressed.get() || this.aPressed.get() || this.sPressed.get() || this.dPressed.get()) {
+                if (this.movementMutex.acquireLock()) {
+                    Objects.requireNonNull(SFXUtility.getRandomMovementSound(this.appService.getActiveRoom().getRoomType())).play();
+                    ScheduleUtility.generateMovementMutexReleaseSchedule(this.movementMutex, 0.5).play();
+                }
+            }
             if (this.wPressed.get()) {
                 this.playerService.moveUp(this.shiftPressed.get());
             } else if (this.aPressed.get()) {
