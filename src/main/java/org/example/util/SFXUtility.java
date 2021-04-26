@@ -130,6 +130,30 @@ public class SFXUtility {
             Paths.get("src/main/resources/static/soundeffects/movement/stepwater_2.wav")
                     .toUri().toString());
 
+    public static final AudioClip water3 = new AudioClip(
+            Paths.get("src/main/resources/static/soundeffects/movement/stepwater_3.wav")
+                    .toUri().toString());
+
+    public static final AudioClip water4 = new AudioClip(
+            Paths.get("src/main/resources/static/soundeffects/movement/stepwater_4.wav")
+                    .toUri().toString());
+
+    public static final AudioClip water5 = new AudioClip(
+            Paths.get("src/main/resources/static/soundeffects/movement/stepwater_5.wav")
+                    .toUri().toString());
+
+    public static final AudioClip water6 = new AudioClip(
+            Paths.get("src/main/resources/static/soundeffects/movement/stepwater_6.wav")
+                    .toUri().toString());
+
+    public static final AudioClip water7 = new AudioClip(
+            Paths.get("src/main/resources/static/soundeffects/movement/stepwater_7.wav")
+                    .toUri().toString());
+
+    public static final AudioClip water8 = new AudioClip(
+            Paths.get("src/main/resources/static/soundeffects/movement/stepwater_8.wav")
+                    .toUri().toString());
+
     public SFXUtility() {
 
     }
@@ -169,7 +193,8 @@ public class SFXUtility {
             case GARDEN1:
             case GARDEN2:
             case GARDEN_TRADER:
-                movementSounds = Arrays.asList(water1, water2);
+                movementSounds = Arrays.asList(water1, water2, water3, water4, water5,
+                        water6, water7, water8);
                 break;
             default:
                 movementSounds = null;
