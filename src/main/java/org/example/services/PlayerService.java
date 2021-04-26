@@ -5,6 +5,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 import org.example.App;
 import org.example.enums.WeaponType;
 import org.example.dto.util.Coordinate;
@@ -13,6 +16,7 @@ import org.example.dao.PlayerState;
 import org.example.dto.util.Room;
 import org.example.enums.Direction;
 import org.example.util.AnimationDurationUtility;
+import org.example.util.SFXUtility;
 import org.example.util.ScheduleUtility;
 
 
@@ -131,6 +135,7 @@ public class PlayerService {
                     currentRoom.setUp(this.roomDirectionService
                             .getRoomForRoomAndDirection(currentRoom, exitDirection));
                 }
+                this.replaceMediaPlayerIfNeeded(currentRoom, currentRoom.getUp());
                 this.appService.setActiveRoom(currentRoom.getUp());
                 this.setNewPlayerSpawnCoordinates(exitDirection);
                 this.appService.setRoot(this.getLoader(currentRoom.getUp()));
@@ -142,6 +147,7 @@ public class PlayerService {
                     currentRoom.setDown(this.roomDirectionService
                             .getRoomForRoomAndDirection(currentRoom, exitDirection));
                 }
+                this.replaceMediaPlayerIfNeeded(currentRoom, currentRoom.getDown());
                 this.appService.setActiveRoom(currentRoom.getDown());
                 this.setNewPlayerSpawnCoordinates(exitDirection);
                 this.appService.setRoot(this.getLoader(currentRoom.getDown()));
@@ -153,6 +159,7 @@ public class PlayerService {
                     currentRoom.setLeft(this.roomDirectionService
                             .getRoomForRoomAndDirection(currentRoom, exitDirection));
                 }
+                this.replaceMediaPlayerIfNeeded(currentRoom, currentRoom.getLeft());
                 this.appService.setActiveRoom(currentRoom.getLeft());
                 this.setNewPlayerSpawnCoordinates(exitDirection);
                 this.appService.setRoot(this.getLoader(currentRoom.getLeft()));
@@ -164,6 +171,7 @@ public class PlayerService {
                     currentRoom.setRight(this.roomDirectionService
                             .getRoomForRoomAndDirection(currentRoom, exitDirection));
                 }
+                this.replaceMediaPlayerIfNeeded(currentRoom, currentRoom.getRight());
                 this.appService.setActiveRoom(currentRoom.getRight());
                 this.setNewPlayerSpawnCoordinates(exitDirection);
                 this.appService.setRoot(this.getLoader(currentRoom.getRight()));
@@ -171,6 +179,22 @@ public class PlayerService {
             break;
         default:
             break;
+        }
+    }
+
+    private void replaceMediaPlayerIfNeeded(Room current, Room target) {
+        if (!RoomDirectionService.isSameRoomClassification(current.getRoomType(),
+                target.getRoomType()) && this.appService.getMediaPlayer().getVolume() > 0) {
+            this.appService.getMediaPlayer().stop();
+            Media media = SFXUtility.getMusicForRoomType(target.getRoomType());
+            if (media == null) {
+                throw new RuntimeException("media should not be null");
+            }
+            MediaPlayer mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setVolume(0.6);
+            mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
+            mediaPlayer.play();
+            this.appService.setMediaPlayer(mediaPlayer);
         }
     }
 
@@ -220,7 +244,7 @@ public class PlayerService {
                 && this.imageView.getTranslateY() >= 400 && this.imageView.getTranslateY() <= 600;
     }
 
-    public void attemptToClaimGold() {
+    public boolean attemptToClaimGold() {
         for (Monster monster : this.monsterService.getMonsterMapping().values()) {
             if (!monster.isAlive() && monster.getRange() == 1.0
                     && this.monsterService.playerIsInRangeOfMonster(
@@ -229,8 +253,10 @@ public class PlayerService {
                 this.goldService.adjustGoldAmount(monster.getKillReward());
                 monster.getImageView().setVisible(false);
                 monster.setRange(-1.0);
+                return true;
             }
         }
+        return false;
     }
 
     public void displayPlayerRightOrientation(PlayerState playerState) {

@@ -12,6 +12,7 @@ import org.example.dao.Item;
 import org.example.dao.PlayerState;
 import org.example.dto.consumables.Potion;
 import org.example.dao.Weapon;
+import org.example.util.SFXUtility;
 
 import java.nio.file.Paths;
 import java.util.Map;
@@ -51,9 +52,11 @@ public class InventoryService {
 
     public void toggleInventoryOpen() {
         if (!this.inventoryOpen) {
+            SFXUtility.OPEN_DIALOG.play();
             this.loadHBoxes();
             this.loadInventoryElements();
         } else {
+            SFXUtility.CLOSE_DIALOG.play();
             this.clearInventoryRows();
         }
         this.inventoryBackground.setVisible(!this.inventoryOpen);
@@ -190,6 +193,7 @@ public class InventoryService {
         Map<String, Item> generalInventory = playerState.getGeneralInventory();
         Weapon weapon = (Weapon) weaponInventory.get(recentlySelectedItem);
         if (weapon != null) {
+            SFXUtility.EQUIP_1.play();
             this.appService.getPlayerState().setActiveWeapon(weapon);
         } else {
             Item item = generalInventory.get(recentlySelectedItem);

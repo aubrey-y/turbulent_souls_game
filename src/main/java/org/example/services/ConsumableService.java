@@ -3,6 +3,7 @@ package org.example.services;
 import org.example.dao.Item;
 import org.example.dto.consumables.Potion;
 import org.example.dao.Weapon;
+import org.example.util.SFXUtility;
 
 import java.util.Map;
 
@@ -49,6 +50,7 @@ public class ConsumableService {
         default:
             break;
         }
+        SFXUtility.USE_CONSUMABLE.play();
     }
 
     public HealthService getHealthService() {

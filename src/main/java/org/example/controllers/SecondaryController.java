@@ -6,6 +6,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 import org.example.App;
 import org.example.controllers.rooms.Forest1Controller;
 import org.example.dto.util.Coordinate;
@@ -23,6 +25,7 @@ import org.example.services.HealthService;
 import org.example.services.PlayerService;
 import org.example.services.RoomDirectionService;
 import org.example.services.SaveService;
+import org.example.util.SFXUtility;
 
 import static org.example.enums.RoomType.FOREST1;
 import static org.example.exceptions.ExceptionMessages.INVALID_ARCHETYPE_EXCEPTION_MESSAGE;
@@ -112,6 +115,15 @@ public class SecondaryController extends ErrorBaseController {
             RoomDirectionService roomDirectionService = new RoomDirectionService(directionService);
             HealthService healthService = new HealthService(this.appService);
             this.appService.setSessionStartMillis(System.currentTimeMillis());
+
+            if (this.appService.getMediaPlayer().getVolume() > 0) {
+                this.appService.getMediaPlayer().stop();
+                MediaPlayer mediaPlayer = new MediaPlayer(SFXUtility.FOREST_MEDIA);
+                mediaPlayer.setVolume(0.6);
+                mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
+                mediaPlayer.play();
+                this.appService.setMediaPlayer(mediaPlayer);
+            }
 
             loader.setControllerFactory(GameScreenController -> new Forest1Controller(
                     this.appService,

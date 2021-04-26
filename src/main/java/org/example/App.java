@@ -7,12 +7,12 @@ import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.media.AudioClip;
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.example.dao.PlayerState;
 import org.example.dto.util.Room;
+import org.example.util.SFXUtility;
 
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -49,12 +49,12 @@ public class App extends Application {
         primaryStage = stage;
         root = FXMLLoader.load(getClass().getResource("primary.fxml"));
         scene = new Scene(root, 1920, 1080);
-        Media media = new Media(Paths.get("src/main/resources/static/music/bardsadventure.mp3")
-                .toUri().toString());
-        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer = new MediaPlayer(SFXUtility.MAIN_MENU_MEDIA);
+        mediaPlayer.setVolume(0.6);
         mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
         mediaPlayer.play();
-        clickSound = new AudioClip(Paths.get("src/main/resources/static/music/buttonPress.wav")
+        clickSound = new AudioClip(Paths.get(
+                "src/main/resources/static/soundeffects/buttonPress.wav")
                 .toUri().toString());
         scene.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent -> clickSound.play());
         stage.setScene(scene);
@@ -102,6 +102,14 @@ public class App extends Application {
 
     public static void setScene(Scene scene) {
         App.scene = scene;
+    }
+
+    public static MediaPlayer getMediaPlayer() {
+        return mediaPlayer;
+    }
+
+    public static void setMediaPlayer(MediaPlayer mediaPlayer) {
+        App.mediaPlayer = mediaPlayer;
     }
 
     public static PlayerState getPlayerState() {

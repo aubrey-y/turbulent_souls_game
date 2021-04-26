@@ -14,7 +14,9 @@ import org.example.dto.util.RandomRoom;
 import org.example.dto.util.Room;
 import org.example.dto.util.RoomIdDirectionKey;
 import org.example.enums.Direction;
+import org.example.enums.RoomType;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -280,5 +282,20 @@ public class RoomDirectionService {
     public RoomDirectionService setDirectionService(DirectionService directionService) {
         this.directionService = directionService;
         return this;
+    }
+
+    public static boolean isSameRoomClassification(RoomType current, RoomType target) {
+        List<RoomType> forests = Arrays.asList(FOREST1, FOREST2, FOREST_TRADER);
+        List<RoomType> castles = Arrays.asList(CASTLE1, CASTLE2, CASTLE_TRADER);
+        List<RoomType> gardens = Arrays.asList(GARDEN1, GARDEN2, GARDEN_TRADER);
+        List<RoomType> boss = Arrays.asList(CASTLE3, BOSS);
+        List<List<RoomType>> classifications = Arrays.asList(forests, castles, gardens, boss);
+
+        for (List<RoomType> theme : classifications) {
+            if (theme.contains(current)) {
+                return theme.contains(target);
+            }
+        }
+        return false;
     }
 }
