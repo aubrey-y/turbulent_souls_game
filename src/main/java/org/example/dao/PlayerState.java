@@ -75,6 +75,8 @@ public class PlayerState {
         this.monstersKilled = playerState.monstersKilled;
         this.email = playerState.email;
         this.lastUpdated = playerState.lastUpdated;
+        this.sessionLength = playerState.getSessionLength();
+        this.goldSpent = playerState.goldSpent;
         this.challengeRoomsComplete = playerState.challengeRoomsComplete;
     }
 
