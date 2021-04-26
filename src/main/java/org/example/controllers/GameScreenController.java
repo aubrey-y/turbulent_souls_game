@@ -30,7 +30,6 @@ import org.example.services.TraderService;
 import org.example.util.SFXUtility;
 import org.example.util.ScheduleUtility;
 
-import java.util.Objects;
 import java.util.Optional;
 
 import static javafx.scene.input.KeyCode.SHIFT;
@@ -119,6 +118,7 @@ public class GameScreenController extends InventoryController {
     }
 
     protected void initGameScreenController(MonsterService monsterService, ImageView trader) {
+
         PlayerState playerState = this.appService.getPlayerState();
         this.initializeUIElements(playerState);
         if (playerState.getEmail() == null) {
@@ -191,11 +191,13 @@ public class GameScreenController extends InventoryController {
                     switch (this.appService.getPlayerState().getActiveWeapon().getType()) {
                     case MAGIC:
                         AudioClip magicSound = SFXUtility.getRandomMagicSound();
-                        magicSound.setVolume(0.5);
+                        magicSound.setVolume(0.3);
                         magicSound.play();
                         break;
                     case STAFF:
-                        SFXUtility.getRandomStaffSound().play();
+                        AudioClip staffSound = SFXUtility.getRandomStaffSound();
+                        staffSound.setVolume(0.3);
+                        staffSound.play();
                         break;
                     case SWORD:
                         SFXUtility.getRandomSwordSound().play();
@@ -243,9 +245,12 @@ public class GameScreenController extends InventoryController {
             if (this.wPressed.get() || this.aPressed.get()
                     || this.sPressed.get() || this.dPressed.get()) {
                 if (this.movementMutex.acquireLock()) {
-                    Objects.requireNonNull(
-                            SFXUtility.getRandomMovementSound(
-                                    this.appService.getActiveRoom().getRoomType())).play();
+                    AudioClip audioClip = SFXUtility.getRandomMovementSound(
+                            this.appService.getActiveRoom().getRoomType());
+                    if (audioClip != null) {
+                        audioClip.setVolume(0.3);
+                        audioClip.play();
+                    }
                     ScheduleUtility.generateMovementMutexReleaseSchedule(
                             this.movementMutex, 0.5).play();
                 }

@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Window;
 import org.example.App;
 import org.example.dao.PlayerState;
@@ -27,6 +28,14 @@ public class AppService {
 
     public Scene getScene() {
         return App.getScene();
+    }
+
+    public MediaPlayer getMediaPlayer() {
+        return App.getMediaPlayer();
+    }
+
+    public void setMediaPlayer(MediaPlayer mediaPlayer) {
+        App.setMediaPlayer(mediaPlayer);
     }
 
     public void toggleSound(ImageView muteDisabled, ImageView muteEnabled) {

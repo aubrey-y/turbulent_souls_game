@@ -1,6 +1,7 @@
 package org.example.util;
 
 import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
 import org.example.enums.RoomType;
 
 import java.nio.file.Paths;
@@ -9,6 +10,21 @@ import java.util.List;
 import java.util.Random;
 
 public class SFXUtility {
+
+    public static final Media MAIN_MENU_MEDIA = new Media(
+            Paths.get("src/main/resources/static/music/main_end_theme.mp3").toUri().toString());
+
+    public static final Media FOREST_MEDIA = new Media(
+            Paths.get("src/main/resources/static/music/forest_theme.mp3").toUri().toString());
+
+    public static final Media CASTLE_MEDIA = new Media(
+            Paths.get("src/main/resources/static/music/castle_theme.mp3").toUri().toString());
+
+    public static final Media GARDEN_MEDIA = new Media(
+            Paths.get("src/main/resources/static/music/garden_theme.mp3").toUri().toString());
+
+    public static final Media BOSS_MEDIA = new Media(
+            Paths.get("src/main/resources/static/music/boss_theme.mp3").toUri().toString());
 
     public static final AudioClip COLLECT_GOLD = new AudioClip(
             Paths.get("src/main/resources/static/soundeffects/gold_sack.wav").toUri().toString());
@@ -213,5 +229,37 @@ public class SFXUtility {
             return null;
         }
         return movementSounds.get(new Random().nextInt(movementSounds.size()));
+    }
+
+    public static Media getMusicForRoomType(RoomType roomType) {
+        Media music;
+        switch (roomType) {
+        case FOREST1:
+        case FOREST2:
+        case FOREST_TRADER:
+            music = FOREST_MEDIA;
+            break;
+        case CASTLE1:
+        case CASTLE2:
+        case CASTLE_TRADER:
+            music = CASTLE_MEDIA;
+            break;
+        case GARDEN1:
+        case GARDEN2:
+        case GARDEN_TRADER:
+            music = GARDEN_MEDIA;
+            break;
+        case CASTLE3:
+        case BOSS:
+            music = BOSS_MEDIA;
+            break;
+        default:
+            music = null;
+        }
+
+        if (music == null) {
+            return null;
+        }
+        return music;
     }
 }

@@ -6,9 +6,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.example.App;
 import org.example.dao.PlayerState;
+import org.example.util.SFXUtility;
 
 import java.io.IOException;
 import java.net.URL;
@@ -51,6 +54,12 @@ public class EndScreenController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        App.getMediaPlayer().stop();
+        MediaPlayer mediaPlayer = new MediaPlayer(SFXUtility.MAIN_MENU_MEDIA);
+        mediaPlayer.setVolume(0.6);
+        mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
+        mediaPlayer.play();
+        App.setMediaPlayer(mediaPlayer);
         PlayerState playerState = App.getPlayerState();
         if (playerState.getHealth() > 0) {
             this.winImage.setVisible(true);
