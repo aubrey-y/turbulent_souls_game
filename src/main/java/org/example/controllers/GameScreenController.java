@@ -12,8 +12,10 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 import org.example.dao.PlayerState;
+import org.example.dto.util.Mutex;
 import org.example.services.AppService;
 import org.example.services.ConsumableService;
 import org.example.services.DirectionService;
@@ -25,6 +27,8 @@ import org.example.services.PlayerService;
 import org.example.services.RoomDirectionService;
 import org.example.services.SaveService;
 import org.example.services.TraderService;
+import org.example.util.SFXUtility;
+import org.example.util.ScheduleUtility;
 
 import java.util.Optional;
 
@@ -58,6 +62,8 @@ public class GameScreenController extends InventoryController {
     private Scene scene;
 
     protected SaveService saveService;
+
+    private Mutex movementMutex = new Mutex();
 
     @FXML
     private Button closeButton;
@@ -112,6 +118,7 @@ public class GameScreenController extends InventoryController {
     }
 
     protected void initGameScreenController(MonsterService monsterService, ImageView trader) {
+
         PlayerState playerState = this.appService.getPlayerState();
         this.initializeUIElements(playerState);
         if (playerState.getEmail() == null) {
@@ -129,6 +136,10 @@ public class GameScreenController extends InventoryController {
         this.initializeInventoryService(this.inventoryService);
         this.consumableService = new ConsumableService(
                 this.healthService, this.playerService, this.appService);
+        this.setupKeyInteraction();
+    }
+
+    private void setupKeyInteraction() {
         this.scene.setOnKeyPressed(e -> {
             switch (e.getCode()) {
             case TAB:
@@ -177,6 +188,25 @@ public class GameScreenController extends InventoryController {
             case SPACE:
                 if (!playerService.getAnimatingAttack()) {
                     this.playerService.playAttackAnimation();
+                    switch (this.appService.getPlayerState().getActiveWeapon().getType()) {
+                    case MAGIC:
+                        AudioClip magicSound = SFXUtility.getRandomMagicSound();
+                        magicSound.setVolume(0.3);
+                        magicSound.play();
+                        break;
+                    case STAFF:
+                        AudioClip staffSound = SFXUtility.getRandomStaffSound();
+                        staffSound.setVolume(0.3);
+                        staffSound.play();
+                        break;
+                    case SWORD:
+                        SFXUtility.getRandomSwordSound().play();
+                        ScheduleUtility.generateAdditionalAudioSchedule(
+                            SFXUtility.getRandomSwordSound(), 0.5).play();
+                        break;
+                    default:
+                        break;
+                    }
                     String monsterKilled = monsterService.attackNearestMonster(
                             this.appService.getPlayerState().getActiveWeapon(),
                             this.player.getTranslateX(), this.player.getTranslateY(),
@@ -201,18 +231,30 @@ public class GameScreenController extends InventoryController {
                         && !this.traderService.isTraderOpen()) {
                     this.traderService.toggleTraderOpen();
                 } else {
-                    this.playerService.attemptToClaimGold();
+                    if (this.playerService.attemptToClaimGold()) {
+                        SFXUtility.COLLECT_GOLD.play();
+                    }
                 }
                 break;
-
             default:
                 break;
             }
-
             if (this.appService.getDevMode() && e.getCode() == SHIFT) {
                 this.shiftPressed.set(true);
             }
-
+            if (this.wPressed.get() || this.aPressed.get()
+                    || this.sPressed.get() || this.dPressed.get()) {
+                if (this.movementMutex.acquireLock()) {
+                    AudioClip audioClip = SFXUtility.getRandomMovementSound(
+                            this.appService.getActiveRoom().getRoomType());
+                    if (audioClip != null) {
+                        audioClip.setVolume(0.3);
+                        audioClip.play();
+                    }
+                    ScheduleUtility.generateMovementMutexReleaseSchedule(
+                            this.movementMutex, 0.5).play();
+                }
+            }
             if (this.wPressed.get()) {
                 this.playerService.moveUp(this.shiftPressed.get());
             } else if (this.aPressed.get()) {
@@ -340,6 +382,9 @@ public class GameScreenController extends InventoryController {
     }
 
     protected boolean initializeChallengeRoom() {
+        AudioClip challengeSound = SFXUtility.CHALLENGE_SOUND;
+        challengeSound.setVolume(0.2);
+        challengeSound.play();
         PlayerState playerState = this.appService.getPlayerState();
         Optional<ButtonType> result;
         ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
